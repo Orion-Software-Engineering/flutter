@@ -30,7 +30,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
               icon: Icon(
                   (masked == true) ? Icons.visibility : Icons.visibility_off),
               // icon: Icon(Icons.visibility),
-              color: Colors.grey,
+              color: Color((masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
             ),
             border: UnderlineInputBorder(
                 borderSide: BorderSide(
@@ -61,7 +61,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                   ? Icons.visibility
                   : Icons.visibility_off),
               // icon: Icon(Icons.visibility),
-              color: Colors.grey,
+              color: Color((confirmMasked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
             ),
             border: UnderlineInputBorder(
                 borderSide: BorderSide(
