@@ -1,9 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-//import 'passwordfield.dart'
 import 'package:flutter/material.dart';
-import 'package:passwordfield/passwordfield.dart';
 import 'package:matchmaking_demo/constants.dart';
-import 'package:date_field/date_field.dart';
+// import 'package:date_field/date_field.dart';
 import 'custom_password_field.dart';
 
 class SignUp extends StatelessWidget {
@@ -18,10 +15,9 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.red,
           image: DecorationImage(
               image: AssetImage('assets/images/sign_in/Sign Up bg.png'),
-              fit: BoxFit.fill),
+              fit: BoxFit.cover),
         ),
         height: double.infinity,
         padding: const EdgeInsets.fromLTRB(20, 70.0, 20.0, 50.0),
@@ -132,7 +128,7 @@ class SignUp extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0),
                               )),
                           onPressed: () {
-                            if (!_formKey!.currentState!.validate()) {
+                            if (!_formKey.currentState!.validate()) {
                               return;
                             }
                           },
