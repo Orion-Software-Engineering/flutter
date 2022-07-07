@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'package:matchmaking_demo/login_and_signup/login_password_field.dart';
+import '../constants.dart';
 
 class Login extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -12,9 +13,10 @@ class Login extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
+          color: Colors.black,
           image: DecorationImage(
               image: AssetImage('assets/images/sign_in/Sign Up bg.png'),
-              fit: BoxFit.fill),
+              fit: BoxFit.cover),
         ),
         height: double.infinity,
         padding: const EdgeInsets.fromLTRB(20, 0.0, 20.0, 0.0),
@@ -74,30 +76,14 @@ class Login extends StatelessWidget {
                             }
                           },
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            suffix: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Forgot password?',
-                                  style: TextStyle(
-                                      color: signUpLoginOrange, fontSize: 16),
-                                )),
-                            labelText: 'Password',
-                            labelStyle: signUpLoginTextFieldTextStyle,
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Colors.grey,
+                        LoginPasswordField(),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Forgot password?',
+                              style: TextStyle(
+                                  color: signUpLoginOrange, fontSize: 16),
                             )),
-                          ),
-                          validator: (value) {
-                            if (emailValid.hasMatch(value!)) {
-                              return null;
-                            } else {
-                              return "Enter a password";
-                            }
-                          },
-                        ),
                         SizedBox(height: 30.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -196,7 +182,7 @@ class Login extends StatelessWidget {
                                     height: 44,
                                     width: 45))
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),

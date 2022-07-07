@@ -2,7 +2,7 @@
 //import 'passwordfield.dart'
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
-import 'constants.dart';
+import 'package:matchmaking_demo/constants.dart';
 import 'package:date_field/date_field.dart';
 import 'custom_password_field.dart';
 
@@ -18,6 +18,7 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
+          color: Colors.red,
           image: DecorationImage(
               image: AssetImage('assets/images/sign_in/Sign Up bg.png'),
               fit: BoxFit.fill),
