@@ -35,10 +35,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
               // icon: Icon(Icons.visibility),
               color: Color((masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
             ),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(
-              color: Colors.grey,
-            )),
+            border: inputBorder,
           ),
           validator: widget.validationFunction,
         ),

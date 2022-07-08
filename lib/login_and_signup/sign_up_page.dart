@@ -27,7 +27,6 @@ class SignUp extends StatelessWidget {
                     title: 'Sign Up',
                     subtext: 'Create your account to start matchmaking'),
               ),
-              SizedBox(height: 20.0),
               Expanded(
                 flex: 4,
                 child: SingleChildScrollView(
@@ -38,11 +37,7 @@ class SignUp extends StatelessWidget {
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: signUpLoginTextColor,
-                            ),
-                          ),
+                          border: inputBorder,
                         ),
                         validator: (value) {
                           if (userNameValid.hasMatch(value!) &&
@@ -57,10 +52,7 @@ class SignUp extends StatelessWidget {
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.grey,
-                          )),
+                          border: inputBorder,
                         ),
                         validator: (value) {
                           if (emailValid.hasMatch(value!)) {
@@ -94,11 +86,11 @@ class SignUp extends StatelessWidget {
                       SizedBox(height: 50.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
-                            // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
-                            )),
+                          primary: signUpLoginButtonColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                        ),
                         onPressed: () {
                           if (!_formKey.currentState!.validate()) {
                             return;
@@ -111,11 +103,7 @@ class SignUp extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'SIGN UP',
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
+                              style: loginSignUpButtonTextStyle,
                             ),
                           ),
                         ),
@@ -136,12 +124,7 @@ class SignUp extends StatelessWidget {
                             },
                             child: Text(
                               'Login',
-                              style: TextStyle(
-                                color: signUpLoginOrange,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16.0,
-                                decoration: TextDecoration.underline,
-                              ),
+                              style: signUpLoginTextButtonStyleOrange,
                             ),
                           ),
                         ],

@@ -3,6 +3,7 @@ import 'package:matchmaking_demo/login_and_signup/components/custom_password_fie
 import 'package:matchmaking_demo/login_and_signup/components/title_and_subtext.dart';
 import '../constants.dart';
 import 'components/login_signup_scaffold.dart';
+import 'package:matchmaking_demo/login_and_signup/components/sign_in_with_button.dart';
 
 class Login extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -68,7 +69,7 @@ class Login extends StatelessWidget {
                       SizedBox(height: 30.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: signUpLoginButtonColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -85,11 +86,7 @@ class Login extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'LOG IN',
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
+                              style: loginSignUpButtonTextStyle,
                             ),
                           ),
                         ),
@@ -112,12 +109,7 @@ class Login extends StatelessWidget {
                               },
                               child: Text(
                                 'Sign Up',
-                                style: TextStyle(
-                                  color: Color(0xFFcd5d27),
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16.0,
-                                  decoration: TextDecoration.underline,
-                                ),
+                                style: signUpLoginTextButtonStyleOrange,
                               ),
                             ),
                           ],
@@ -140,28 +132,15 @@ class Login extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: const Image(
-                              image: AssetImage(
-                                'assets/images/sign_in/logo_apple.png',
-                              ),
-                              height: 44,
-                              width: 45,
-                            ),
+                          SignInWithButton(
+                            imagePath: 'assets/images/sign_in/logo_apple.png',
                           ),
-                          TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                  'assets/images/sign_in/logo_outlook.png',
-                                  height: 44,
-                                  width: 45)),
-                          TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                  'assets/images/sign_in/logo_google.png',
-                                  height: 44,
-                                  width: 45))
+                          SignInWithButton(
+                            imagePath: 'assets/images/sign_in/logo_outlook.png',
+                          ),
+                          SignInWithButton(
+                            imagePath: 'assets/images/sign_in/logo_google.png',
+                          )
                         ],
                       ),
                     ],
