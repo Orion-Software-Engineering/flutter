@@ -3,7 +3,7 @@ import 'package:matchmaking_demo/constants.dart';
 import 'package:matchmaking_demo/login_and_signup/components/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/login_and_signup/components/title_and_subtext.dart';
 // import 'package:date_field/date_field.dart';
-import 'components/custom_password_field.dart';
+import '../login_and_signup/components/custom_password_field.dart';
 
 class SignUp extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

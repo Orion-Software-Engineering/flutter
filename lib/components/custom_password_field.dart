@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/constants.dart';
+
+import '../../utils/constants.dart';
 
 class CustomPasswordField extends StatefulWidget {
-  CustomPasswordField(
-      {required this.hintText, required this.validationFunction});
-  String? hintText;
-  FormFieldValidator<String> validationFunction;
+  const CustomPasswordField(
+      {Key? key, required this.hintText, required this.validationFunction})
+      : super(key: key);
+  final String? hintText;
+  final FormFieldValidator<String> validationFunction;
 
   @override
   State<CustomPasswordField> createState() => _CustomPasswordFieldState();
