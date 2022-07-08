@@ -18,7 +18,7 @@ class LogInSignUpScaffold extends StatelessWidget {
               fit: BoxFit.cover),
         ),
         height: double.infinity,
-        padding: const EdgeInsets.fromLTRB(20, 0.0, 20.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(20, 0.0, 20.0, 0),
         width: double.infinity,
         child: child,
       ),
