@@ -10,19 +10,19 @@ class LoginResponseModel{
 
 }
 class LoginRequestModel{
-  late String email;
-  late String password;
+  late String ?email;
+  late String ?password;
 
   LoginRequestModel({
-    this.email="",
-    this.password="",
+    this.email,
+    this.password,
   });
 
 
   Map<String,dynamic> toJson(){
     Map<String,dynamic> map={
-      'email':email.trim(),
-      'password':password.trim(),
+      'email':email,//.trim(),
+      'password':password,//.trim(),
     };
 
     return map;

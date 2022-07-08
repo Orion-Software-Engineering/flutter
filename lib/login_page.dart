@@ -9,16 +9,14 @@ class Login extends StatelessWidget {
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
-  late LoginRequestModel requestModel;
+  late String email;
+  late String password;
 
-  void initState(){
-    initState();
-    requestModel=new LoginRequestModel();
-  }
 
 
   @override
   Widget build(BuildContext context) {
+    LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -75,10 +73,11 @@ class Login extends StatelessWidget {
                               ),
                             ),
                           ),
-                          onSaved: (input)=>requestModel.email=input!,
+                          onSaved: (value)=>requestModel.email=value!,
                           validator: (value) {
                             if (emailValid.hasMatch(value!) &&
                                 value.isNotEmpty) {
+                                email=value;
                               return null;
                             } else {
                               return "Enter a valid email address";
@@ -101,9 +100,10 @@ class Login extends StatelessWidget {
                               color: Colors.grey,
                             )),
                           ),
-                          onSaved: (input)=>requestModel.password=input!,
+                          onSaved: (value)=>requestModel.password=value!,
                           validator: (value) {
                             if (userNameValid.hasMatch(value!) && value.isNotEmpty) {
+                              password=value;
                               return null;
                             } else {
                               return "Enter a valid password";
@@ -120,6 +120,8 @@ class Login extends StatelessWidget {
                               )),
                           onPressed: () {
                             if(validateAndSave()){
+                              requestModel.email=email;
+                              requestModel.password=password;
                               print(requestModel.toJson());
                             }
                           },
