@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/login_and_signup/components/custom_password_field.dart';
-import 'package:matchmaking_demo/login_and_signup/components/title_and_subtext.dart';
-import '../constants.dart';
-import 'components/login_signup_scaffold.dart';
-import 'package:matchmaking_demo/login_and_signup/components/sign_in_with_button.dart';
+
+import '../components/custom_password_field.dart';
+import '../components/login_signup_scaffold.dart';
+import '../components/sign_in_with_button.dart';
+import '../components/title_and_subtext.dart';
+import '../utils/constants.dart';
 
 class Login extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  RegExp emailValid = RegExp(
+  final RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
+  final RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
+
+  Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +96,7 @@ class Login extends StatelessWidget {
                       ),
                       SizedBox(height: 15.0),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -116,7 +119,7 @@ class Login extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 8.0),
                         child: Row(children: <Widget>[
                           Expanded(
                               child: Divider(

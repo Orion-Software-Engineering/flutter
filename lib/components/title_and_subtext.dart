@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/constants.dart';
+import '../../utils/constants.dart';
 
 class TitleAndSubtext extends StatelessWidget {
   TitleAndSubtext({required this.title, required this.subtext});
+
   String title;
   String subtext;
 
@@ -14,7 +15,7 @@ class TitleAndSubtext extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 40.0,
               fontWeight: FontWeight.w700,
@@ -22,7 +23,7 @@ class TitleAndSubtext extends StatelessWidget {
           ),
           Text(
             subtext,
-            style: TextStyle(
+            style: const TextStyle(
               color: signUpLoginTextColor,
               fontSize: 16.0,
               fontWeight: FontWeight.w700,
