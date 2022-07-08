@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 //import 'passwordfield.dart'
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'constants.dart';

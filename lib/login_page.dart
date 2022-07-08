@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/requests/login_model.dart';
 import 'constants.dart';
 
 class Login extends StatelessWidget {
@@ -6,6 +9,13 @@ class Login extends StatelessWidget {
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
+  late LoginRequestModel requestModel;
+
+  void initState(){
+    initState();
+    requestModel=new LoginRequestModel();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +75,7 @@ class Login extends StatelessWidget {
                               ),
                             ),
                           ),
+                          onSaved: (input)=>requestModel.email=input!,
                           validator: (value) {
                             if (emailValid.hasMatch(value!) &&
                                 value.isNotEmpty) {
@@ -90,11 +101,12 @@ class Login extends StatelessWidget {
                               color: Colors.grey,
                             )),
                           ),
+                          onSaved: (input)=>requestModel.password=input!,
                           validator: (value) {
-                            if (emailValid.hasMatch(value!)) {
+                            if (userNameValid.hasMatch(value!) && value.isNotEmpty) {
                               return null;
                             } else {
-                              return "Enter a password";
+                              return "Enter a valid password";
                             }
                           },
                         ),
@@ -107,8 +119,8 @@ class Login extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0),
                               )),
                           onPressed: () {
-                            if (!_formKey!.currentState!.validate()) {
-                              return;
+                            if(validateAndSave()){
+                              print(requestModel.toJson());
                             }
                           },
                           child: Container(
@@ -207,5 +219,17 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool validateAndSave(){
+    final form=_formKey.currentState;
+    if(form!.validate()){
+      // ignore: invalid_null_aware_operator
+      form?.save;
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }
