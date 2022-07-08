@@ -1,2 +1,2 @@
-# Orion Meet Mobile App Repository
+# Orion Meet Mobile App
 Built with ❤️ and Flutter
