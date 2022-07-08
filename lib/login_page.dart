@@ -1,23 +1,39 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service.dart';
 import 'package:matchmaking_demo/requests/login_model.dart';
+import 'package:matchmaking_demo/requests/progress_popup.dart';
 import 'constants.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final scaffoldKey=GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
-  late String email;
-  late String password;
-
-
+  late String email='';
+  late String password='';
+  bool isApiCallProcess=false;
 
   @override
   Widget build(BuildContext context) {
+    return Progress(
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+      child: _ui(context),
+    );
+  }
+
+  Widget _ui(BuildContext context) {
     LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
     return Scaffold(
+      key: scaffoldKey,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -122,6 +138,23 @@ class Login extends StatelessWidget {
                             if(validateAndSave()){
                               requestModel.email=email;
                               requestModel.password=password;
+                              setState((){
+                                isApiCallProcess=true;
+                              });
+                              APIService apiService= new APIService();
+                              apiService.login(requestModel).then((value){
+                                setState((){
+                                  isApiCallProcess=false;
+                              });
+                                if(value.token!.isNotEmpty){
+                                  final snackBar= SnackBar(content: Text("Login Successful"));
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                }
+                                else{
+                                  final snackBar= SnackBar(content: Text("value.error"));
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                }
+                              });
                               print(requestModel.toJson());
                             }
                           },
@@ -235,3 +268,6 @@ class Login extends StatelessWidget {
     }
   }
 }
+
+
+

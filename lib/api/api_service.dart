@@ -5,10 +5,10 @@ import 'dart:convert';
 
 
 class APIService{
-  Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
+  Future<LoginResponseModel> login(LoginRequestModel loginRequestModel) async {
 
-    final response = await http.post(logInUrl as Uri, body: requestModel.toJson());
-    if (response.statusCode==200 || response.statusCode==404){
+    final response = await http.post(logInUrl as Uri, body: loginRequestModel.toJson());
+    if (response.statusCode==200){
       return LoginResponseModel.fromJson(json.decode(response.body));
     }
     else{
