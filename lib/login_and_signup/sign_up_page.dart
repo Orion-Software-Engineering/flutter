@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/constants.dart';
+import 'package:matchmaking_demo/login_and_signup/components/title_and_subtext.dart';
 // import 'package:date_field/date_field.dart';
-import 'custom_password_field.dart';
+import 'components/custom_password_field.dart';
 
 class SignUp extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -30,27 +31,9 @@ class SignUp extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        'Create your account to start matching',
-                        style: TextStyle(
-                          color: signUpLoginTextColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
+                  child: TitleAndSubtext(
+                      title: 'Sign Up',
+                      subtext: 'Create your account to start matchmaking'),
                 ),
                 SizedBox(height: 20.0),
                 Expanded(
@@ -95,30 +78,27 @@ class SignUp extends StatelessWidget {
                             }
                           },
                         ),
-                        CustomPasswordField(),
-                        // TextFormField(
-                        //   obscureText: true,
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Confirm Password',
-                        //     labelStyle: signUpLoginTextFieldTextStyle,
-                        //     suffixIcon: IconButton(
-                        //       onPressed: () {},
-                        //       icon: Icon(Icons.visibility),
-                        //       color: Colors.grey,
-                        //     ),
-                        //     border: UnderlineInputBorder(
-                        //         borderSide: BorderSide(
-                        //       color: Colors.grey,
-                        //     )),
-                        //   ),
-                        //   validator: (value) {
-                        //     if (value == userPassword) {
-                        //       return null;
-                        //     } else {
-                        //       return "Passwords don't match";
-                        //     }
-                        //   },
-                        // ),
+                        CustomPasswordField(
+                          hintText: 'Password',
+                          validationFunction: (value) {
+                            if (value!.length >= 8) {
+                              userPassword = value;
+                              return null;
+                            } else {
+                              return "Password must be at least 8 characters long";
+                            }
+                          },
+                        ),
+                        CustomPasswordField(
+                          hintText: 'Confirm Password',
+                          validationFunction: (value) {
+                            if (value == userPassword) {
+                              return null;
+                            } else {
+                              return "Passwords don't match";
+                            }
+                          },
+                        ),
                         SizedBox(height: 50.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(

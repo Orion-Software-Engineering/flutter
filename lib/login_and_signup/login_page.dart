@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/login_and_signup/login_password_field.dart';
+import 'package:matchmaking_demo/login_and_signup/components/custom_password_field.dart';
+import 'package:matchmaking_demo/login_and_signup/components/title_and_subtext.dart';
 import '../constants.dart';
 
 class Login extends StatelessWidget {
@@ -27,29 +28,11 @@ class Login extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  flex: 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        'Enter your email and password',
-                        style: TextStyle(
-                          color: signUpLoginTextColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                    flex: 2,
+                    child: TitleAndSubtext(
+                      title: 'Sign In',
+                      subtext: 'Enter your email and password',
+                    )),
                 Expanded(
                   flex: 3,
                   child: SingleChildScrollView(
@@ -76,7 +59,15 @@ class Login extends StatelessWidget {
                             }
                           },
                         ),
-                        LoginPasswordField(),
+                        CustomPasswordField(
+                            hintText: 'Password',
+                            validationFunction: (value) {
+                              if (value!.isNotEmpty) {
+                                return null;
+                              } else {
+                                return 'Enter password';
+                              }
+                            }),
                         TextButton(
                             onPressed: () {},
                             child: Text(
@@ -93,7 +84,7 @@ class Login extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0),
                               )),
                           onPressed: () {
-                            if (!_formKey!.currentState!.validate()) {
+                            if (!_formKey.currentState!.validate()) {
                               return;
                             }
                           },
