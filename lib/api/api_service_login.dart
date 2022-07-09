@@ -1,20 +1,22 @@
 import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/constants.dart';
-import 'package:matchmaking_demo/requests/login_model.dart';
+import 'package:matchmaking_demo/models/login_model.dart';
 import 'dart:convert';
 
 
 class APIService{
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
 
+
     var url=Uri(
-      scheme: 'https',
-      host: 'orion-meet.herokuapp.com',
-      path: '/api/auth/signin',
+      scheme: scheme,
+      host: host,
+      path: logInPath,
         );
     try{
       final response = await http.post(url, body: requestModel.toJson());
-      if (response.statusCode==200 || response.statusCode==400){
+
+      if (response.statusCode==200){
         return LoginResponseModel.fromJson(json.decode(response.body));
       }
       else{
@@ -22,7 +24,7 @@ class APIService{
       }
     }
     catch(e){
-      throw Exception(e);
+     rethrow;
     }
 
   }

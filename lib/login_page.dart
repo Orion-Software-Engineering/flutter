@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service.dart';
-import 'package:matchmaking_demo/requests/login_model.dart';
-import 'package:matchmaking_demo/requests/progress_popup.dart';
+import 'package:matchmaking_demo/api/api_service_login.dart';
+import 'package:matchmaking_demo/models/login_model.dart';
+import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'constants.dart';
 
 class Login extends StatefulWidget {
@@ -17,6 +17,7 @@ class _LoginState extends State<Login> {
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
+  RegExp passwordValid = RegExp(r".+");
   //late String email='';
   //late String password='';
   bool isApiCallProcess=false;
@@ -69,7 +70,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Text(
-                        'Enter your email and password',
+                        'Enter your username and password',
                         style: TextStyle(
                           color: signUpLoginTextColor,
                           fontSize: 16.0,
@@ -88,7 +89,7 @@ class _LoginState extends State<Login> {
                       children: [
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: 'Email',
+                            labelText: 'Username',
                             labelStyle: signUpLoginTextFieldTextStyle,
                             border: UnderlineInputBorder(
                               borderSide: BorderSide(
@@ -96,17 +97,17 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-                          onSaved: (value)=>requestModel.email=value!,
+                          onSaved: (value)=>requestModel.username=value!,
                           validator: (value) {
-                            if (emailValid.hasMatch(value!) &&
+                            if (userNameValid.hasMatch(value!) &&
                                 value.isNotEmpty) {
-                                String email=value;
+                                String username=value;
                                 setState((){
-                                  requestModel.email=email;
+                                  requestModel.username=username;
                                 });
                               return null;
                             } else {
-                              return "Enter a valid email address";
+                              return "Enter a valid username address";
                             }
                           },
                         ),
@@ -128,7 +129,7 @@ class _LoginState extends State<Login> {
                           ),
                           //onSaved: (value)=>requestModel.password=value!,
                           validator: (value) {
-                            if (userNameValid.hasMatch(value!) && value.isNotEmpty) {
+                            if (passwordValid.hasMatch(value!) && value.isNotEmpty) {
                               String password=value;
                               setState((){
                                 requestModel.password=password;
@@ -157,15 +158,8 @@ class _LoginState extends State<Login> {
                               apiService.login(requestModel).then((value){
                                 setState((){
                                   isApiCallProcess=false;
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login Successful')));
                               });
-                                if(value.token!.isNotEmpty){
-                                  final snackBar=SnackBar(content: Text("Login Successful"));
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
-                                else{
-                                  final snackBar=SnackBar(content: Text(value.error!));
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
                               });
                               print(requestModel.toJson());
                             }

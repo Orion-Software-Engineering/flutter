@@ -7,7 +7,8 @@ const TextStyle signUpLoginTextFieldTextStyle =
 
 
 //apis
-const String mainUrl= "https://orion-meet.herokuapp.com";
-const String signUpUrl="https://orion-meet.herokuapp.com/api/auth/signup";
-const String  logInUrl="https://orion-meet.herokuapp.com/api/auth/signin";
+const String scheme= "https";
+const String host="orion-meet.herokuapp.com";
+const String  logInPath="/api/auth/signin";
+const String signUpPath="/api/auth/signup";
 

@@ -2,21 +2,52 @@
 //import 'passwordfield.dart'
 import 'dart:core';
 
+import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_signup.dart';
+import 'package:matchmaking_demo/models/signup_model.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'constants.dart';
 import 'package:date_field/date_field.dart';
 import 'custom_password_field.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
-  late String userPassword;
+  bool masked = true;
+  bool confirmMasked = true;
+  String password='';
+  late SignupRequestModel requestModel;
+  late SignupResponseModel responseModel;
+  bool isApiCallProcess=false;
+
+  @override
+  void initState(){
+    super.initState();
+    requestModel= new SignupRequestModel();
+    responseModel =new SignupResponseModel();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return Progress(
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+      child: _ui(context),
+    );
+  }
+
+  @override
+  Widget _ui(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -74,9 +105,14 @@ class SignUp extends StatelessWidget {
                               ),
                             ),
                           ),
+                          onSaved: (value)=>requestModel.username=value!,
                           validator: (value) {
                             if (userNameValid.hasMatch(value!) &&
                                 value.isNotEmpty) {
+                              String username=value;
+                              setState((){
+                                requestModel.username=username;
+                              });
                               return null;
                             } else {
                               return "Username should be alphanumeric";
@@ -92,38 +128,82 @@ class SignUp extends StatelessWidget {
                               color: Colors.grey,
                             )),
                           ),
+                          onSaved: (value)=>requestModel.username=value!,
                           validator: (value) {
                             if (emailValid.hasMatch(value!)) {
+                              String email=value;
+                              setState((){
+                                requestModel.email=email;
+                              });
                               return null;
                             } else {
                               return "Enter a valid email address";
                             }
                           },
                         ),
-                        CustomPasswordField(),
-                        // TextFormField(
-                        //   obscureText: true,
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Confirm Password',
-                        //     labelStyle: signUpLoginTextFieldTextStyle,
-                        //     suffixIcon: IconButton(
-                        //       onPressed: () {},
-                        //       icon: Icon(Icons.visibility),
-                        //       color: Colors.grey,
-                        //     ),
-                        //     border: UnderlineInputBorder(
-                        //         borderSide: BorderSide(
-                        //       color: Colors.grey,
-                        //     )),
-                        //   ),
-                        //   validator: (value) {
-                        //     if (value == userPassword) {
-                        //       return null;
-                        //     } else {
-                        //       return "Passwords don't match";
-                        //     }
-                        //   },
-                        // ),
+                        TextFormField(
+                          obscureText: masked,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: signUpLoginTextFieldTextStyle,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  masked = !masked;
+                                });
+                              },
+                              icon: Icon(
+                                  (masked == true) ? Icons.visibility : Icons.visibility_off),
+                              // icon: Icon(Icons.visibility),
+                              color: Color((masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
+                            ),
+                            border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                )),
+                          ),
+                          validator: (value) {
+                            if (value!.length >= 8) {
+                              setState(()=>password=value);
+                              setState((){
+                                requestModel.password=password;
+                              });
+                              return null;
+                            } else {
+                              return "Password must be at least 8 characters long";
+                            }
+                          },
+                        ),
+                        TextFormField(
+                          obscureText: confirmMasked,
+                          decoration: InputDecoration(
+                            labelText: 'Confirm Password',
+                            labelStyle: signUpLoginTextFieldTextStyle,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  confirmMasked = !confirmMasked;
+                                });
+                              },
+                              icon: Icon((confirmMasked == true)
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              // icon: Icon(Icons.visibility),
+                              color: Color((confirmMasked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
+                            ),
+                            border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                )),
+                          ),
+                          validator: (value) {
+                            if (value == password) {
+                              return null;
+                            } else {
+                              return "Passwords don't match";
+                            }
+                          },
+                        ),
                         SizedBox(height: 50.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -133,9 +213,20 @@ class SignUp extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0),
                               )),
                           onPressed: () {
-                            if (!_formKey!.currentState!.validate()) {
-                              return;
-                            }
+                              if(validateAndSave()){
+                                setState((){
+                                  isApiCallProcess=true;
+                                });
+                                APIService apiService= new APIService();
+                                apiService.signup(requestModel).then((value){
+                                  setState((){
+                                    isApiCallProcess=false;
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Signup Successful')));
+                                  });
+
+                                });
+                              }
+                              print(requestModel.toJson());
                           },
                           child: Container(
                             width: double.infinity,
@@ -189,5 +280,15 @@ class SignUp extends StatelessWidget {
         ),
       ),
     );
+  }
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form!.validate()) {
+      form.save;
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }
