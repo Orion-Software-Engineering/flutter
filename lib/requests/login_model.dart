@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_if_null_operators
 
 class LoginResponseModel{
-    late  String ?token;
-    late  String ?error;
+    String ?token;
+    String ?error;
 
     LoginResponseModel({this.token,this.error});
 
@@ -12,13 +12,8 @@ class LoginResponseModel{
 
 }
 class LoginRequestModel{
-  late String ?email;
-  late String ?password;
-
-  LoginRequestModel({
-    this.email,
-    this.password,
-  });
+  String email='';
+  String password='';
 
 
   Map<String,dynamic> toJson(){

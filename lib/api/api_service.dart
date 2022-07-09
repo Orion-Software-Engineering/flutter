@@ -5,14 +5,25 @@ import 'dart:convert';
 
 
 class APIService{
-  Future<LoginResponseModel> login(LoginRequestModel loginRequestModel) async {
+  Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
 
-    final response = await http.post(logInUrl as Uri, body: loginRequestModel.toJson());
-    if (response.statusCode==200){
-      return LoginResponseModel.fromJson(json.decode(response.body));
+    var url=Uri(
+      scheme: 'https',
+      host: 'orion-meet.herokuapp.com',
+      path: '/api/auth/signin',
+        );
+    try{
+      final response = await http.post(url, body: requestModel.toJson());
+      if (response.statusCode==200 || response.statusCode==400){
+        return LoginResponseModel.fromJson(json.decode(response.body));
+      }
+      else{
+        throw Exception('Failed to load data ${response.statusCode}');
+      }
     }
-    else{
-      throw Exception('Failed to load data');
+    catch(e){
+      throw Exception(e);
     }
+
   }
 }

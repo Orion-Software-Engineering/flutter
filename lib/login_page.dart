@@ -17,9 +17,16 @@ class _LoginState extends State<Login> {
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
-  late String email='';
-  late String password='';
+  //late String email='';
+  //late String password='';
   bool isApiCallProcess=false;
+  late LoginRequestModel requestModel;
+
+  @override
+  void initState(){
+    super.initState();
+    requestModel= new LoginRequestModel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class _LoginState extends State<Login> {
   }
 
   Widget _ui(BuildContext context) {
-    LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
+    //LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
     return Scaffold(
       key: scaffoldKey,
       body: Container(
@@ -93,7 +100,10 @@ class _LoginState extends State<Login> {
                           validator: (value) {
                             if (emailValid.hasMatch(value!) &&
                                 value.isNotEmpty) {
-                                email=value;
+                                String email=value;
+                                setState((){
+                                  requestModel.email=email;
+                                });
                               return null;
                             } else {
                               return "Enter a valid email address";
@@ -116,10 +126,14 @@ class _LoginState extends State<Login> {
                               color: Colors.grey,
                             )),
                           ),
-                          onSaved: (value)=>requestModel.password=value!,
+                          //onSaved: (value)=>requestModel.password=value!,
                           validator: (value) {
                             if (userNameValid.hasMatch(value!) && value.isNotEmpty) {
-                              password=value;
+                              String password=value;
+                              setState((){
+                                requestModel.password=password;
+                              });
+                              //password=value;
                               return null;
                             } else {
                               return "Enter a valid password";
@@ -136,8 +150,6 @@ class _LoginState extends State<Login> {
                               )),
                           onPressed: () {
                             if(validateAndSave()){
-                              requestModel.email=email;
-                              requestModel.password=password;
                               setState((){
                                 isApiCallProcess=true;
                               });
@@ -147,11 +159,11 @@ class _LoginState extends State<Login> {
                                   isApiCallProcess=false;
                               });
                                 if(value.token!.isNotEmpty){
-                                  final snackBar= SnackBar(content: Text("Login Successful"));
+                                  final snackBar=SnackBar(content: Text("Login Successful"));
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
                                 else{
-                                  final snackBar= SnackBar(content: Text("value.error"));
+                                  final snackBar=SnackBar(content: Text(value.error!));
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
                               });
@@ -259,8 +271,7 @@ class _LoginState extends State<Login> {
   bool validateAndSave(){
     final form=_formKey.currentState;
     if(form!.validate()){
-      // ignore: invalid_null_aware_operator
-      form?.save;
+      form.save;
       return true;
     }
     else{
