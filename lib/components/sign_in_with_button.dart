@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SignInWithButton extends StatelessWidget {
-  SignInWithButton({required this.imagePath});
-  String imagePath;
+  const SignInWithButton({Key? key, required this.imagePath}) : super(key: key);
+  final String imagePath;
+
   @override
   Widget build(BuildContext context) {
     return TextButton(

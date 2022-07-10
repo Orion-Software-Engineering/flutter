@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LogInSignUpScaffold extends StatelessWidget {
-  LogInSignUpScaffold({required this.child});
+  const LogInSignUpScaffold({Key? key, required this.child}) : super(key: key);
 
-  Widget child;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
