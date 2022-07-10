@@ -21,5 +21,6 @@ const TextStyle signUpLoginTextButtonStyleOrange = TextStyle(
 const UnderlineInputBorder inputBorder = UnderlineInputBorder(
   borderSide: BorderSide(
     color: signUpLoginTextColor,
+    width: 2,
   ),
 );

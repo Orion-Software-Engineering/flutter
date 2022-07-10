@@ -20,6 +20,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
     return Column(
       children: [
         TextFormField(
+          keyboardType: TextInputType.emailAddress,
           obscureText: masked,
           decoration: InputDecoration(
             labelText: widget.hintText,

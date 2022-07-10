@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/constants.dart';
 import 'package:matchmaking_demo/login_and_signup/components/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/login_and_signup/components/title_and_subtext.dart';
-// import 'package:date_field/date_field.dart';
+import 'package:matchmaking_demo/login_and_signup/components/date_of_birth.dart';
 import 'components/custom_password_field.dart';
 
 class SignUp extends StatelessWidget {
@@ -11,6 +11,7 @@ class SignUp extends StatelessWidget {
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
   late String userPassword;
+  // final datePick = await
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +84,8 @@ class SignUp extends StatelessWidget {
                           }
                         },
                       ),
+                      DobField(),
+                      //TODO DOB
                       SizedBox(height: 50.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
