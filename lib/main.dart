@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/sign_up',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => Login(),
         '/sign_up': (context) => SignUp(),
