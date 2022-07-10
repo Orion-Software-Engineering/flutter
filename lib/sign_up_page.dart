@@ -6,10 +6,7 @@ import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_signup.dart';
 import 'package:matchmaking_demo/models/signup_model.dart';
-import 'package:passwordfield/passwordfield.dart';
 import 'constants.dart';
-import 'package:date_field/date_field.dart';
-import 'custom_password_field.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -25,16 +22,16 @@ class _SignUpState extends State<SignUp> {
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
   bool masked = true;
   bool confirmMasked = true;
-  String password='';
+  String password = '';
   late SignupRequestModel requestModel;
   late SignupResponseModel responseModel;
-  bool isApiCallProcess=false;
+  bool isApiCallProcess = false;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    requestModel= new SignupRequestModel();
-    responseModel =new SignupResponseModel();
+    requestModel = new SignupRequestModel();
+    responseModel = new SignupResponseModel();
   }
 
   @override
@@ -105,13 +102,13 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                           ),
-                          onSaved: (value)=>requestModel.username=value!,
+                          onSaved: (value) => requestModel.username = value!,
                           validator: (value) {
                             if (userNameValid.hasMatch(value!) &&
                                 value.isNotEmpty) {
-                              String username=value;
-                              setState((){
-                                requestModel.username=username;
+                              String username = value;
+                              setState(() {
+                                requestModel.username = username;
                               });
                               return null;
                             } else {
@@ -128,12 +125,12 @@ class _SignUpState extends State<SignUp> {
                               color: Colors.grey,
                             )),
                           ),
-                          onSaved: (value)=>requestModel.username=value!,
+                          onSaved: (value) => requestModel.username = value!,
                           validator: (value) {
                             if (emailValid.hasMatch(value!)) {
-                              String email=value;
-                              setState((){
-                                requestModel.email=email;
+                              String email = value;
+                              setState(() {
+                                requestModel.email = email;
                               });
                               return null;
                             } else {
@@ -152,21 +149,23 @@ class _SignUpState extends State<SignUp> {
                                   masked = !masked;
                                 });
                               },
-                              icon: Icon(
-                                  (masked == true) ? Icons.visibility : Icons.visibility_off),
+                              icon: Icon((masked == true)
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
                               // icon: Icon(Icons.visibility),
-                              color: Color((masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
+                              color: Color(
+                                  (masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
                             ),
                             border: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.grey,
-                                )),
+                              color: Colors.grey,
+                            )),
                           ),
                           validator: (value) {
                             if (value!.length >= 8) {
-                              setState(()=>password=value);
-                              setState((){
-                                requestModel.password=password;
+                              setState(() => password = value);
+                              setState(() {
+                                requestModel.password = password;
                               });
                               return null;
                             } else {
@@ -189,12 +188,14 @@ class _SignUpState extends State<SignUp> {
                                   ? Icons.visibility
                                   : Icons.visibility_off),
                               // icon: Icon(Icons.visibility),
-                              color: Color((confirmMasked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
+                              color: Color((confirmMasked == true)
+                                  ? 0xFF8c8c8c
+                                  : 0xFFcd5d27),
                             ),
                             border: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.grey,
-                                )),
+                              color: Colors.grey,
+                            )),
                           ),
                           validator: (value) {
                             if (value == password) {
@@ -213,20 +214,21 @@ class _SignUpState extends State<SignUp> {
                                 borderRadius: BorderRadius.circular(50.0),
                               )),
                           onPressed: () {
-                              if(validateAndSave()){
-                                setState((){
-                                  isApiCallProcess=true;
+                            if (validateAndSave()) {
+                              setState(() {
+                                isApiCallProcess = true;
+                              });
+                              APIService apiService = new APIService();
+                              apiService.signup(requestModel).then((value) {
+                                setState(() {
+                                  isApiCallProcess = false;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text('Signup Successful')));
                                 });
-                                APIService apiService= new APIService();
-                                apiService.signup(requestModel).then((value){
-                                  setState((){
-                                    isApiCallProcess=false;
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Signup Successful')));
-                                  });
-
-                                });
-                              }
-                              print(requestModel.toJson());
+                              });
+                            }
+                            print(requestModel.toJson());
                           },
                           child: Container(
                             width: double.infinity,
@@ -281,13 +283,13 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
   bool validateAndSave() {
     final form = _formKey.currentState;
     if (form!.validate()) {
       form.save;
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

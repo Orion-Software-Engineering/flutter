@@ -3,29 +3,23 @@ import 'package:matchmaking_demo/constants.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'dart:convert';
 
-
-class APIService{
+class APIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
-
-
-    var url=Uri(
+    var url = Uri(
       scheme: scheme,
       host: host,
       path: logInPath,
-        );
-    try{
+    );
+    try {
       final response = await http.post(url, body: requestModel.toJson());
 
-      if (response.statusCode==200){
+      if (response.statusCode == 200) {
         return LoginResponseModel.fromJson(json.decode(response.body));
-      }
-      else{
+      } else {
         throw Exception('Failed to load data ${response.statusCode}');
       }
+    } catch (e) {
+      rethrow;
     }
-    catch(e){
-     rethrow;
-    }
-
   }
 }
