@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/constants.dart';
 import 'package:matchmaking_demo/login_and_signup/components/login_signup_scaffold.dart';
@@ -10,6 +12,7 @@ class SignUp extends StatelessWidget {
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
+  RegExp dobValid = RegExp(r"0[0-9]|[12][0-9]|3[01]-0[0-9]|1[0-2]-\d{4}$");
   late String userPassword;
   // final datePick = await
 
