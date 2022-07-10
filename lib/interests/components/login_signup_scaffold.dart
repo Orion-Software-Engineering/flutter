@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/constants.dart';
-import 'package:matchmaking_demo/login_and_signup/components/title_and_subtext.dart';
-import 'package:matchmaking_demo/login_and_signup/components/custom_password_field.dart';
 
 class InterestsScaffold extends StatelessWidget {
   InterestsScaffold({required this.child});
