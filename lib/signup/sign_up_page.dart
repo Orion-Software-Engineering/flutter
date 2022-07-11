@@ -1,9 +1,9 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
-import '../components/custom_password_field.dart';
-import '../components/date_of_birth.dart';
-import '../components/login_signup_scaffold.dart';
-import '../components/title_and_subtext.dart';
+import '../components/login_signup/custom_password_field.dart';
+import '../components/login_signup/date_of_birth.dart';
+import '../components/login_signup/login_signup_scaffold.dart';
+import '../components/login_signup/title_and_subtext.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatelessWidget {
@@ -52,6 +52,7 @@ class SignUp extends StatelessWidget {
                         },
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: signUpLoginTextFieldTextStyle,
@@ -87,7 +88,7 @@ class SignUp extends StatelessWidget {
                         },
                       ),
                       DobField(),
-                      //TODO DOB
+                      //TODO DOB date correction
                       SizedBox(height: 50.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -100,6 +101,7 @@ class SignUp extends StatelessWidget {
                           if (!_formKey.currentState!.validate()) {
                             return;
                           }
+                          Navigator.pushNamed(context, '/interests_1');
                         },
                         child: Container(
                           width: double.infinity,

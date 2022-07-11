@@ -69,7 +69,7 @@ flutter:
     - assets/images/sign_in/logo_outlook.png
     - assets/images/sign_in/logo_google.png
     - assets/images/sign_in/Sign Up bg.png
-    -
+    - assets/images/interests/Orion logo(!BG) 3.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

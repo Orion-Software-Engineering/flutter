@@ -24,3 +24,47 @@ const UnderlineInputBorder inputBorder = UnderlineInputBorder(
     width: 2,
   ),
 );
+
+//INTERESTS
+const List<String> interestsList = [
+  'Art',
+  'Business',
+  'Cars & Vehicles',
+  'Comedy',
+  'Vacation',
+  'Entertainment',
+  'Food',
+  'Fashion',
+  'Gaming',
+  'Health & Fitness',
+  'Hair & Beauty',
+  'News & Politics',
+  'Photography',
+  'Science & Technology',
+  'Sports'
+];
+
+const TextStyle interestsTitleStyle =
+    TextStyle(fontSize: 40, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
+
+const TextStyle interestsButtonTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 22,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Nunito');
+
+const Color interestsButtonColorNormal = Color(0xFF222222);
+
+const Color interestsButtonColorSelected = Color(0xFF205098);
+
+const TextStyle interestsPageNumberStyle = TextStyle(
+    fontFamily: 'Nunito',
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: Colors.grey);
+
+const TextStyle interestsPageNextBackStyle = TextStyle(
+    fontFamily: 'Nunito',
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    color: Colors.grey);
