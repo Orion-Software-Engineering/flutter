@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
+import '../../utils/varriables.dart';
 
 class InterestsButton extends StatefulWidget {
   InterestsButton({required this.text});
@@ -17,10 +18,15 @@ class _InterestsButtonState extends State<InterestsButton> {
       onTap: () {
         setState(() {
           selected = !selected;
+          selected
+              ? globalInterestsSet.add(widget.text)
+              : globalInterestsSet.remove(widget.text);
+          print('hit');
         });
       },
       child: Container(
-          height: 44,
+          margin: EdgeInsets.fromLTRB(0, 0, 0, 22),
+          height: 50,
           width: double.infinity,
           decoration: BoxDecoration(
               color: selected

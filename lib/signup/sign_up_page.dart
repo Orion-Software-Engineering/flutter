@@ -52,6 +52,7 @@ class SignUp extends StatelessWidget {
                         },
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: signUpLoginTextFieldTextStyle,
@@ -87,7 +88,7 @@ class SignUp extends StatelessWidget {
                         },
                       ),
                       DobField(),
-                      //TODO DOB
+                      //TODO DOB date correction
                       SizedBox(height: 50.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -100,6 +101,7 @@ class SignUp extends StatelessWidget {
                           if (!_formKey.currentState!.validate()) {
                             return;
                           }
+                          Navigator.pushNamed(context, '/interests_1');
                         },
                         child: Container(
                           width: double.infinity,
