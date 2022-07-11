@@ -4,7 +4,10 @@ import 'package:intl/intl.dart';
 import '../utils/constants.dart';
 
 class DobField extends StatefulWidget {
-  const DobField({Key? key}) : super(key: key);
+  const DobField({Key? key, required this.validationFunction})
+      : super(key: key);
+
+  final FormFieldValidator<String> validationFunction;
 
   @override
   State<DobField> createState() => _DobFieldState();
@@ -43,6 +46,7 @@ class _DobFieldState extends State<DobField> {
             labelStyle: signUpLoginTextFieldTextStyle,
             border: inputBorder,
             suffixIcon: Icon(Icons.calendar_month)),
+        validator: widget.validationFunction,
       ),
     );
   }

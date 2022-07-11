@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_login.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
-import 'constants.dart';
+import '../utils/constants.dart';
+import 'package:matchmaking_demo/components/custom_password_field.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,21 +13,19 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final scaffoldKey=GlobalKey<ScaffoldState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
   RegExp passwordValid = RegExp(r".+");
-  //late String email='';
-  //late String password='';
-  bool isApiCallProcess=false;
+  bool isApiCallProcess = false;
   late LoginRequestModel requestModel;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    requestModel= new LoginRequestModel();
+    requestModel = new LoginRequestModel();
   }
 
   @override
@@ -97,50 +96,33 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-                          onSaved: (value)=>requestModel.username=value!,
                           validator: (value) {
                             if (userNameValid.hasMatch(value!) &&
                                 value.isNotEmpty) {
-                                String username=value;
-                                setState((){
-                                  requestModel.username=username;
-                                });
+                              String username = value;
+                              setState(() {
+                                requestModel.username = username;
+                              });
                               return null;
                             } else {
                               return "Enter a valid username address";
                             }
                           },
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            suffix: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Forgot password?',
-                                  style: TextStyle(
-                                      color: signUpLoginOrange, fontSize: 16),
-                                )),
-                            labelText: 'Password',
-                            labelStyle: signUpLoginTextFieldTextStyle,
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Colors.grey,
-                            )),
-                          ),
-                          //onSaved: (value)=>requestModel.password=value!,
-                          validator: (value) {
-                            if (passwordValid.hasMatch(value!) && value.isNotEmpty) {
-                              String password=value;
-                              setState((){
-                                requestModel.password=password;
-                              });
-                              //password=value;
-                              return null;
-                            } else {
-                              return "Enter a valid password";
-                            }
-                          },
-                        ),
+                        CustomPasswordField(
+                            hintText: 'Password',
+                            validationFunction: (value) {
+                              if (value!.isNotEmpty &&
+                                  passwordValid.hasMatch(value!)) {
+                                String password = value;
+                                setState(() {
+                                  requestModel.password = password;
+                                });
+                                return null;
+                              } else {
+                                return 'Enter a password';
+                              }
+                            }),
                         SizedBox(height: 30.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -150,16 +132,18 @@ class _LoginState extends State<Login> {
                                 borderRadius: BorderRadius.circular(50.0),
                               )),
                           onPressed: () {
-                            if(validateAndSave()){
-                              setState((){
-                                isApiCallProcess=true;
+                            if (validateAndSave()) {
+                              setState(() {
+                                isApiCallProcess = true;
                               });
-                              APIService apiService= new APIService();
-                              apiService.login(requestModel).then((value){
-                                setState((){
-                                  isApiCallProcess=false;
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login Successful')));
-                              });
+                              APIService apiService = new APIService();
+                              apiService.login(requestModel).then((value) {
+                                setState(() {
+                                  isApiCallProcess = false;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text('Login Successful')));
+                                });
                               });
                               print(requestModel.toJson());
                             }
@@ -262,17 +246,13 @@ class _LoginState extends State<Login> {
     );
   }
 
-  bool validateAndSave(){
-    final form=_formKey.currentState;
-    if(form!.validate()){
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form!.validate()) {
       form.save;
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
 }
-
-
-

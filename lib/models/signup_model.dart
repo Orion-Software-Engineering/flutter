@@ -18,12 +18,14 @@ class SignupRequestModel {
   String username = '';
   String email = '';
   String password = '';
+  String dob = '';
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
       'username': username.trim(),
       'email': email.trim(),
       'password': password.trim(),
+      'dob': dob.trim(),
     };
 
     return map;

@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:matchmaking_demo/constants.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'dart:convert';
 
