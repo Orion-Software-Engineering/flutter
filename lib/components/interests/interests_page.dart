@@ -103,6 +103,9 @@ class InterestsPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    if (pageNumber == 3) {
+                      //TODO API Call should be done here with globalInterestsSet. Convert to list if needed.
+                    }
                     Navigator.pushNamed(context, nextPage!);
                   },
                   child: Text(
