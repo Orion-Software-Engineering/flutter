@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'signup/sign_up_page.dart';
 import 'login/login_page.dart';
 
@@ -25,10 +26,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      initialRoute: '/interests_1',
       routes: {
         '/login': (context) => Login(),
         '/sign_up': (context) => SignUp(),
+        '/interests_1': (context) => InterestsOne()
       },
     );
   }

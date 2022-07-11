@@ -24,3 +24,18 @@ const UnderlineInputBorder inputBorder = UnderlineInputBorder(
     width: 2,
   ),
 );
+
+//INTERESTS
+
+const TextStyle interestsTitleStyle =
+    TextStyle(fontSize: 40, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
+
+const TextStyle interestsButtonTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 22,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Nunito');
+
+const Color interestsButtonColorNormal = Color(0xFF222222);
+
+const Color interestsButtonColorSelected = Color(0xFF727272);

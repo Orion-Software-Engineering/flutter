@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../components/custom_password_field.dart';
-import '../components/login_signup_scaffold.dart';
-import '../components/sign_in_with_button.dart';
-import '../components/title_and_subtext.dart';
+import '../components/login_signup/custom_password_field.dart';
+import '../components/login_signup/login_signup_scaffold.dart';
+import '../components/login_signup/sign_in_with_button.dart';
+import '../components/login_signup/title_and_subtext.dart';
 import '../utils/constants.dart';
 
 class Login extends StatelessWidget {

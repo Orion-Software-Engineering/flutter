@@ -1,9 +1,9 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
-import '../components/custom_password_field.dart';
-import '../components/date_of_birth.dart';
-import '../components/login_signup_scaffold.dart';
-import '../components/title_and_subtext.dart';
+import '../components/login_signup/custom_password_field.dart';
+import '../components/login_signup/date_of_birth.dart';
+import '../components/login_signup/login_signup_scaffold.dart';
+import '../components/login_signup/title_and_subtext.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatelessWidget {
