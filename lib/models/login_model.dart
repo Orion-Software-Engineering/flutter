@@ -6,6 +6,7 @@ class LoginResponseModel {
 
   LoginResponseModel({this.token, this.error});
 
+  //TODO: Take the user's ID also
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
       token: json["token"] != null ? json["token"] : "",
