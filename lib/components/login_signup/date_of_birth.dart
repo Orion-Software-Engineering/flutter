@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import '../../utils/constants.dart';
 
 class DobField extends StatefulWidget {
-
   const DobField({Key? key, required this.validationFunction})
       : super(key: key);
 
@@ -18,7 +17,6 @@ class _DobFieldState extends State<DobField> {
   String? dateValue;
 
   //TODO this _bLogicDateValue has the date format required for the backend stuff
-  String? _bLogicDateValue;
   var dateFormat = DateFormat('dd/MM/yyyy - kk:mm');
 
   @override
@@ -33,7 +31,6 @@ class _DobFieldState extends State<DobField> {
                     DateTime(DateTime.now().year - 18).add(Duration(days: 100)))
             .then((date) {
           setState(() {
-            _bLogicDateValue = date.toString().substring(0, 10);
             dateValue = dateFormat.format(date!).substring(0, 10);
           });
         });

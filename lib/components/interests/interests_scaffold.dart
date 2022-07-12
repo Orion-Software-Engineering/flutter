@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class InterestsScaffold extends StatelessWidget {
-  InterestsScaffold({required this.child});
-  Widget child;
+  const InterestsScaffold({Key? key, required this.child}) : super(key: key);
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

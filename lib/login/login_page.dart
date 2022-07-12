@@ -114,7 +114,7 @@ class _LoginState extends State<Login> {
                             hintText: 'Password',
                             validationFunction: (value) {
                               if (value!.isNotEmpty &&
-                                  passwordValid.hasMatch(value!)) {
+                                  passwordValid.hasMatch(value)) {
                                 String password = value;
                                 setState(() {
                                   requestModel.password = password;

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-//import 'passwordfield.dart'
-import 'dart:core';
 
+import 'dart:core';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_signup.dart';
@@ -11,6 +10,8 @@ import '../components/login_signup/date_of_birth.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
+
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -28,14 +29,13 @@ class _SignUpState extends State<SignUp> {
   late SignupRequestModel requestModel;
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
-  String? _bLogicDateValue;
   String? dateValue;
 
   @override
   void initState() {
     super.initState();
-    requestModel = new SignupRequestModel();
-    responseModel = new SignupResponseModel();
+    requestModel = SignupRequestModel();
+    responseModel = SignupResponseModel();
   }
 
   @override
@@ -47,7 +47,6 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  @override
   Widget _ui(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -69,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                   flex: 2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+                    children: const [
                       Text(
                         'Sign Up',
                         style: TextStyle(
@@ -173,6 +172,7 @@ class _SignUpState extends State<SignUp> {
 
                         DobField(validationFunction: (value) {
                           requestModel.dob = value!;
+                          return null;
                         }),
 
                         SizedBox(height: 50.0),
@@ -188,7 +188,7 @@ class _SignUpState extends State<SignUp> {
                               setState(() {
                                 isApiCallProcess = true;
                               });
-                              APIService apiService = new APIService();
+                              APIService apiService = APIService();
                               apiService.signup(requestModel).then((value) {
                                 setState(() {
                                   isApiCallProcess = false;

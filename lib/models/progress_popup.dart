@@ -9,7 +9,7 @@ class Progress extends StatelessWidget {
   final Color color;
   final Animation<Color>? valueColor;
 
-  Progress({
+  const Progress({
     Key? key,
     required this.child,
     required this.inAsyncCall,

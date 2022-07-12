@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
-import '../../utils/varriables.dart';
+import '../../utils/variables.dart';
 
 class InterestsButton extends StatefulWidget {
-  InterestsButton({required this.text});
-  String text;
+  const InterestsButton({Key? key, required this.text}) : super(key: key);
+  final String text;
 
   @override
   State<InterestsButton> createState() => _InterestsButtonState();
@@ -12,6 +12,7 @@ class InterestsButton extends StatefulWidget {
 
 class _InterestsButtonState extends State<InterestsButton> {
   bool selected = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
