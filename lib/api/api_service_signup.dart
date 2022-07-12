@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:matchmaking_demo/constants.dart';
 import 'package:matchmaking_demo/models/signup_model.dart';
 import 'dart:convert';
+
+import '../utils/constants.dart';
 
 
 class APIService{

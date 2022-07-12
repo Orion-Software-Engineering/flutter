@@ -68,3 +68,9 @@ const TextStyle interestsPageNextBackStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     color: Colors.grey);
+
+//apis
+const String scheme = "https";
+const String host = "orion-meet.herokuapp.com";
+const String logInPath = "/api/auth/signin";
+const String signUpPath = "/api/auth/signup";
