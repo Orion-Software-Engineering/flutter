@@ -120,6 +120,7 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
                         TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             labelText: 'Email',
                             labelStyle: signUpLoginTextFieldTextStyle,
@@ -197,6 +198,7 @@ class _SignUpState extends State<SignUp> {
                                           content: Text('Signup Successful')));
                                 });
                               });
+                              //TODO Navigation to '/interest_1' page BLogic kindly find the most suitable place to put it. I can't seem to figure it out
                             }
                             print(requestModel.toJson());
                           },

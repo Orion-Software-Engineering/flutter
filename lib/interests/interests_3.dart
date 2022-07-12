@@ -9,6 +9,7 @@ class InterestsThree extends StatelessWidget {
   Widget build(BuildContext context) {
     return InterestsScaffold(
       child: InterestsPage(
+        nextPage: '/all_set',
         showBackButton: true,
         pageNumber: 3,
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import '../../utils/constants.dart';
 import 'interests_button.dart';
@@ -105,9 +106,19 @@ class InterestsPage extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (pageNumber == 3) {
-                    //TODO API Call should be done here with globalInterestsSet. Convert to list if needed.
+                    if (globalInterestsSet.length < 3) {
+                      Fluttertoast.showToast(
+                          backgroundColor: Color(0x9E9E9E7E),
+                          textColor: Colors.white,
+                          msg: 'Select at least 3 interests',
+                          fontSize: 16);
+                    } else {
+                      Navigator.pushNamed(context, nextPage!);
+                      //TODO API Call should be done here with globalInterestsSet. Convert to list if needed.
+                    }
+                  } else {
+                    Navigator.pushNamed(context, nextPage!);
                   }
-                  Navigator.pushNamed(context, nextPage!);
                 },
                 child: Text(
                   (pageNumber == 3) ? 'Done' : 'Next-->',
@@ -123,6 +134,15 @@ class InterestsPage extends StatelessWidget {
           child: TextButton(
               onPressed: () {
                 print(globalInterestsSet);
+                if (globalInterestsSet.length > 2) {
+                  Navigator.pushNamed(context, '/all_set');
+                } else {
+                  Fluttertoast.showToast(
+                      backgroundColor: Color(0x9E9E9E7E),
+                      textColor: Colors.white,
+                      msg: 'Select at least 3 interests',
+                      fontSize: 16);
+                }
               },
               child: Text(
                 'Skip now -->',

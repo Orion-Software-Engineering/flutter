@@ -33,6 +33,7 @@ dependencies:
   date_field: ^3.0.0
   ionicons: ^0.1.2
   http: ^0.13.4
+  fluttertoast: ^8.0.9
 
 
   # The following adds the Cupertino Icons font to your application.
