@@ -3,32 +3,31 @@
 import 'package:flutter/material.dart';
 
 class Progress extends StatelessWidget {
-
   final Widget child;
   final bool inAsyncCall;
   final double opacity;
   final Color color;
-  final Animation<Color> ?valueColor;
+  final Animation<Color>? valueColor;
 
   Progress({
-    Key ?key,
+    Key? key,
     required this.child,
     required this.inAsyncCall,
-    this.opacity=0.3,
-    this.color=Colors.grey,
+    this.opacity = 0.3,
+    this.color = Colors.grey,
     this.valueColor,
-}): super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgetList =<Widget>[];
+    List<Widget> widgetList = <Widget>[];
     widgetList.add(child);
-    if(inAsyncCall){
-      final modal=new Stack(
+    if (inAsyncCall) {
+      final modal = new Stack(
         children: [
           new Opacity(
             opacity: opacity,
-            child: ModalBarrier(dismissible: true,color: color),
+            child: ModalBarrier(dismissible: true, color: color),
           ),
           new Center(
             child: new CircularProgressIndicator(),
@@ -40,6 +39,5 @@ class Progress extends StatelessWidget {
     return Stack(
       children: widgetList,
     );
-
   }
 }

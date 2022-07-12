@@ -1,33 +1,25 @@
 import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/signup_model.dart';
 import 'dart:convert';
-
 import '../utils/constants.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 
-
-class APIService{
-
+class APIService {
   Future<SignupResponseModel> signup(SignupRequestModel requestModel) async {
-    var message='';
-    var url=Uri(
+    var url = Uri(
       scheme: scheme,
       host: host,
       path: signUpPath,
     );
-    try{
+    try {
       final response = await http.post(url, body: requestModel.toJson());
-
-      message=response.body;
-      if (response.statusCode==201){
+      if (response.statusCode == 201) {
         return SignupResponseModel.fromJson(json.decode(response.body));
-      }
-      else{
+      } else {
         throw Exception("Failed to load data ${response.statusCode}");
       }
-    }
-    catch(e){
+    } catch (e) {
       rethrow;
     }
-
   }
 }

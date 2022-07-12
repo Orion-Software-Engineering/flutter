@@ -6,6 +6,8 @@ import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_signup.dart';
 import 'package:matchmaking_demo/models/signup_model.dart';
+import '../components/login_signup/custom_password_field.dart';
+import '../components/login_signup/date_of_birth.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -26,6 +28,8 @@ class _SignUpState extends State<SignUp> {
   late SignupRequestModel requestModel;
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
+  String? _bLogicDateValue;
+  String? dateValue;
 
   @override
   void initState() {
@@ -138,30 +142,11 @@ class _SignUpState extends State<SignUp> {
                             }
                           },
                         ),
-                        TextFormField(
-                          obscureText: masked,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: signUpLoginTextFieldTextStyle,
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  masked = !masked;
-                                });
-                              },
-                              icon: Icon((masked == true)
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
-                              // icon: Icon(Icons.visibility),
-                              color: Color(
-                                  (masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
-                            ),
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Colors.grey,
-                            )),
-                          ),
-                          validator: (value) {
+
+                        //Password field
+                        CustomPasswordField(
+                          hintText: 'Password',
+                          validationFunction: (value) {
                             if (value!.length >= 8) {
                               setState(() => password = value);
                               setState(() {
@@ -173,31 +158,11 @@ class _SignUpState extends State<SignUp> {
                             }
                           },
                         ),
-                        TextFormField(
-                          obscureText: confirmMasked,
-                          decoration: InputDecoration(
-                            labelText: 'Confirm Password',
-                            labelStyle: signUpLoginTextFieldTextStyle,
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  confirmMasked = !confirmMasked;
-                                });
-                              },
-                              icon: Icon((confirmMasked == true)
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
-                              // icon: Icon(Icons.visibility),
-                              color: Color((confirmMasked == true)
-                                  ? 0xFF8c8c8c
-                                  : 0xFFcd5d27),
-                            ),
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Colors.grey,
-                            )),
-                          ),
-                          validator: (value) {
+
+                        //Confirm Password Field
+                        CustomPasswordField(
+                          hintText: 'Confirm Password',
+                          validationFunction: (value) {
                             if (value == password) {
                               return null;
                             } else {
@@ -205,6 +170,11 @@ class _SignUpState extends State<SignUp> {
                             }
                           },
                         ),
+
+                        DobField(validationFunction: (value) {
+                          requestModel.dob = value!;
+                        }),
+
                         SizedBox(height: 50.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(

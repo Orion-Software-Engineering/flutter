@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'dart:convert';
-
 import '../utils/constants.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 
 class APIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
