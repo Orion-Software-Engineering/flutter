@@ -16,7 +16,7 @@ class TitleAndSubtext extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            color: Colors.black,
+            // color: Colors.black,
             fontSize: 40.0,
             fontWeight: FontWeight.w700,
           ),
