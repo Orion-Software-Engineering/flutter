@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color signUpLoginTextColor = Colors.grey;
 const Color signUpLoginOrange = Color(0xFFcd5d27);
+const Color orionLogoCenterColor = Color(0xFF1B1129);
 const TextStyle signUpLoginTextFieldTextStyle =
     TextStyle(color: signUpLoginTextColor, fontFamily: 'Nunito', fontSize: 16);
 
@@ -17,7 +18,7 @@ const TextStyle loginSignUpButtonTextStyle = TextStyle(
   color: Colors.white,
 );
 const TextStyle signUpLoginTextButtonStyleOrange = TextStyle(
-  color: Color(0xFFcd5d27),
+  color: signUpLoginOrange,
   fontWeight: FontWeight.w700,
   fontSize: 16.0,
   decoration: TextDecoration.underline,
@@ -73,3 +74,19 @@ const TextStyle interestsPageNextBackStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     color: Colors.grey);
+
+//THEMES
+
+class MyThemes {
+  static final darkTheme = ThemeData(
+      scaffoldBackgroundColor: orionLogoCenterColor,
+      fontFamily: 'Nunito',
+      colorScheme: ColorScheme.dark());
+
+  //1b1129
+
+  static final lightTheme = ThemeData(
+      scaffoldBackgroundColor: Colors.white,
+      fontFamily: 'Nunito',
+      colorScheme: ColorScheme.light());
+}

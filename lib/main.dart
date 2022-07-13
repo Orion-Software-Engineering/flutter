@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 import 'components/interests/all_set.dart';
 import 'interests/interests_3.dart';
 import 'signup/sign_up_page.dart';
@@ -15,10 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        fontFamily: "Nunito",
-        primarySwatch: Colors.blue,
-      ),
+      themeMode: ThemeMode.system,
+      theme: MyThemes.lightTheme,
+      darkTheme: MyThemes.darkTheme,
       initialRoute: '/login',
       routes: {
         '/login': (context) => Login(),
