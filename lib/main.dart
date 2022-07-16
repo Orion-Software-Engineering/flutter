@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/events/events_page.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      initialRoute: '/login',
+      initialRoute:  '/events_page',//'/login', //
       routes: {
+        '/events_page': (context)=> Events(),
         '/login': (context) => Login(),
         '/sign_up': (context) =>
             SignUp(), //TODO Bridge between '/sign_up' and '/interests_1' not built yet. Check TODOs for specifics.
