@@ -40,7 +40,7 @@ class _DobFieldState extends State<DobField> {
         controller: TextEditingController(text: dateValue),
         enabled: false,
         decoration: InputDecoration(
-            labelText: dateValue == null ? 'YYYY-MM-DD' : 'Date of Birth',
+            labelText: dateValue == null ? 'DD/MM/YYYY' : 'Date of Birth',
             labelStyle: signUpLoginTextFieldTextStyle,
             border: inputBorder,
             suffixIcon: Icon(Icons.calendar_month)),
