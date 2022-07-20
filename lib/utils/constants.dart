@@ -81,7 +81,8 @@ class MyThemes {
   static final darkTheme = ThemeData(
       scaffoldBackgroundColor: orionLogoCenterColor,
       fontFamily: 'Nunito',
-      colorScheme: ColorScheme.dark());
+      colorScheme: ColorScheme
+          .dark()); //TODO Icon Theme and primary icon theme as well as peimary color)
 
   //1b1129
 
