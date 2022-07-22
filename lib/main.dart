@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      initialRoute:  '/events_page',//'/login', //
+      initialRoute: '/login', //'/login', //
       routes: {
-        '/events_page': (context)=> Events(),
+        '/events_page': (context) => Events(),
         '/login': (context) => Login(),
         '/sign_up': (context) =>
             SignUp(), //TODO Bridge between '/sign_up' and '/interests_1' not built yet. Check TODOs for specifics.

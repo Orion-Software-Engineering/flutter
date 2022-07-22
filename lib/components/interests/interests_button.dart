@@ -26,20 +26,21 @@ class _InterestsButtonState extends State<InterestsButton> {
         });
       },
       child: Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, 22),
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: selected
-                  ? interestsButtonColorSelected
-                  : interestsButtonColorNormal,
-              borderRadius: BorderRadius.circular(20)),
-          child: Center(
-            child: Text(
-              widget.text,
-              style: interestsButtonTextStyle,
-            ),
-          )),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, 22),
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: selected
+                ? interestsButtonColorSelected
+                : interestsButtonColorNormal,
+            borderRadius: BorderRadius.circular(20)),
+        child: Center(
+          child: Text(
+            widget.text,
+            style: interestsButtonTextStyle,
+          ),
+        ),
+      ),
     );
   }
 }

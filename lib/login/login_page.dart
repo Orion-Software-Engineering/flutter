@@ -203,11 +203,12 @@ class _LoginState extends State<Login> {
                                   height: 44,
                                   width: 45)),
                           TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                  'assets/images/sign_in/logo_google.png',
-                                  height: 44,
-                                  width: 45))
+                            onPressed: () {},
+                            child: Image.asset(
+                                'assets/images/sign_in/logo_google.png',
+                                height: 44,
+                                width: 45),
+                          ),
                         ],
                       )
                     ],

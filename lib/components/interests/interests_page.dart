@@ -132,23 +132,24 @@ class InterestsPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 210, 0, 0),
           child: TextButton(
-              onPressed: () {
-                print(globalInterestsSet);
-                if (globalInterestsSet.length > 2) {
-                  Navigator.pushNamed(context, '/all_set');
-                } else {
-                  Fluttertoast.showToast(
-                      backgroundColor: Color(0x9E9E9E7E),
-                      textColor: Colors.white,
-                      msg: 'Select at least 3 interests',
-                      fontSize: 16);
-                }
-              },
-              child: Text(
-                'Skip now -->',
-                style: interestsPageNextBackStyle,
-              )),
-        )
+            onPressed: () {
+              print(globalInterestsSet);
+              if (globalInterestsSet.length > 2) {
+                Navigator.pushNamed(context, '/all_set');
+              } else {
+                Fluttertoast.showToast(
+                    backgroundColor: Color(0x9E9E9E7E),
+                    textColor: Colors.white,
+                    msg: 'Select at least 3 interests',
+                    fontSize: 16);
+              }
+            },
+            child: Text(
+              'Skip now -->',
+              style: interestsPageNextBackStyle,
+            ),
+          ),
+        ),
       ],
     );
   }

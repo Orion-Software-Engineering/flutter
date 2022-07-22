@@ -33,10 +33,9 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                   masked = !masked;
                 });
               },
-              icon: Icon(
-                  (masked == true) ? Icons.visibility : Icons.visibility_off),
+              icon: Icon((masked) ? Icons.visibility : Icons.visibility_off),
               // icon: Icon(Icons.visibility),
-              color: Color((masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
+              color: Color((masked) ? 0xFF8c8c8c : 0xFFcd5d27),
             ),
             border: inputBorder,
           ),
