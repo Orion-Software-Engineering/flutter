@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_signup.dart';
 
 const Color signUpLoginTextColor = Colors.grey;
 const Color signUpLoginOrange = Color(0xFFcd5d27);
@@ -10,10 +9,10 @@ const TextStyle signUpLoginTextFieldTextStyle =
 //apis
 
 const String scheme = "https";
-const String host = "orion-meet.herokuapp.com";
+const String host = "orion-meet-testing.herokuapp.com";
 const String logInPath = "/api/auth/signin";
 const String signUpPath = "/api/auth/signup";
-const String interestPath="/api/interest/";
+const String interestPath = "/api/interest/";
 
 const TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,

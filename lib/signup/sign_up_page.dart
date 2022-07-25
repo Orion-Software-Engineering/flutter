@@ -165,15 +165,14 @@ class _SignUpState extends State<SignUp> {
                               isApiCallProcess = true;
                             });
                             APIService apiService = APIService();
-                            try{
+                            try {
                               apiService.signup(requestModel).then((value) {
                                 setState(() {
                                   isApiCallProcess = false;
                                   Navigator.pushNamed(context, '/interests_1');
                                 });
                               });
-                            }
-                            catch(e){
+                            } catch (e) {
                               isApiCallProcess = false;
                               Fluttertoast.showToast(
                                   backgroundColor: Color(0x9E9E9E7E),
@@ -181,9 +180,8 @@ class _SignUpState extends State<SignUp> {
                                   msg: message,
                                   fontSize: 16);
                             }
-
                           }
-                          print(requestModel.toJson());
+                          //print(requestModel.toJson());
                         },
                         child: Container(
                           width: double.infinity,
@@ -248,5 +246,3 @@ class _SignUpState extends State<SignUp> {
     }
   }
 }
-
-

@@ -9,7 +9,6 @@ import '../../utils/constants.dart';
 import 'interests_button.dart';
 import 'package:matchmaking_demo/api/api_service_interests.dart';
 
-
 class InterestsPage extends StatefulWidget {
   InterestsPage(
       {Key? key,
@@ -143,17 +142,19 @@ class _InterestsPageState extends State<InterestsPage> {
                           msg: 'Select at least 3 interests',
                           fontSize: 16);
                     } else {
-                      setState((){
+                      setState(() {
                         isApiCallProcess = true;
-                        print(globalInterestsSet.toList());
+                        //print(globalInterestsSet.toList());
+                        //print(globalInterestsSet.toList().runtimeType);
                       });
-                      requestModel.interests=globalInterestsSet.toList();
+                      requestModel.interests = globalInterestsSet.toList();
+                      //print(requestModel.interests);
                       InterestAPIService apiService = InterestAPIService();
                       apiService.interest(requestModel).then((value) {
                         setState(() {
                           isApiCallProcess = false;
+                          Navigator.pushNamed(context, '/all_set');
                         });
-                        Navigator.pushNamed(context, '/all_set');
                       });
                     }
                   } else {
@@ -173,9 +174,16 @@ class _InterestsPageState extends State<InterestsPage> {
           padding: const EdgeInsets.fromLTRB(0, 210, 0, 0),
           child: TextButton(
               onPressed: () {
-                print(globalInterestsSet);
                 if (globalInterestsSet.length > 2) {
-                  Navigator.pushNamed(context, '/all_set');
+                  isApiCallProcess = true;
+                  requestModel.interests = globalInterestsSet.toList();
+                  InterestAPIService apiService = InterestAPIService();
+                  apiService.interest(requestModel).then((value) {
+                    setState(() {
+                      isApiCallProcess = false;
+                      Navigator.pushNamed(context, '/all_set');
+                    });
+                  });
                 } else {
                   Fluttertoast.showToast(
                       backgroundColor: Color(0x9E9E9E7E),

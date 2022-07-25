@@ -22,7 +22,7 @@ class _InterestsButtonState extends State<InterestsButton> {
           selected
               ? globalInterestsSet.add(widget.text.toLowerCase())
               : globalInterestsSet.remove(widget.text);
-          print('hit');
+          //print('hit');
         });
       },
       child: Container(

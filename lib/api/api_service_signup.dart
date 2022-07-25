@@ -1,12 +1,15 @@
+// ignore_for_file: avoid_print
+
 import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/signup_model.dart';
 import 'dart:convert';
 import '../utils/constants.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-String userID="";
-String message="";
-class APIService{
 
+String userID = "";
+String message = "";
+
+class APIService {
   Future<SignupResponseModel> signup(SignupRequestModel requestModel) async {
     var url = Uri(
       scheme: scheme,
@@ -14,13 +17,10 @@ class APIService{
       path: signUpPath,
     );
 
-
-  try {
+    try {
       final response = await http.post(url, body: requestModel.toJson());
       if (response.statusCode == 201) {
-        //userID=json.decode(response.body)["userId"];
-        print(userID);
-        print(response.body);
+        userID = json.decode(response.body)["userId"];
         return SignupResponseModel.fromJson(json.decode(response.body));
       } else {
         print(response.body);

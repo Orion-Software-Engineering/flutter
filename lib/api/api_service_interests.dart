@@ -5,21 +5,18 @@ import 'dart:convert';
 import '../utils/constants.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 
-
-
-
 class InterestAPIService {
-  Future<InterestResponseModel> interest(InterestRequestModel requestModel) async {
+  Future<InterestResponseModel> interest(
+      InterestRequestModel requestModel) async {
     var url = Uri(
       scheme: scheme,
       host: host,
-      path: interestPath+userID,
+      path: interestPath + userID,
     );
 
     try {
-      print("${userID}here");
-      print(url);
-      final response = await http.post(url, body: requestModel.toJson());
+      final response = await http.post(url, body: jsonEncode(requestModel));
+      //print(requestModel.toJson());
       if (response.statusCode == 200) {
         return InterestResponseModel.fromJson(json.decode(response.body));
       } else {
