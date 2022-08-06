@@ -1,7 +1,7 @@
 # Orion Meet Mobile App
 Built with ❤️ and Flutter
 ## Screenshots and About
-![Screenshot_20220806-144233](https://user-images.githubusercontent.com/80262558/183254020-60183991-62c7-4904-b6dc-29cfbeefb4ac.jpg =158.5 x 73.6)
+![Screenshot_20220806-144233](https://user-images.githubusercontent.com/80262558/183254020-60183991-62c7-4904-b6dc-29cfbeefb4ac.jpg =158x73)
 
 ![Screenshot_20220806-144251](https://user-images.githubusercontent.com/80262558/183253982-a9ee43d8-d1d3-411b-865a-88523b31f483.jpg =158.5 x 73.6)
 
