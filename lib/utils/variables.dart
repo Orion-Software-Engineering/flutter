@@ -1,6 +1,3 @@
-// FOR BLOGIC this set holds the selected interests of the user
-// has temporary info for messages page testing
-
 import 'package:flutter/material.dart';
 
 Set<String> globalInterestsSet = {};
