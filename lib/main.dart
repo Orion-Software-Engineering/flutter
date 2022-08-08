@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/components/home/home_scaffold.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
@@ -25,8 +27,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/login': (context) => Login(),
-        '/sign_up': (context) =>
-            SignUp(), //TODO Bridge between '/sign_up' and '/interests_1' not built yet. Check TODOs for specifics.
+        '/sign_up': (context) => SignUp(),
         '/interests_1': (context) => InterestsOne(),
         '/interests_2': (context) => InterestsTwo(),
         '/interests_3': (context) => InterestsThree(),

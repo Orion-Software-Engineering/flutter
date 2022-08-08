@@ -7,10 +7,12 @@ const TextStyle signUpLoginTextFieldTextStyle =
     TextStyle(color: signUpLoginTextColor, fontFamily: 'Nunito', fontSize: 16);
 
 //apis
+
 const String scheme = "https";
-const String host = "orion-meet.herokuapp.com";
+const String host = "orion-meet-testing.herokuapp.com";
 const String logInPath = "/api/auth/signin";
 const String signUpPath = "/api/auth/signup";
+const String interestPath = "/api/interest/";
 
 const TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 Set<String> globalInterestsSet = {};
 
 //This class is just for testing ui

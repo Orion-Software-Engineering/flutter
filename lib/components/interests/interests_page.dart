@@ -1,10 +1,15 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:matchmaking_demo/models/interest_model.dart';
+import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import '../../utils/constants.dart';
 import 'interests_button.dart';
+import 'package:matchmaking_demo/api/api_service_interests.dart';
 
-class InterestsPage extends StatelessWidget {
+class InterestsPage extends StatefulWidget {
   InterestsPage(
       {Key? key,
       required this.pageNumber,
@@ -12,18 +17,42 @@ class InterestsPage extends StatelessWidget {
       required this.showBackButton})
       : super(key: key);
   int pageNumber;
-  int? interestListLocalStartIndex;
   String? nextPage;
-  String helpText = '';
   bool showBackButton = true;
 
   @override
+  State<InterestsPage> createState() => _InterestsPageState();
+}
+
+class _InterestsPageState extends State<InterestsPage> {
+  int? interestListLocalStartIndex;
+  String helpText = '';
+  late InterestRequestModel requestModel;
+  late InterestResponseModel responseModel;
+  bool isApiCallProcess = false;
+
+  @override
+  void initState() {
+    super.initState();
+    requestModel = InterestRequestModel();
+    responseModel = InterestResponseModel();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (pageNumber == 1) {
+    return Progress(
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+      child: _ui(context),
+    );
+  }
+
+  Widget _ui(BuildContext context) {
+    if (widget.pageNumber == 1) {
       interestListLocalStartIndex = 0;
-    } else if (pageNumber == 2) {
+    } else if (widget.pageNumber == 2) {
       interestListLocalStartIndex = 5;
-    } else if (pageNumber == 3) {
+    } else if (widget.pageNumber == 3) {
       interestListLocalStartIndex = 10;
     }
 
@@ -37,7 +66,7 @@ class InterestsPage extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: Text(
-            '$pageNumber/3',
+            '${widget.pageNumber}/3',
             style: interestsPageNumberStyle,
             textAlign: TextAlign.right,
           ),
@@ -95,7 +124,7 @@ class InterestsPage extends StatelessWidget {
                   ]);
                   Navigator.pop(context);
                 },
-                child: (!showBackButton)
+                child: (!widget.showBackButton)
                     ? SizedBox(width: 10)
                     : Text(
                         '<--Back',
@@ -105,7 +134,7 @@ class InterestsPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  if (pageNumber == 3) {
+                  if (widget.pageNumber == 3) {
                     if (globalInterestsSet.length < 3) {
                       Fluttertoast.showToast(
                           backgroundColor: Color(0x9E9E9E7E),
@@ -113,15 +142,27 @@ class InterestsPage extends StatelessWidget {
                           msg: 'Select at least 3 interests',
                           fontSize: 16);
                     } else {
-                      Navigator.pushNamed(context, nextPage!);
-                      //TODO API Call should be done here with globalInterestsSet. Convert to list if needed.
+                      setState(() {
+                        isApiCallProcess = true;
+                        //print(globalInterestsSet.toList());
+                        //print(globalInterestsSet.toList().runtimeType);
+                      });
+                      requestModel.interests = globalInterestsSet.toList();
+                      //print(requestModel.interests);
+                      InterestAPIService apiService = InterestAPIService();
+                      apiService.interest(requestModel).then((value) {
+                        setState(() {
+                          isApiCallProcess = false;
+                          Navigator.pushNamed(context, '/all_set');
+                        });
+                      });
                     }
                   } else {
-                    Navigator.pushNamed(context, nextPage!);
+                    Navigator.pushNamed(context, widget.nextPage!);
                   }
                 },
                 child: Text(
-                  (pageNumber == 3) ? 'Done' : 'Next-->',
+                  (widget.pageNumber == 3) ? 'Done' : 'Next-->',
                   style: interestsPageNextBackStyle,
                   textAlign: TextAlign.right,
                 ),
@@ -133,9 +174,16 @@ class InterestsPage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 210, 0, 0),
           child: TextButton(
               onPressed: () {
-                print(globalInterestsSet);
                 if (globalInterestsSet.length > 2) {
-                  Navigator.pushNamed(context, '/all_set');
+                  isApiCallProcess = true;
+                  requestModel.interests = globalInterestsSet.toList();
+                  InterestAPIService apiService = InterestAPIService();
+                  apiService.interest(requestModel).then((value) {
+                    setState(() {
+                      isApiCallProcess = false;
+                      Navigator.pushNamed(context, '/all_set');
+                    });
+                  });
                 } else {
                   Fluttertoast.showToast(
                       backgroundColor: Color(0x9E9E9E7E),

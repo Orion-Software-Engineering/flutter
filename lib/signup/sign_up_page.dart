@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'dart:core';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
@@ -165,17 +165,23 @@ class _SignUpState extends State<SignUp> {
                               isApiCallProcess = true;
                             });
                             APIService apiService = APIService();
-                            apiService.signup(requestModel).then((value) {
-                              setState(() {
-                                isApiCallProcess = false;
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text('Signup Successful')));
+                            try {
+                              apiService.signup(requestModel).then((value) {
+                                setState(() {
+                                  isApiCallProcess = false;
+                                  Navigator.pushNamed(context, '/interests_1');
+                                });
                               });
-                            });
-                            //TODO Navigation to '/interest_1' page BLogic kindly find the most suitable place to put it. I can't seem to figure it out
+                            } catch (e) {
+                              isApiCallProcess = false;
+                              Fluttertoast.showToast(
+                                  backgroundColor: Color(0x9E9E9E7E),
+                                  textColor: Colors.white,
+                                  msg: message,
+                                  fontSize: 16);
+                            }
                           }
-                          print(requestModel.toJson());
+                          //print(requestModel.toJson());
                         },
                         child: Container(
                           width: double.infinity,
