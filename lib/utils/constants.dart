@@ -65,6 +65,8 @@ const Color interestsButtonColorNormal = Color(0xFF222222);
 
 const Color interestsButtonColorSelected = Color(0xFF205098);
 
+const Color messageTileColor = Color(0x69B4B2B2);
+
 const TextStyle interestsPageNumberStyle = TextStyle(
     fontFamily: 'Nunito',
     fontSize: 20,
@@ -83,7 +85,8 @@ class MyThemes {
   static final darkTheme = ThemeData(
       scaffoldBackgroundColor: orionLogoCenterColor,
       fontFamily: 'Nunito',
-      colorScheme: ColorScheme.dark());
+      colorScheme: ColorScheme
+          .dark()); //TODO Icon Theme and primary icon theme as well as peimary color)
 
   //1b1129
 

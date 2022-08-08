@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/components/home/home_scaffold.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
@@ -14,6 +15,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,14 +24,15 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      initialRoute: '/login',
+      initialRoute: '/home',
       routes: {
         '/login': (context) => Login(),
         '/sign_up': (context) => SignUp(),
         '/interests_1': (context) => InterestsOne(),
         '/interests_2': (context) => InterestsTwo(),
         '/interests_3': (context) => InterestsThree(),
-        '/all_set': (context) => AllSet()
+        '/all_set': (context) => AllSet(),
+        '/home': (context) => HomeScaffold()
       },
     );
   }
