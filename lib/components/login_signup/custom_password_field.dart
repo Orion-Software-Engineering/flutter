@@ -7,6 +7,9 @@ class CustomPasswordField extends StatefulWidget {
       {Key? key, required this.hintText, required this.validationFunction})
       : super(key: key);
   final String? hintText;
+  //validateFunction was a necessary property because the field was to be used in 2 ways.
+  //1. To check password validity
+  //2. To check that the password entered for confirm password matches.
   final FormFieldValidator<String> validationFunction;
 
   @override

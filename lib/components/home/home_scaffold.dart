@@ -1,7 +1,9 @@
 /*
 * HomeScaffold holds the entire layout for the app (ie. Home screen, messages screen, events screen, etc
 * The AppBar and Bottom NavigationBar exist in this script
-* The various pages are found in the tabs list*/
+* The various pages are found in the tabs list and are selected based on the valuw _currentIndex holds
+* TODO:Theme mode toggling btn dark and light modes
+*  */
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +25,7 @@ class HomeScaffold extends StatefulWidget {
 class _HomeScaffoldState extends State<HomeScaffold> {
   int _currentIndex = 1;
 
-  final tabs = <Widget>[HomePage(), ChatRoom(), NewsPage(), SettingsPage()];
+  final tabs = <Widget>[HomePage(), ChatRoom(), EventsPage(), SettingsPage()];
 
   final titles = <String>['Matching', 'Messages', 'Events', 'Settings'];
   @override

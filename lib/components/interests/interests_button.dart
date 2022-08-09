@@ -1,3 +1,8 @@
+/*
+* This widget is the button used for selecting interests in interests_page.dart
+* When toggled on it adds its value (text) to the list (set) of interests globalInterestsSet in variables.dart
+* When toggled off it does the opposite*/
+
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
 import '../../utils/variables.dart';

@@ -1,3 +1,11 @@
+/*
+* the DobField does not allow manual inputs via keyboard
+* showDatePicker is used for convenience of the user,
+* AND my convenience as well.
+* Didn't want to go through the hassle of validating user inputs for date
+* since everyone has various formats for writing dates
+* */
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

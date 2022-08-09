@@ -1,3 +1,7 @@
+/*
+* The Messaging page that shows a list of contacts you've been texting
+* */
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/utils/constants.dart';

@@ -1,3 +1,12 @@
+/*
+* This widget is used in all three interests pages
+* this page holds 5 interests buttons
+* these buttons are populated by a list on interests in constants.dart and are selected in fives.
+* the value of PageNumber determines which 5 items would be selected.
+* pageNumber = 1 means index 0 is the starting point and the index would be incremented 4 times to get all 5 interests.
+* this index = interestListStartIndex in this file
+* the text held by these 5 butt*/
+
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
@@ -16,6 +25,9 @@ class InterestsPage extends StatefulWidget {
       this.nextPage,
       required this.showBackButton})
       : super(key: key);
+  //pageNumber is used to determine whether the page requires a back button or not. Since page one does not require one.
+  //it is also used to choose between 'Next-->'and 'Done' for moving to the next page
+  //pageNumber is also used to tell
   int pageNumber;
   String? nextPage;
   bool showBackButton = true;
@@ -25,7 +37,7 @@ class InterestsPage extends StatefulWidget {
 }
 
 class _InterestsPageState extends State<InterestsPage> {
-  int? interestListLocalStartIndex;
+  int? interestListStartIndex;
   String helpText = '';
   late InterestRequestModel requestModel;
   late InterestResponseModel responseModel;
@@ -49,11 +61,11 @@ class _InterestsPageState extends State<InterestsPage> {
 
   Widget _ui(BuildContext context) {
     if (widget.pageNumber == 1) {
-      interestListLocalStartIndex = 0;
+      interestListStartIndex = 0;
     } else if (widget.pageNumber == 2) {
-      interestListLocalStartIndex = 5;
+      interestListStartIndex = 5;
     } else if (widget.pageNumber == 3) {
-      interestListLocalStartIndex = 10;
+      interestListStartIndex = 10;
     }
 
     return Column(
@@ -76,27 +88,27 @@ class _InterestsPageState extends State<InterestsPage> {
             children: [
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex!],
+                  text: interestsList[interestListStartIndex!],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 1],
+                  text: interestsList[interestListStartIndex! + 1],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 2],
+                  text: interestsList[interestListStartIndex! + 2],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 3],
+                  text: interestsList[interestListStartIndex! + 3],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 4],
+                  text: interestsList[interestListStartIndex! + 4],
                 ),
               )
             ],
@@ -116,11 +128,11 @@ class _InterestsPageState extends State<InterestsPage> {
               GestureDetector(
                 onTap: () {
                   globalInterestsSet.removeAll([
-                    interestsList[interestListLocalStartIndex!],
-                    interestsList[interestListLocalStartIndex! + 1],
-                    interestsList[interestListLocalStartIndex! + 2],
-                    interestsList[interestListLocalStartIndex! + 3],
-                    interestsList[interestListLocalStartIndex! + 4]
+                    interestsList[interestListStartIndex!],
+                    interestsList[interestListStartIndex! + 1],
+                    interestsList[interestListStartIndex! + 2],
+                    interestsList[interestListStartIndex! + 3],
+                    interestsList[interestListStartIndex! + 4]
                   ]);
                   Navigator.pop(context);
                 },
