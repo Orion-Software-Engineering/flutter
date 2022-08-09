@@ -23,7 +23,7 @@ class HomeScaffold extends StatefulWidget {
 }
 
 class _HomeScaffoldState extends State<HomeScaffold> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   final tabs = <Widget>[HomePage(), ChatRoom(), EventsPage(), SettingsPage()];
 
@@ -37,6 +37,15 @@ class _HomeScaffoldState extends State<HomeScaffold> {
 
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: const <Color>[Color(0xFFFF0000), Color(0xFF0000FF)],
+            ),
+          ),
+        ),
         toolbarHeight: 70,
         leading: GestureDetector(
           onTap: () {},

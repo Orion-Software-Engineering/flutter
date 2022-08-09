@@ -14,38 +14,42 @@ class ChatRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: chatList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 1.2),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: messageTileColor),
-              child: ListTile(
-                leading: AvatarPlaceholder(),
-                title: Text(chatList[index].name),
-                subtitle: Row(
-                  children: [
-                    FaIcon(
-                      (chatList[index].sent)
-                          ? FontAwesomeIcons.anglesUp
-                          : FontAwesomeIcons.anglesDown,
-                      size: 15,
-                    ),
-                    SizedBox(width: 10),
-                    Text((chatList[index].lastMessageType == MessageType.image)
-                        ? "Image received"
-                        : chatList[index].lastMessage),
-                  ],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+      child: ListView.builder(
+          itemCount: chatList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1.2),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: messageTileColor),
+                child: ListTile(
+                  leading: AvatarPlaceholder(),
+                  title: Text(chatList[index].name),
+                  subtitle: Row(
+                    children: [
+                      FaIcon(
+                        (chatList[index].sent)
+                            ? FontAwesomeIcons.anglesUp
+                            : FontAwesomeIcons.anglesDown,
+                        size: 15,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                          (chatList[index].lastMessageType == MessageType.image)
+                              ? "Image received"
+                              : chatList[index].lastMessage),
+                    ],
+                  ),
+                  trailing: Text((chatList[index].numberOfUnreads == 0)
+                      ? ""
+                      : chatList[index].numberOfUnreads.toString()),
                 ),
-                trailing: Text((chatList[index].numberOfUnreads == 0)
-                    ? ""
-                    : chatList[index].numberOfUnreads.toString()),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }

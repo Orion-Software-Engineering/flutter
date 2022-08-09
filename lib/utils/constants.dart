@@ -65,7 +65,7 @@ const Color interestsButtonColorNormal = Color(0xFF222222);
 
 const Color interestsButtonColorSelected = Color(0xFF205098);
 
-const Color messageTileColor = Color(0x69B4B2B2);
+const Color messageTileColor = Color(0x99D9D9D9);
 
 const TextStyle interestsPageNumberStyle = TextStyle(
     fontFamily: 'Nunito',

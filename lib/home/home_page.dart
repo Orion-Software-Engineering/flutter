@@ -23,17 +23,43 @@ class _HomePageState extends State<HomePage> {
           child: Expanded(
             flex: 4,
             child: Container(
+              padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
               decoration: BoxDecoration(
-                color: Colors.grey,
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: const <Color>[Color(0xB5A6A5A5), Color(0xEDE3E3E3)],
+                ),
                 borderRadius: BorderRadius.circular(
                   15,
                 ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(PossibleMatches[index].name),
-                  Text(PossibleMatches[index].about),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      PossibleMatches[index].name,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 32),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      PossibleMatches[index].about,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16),
+                    ),
+                  ),
                 ],
               ),
             ),
