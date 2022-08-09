@@ -14,7 +14,7 @@ class AvatarPlaceholder extends StatelessWidget {
         height: 55,
         width: 55,
         decoration: BoxDecoration(
-          color: Colors.black,
+          // color: Colors.black,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Center(

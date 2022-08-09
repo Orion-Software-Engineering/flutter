@@ -10,8 +10,11 @@ import 'package:matchmaking_demo/utils/variables.dart';
 import '../components/home/avatar_placeholder.dart';
 
 class ChatRoom extends StatelessWidget {
-  const ChatRoom({Key? key}) : super(key: key);
+  // const ChatRoom({Key? key}) : super(key: key);
 
+  //TODO conversations that jave just 2 members are chats.
+  //TODO val is to hold the Zodiac sign on the other member and based on that an avatar is selected. this cna be implemented after the backend is done
+  String val = "Leo";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +29,10 @@ class ChatRoom extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: messageTileColor),
                 child: ListTile(
-                  leading: AvatarPlaceholder(),
+                  leading: AvatarPlaceholder(
+                    avatar:
+                        Image.asset('assets/images/messaging/Avatars/$val.png'),
+                  ),
                   title: Text(chatList[index].name),
                   subtitle: Row(
                     children: [
