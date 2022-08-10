@@ -11,10 +11,10 @@ class LogInSignUpScaffold extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            top: -280,
-            right: 230,
-            left: -130,
-            bottom: 600,
+            top: MediaQuery.of(context).size.height * -0.3,
+            right: MediaQuery.of(context).size.width * 0.6,
+            left: MediaQuery.of(context).size.width * -0.3,
+            bottom: MediaQuery.of(context).size.height * 0.6,
             child: Image.asset('assets/images/interests/Orion logo(!BG) 3.png'),
           ),
           Padding(

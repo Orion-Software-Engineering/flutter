@@ -5,6 +5,7 @@ import 'package:matchmaking_demo/components/home/home_scaffold.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
+import 'Profile/profile.dart';
 import 'components/interests/all_set.dart';
 import 'interests/interests_3.dart';
 import 'signup/sign_up_page.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         '/interests_2': (context) => InterestsTwo(),
         '/interests_3': (context) => InterestsThree(),
         '/all_set': (context) => AllSet(),
-        '/home': (context) => HomeScaffold()
+        '/home': (context) => HomeScaffold(),
+        '/profile': (context) => Profile()
       },
     );
   }
