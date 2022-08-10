@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:core';
+import 'dart:ffi';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
@@ -32,6 +33,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
   String? dateValue;
+  String? gender;
 
   @override
   void initState() {
@@ -150,7 +152,40 @@ class _SignUpState extends State<SignUp> {
                         requestModel.dob = value!;
                         return null;
                       }),
-
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Flexible(//TODO fix layout issue
+                                  child: Row(
+                                    children: [
+                                      RadioListTile(
+                                          title: Text("Male"),
+                                          contentPadding: EdgeInsets.all(0),
+                                          value: "male",
+                                          groupValue: gender,
+                                          onChanged: (value){
+                                            gender=value as String?;
+                                          }),
+                                      RadioListTile(
+                                          title: Text("Female"),
+                                          contentPadding: EdgeInsets.all(0),
+                                          value: "female",
+                                          groupValue: gender,
+                                          onChanged: (value){
+                                            gender=value as String?;
+                                          }),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       SizedBox(height: 50.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 Set<String> globalInterestsSet = {};
 
 //This class is just for testing ui
