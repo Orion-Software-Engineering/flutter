@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 import 'dart:core';
-import 'dart:ffi';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
@@ -21,10 +20,8 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
-
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
   bool masked = true;
   bool confirmMasked = true;
@@ -33,7 +30,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
   String? dateValue;
-  String? gender;
+  String gender="male";
 
   @override
   void initState() {
@@ -152,36 +149,43 @@ class _SignUpState extends State<SignUp> {
                         requestModel.dob = value!;
                         return null;
                       }),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      Container(
+                        width: 500,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Flexible(//TODO fix layout issue
-                                  child: Row(
-                                    children: [
-                                      RadioListTile(
-                                          title: Text("Male"),
-                                          contentPadding: EdgeInsets.all(0),
-                                          value: "male",
-                                          groupValue: gender,
-                                          onChanged: (value){
-                                            gender=value as String?;
-                                          }),
-                                      RadioListTile(
-                                          title: Text("Female"),
-                                          contentPadding: EdgeInsets.all(0),
-                                          value: "female",
-                                          groupValue: gender,
-                                          onChanged: (value){
-                                            gender=value as String?;
-                                          }),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                            Container(
+                              width: 110.0,
+                              child: RadioListTile(
+                                  title: Text("Male",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      color: Colors.grey,
+                                    ),),
+                                  contentPadding: EdgeInsets.all(0),
+                                  value: "male",
+                                  groupValue: gender,
+                                  onChanged: (value){
+                                    setState((){
+                                      gender=value.toString();
+                                    });
+                                  }),
+                            ),
+                            Container(
+                              width: 110.0,
+                              child: RadioListTile(
+                                  title: Text("Female",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      color: Colors.grey,
+                                    ),),
+                                  contentPadding: EdgeInsets.all(0),
+                                  value: "female",
+                                  groupValue: gender,
+                                  onChanged: (value){
+                                    setState((){
+                                      gender=value.toString();
+                                    });
+                                  }),
                             ),
                           ],
                         ),
