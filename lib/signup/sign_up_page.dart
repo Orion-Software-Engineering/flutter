@@ -30,7 +30,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
   String? dateValue;
-  String gender="male";
+  String gender = "male";
 
   @override
   void initState() {
@@ -156,34 +156,38 @@ class _SignUpState extends State<SignUp> {
                             Container(
                               width: 110.0,
                               child: RadioListTile(
-                                  title: Text("Male",
+                                  title: Text(
+                                    "Male",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
                                       color: Colors.grey,
-                                    ),),
+                                    ),
+                                  ),
                                   contentPadding: EdgeInsets.all(0),
                                   value: "male",
                                   groupValue: gender,
-                                  onChanged: (value){
-                                    setState((){
-                                      gender=value.toString();
+                                  onChanged: (value) {
+                                    setState(() {
+                                      gender = value.toString();
                                     });
                                   }),
                             ),
                             Container(
                               width: 110.0,
                               child: RadioListTile(
-                                  title: Text("Female",
+                                  title: Text(
+                                    "Female",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
                                       color: Colors.grey,
-                                    ),),
+                                    ),
+                                  ),
                                   contentPadding: EdgeInsets.all(0),
                                   value: "female",
                                   groupValue: gender,
-                                  onChanged: (value){
-                                    setState((){
-                                      gender=value.toString();
+                                  onChanged: (value) {
+                                    setState(() {
+                                      gender = value.toString();
                                     });
                                   }),
                             ),
@@ -250,7 +254,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           MaterialButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushNamed(context, '/login');
                             },
                             child: Text(
                               'Login',

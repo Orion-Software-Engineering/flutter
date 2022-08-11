@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/components/home/home_scaffold.dart';
+import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         '/interests_2': (context) => InterestsTwo(),
         '/interests_3': (context) => InterestsThree(),
         '/all_set': (context) => AllSet(),
-        '/home': (context) => HomeScaffold()
+        '/home': (context) => HomeScaffold(),
+        '/forgot_password': (context) => ForgotPassword(),
       },
     );
   }

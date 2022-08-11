@@ -140,6 +140,25 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          MaterialButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/forgot_password');
+                            },
+                            child: Text(
+                              'Forgot password?',
+                              style: TextStyle(
+                                color: signUpLoginOrange,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16.0,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(height: 15.0),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
