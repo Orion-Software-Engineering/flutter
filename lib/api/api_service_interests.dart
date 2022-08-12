@@ -15,11 +15,12 @@ class InterestAPIService {
     );
 
     try {
-      final response = await http.post(url, body: jsonEncode(requestModel));
-      //print(requestModel.toJson());
+      final response = await http.post(url, body: requestModel.toJson());
+      print(requestModel.toJson());
       if (response.statusCode == 200) {
         return InterestResponseModel.fromJson(json.decode(response.body));
       } else {
+        print(response.body);
         throw Exception("Failed to load data ${response.statusCode}");
       }
     } catch (e) {

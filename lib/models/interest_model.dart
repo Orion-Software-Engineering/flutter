@@ -15,10 +15,10 @@ class InterestResponseModel {
 }
 
 class InterestRequestModel {
-  late List<String> interests;
+  late dynamic interests;
 
-  Map<String, List<String>> toJson() {
-    Map<String, List<String>> map = {
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {
       'interests': interests,
     };
     return map;

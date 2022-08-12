@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/components/home/home_scaffold.dart';
 import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
+import 'package:matchmaking_demo/chat/chat_page.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      initialRoute: '/sign_up',
+      initialRoute: '/chat_page',
       routes: {
         '/login': (context) => Login(),
         '/sign_up': (context) => SignUp(),
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/all_set': (context) => AllSet(),
         '/home': (context) => HomeScaffold(),
         '/forgot_password': (context) => ForgotPassword(),
+        '/chat_page': (context) => Chat(),
       },
     );
   }
