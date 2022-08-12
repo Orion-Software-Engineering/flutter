@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 /*
 * HomePage is a "recyclerview" with a lost of possible matches(*/
 

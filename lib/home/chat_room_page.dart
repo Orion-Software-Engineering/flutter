@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+
 /*
 * The Messaging page that shows a list of contacts you've been texting
 * */
@@ -12,7 +14,7 @@ import '../components/home/avatar_placeholder.dart';
 class ChatRoom extends StatelessWidget {
   // const ChatRoom({Key? key}) : super(key: key);
 
-  //TODO conversations that jave just 2 members are chats.
+  //TODO conversations that have just 2 members are chats.
   //TODO val is to hold the Zodiac sign on the other member and based on that an avatar is selected. this cna be implemented after the backend is done
   String val = "Leo";
   @override
