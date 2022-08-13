@@ -4,7 +4,6 @@
 * The various pages are found in the tabs list and are selected based on the valuw _currentIndex holds
 * TODO:Theme mode toggling btn dark and light modes
 *  */
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/components/home/avatar_placeholder.dart';
@@ -72,7 +71,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
                 onTap: () {
-                  // TODO profile page Navigation
+                  Navigator.pushNamed(context, '/profile');
                 },
                 child: AvatarPlaceholder()),
           ),

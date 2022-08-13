@@ -20,7 +20,10 @@ class BioFields extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-                fontSize: 36, color: Colors.black, fontWeight: FontWeight.w700),
+                fontSize: (title == 'Bio') ? 20 : 36,
+                color: Colors.black,
+                fontWeight:
+                    (title == 'Bio') ? FontWeight.w400 : FontWeight.w700),
           )
         ],
       ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 
+import '../components/profile/active_interests_list.dart';
 import '../components/profile/bio_fields.dart';
+import '../components/profile/interests_bullet.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -74,14 +77,42 @@ class Profile extends StatelessWidget {
                   color: Color(0xffffffff),
                   borderRadius: BorderRadius.circular(20)),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BioFields(title: 'Username', value: "Some Name"),
-                  BioFields(title: 'Age', value: "21"),
+                  BioFields(title: 'Date of Birth', value: "21"),
+                  BioFields(title: 'Gender', value: "M"),
+                  BioFields(title: 'Bio', value: "Lorem Ipsum"),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Active Interests',
+                          // textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        ActiveInterestsList(interestList: interestsList),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20.0, 40, 0, 0),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 40,
+            ),
+          ),
         ],
       ),
     );
