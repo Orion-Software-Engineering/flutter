@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
-
+import 'package:matchmaking_demo/models/messaging/message_model.dart';
 import '../components/home/avatar_placeholder.dart';
 
 class ChatRoom extends StatelessWidget {
@@ -30,9 +30,7 @@ class ChatRoom extends StatelessWidget {
                     color: messageTileColor),
                 child: ListTile(
                   leading: AvatarPlaceholder(
-                    avatar:
-                        Image.asset('assets/images/messaging/Avatars/$val.png'),
-                  ),
+                      firstCharacter: chatList[index].name[0]),
                   title: Text(chatList[index].name),
                   subtitle: Row(
                     children: [
