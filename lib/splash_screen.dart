@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     checkForPreviousLoginDetails();
-    Timer(Duration(seconds: 4), () => routeToApp());
+    Timer(Duration(seconds: 1), () => routeToApp());
   }
 
   @override

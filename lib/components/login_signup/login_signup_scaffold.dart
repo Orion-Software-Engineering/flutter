@@ -28,16 +28,3 @@ class LogInSignUpScaffold extends StatelessWidget {
     );
   }
 }
-
-// Container(
-// decoration: const BoxDecoration(
-// color: Colors.black,
-// image: DecorationImage(
-// image: AssetImage('assets/images/sign_in/Sign Up bg.png'),
-// fit: BoxFit.cover),
-// ),
-// height: double.infinity,
-// padding: const EdgeInsets.fromLTRB(20, 0.0, 20.0, 0),
-// width: double.infinity,
-// child: child,
-// )

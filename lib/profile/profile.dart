@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_profile.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 
 import '../components/profile/active_interests_list.dart';
 import '../components/profile/bio_fields.dart';
 import '../components/profile/interests_bullet.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  @override
+  // ignore: must_call_super
+  void initState() {
+    print(
+        "PPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\n");
+    APIServiceProfile apiServiceProfile = APIServiceProfile();
+    apiServiceProfile.getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {

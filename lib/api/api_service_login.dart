@@ -14,11 +14,13 @@ class APIServiceLogin {
     );
     try {
       final response = await http.post(url, body: requestModel.toJson());
-      // print(response.statusCode);
-      // print(response.body);
+      print(response.statusCode);
+      print(response.body);
 
       if (response.statusCode == 200) {
-        String userId = json.decode(response.body)["userID"];
+        print("entered statuscode");
+        String userId = json.decode(response.body)["id"];
+        print(userId);
         saveUserIdAfterLogin(userId);
 
         return LoginResponseModel.fromJson(json.decode(response.body));

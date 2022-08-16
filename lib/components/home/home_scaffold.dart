@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/components/home/avatar_placeholder.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
+import 'package:matchmaking_demo/models/messaging/message_model.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
 
@@ -22,7 +23,7 @@ class HomeScaffold extends StatefulWidget {
 }
 
 class _HomeScaffoldState extends State<HomeScaffold> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   final tabs = <Widget>[HomePage(), ChatRoom(), EventsPage(), SettingsPage()];
 
@@ -46,19 +47,16 @@ class _HomeScaffoldState extends State<HomeScaffold> {
           ),
         ),
         toolbarHeight: 70,
-        leading: GestureDetector(
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Color(0x80FFFFFF),
-                  borderRadius: BorderRadius.circular(50)),
-              child: Center(
-                child: FaIcon(
-                  changeThemeIcon,
-                  color: Colors.black,
-                ),
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Color(0x80FFFFFF),
+                borderRadius: BorderRadius.circular(50)),
+            child: Center(
+              child: FaIcon(
+                changeThemeIcon,
+                color: Colors.black,
               ),
             ),
           ),
@@ -73,7 +71,9 @@ class _HomeScaffoldState extends State<HomeScaffold> {
                 onTap: () {
                   Navigator.pushNamed(context, '/profile');
                 },
-                child: AvatarPlaceholder()),
+                child: AvatarPlaceholder(
+                  firstCharacter: 'M', //TODO must be replaced
+                )),
           ),
         ],
       ),
@@ -101,10 +101,13 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               label: 'Home',
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.chat_bubble_outline,
-                color: Colors.black,
-                size: widget.iconSize,
+              icon: GestureDetector(
+                onTap: () {},
+                child: Icon(
+                  Icons.chat_bubble_outline,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
               ),
               activeIcon: Icon(
                 Icons.chat_bubble,
