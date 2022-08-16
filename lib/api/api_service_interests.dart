@@ -14,14 +14,21 @@ class InterestAPIService {
       path: interestPath + userID,
     );
 
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+
     try {
       print(jsonEncode(requestModel));
-      final response = await http.post(url, body: jsonEncode(requestModel));
+      final response = await http.post(url,
+          body: jsonEncode(requestModel), headers: headers);
+
       print(response.body);
       if (response.statusCode == 200) {
         return InterestResponseModel.fromJson(json.decode(response.body));
       } else {
-        print(response.body);
+        // print(response.body);
         throw Exception("Failed to load data ${response.statusCode}");
       }
     } catch (e) {
