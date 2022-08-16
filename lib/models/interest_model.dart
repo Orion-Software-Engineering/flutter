@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_if_null_operators
 
+import 'package:flutter/material.dart';
+
 class InterestResponseModel {
   String? token;
   String? error;
@@ -15,10 +17,10 @@ class InterestResponseModel {
 }
 
 class InterestRequestModel {
-  late dynamic interests;
+  List<String> interests = [];
 
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> map = {
+  Map<String, List<String>> toJson() {
+    Map<String, List<String>> map = {
       'interests': interests,
     };
     return map;

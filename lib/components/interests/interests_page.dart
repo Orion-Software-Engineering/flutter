@@ -160,7 +160,6 @@ class _InterestsPageState extends State<InterestsPage> {
                         //print(globalInterestsSet.toList().runtimeType);
                       });
                       requestModel.interests = globalInterestsSet.toList();
-                      //print(requestModel.interests);
                       InterestAPIService apiService = InterestAPIService();
                       apiService.interest(requestModel).then((value) {
                         setState(() {
