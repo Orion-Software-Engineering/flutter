@@ -164,7 +164,7 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.all(0),
-                                  value: "male",
+                                  value: true,
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
@@ -183,7 +183,7 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.all(0),
-                                  value: "female",
+                                  value: false,
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {

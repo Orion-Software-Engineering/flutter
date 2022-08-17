@@ -46,8 +46,9 @@ class _DummyHomeState extends State<DummyHome> {
         title: Text("Dummy Home"),
       ),
       body: Container(
-        child:
-            userPosition != null ? Text(userPosition.toString()) : Text("dat"),
+        child: userPosition != null
+            ? Text(userPosition.toString())
+            : Text("DENIED"),
       ),
     );
   }
