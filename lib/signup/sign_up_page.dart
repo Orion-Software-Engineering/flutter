@@ -1,12 +1,14 @@
-// ignore_for_file: prefer_const_constructors
-
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 import 'dart:core';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_signup.dart';
 import 'package:matchmaking_demo/models/signup_model.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../components/login_signup/date_of_birth.dart';
+import '../components/login_signup/title_and_subtext.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -18,10 +20,8 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
-
   RegExp emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
   bool masked = true;
   bool confirmMasked = true;
@@ -30,6 +30,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
   String? dateValue;
+  String gender = "male";
 
   @override
   void initState() {
@@ -48,208 +49,230 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget _ui(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/sign_in/Sign Up bg.png'),
-              fit: BoxFit.fill),
-        ),
-        height: double.infinity,
-        padding: const EdgeInsets.fromLTRB(20, 70.0, 20.0, 50.0),
-        width: double.infinity,
-        child: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  flex: 2,
+    return LogInSignUpScaffold(
+      child: Center(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                flex: 2,
+                child: TitleAndSubtext(
+                    title: 'Sign Up',
+                    subtext: 'Create your account to start matching'),
+              ),
+              SizedBox(height: 20.0),
+              Expanded(
+                flex: 4,
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.w700,
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Username',
+                          labelStyle: signUpLoginTextFieldTextStyle,
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: signUpLoginTextColor,
+                            ),
+                          ),
                         ),
+                        onSaved: (value) => requestModel.username = value!,
+                        validator: (value) {
+                          if (userNameValid.hasMatch(value!) &&
+                              value.isNotEmpty) {
+                            String username = value;
+                            setState(() {
+                              requestModel.username = username;
+                            });
+                            return null;
+                          } else {
+                            return "Username should be alphanumeric";
+                          }
+                        },
                       ),
-                      Text(
-                        'Create your account to start matching',
-                        style: TextStyle(
-                          color: signUpLoginTextColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Expanded(
-                  flex: 4,
-                  child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Username',
-                            labelStyle: signUpLoginTextFieldTextStyle,
-                            border: UnderlineInputBorder(
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: signUpLoginTextFieldTextStyle,
+                          border: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: signUpLoginTextColor,
-                              ),
-                            ),
-                          ),
-                          onSaved: (value) => requestModel.username = value!,
-                          validator: (value) {
-                            if (userNameValid.hasMatch(value!) &&
-                                value.isNotEmpty) {
-                              String username = value;
-                              setState(() {
-                                requestModel.username = username;
-                              });
-                              return null;
-                            } else {
-                              return "Username should be alphanumeric";
-                            }
-                          },
+                            color: Colors.grey,
+                          )),
                         ),
-                        TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            labelStyle: signUpLoginTextFieldTextStyle,
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Colors.grey,
-                            )),
-                          ),
-                          onSaved: (value) => requestModel.username = value!,
-                          validator: (value) {
-                            if (emailValid.hasMatch(value!)) {
-                              String email = value;
-                              setState(() {
-                                requestModel.email = email;
-                              });
-                              return null;
-                            } else {
-                              return "Enter a valid email address";
-                            }
-                          },
-                        ),
+                        onSaved: (value) => requestModel.username = value!,
+                        validator: (value) {
+                          if (emailValid.hasMatch(value!)) {
+                            String email = value;
+                            setState(() {
+                              requestModel.email = email;
+                            });
+                            return null;
+                          } else {
+                            return "Enter a valid email address";
+                          }
+                        },
+                      ),
 
-                        //Password field
-                        CustomPasswordField(
-                          hintText: 'Password',
-                          validationFunction: (value) {
-                            if (value!.length >= 8) {
-                              setState(() => password = value);
-                              setState(() {
-                                requestModel.password = password;
-                              });
-                              return null;
-                            } else {
-                              return "Password must be at least 8 characters long";
-                            }
-                          },
-                        ),
+                      //Password field
+                      CustomPasswordField(
+                        hintText: 'Password',
+                        validationFunction: (value) {
+                          if (value!.length >= 8) {
+                            setState(() => password = value);
+                            setState(() {
+                              requestModel.password = password;
+                            });
+                            return null;
+                          } else {
+                            return "Password must be at least 8 characters long";
+                          }
+                        },
+                      ),
 
-                        //Confirm Password Field
-                        CustomPasswordField(
-                          hintText: 'Confirm Password',
-                          validationFunction: (value) {
-                            if (value == password) {
-                              return null;
-                            } else {
-                              return "Passwords don't match";
-                            }
-                          },
-                        ),
+                      //Confirm Password Field
+                      CustomPasswordField(
+                        hintText: 'Confirm Password',
+                        validationFunction: (value) {
+                          if (value == password) {
+                            return null;
+                          } else {
+                            return "Passwords don't match";
+                          }
+                        },
+                      ),
 
-                        DobField(validationFunction: (value) {
-                          requestModel.dob = value!;
-                          return null;
-                        }),
-
-                        SizedBox(height: 50.0),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
-                              // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              )),
-                          onPressed: () {
-                            if (validateAndSave()) {
-                              setState(() {
-                                isApiCallProcess = true;
-                              });
-                              APIService apiService = APIService();
-                              apiService.signup(requestModel).then((value) {
-                                setState(() {
-                                  isApiCallProcess = false;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text('Signup Successful')));
-                                });
-                              });
-                              //TODO Navigation to '/interest_1' page BLogic kindly find the most suitable place to put it. I can't seem to figure it out
-                            }
-                            print(requestModel.toJson());
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5.0, horizontal: 0.0),
-                            child: Center(
-                              child: Text(
-                                'SIGN UP',
-                                style: TextStyle(
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 12.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      DobField(validationFunction: (value) {
+                        requestModel.dob = value!;
+                        return null;
+                      }),
+                      Container(
+                        width: 500,
+                        child: Row(
                           children: [
-                            Text(
-                              'Already have an account?',
-                              style: TextStyle(
-                                fontSize: 15.0,
-                              ),
+                            Container(
+                              width: 110.0,
+                              child: RadioListTile(
+                                  title: Text(
+                                    "Male",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.all(0),
+                                  value: "male",
+                                  groupValue: gender,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      gender = value.toString();
+                                    });
+                                  }),
                             ),
-                            MaterialButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                  color: signUpLoginOrange,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16.0,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
+                            Container(
+                              width: 110.0,
+                              child: RadioListTile(
+                                  title: Text(
+                                    "Female",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.all(0),
+                                  value: "female",
+                                  groupValue: gender,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      gender = value.toString();
+                                    });
+                                  }),
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 50.0),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                            // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            )),
+                        onPressed: () {
+                          if (validateAndSave()) {
+                            setState(() {
+                              isApiCallProcess = true;
+                            });
+                            APIService apiService = APIService();
+                            try {
+                              apiService.signup(requestModel).then((value) {
+                                setState(() {
+                                  isApiCallProcess = false;
+                                  Navigator.pushNamed(context, '/interests_1');
+                                });
+                              });
+                            } catch (e) {
+                              isApiCallProcess = false;
+                              Fluttertoast.showToast(
+                                  backgroundColor: Color(0x9E9E9E7E),
+                                  textColor: Colors.white,
+                                  msg: message,
+                                  fontSize: 16);
+                            }
+                          }
+                          //print(requestModel.toJson());
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 5.0, horizontal: 0.0),
+                          child: Center(
+                            child: Text(
+                              'SIGN UP',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 12.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already have an account?',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          MaterialButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                color: signUpLoginOrange,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16.0,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,30 +1,71 @@
+/*
+* This widget is used in all three interests pages
+* this page holds 5 interests buttons
+* these buttons are populated by a list on interests in constants.dart and are selected in fives.
+* the value of PageNumber determines which 5 items would be selected.
+* pageNumber = 1 means index 0 is the starting point and the index would be incremented 4 times to get all 5 interests.
+* this index = interestListStartIndex in this file
+* the text held by these 5 butt*/
+
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:matchmaking_demo/models/interest_model.dart';
+import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import '../../utils/constants.dart';
 import 'interests_button.dart';
+import 'package:matchmaking_demo/api/api_service_interests.dart';
 
-class InterestsPage extends StatelessWidget {
+class InterestsPage extends StatefulWidget {
   InterestsPage(
       {Key? key,
       required this.pageNumber,
       this.nextPage,
       required this.showBackButton})
       : super(key: key);
+  //pageNumber is used to determine whether the page requires a back button or not. Since page one does not require one.
+  //it is also used to choose between 'Next-->'and 'Done' for moving to the next page
+  //pageNumber is also used to tell
   int pageNumber;
-  int? interestListLocalStartIndex;
   String? nextPage;
-  String helpText = '';
   bool showBackButton = true;
 
   @override
+  State<InterestsPage> createState() => _InterestsPageState();
+}
+
+class _InterestsPageState extends State<InterestsPage> {
+  int? interestListStartIndex;
+  String helpText = '';
+  late InterestRequestModel requestModel;
+  late InterestResponseModel responseModel;
+  bool isApiCallProcess = false;
+
+  @override
+  void initState() {
+    super.initState();
+    requestModel = InterestRequestModel();
+    responseModel = InterestResponseModel();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (pageNumber == 1) {
-      interestListLocalStartIndex = 0;
-    } else if (pageNumber == 2) {
-      interestListLocalStartIndex = 5;
-    } else if (pageNumber == 3) {
-      interestListLocalStartIndex = 10;
+    return Progress(
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+      child: _ui(context),
+    );
+  }
+
+  Widget _ui(BuildContext context) {
+    if (widget.pageNumber == 1) {
+      interestListStartIndex = 0;
+    } else if (widget.pageNumber == 2) {
+      interestListStartIndex = 5;
+    } else if (widget.pageNumber == 3) {
+      interestListStartIndex = 10;
     }
 
     return Column(
@@ -37,7 +78,7 @@ class InterestsPage extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: Text(
-            '$pageNumber/3',
+            '${widget.pageNumber}/3',
             style: interestsPageNumberStyle,
             textAlign: TextAlign.right,
           ),
@@ -47,27 +88,27 @@ class InterestsPage extends StatelessWidget {
             children: [
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex!],
+                  text: interestsList[interestListStartIndex!],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 1],
+                  text: interestsList[interestListStartIndex! + 1],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 2],
+                  text: interestsList[interestListStartIndex! + 2],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 3],
+                  text: interestsList[interestListStartIndex! + 3],
                 ),
               ),
               Expanded(
                 child: InterestsButton(
-                  text: interestsList[interestListLocalStartIndex! + 4],
+                  text: interestsList[interestListStartIndex! + 4],
                 ),
               )
             ],
@@ -87,15 +128,15 @@ class InterestsPage extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   globalInterestsSet.removeAll([
-                    interestsList[interestListLocalStartIndex!],
-                    interestsList[interestListLocalStartIndex! + 1],
-                    interestsList[interestListLocalStartIndex! + 2],
-                    interestsList[interestListLocalStartIndex! + 3],
-                    interestsList[interestListLocalStartIndex! + 4]
+                    interestsList[interestListStartIndex!],
+                    interestsList[interestListStartIndex! + 1],
+                    interestsList[interestListStartIndex! + 2],
+                    interestsList[interestListStartIndex! + 3],
+                    interestsList[interestListStartIndex! + 4]
                   ]);
                   Navigator.pop(context);
                 },
-                child: (!showBackButton)
+                child: (!widget.showBackButton)
                     ? SizedBox(width: 10)
                     : Text(
                         '<--Back',
@@ -105,7 +146,7 @@ class InterestsPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  if (pageNumber == 3) {
+                  if (widget.pageNumber == 3) {
                     if (globalInterestsSet.length < 3) {
                       Fluttertoast.showToast(
                           backgroundColor: Color(0x9E9E9E7E),
@@ -113,15 +154,26 @@ class InterestsPage extends StatelessWidget {
                           msg: 'Select at least 3 interests',
                           fontSize: 16);
                     } else {
-                      Navigator.pushNamed(context, nextPage!);
-                      //TODO API Call should be done here with globalInterestsSet. Convert to list if needed.
+                      setState(() {
+                        isApiCallProcess = true;
+                        //print(globalInterestsSet.toList());
+                        //print(globalInterestsSet.toList().runtimeType);
+                      });
+                      requestModel.interests = globalInterestsSet.toList();
+                      InterestAPIService apiService = InterestAPIService();
+                      apiService.interest(requestModel).then((value) {
+                        setState(() {
+                          isApiCallProcess = false;
+                          Navigator.pushNamed(context, '/all_set');
+                        });
+                      });
                     }
                   } else {
-                    Navigator.pushNamed(context, nextPage!);
+                    Navigator.pushNamed(context, widget.nextPage!);
                   }
                 },
                 child: Text(
-                  (pageNumber == 3) ? 'Done' : 'Next-->',
+                  (widget.pageNumber == 3) ? 'Done' : 'Next-->',
                   style: interestsPageNextBackStyle,
                   textAlign: TextAlign.right,
                 ),
@@ -133,9 +185,16 @@ class InterestsPage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 210, 0, 0),
           child: TextButton(
               onPressed: () {
-                print(globalInterestsSet);
                 if (globalInterestsSet.length > 2) {
-                  Navigator.pushNamed(context, '/all_set');
+                  isApiCallProcess = true;
+                  requestModel.interests = globalInterestsSet.toList();
+                  InterestAPIService apiService = InterestAPIService();
+                  apiService.interest(requestModel).then((value) {
+                    setState(() {
+                      isApiCallProcess = false;
+                      Navigator.pushNamed(context, '/all_set');
+                    });
+                  });
                 } else {
                   Fluttertoast.showToast(
                       backgroundColor: Color(0x9E9E9E7E),

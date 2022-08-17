@@ -1,3 +1,11 @@
+/*
+* the DobField does not allow manual inputs via keyboard
+* showDatePicker is used for convenience of the user,
+* AND my convenience as well.
+* Didn't want to go through the hassle of validating user inputs for date
+* since everyone has various formats for writing dates
+* */
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -16,7 +24,6 @@ class DobField extends StatefulWidget {
 class _DobFieldState extends State<DobField> {
   String? dateValue;
 
-  //TODO this _bLogicDateValue has the date format required for the backend stuff
   var dateFormat = DateFormat('dd/MM/yyyy - kk:mm');
 
   @override
@@ -34,13 +41,12 @@ class _DobFieldState extends State<DobField> {
             dateValue = dateFormat.format(date!).substring(0, 10);
           });
         });
-        // TODO Picker starts from Jan 1 of 2004. You have to make it include the days between Jan 1 and now
       },
       child: TextFormField(
         controller: TextEditingController(text: dateValue),
         enabled: false,
         decoration: InputDecoration(
-            labelText: dateValue == null ? 'YYYY-MM-DD' : 'Date of Birth',
+            labelText: dateValue == null ? 'DD/MM/YYYY' : 'Date of Birth',
             labelStyle: signUpLoginTextFieldTextStyle,
             border: inputBorder,
             suffixIcon: Icon(Icons.calendar_month)),

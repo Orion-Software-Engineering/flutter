@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_login.dart';
+import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
+import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import '../components/login_signup/custom_password_field.dart';
@@ -39,208 +41,199 @@ class _LoginState extends State<Login> {
 
   Widget _ui(BuildContext context) {
     //LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
-    return Scaffold(
+    return LogInSignUpScaffold(
       key: scaffoldKey,
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/sign_in/Sign Up bg.png'),
-              fit: BoxFit.fill),
-        ),
-        height: double.infinity,
-        padding: const EdgeInsets.fromLTRB(20, 0.0, 20.0, 0.0),
-        width: double.infinity,
-        child: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 2,
+      child: Center(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 2,
+                child: TitleAndSubtext(
+                    title: 'Sign In',
+                    subtext: 'Enter your username and password'),
+              ),
+              Expanded(
+                flex: 3,
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.w700,
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Username',
+                          labelStyle: signUpLoginTextFieldTextStyle,
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: signUpLoginTextColor,
+                            ),
+                          ),
+                        ),
+                        onSaved: (value) => requestModel.username = value!,
+                        validator: (value) {
+                          if (userNameValid.hasMatch(value!) &&
+                              value.isNotEmpty) {
+                            String username = value;
+                            setState(() {
+                              requestModel.username = username;
+                            });
+                            return null;
+                          } else {
+                            return "Enter a valid username address";
+                          }
+                        },
+                      ),
+                      CustomPasswordField(
+                          hintText: 'Password',
+                          validationFunction: (value) {
+                            if (value!.isNotEmpty &&
+                                passwordValid.hasMatch(value)) {
+                              String password = value;
+                              setState(() {
+                                requestModel.password = password;
+                              });
+                              return null;
+                            } else {
+                              return 'Enter a password';
+                            }
+                          }),
+                      SizedBox(height: 30.0),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                            // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            )),
+                        onPressed: () {
+                          if (validateAndSave()) {
+                            setState(() {
+                              isApiCallProcess = true;
+                            });
+                            APIService apiService = new APIService();
+                            apiService.login(requestModel).then((value) {
+                              setState(() {
+                                isApiCallProcess = false;
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text('Login Successful')));
+                              });
+                            });
+                            print(requestModel.toJson());
+                          }
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 0.0),
+                          child: Center(
+                            child: Text(
+                              'LOG IN',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      Text(
-                        'Enter your username and password',
-                        style: TextStyle(
-                          color: signUpLoginTextColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          MaterialButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/forgot_password');
+                            },
+                            child: Text(
+                              'Forgot password?',
+                              style: TextStyle(
+                                color: signUpLoginOrange,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16.0,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15.0),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have an account?",
+                              style: TextStyle(
+                                fontSize: 15.0,
+                              ),
+                            ),
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/sign_up');
+                              },
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Color(0xFFcd5d27),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
+                        child: Row(children: <Widget>[
+                          Expanded(
+                              child: Divider(
+                            color: Colors.black,
+                          )),
+                          Text("    Sign In With    "),
+                          Expanded(
+                              child: Divider(
+                            color: Colors.black,
+                          )),
+                        ]),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: const Image(
+                              image: AssetImage(
+                                'assets/images/sign_in/logo_apple.png',
+                              ),
+                              height: 44,
+                              width: 45,
+                            ),
+                          ),
+                          TextButton(
+                              onPressed: () {},
+                              child: Image.asset(
+                                  'assets/images/sign_in/logo_outlook.png',
+                                  height: 44,
+                                  width: 45)),
+                          TextButton(
+                              onPressed: () {},
+                              child: Image.asset(
+                                  'assets/images/sign_in/logo_google.png',
+                                  height: 44,
+                                  width: 45))
+                        ],
                       )
                     ],
                   ),
                 ),
-                Expanded(
-                  flex: 3,
-                  child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Username',
-                            labelStyle: signUpLoginTextFieldTextStyle,
-                            border: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: signUpLoginTextColor,
-                              ),
-                            ),
-                          ),
-                          onSaved: (value) => requestModel.username = value!,
-                          validator: (value) {
-                            if (userNameValid.hasMatch(value!) &&
-                                value.isNotEmpty) {
-                              String username = value;
-                              setState(() {
-                                requestModel.username = username;
-                              });
-                              return null;
-                            } else {
-                              return "Enter a valid username address";
-                            }
-                          },
-                        ),
-                        CustomPasswordField(
-                            hintText: 'Password',
-                            validationFunction: (value) {
-                              if (value!.isNotEmpty &&
-                                  passwordValid.hasMatch(value)) {
-                                String password = value;
-                                setState(() {
-                                  requestModel.password = password;
-                                });
-                                return null;
-                              } else {
-                                return 'Enter a password';
-                              }
-                            }),
-                        SizedBox(height: 30.0),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
-                              // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              )),
-                          onPressed: () {
-                            if (validateAndSave()) {
-                              setState(() {
-                                isApiCallProcess = true;
-                              });
-                              APIService apiService = new APIService();
-                              apiService.login(requestModel).then((value) {
-                                setState(() {
-                                  isApiCallProcess = false;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text('Login Successful')));
-                                });
-                              });
-                              print(requestModel.toJson());
-                            }
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 0.0),
-                            child: Center(
-                              child: Text(
-                                'LOG IN',
-                                style: TextStyle(
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 15.0),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Don't have an account?",
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                              MaterialButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/sign_up');
-                                },
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    color: Color(0xFFcd5d27),
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16.0,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                          child: Row(children: <Widget>[
-                            Expanded(
-                                child: Divider(
-                              color: Colors.black,
-                            )),
-                            Text("    Sign In With    "),
-                            Expanded(
-                                child: Divider(
-                              color: Colors.black,
-                            )),
-                          ]),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: const Image(
-                                image: AssetImage(
-                                  'assets/images/sign_in/logo_apple.png',
-                                ),
-                                height: 44,
-                                width: 45,
-                              ),
-                            ),
-                            TextButton(
-                                onPressed: () {},
-                                child: Image.asset(
-                                    'assets/images/sign_in/logo_outlook.png',
-                                    height: 44,
-                                    width: 45)),
-                            TextButton(
-                                onPressed: () {},
-                                child: Image.asset(
-                                    'assets/images/sign_in/logo_google.png',
-                                    height: 44,
-                                    width: 45))
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
