@@ -34,6 +34,24 @@ dependencies:
   ionicons: ^0.1.2
   http: ^0.13.4
   fluttertoast: ^8.0.9
+  flutter_native_splash: ^2.2.4
+  flutter_native_splash:
+    color: "#ffffff"
+    image: assets/splash.png
+    color_dark: "#221935"
+    android: true
+    ios: true
+    android_12:
+      image: assets/splash.png
+      color: "#ffffff"
+      image_dark: assets/splash.png
+      color_dark: "#221935"
+      icon_background_color_dark: "#221935"
+    fullscreen: true
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
   font_awesome_flutter: 10.1.0
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
