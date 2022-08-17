@@ -12,6 +12,7 @@ import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomeScaffold extends StatefulWidget {
   final double iconSize = 24.0;
@@ -24,12 +25,39 @@ class HomeScaffold extends StatefulWidget {
 
 class _HomeScaffoldState extends State<HomeScaffold> {
   int _currentIndex = 0;
+  Position? userPosition;
+  void getCurrentPosition() async {
+    Position position = await askLocationPermission();
+    setState(() {
+      userPosition = position;
+    });
+  }
+
+  Future<Position> askLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error("Location permission denied");
+      }
+    }
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+  }
 
   final tabs = <Widget>[HomePage(), ChatRoom(), EventsPage(), SettingsPage()];
 
   final titles = <String>['Matching', 'Messages', 'Events', 'Settings'];
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentPosition();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(userPosition);
     IconData changeThemeIcon =
         (MediaQuery.of(context).platformBrightness == Brightness.light)
             ? FontAwesomeIcons.solidSun
