@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/components/home/dummy_home.dart';
 import 'package:matchmaking_demo/components/home/home_scaffold.dart';
 import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
 import 'package:matchmaking_demo/chat/chat_page.dart';
@@ -39,7 +38,6 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScaffold(),
         '/forgot_password': (context) => ForgotPassword(),
         '/chat_page': (context) => Chat(),
-        '/dummy_home': (context) => DummyHome(),
       },
     );
   }
