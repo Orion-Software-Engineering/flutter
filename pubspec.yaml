@@ -42,6 +42,7 @@ dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.2.7
 
 dev_dependencies:
   flutter_test:
@@ -115,3 +116,17 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/splash/splash.png
+  color_dark: "#221935"
+  android: true
+  ios: true
+  android_12:
+    image: assets/images/splash/splash.png
+    color: "#ffffff"
+    image_dark: assets/images/splash/splash.png
+    color_dark: "#221935"
+    icon_background_color_dark: "#221935"
+  fullscreen: true
