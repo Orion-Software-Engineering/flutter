@@ -30,7 +30,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
   String? dateValue;
-  String gender = "male";
+  bool gender = true;
 
   @override
   void initState() {
@@ -168,7 +168,7 @@ class _SignUpState extends State<SignUp> {
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = value.toString();
+                                      gender = true;
                                     });
                                   }),
                             ),
@@ -187,7 +187,7 @@ class _SignUpState extends State<SignUp> {
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = value.toString();
+                                      gender = false;
                                     });
                                   }),
                             ),
@@ -207,12 +207,22 @@ class _SignUpState extends State<SignUp> {
                             setState(() {
                               isApiCallProcess = true;
                             });
-                            APIService apiService = APIService();
+                            SignUpAPIService apiService = SignUpAPIService();
                             try {
                               apiService.signup(requestModel).then((value) {
                                 setState(() {
                                   isApiCallProcess = false;
-                                  Navigator.pushNamed(context, '/interests_1');
+                                  if (statusCode == 201) {
+                                    Navigator.pushNamed(
+                                        context, '/interests_1');
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        backgroundColor: Colors.black,
+                                        textColor: Colors.white,
+                                        fontSize: 16,
+                                        timeInSecForIosWeb: 2,
+                                        msg: message);
+                                  }
                                 });
                               });
                             } catch (e) {
