@@ -70,7 +70,7 @@ class EventsPage extends StatelessWidget {
             ),
             Expanded(
                 child: Container(
-              padding: EdgeInsets.all(2 0.0),
+              padding: EdgeInsets.all(20.0),
               //margin: EdgeInsets.all(20.0),
               child: Text(
                 'Happening this week',
