@@ -8,6 +8,7 @@ class EventsPage extends StatelessWidget {
     return Scaffold(
       /*ListView.builder(itemBuilder:
     itemBuilder)(*/
+      //The Trending section will show the tpo 4 events with the most likes.
       body: SingleChildScrollView(
         child: Wrap(
           children: <Widget>[
