@@ -69,6 +69,7 @@ class EventsPage extends StatelessWidget {
                 ),
               ],
             ),
+            //The new section.
             Expanded(
                 child: Container(
               padding: EdgeInsets.all(20.0),
