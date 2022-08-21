@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../models/messaging/conversation_model.dart';
 import '../utils/api_call_paths.dart';
-import '../utils/constants.dart';
 
 class APIServiceConversation {
   String? userId;

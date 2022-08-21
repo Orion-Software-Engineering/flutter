@@ -3,13 +3,10 @@
 * */
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_conversation.dart';
 import 'package:matchmaking_demo/api/api_service_message.dart';
 import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'package:matchmaking_demo/utils/variables.dart';
-import 'package:matchmaking_demo/models/messaging/message_model.dart';
 import '../components/home/avatar_placeholder.dart';
 
 class ChatRoom extends StatefulWidget {

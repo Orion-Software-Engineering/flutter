@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import '../models/messaging/message_model.dart';
 import '../utils/api_call_paths.dart';
