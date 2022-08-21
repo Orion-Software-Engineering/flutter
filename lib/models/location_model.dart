@@ -6,10 +6,10 @@ class LocationResponseModel {
 
   LocationResponseModel({this.token, this.error});
 
-  factory LocationResponseModel.fromJson(Map<String, dynamic> json) {
+  factory LocationResponseModel.fromJson(String response) {
     return LocationResponseModel(
-      token: json["token"] != null ? json["token"] : "",
-      error: json["error"] != null ? json["error"] : "",
+      token: response != null ? response : "",
+      error: response != null ? response : "",
     );
   }
 }
@@ -21,7 +21,7 @@ class LocationPostModel {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
-      'userID': userID.trim(),
+      'userId': userID.trim(),
       'latitude': latitude.trim(),
       'longitude': longitude.trim(),
     };
