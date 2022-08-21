@@ -7,6 +7,7 @@ import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.d
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../utils/constants.dart';
 
@@ -114,6 +115,8 @@ class _LoginState extends State<Login> {
                               isApiCallProcess = true;
                             });
                             LoginAPIService apiService = new LoginAPIService();
+                            saveCredentials();
+     
                             apiService.login(requestModel).then((value) {
                               setState(() {
                                 isApiCallProcess = false;
@@ -131,6 +134,7 @@ class _LoginState extends State<Login> {
                                       msg: message);
                                 }
                               });
+                              Navigator.pushNamed(context, '/home');
                             });
                             print(requestModel.toJson());
                           }
@@ -239,7 +243,7 @@ class _LoginState extends State<Login> {
                                   height: 44,
                                   width: 45))
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -259,5 +263,12 @@ class _LoginState extends State<Login> {
     } else {
       return false;
     }
+  }
+
+  void saveCredentials() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setString("username", requestModel.username);
+    sharedPreferences.setString("password", requestModel.password);
   }
 }

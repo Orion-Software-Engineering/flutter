@@ -6,7 +6,9 @@ import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
 import 'package:matchmaking_demo/chat/chat_page.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
+import 'package:matchmaking_demo/splash_screen.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
+import 'Profile/profile.dart';
 import 'components/interests/all_set.dart';
 import 'interests/interests_3.dart';
 import 'signup/sign_up_page.dart';
@@ -27,8 +29,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      initialRoute: '/home',
+      initialRoute: '/splash',
       routes: {
+        '/splash': (context) => SplashScreen(),
         '/login': (context) => Login(),
         '/sign_up': (context) => SignUp(),
         '/interests_1': (context) => InterestsOne(),
@@ -38,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScaffold(),
         '/forgot_password': (context) => ForgotPassword(),
         '/chat_page': (context) => Chat(),
+        '/profile': (context) => Profile()
       },
     );
   }
