@@ -16,16 +16,15 @@ class LoginAPIService {
     );
     try {
       final response = await http.post(url, body: requestModel.toJson());
-      if (response.statusCode == 403) {
-        message = "Your account is not verified. Please check your mail";
-      } else if (response.statusCode == 404) {
-        message = "Incorrect username or password";
+      print(response.statusCode);
       if (response.statusCode == 200) {
         String userId = json.decode(response.body)["id"];
         saveUserIdAfterLogin(userId);
-
-        return LoginResponseModel.fromJson(json.decode(response.body));
-      } 
+      } else if (response.statusCode == 403) {
+        message = "Your account is not verified. Please check your mail";
+      } else if (response.statusCode == 404) {
+        message = "Incorrect username or password";
+      }
       statusCode = response.statusCode;
       return LoginResponseModel.fromJson(response.body);
     } catch (e) {

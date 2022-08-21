@@ -116,7 +116,7 @@ class _LoginState extends State<Login> {
                             });
                             LoginAPIService apiService = new LoginAPIService();
                             saveCredentials();
-     
+
                             apiService.login(requestModel).then((value) {
                               setState(() {
                                 isApiCallProcess = false;
@@ -134,9 +134,7 @@ class _LoginState extends State<Login> {
                                       msg: message);
                                 }
                               });
-                              Navigator.pushNamed(context, '/home');
                             });
-                            print(requestModel.toJson());
                           }
                         },
                         child: Container(
