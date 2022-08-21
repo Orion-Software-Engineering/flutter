@@ -9,7 +9,7 @@ class APIServiceConversation {
   String? myUsername;
   List<String> listOfConversationIds = [];
   Map<String, List<Map<String, String>>> conversationIdsAndTheirUsers = {};
-  List<ConversationInfo> listOfConversationInfos = [];
+  List<ConversationInfo> listOfConversationInfo = [];
 
   Future getConversationsOfUser() async {
     final SharedPreferences sharedPreferences =
@@ -60,9 +60,9 @@ class APIServiceConversation {
           }
           conversationInfo.conversationUsers.add(userIdAndUsername);
         }
-        listOfConversationInfos.add(conversationInfo);
+        listOfConversationInfo.add(conversationInfo);
       }
-      print("print conversationIdsAndTheirUsers = $listOfConversationInfos");
+      print("print conversationIdsAndTheirUsers = $listOfConversationInfo");
     } else {
       print("There are no conversation ids to work with");
     }
