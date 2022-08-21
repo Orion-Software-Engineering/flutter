@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_if_null_operators
 
-// ignore: unused_import
 import 'package:flutter/material.dart';
 
 class InterestResponseModel {

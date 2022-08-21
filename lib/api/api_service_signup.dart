@@ -8,9 +8,8 @@ import 'package:matchmaking_demo/utils/constants.dart';
 
 String userID = "";
 String message = "";
-int statusCode = 0;
 
-class SignUpAPIService {
+class APIService {
   Future<SignupResponseModel> signup(SignupRequestModel requestModel) async {
     var url = Uri(
       scheme: scheme,
@@ -21,23 +20,12 @@ class SignUpAPIService {
     try {
       final response = await http.post(url, body: requestModel.toJson());
       if (response.statusCode == 201) {
-        print(json.decode(response.body)["userId"]);
+        userID = json.decode(response.body)["userId"];
+        return SignupResponseModel.fromJson(json.decode(response.body));
       } else {
-        message = json.decode(response.body)["message"];
-        if (response.statusCode == 400) {
-          switch (message) {
-            case "Duplicated email":
-              message = "Email already in use";
-              break;
-            case "Duplicated username":
-              message = "Username already in use";
-              break;
-          }
-        }
+        print(response.body);
+        throw Exception("Failed to load data ${response.statusCode}");
       }
-      print(response.body);
-      statusCode = response.statusCode;
-      return SignupResponseModel.fromJson(json.decode(response.body));
     } catch (e) {
       rethrow;
     }
