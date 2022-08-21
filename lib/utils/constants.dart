@@ -16,6 +16,10 @@ const String interestPath = "/api/interest/";
 const String forgotPasswordPath = "/api/resetPassword";
 const String locationPath = "/api/user/location";
 
+const String profilePath = "/api/user/profile/";
+const String getConversationsPath = "/api/conversation/user/all/";
+const String getUsersOfAllConversationsPath = "/api/conversation/users/all/";
+
 const TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.w400,

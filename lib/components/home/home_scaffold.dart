@@ -111,7 +111,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: AvatarPlaceholder(),
+            child: AvatarPlaceholder(firstCharacter: 'H'),
           ),
         ],
       ),
