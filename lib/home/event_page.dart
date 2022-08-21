@@ -70,7 +70,7 @@ class EventsPage extends StatelessWidget {
               ],
             ),
 
-            //The new section based on filter settings show the events within a given  time frame.
+            //The new section based on filter settings show the events within a given time frame.
             Expanded(
                 child: Container(
               padding: EdgeInsets.all(20.0),
