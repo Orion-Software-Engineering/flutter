@@ -17,20 +17,12 @@ class LoginAPIService {
     try {
       final response = await http.post(url, body: requestModel.toJson());
       print(response.body);
-      print(response.body);
-
-      if (response.statusCode == 403 &&
-          response.body == "Verify your account before logging in") {
+      print(response.statusCode);
+      print(statusCode.runtimeType);
+      if (response.statusCode == 403) {
         message = "Your account is not verified. Please check your mail";
       } else if (response.statusCode == 404) {
-        switch (json.decode(response.body)["message"]) {
-          case "Invalid Credentials":
-            message = "Incorrect password";
-            break;
-          case "Account not found":
-            message = "Username does not exist";
-            break;
-        }
+        message = "Incorrect username or password";
       }
       statusCode = response.statusCode;
       return LoginResponseModel.fromJson(json.decode(response.body));
