@@ -122,9 +122,7 @@ class _LoginState extends State<Login> {
                                     SnackBar(
                                         content: Text('Login Successful')));
                               });
-                              Navigator.pushNamed(context, '/home');
                             });
-                            print(requestModel.toJson());
                           }
                         },
                         child: Container(

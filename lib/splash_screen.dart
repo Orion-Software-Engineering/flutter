@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
       widget.requestModel = LoginRequestModel();
       widget.requestModel!.username = widget.obtainedUsername!;
       widget.requestModel!.password = widget.obtainedPassword!;
-      APIServiceLogin apiService = APIServiceLogin();
+      LoginAPIService apiService = LoginAPIService();
       apiService.login(widget.requestModel!).then((value) {
         checkIfLoginSuccessful = true;
         Navigator.pushNamed(context, '/home');
