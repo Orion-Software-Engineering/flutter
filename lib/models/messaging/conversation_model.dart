@@ -1,10 +1,7 @@
-class ConversationResponseModel {
+class ConversationInfo {
   final String? conversationId;
-  // final String? conversationName;
-  // final List? conversationUsers;
+  String conversationName = "incoming";
+  final List<Map<String, String>> conversationUsers = [];
 
-  ConversationResponseModel({this.conversationId});
-  factory ConversationResponseModel.fromJson(Map<String, dynamic> json) {
-    return ConversationResponseModel(conversationId: json["id"] ?? "");
-  }
+  ConversationInfo({this.conversationId});
 }

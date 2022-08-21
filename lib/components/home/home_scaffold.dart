@@ -27,7 +27,7 @@ class HomeScaffold extends StatefulWidget {
 }
 
 class _HomeScaffoldState extends State<HomeScaffold> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   Position? userPosition;
   void getCurrentPosition() async {
     Position position = await askLocationPermission();
@@ -109,9 +109,14 @@ class _HomeScaffoldState extends State<HomeScaffold> {
           child: Text(titles[_currentIndex]),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AvatarPlaceholder(firstCharacter: 'H'),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "/profile");
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AvatarPlaceholder(firstCharacter: 'H'),
+            ),
           ),
         ],
       ),

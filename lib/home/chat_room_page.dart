@@ -3,11 +3,10 @@
 * */
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_conversation.dart';
+import 'package:matchmaking_demo/api/api_service_message.dart';
+import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'package:matchmaking_demo/utils/variables.dart';
-import 'package:matchmaking_demo/models/messaging/message_model.dart';
 import '../components/home/avatar_placeholder.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -16,14 +15,21 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
-  late Future<List> listOfConversationIds;
+  List<ConversationInfo> chatList = [];
+
   @override
   void initState() {
     super.initState();
     APIServiceConversation apiServiceConversation = APIServiceConversation();
     apiServiceConversation
         .getConversationsOfUser()
-        .then((value) => apiServiceConversation.getUsersOfAllConversations());
+        .then((value) => apiServiceConversation.getUsersOfAllConversations())
+        .then(
+          (value) => setState(() {
+            chatList = apiServiceConversation.listOfConversationInfos;
+            print("inside setstate chatList = $chatList");
+          }),
+        );
   }
 
   @override
@@ -35,32 +41,31 @@ class _ChatRoomState extends State<ChatRoom> {
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 1.2),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: messageTileColor),
-                child: ListTile(
-                  leading: AvatarPlaceholder(
-                      firstCharacter: chatList[index].name[0]),
-                  title: Text(chatList[index].name),
-                  subtitle: Row(
-                    children: [
-                      FaIcon(
-                        (chatList[index].sent)
-                            ? FontAwesomeIcons.anglesUp
-                            : FontAwesomeIcons.anglesDown,
-                        size: 15,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                          (chatList[index].lastMessageType == MessageType.image)
-                              ? "Image received"
-                              : chatList[index].lastMessage),
-                    ],
+              child: GestureDetector(
+                onTap: () {
+                  APIServiceMessage apiServiceMessage = APIServiceMessage();
+                  apiServiceMessage.getMessagesOfConversation(
+                      chatList[index].conversationId!);
+                  //TODO route to dm and put the function above in its initState instead
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: messageTileColor),
+                  child: ListTile(
+                    leading: AvatarPlaceholder(
+                        firstCharacter: chatList[index].conversationName[0]),
+                    title: Text(chatList[index].conversationName),
+                    subtitle: Row(
+                      children: [
+                        Text("to be implemented"),
+                        //TODO dont change to constant if prompted
+                      ],
+                    ),
+                    // trailing: Text((chatList[index].numberOfUnreads == 0)
+                    //     ? ""
+                    // : chatList[index].numberOfUnreads.toString()),
                   ),
-                  trailing: Text((chatList[index].numberOfUnreads == 0)
-                      ? ""
-                      : chatList[index].numberOfUnreads.toString()),
                 ),
               ),
             );

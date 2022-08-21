@@ -26,7 +26,7 @@ class _ChatState extends State<Chat> {
                   colors: const <Color>[Color(0xFFE53935), Color(0xFF1A237E)])),
         ),
         title: GestureDetector(
-          onTap: () => Navigator.of(context).pushNamed('/home'),
+          onTap: () => Navigator.of(context).pushNamed('/profile'),
           child: Row(
             children: [
               CircleAvatar(
