@@ -26,7 +26,7 @@ class _ChatRoomState extends State<ChatRoom> {
         .then((value) => apiServiceConversation.getUsersOfAllConversations())
         .then(
           (value) => setState(() {
-            chatList = apiServiceConversation.listOfConversationInfos;
+            chatList = apiServiceConversation.listOfConversationInfo;
             print("inside setstate chatList = $chatList");
           }),
         );

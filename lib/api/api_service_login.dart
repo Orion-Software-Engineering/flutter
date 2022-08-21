@@ -3,8 +3,6 @@ import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../utils/api_call_paths.dart';
-import '../utils/constants.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 
 String message = "";
 int statusCode = 0;
