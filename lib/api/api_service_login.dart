@@ -2,10 +2,12 @@ import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import '../utils/constants.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 
-class APIServiceLogin {
+String message = "";
+int statusCode = 0;
+
+class LoginAPIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
     var url = Uri(
       scheme: scheme,
@@ -14,17 +16,18 @@ class APIServiceLogin {
     );
     try {
       final response = await http.post(url, body: requestModel.toJson());
-      print(response.statusCode);
-      print(response.body);
-
+      if (response.statusCode == 403) {
+        message = "Your account is not verified. Please check your mail";
+      } else if (response.statusCode == 404) {
+        message = "Incorrect username or password";
       if (response.statusCode == 200) {
         String userId = json.decode(response.body)["id"];
         saveUserIdAfterLogin(userId);
 
         return LoginResponseModel.fromJson(json.decode(response.body));
-      } else {
-        throw Exception('Failed to load data ${response.statusCode}');
-      }
+      } 
+      statusCode = response.statusCode;
+      return LoginResponseModel.fromJson(response.body);
     } catch (e) {
       rethrow;
     }
