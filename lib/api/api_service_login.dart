@@ -5,7 +5,10 @@ import 'dart:convert';
 import '../utils/constants.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 
-class APIServiceLogin {
+String message = "";
+int statusCode = 0;
+
+class LoginAPIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
     var url = Uri(
       scheme: scheme,
@@ -22,7 +25,7 @@ class APIServiceLogin {
         message = "Your account is not verified. Please check your mail";
       } else if (response.statusCode == 404) {
         message = "Incorrect username or password";
-      }else {
+      } else {
         throw Exception('Failed to load data ${response.statusCode}');
       }
       statusCode = response.statusCode;

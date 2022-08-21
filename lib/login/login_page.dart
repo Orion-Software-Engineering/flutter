@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/api/api_service_login.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
@@ -114,13 +115,24 @@ class _LoginState extends State<Login> {
                               isApiCallProcess = true;
                             });
                             saveCredentials();
-                            APIServiceLogin apiService = new APIServiceLogin();
+                            LoginAPIService apiService = new LoginAPIService();
                             apiService.login(requestModel).then((value) {
                               setState(() {
                                 isApiCallProcess = false;
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text('Login Successful')));
+                                if (statusCode == 200) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text('Login Successful')));
+                                  Navigator.pushNamed(context, '/home');
+                                } else {
+                                  Fluttertoast.showToast(
+                                    msg: message,
+                                    textColor: Colors.white,
+                                    backgroundColor: Colors.black,
+                                    timeInSecForIosWeb: 2,
+                                    fontSize: 16,
+                                  );
+                                }
                               });
                             });
                           }
