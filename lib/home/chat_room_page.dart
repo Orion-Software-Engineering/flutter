@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_conversation.dart';
+import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/messaging/message_model.dart';
@@ -16,14 +17,21 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
-  late Future<List> listOfConversationIds;
+  List<ConversationInfo> chatList = [];
+
   @override
   void initState() {
     super.initState();
     APIServiceConversation apiServiceConversation = APIServiceConversation();
     apiServiceConversation
         .getConversationsOfUser()
-        .then((value) => apiServiceConversation.getUsersOfAllConversations());
+        .then((value) => apiServiceConversation.getUsersOfAllConversations())
+        .then(
+          (value) => setState(() {
+            chatList = apiServiceConversation.listOfConversationInfos;
+            print("inside setstate chatList = $chatList");
+          }),
+        );
   }
 
   @override
@@ -41,26 +49,17 @@ class _ChatRoomState extends State<ChatRoom> {
                     color: messageTileColor),
                 child: ListTile(
                   leading: AvatarPlaceholder(
-                      firstCharacter: chatList[index].name[0]),
-                  title: Text(chatList[index].name),
+                      firstCharacter: chatList[index].conversationName[0]),
+                  title: Text(chatList[index].conversationName),
                   subtitle: Row(
                     children: [
-                      FaIcon(
-                        (chatList[index].sent)
-                            ? FontAwesomeIcons.anglesUp
-                            : FontAwesomeIcons.anglesDown,
-                        size: 15,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                          (chatList[index].lastMessageType == MessageType.image)
-                              ? "Image received"
-                              : chatList[index].lastMessage),
+                      Text("to be implemented"),
+                      //TODO dont change to constant if prompted
                     ],
                   ),
-                  trailing: Text((chatList[index].numberOfUnreads == 0)
-                      ? ""
-                      : chatList[index].numberOfUnreads.toString()),
+                  // trailing: Text((chatList[index].numberOfUnreads == 0)
+                  //     ? ""
+                  // : chatList[index].numberOfUnreads.toString()),
                 ),
               ),
             );
