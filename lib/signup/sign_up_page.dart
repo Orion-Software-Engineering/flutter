@@ -30,7 +30,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isApiCallProcess = false;
   String? dateValue;
-  bool gender = true;
+  String gender = "male";
 
   @override
   void initState() {
@@ -168,7 +168,7 @@ class _SignUpState extends State<SignUp> {
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = true;
+                                      gender = value.toString();
                                     });
                                   }),
                             ),
@@ -187,7 +187,7 @@ class _SignUpState extends State<SignUp> {
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = false;
+                                      gender = value.toString();
                                     });
                                   }),
                             ),
@@ -207,22 +207,12 @@ class _SignUpState extends State<SignUp> {
                             setState(() {
                               isApiCallProcess = true;
                             });
-                            SignUpAPIService apiService = SignUpAPIService();
+                            APIService apiService = APIService();
                             try {
                               apiService.signup(requestModel).then((value) {
                                 setState(() {
                                   isApiCallProcess = false;
-                                  if (statusCode == 201) {
-                                    Navigator.pushNamed(
-                                        context, '/interests_1');
-                                  } else {
-                                    Fluttertoast.showToast(
-                                        backgroundColor: Colors.black,
-                                        textColor: Colors.white,
-                                        fontSize: 16,
-                                        timeInSecForIosWeb: 2,
-                                        msg: message);
-                                  }
+                                  Navigator.pushNamed(context, '/interests_1');
                                 });
                               });
                             } catch (e) {
