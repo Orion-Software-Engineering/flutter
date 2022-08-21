@@ -1,18 +1,21 @@
 /*
 * HomeScaffold holds the entire layout for the app (ie. Home screen, messages screen, events screen, etc
 * The AppBar and Bottom NavigationBar exist in this script
-* The various pages are found in the tabs list and are selected based on the valuw _currentIndex holds
+* The various pages are found in the tabs list and are selected based on the value _currentIndex holds
 * TODO:Theme mode toggling btn dark and light modes
 *  */
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/components/home/avatar_placeholder.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
+import '../../api/api_service_signup.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:matchmaking_demo/models/location_model.dart';
 
 class HomeScaffold extends StatefulWidget {
   final double iconSize = 24.0;
@@ -30,6 +33,14 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     Position position = await askLocationPermission();
     setState(() {
       userPosition = position;
+      postModel = LocationPostModel();
+      postModel.userID = userID;
+      postModel.latitude = userPosition!.latitude.toStringAsFixed(6).toString();
+      postModel.longitude =
+          userPosition!.longitude.toStringAsFixed(6).toString();
+      print(postModel);
+      LocationAPIService apiService = LocationAPIService();
+      apiService.location(postModel).then((value) => null);
     });
   }
 
@@ -48,6 +59,8 @@ class _HomeScaffoldState extends State<HomeScaffold> {
   final tabs = <Widget>[HomePage(), ChatRoom(), EventsPage(), SettingsPage()];
 
   final titles = <String>['Matching', 'Messages', 'Events', 'Settings'];
+
+  late LocationPostModel postModel;
 
   @override
   void initState() {
