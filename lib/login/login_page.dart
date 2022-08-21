@@ -119,6 +119,7 @@ class _LoginState extends State<Login> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text('Login Successful')));
+                                Navigator.pushNamed(context, '/home');
                               });
                             });
                             print(requestModel.toJson());

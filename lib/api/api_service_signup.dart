@@ -19,6 +19,7 @@ class APIService {
 
     try {
       final response = await http.post(url, body: requestModel.toJson());
+      print(userID);
       if (response.statusCode == 201) {
         userID = json.decode(response.body)["userId"];
         return SignupResponseModel.fromJson(json.decode(response.body));
