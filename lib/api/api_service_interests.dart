@@ -23,8 +23,6 @@ class InterestAPIService {
       print(jsonEncode(requestModel));
       final response = await http.post(url,
           body: jsonEncode(requestModel), headers: headers);
-
-      print(response.body);
       if (response.statusCode == 200) {
         return InterestResponseModel.fromJson(json.decode(response.body));
       } else {
