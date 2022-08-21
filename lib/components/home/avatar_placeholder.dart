@@ -6,22 +6,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
 class AvatarPlaceholder extends StatelessWidget {
-  AvatarPlaceholder({Key? key, this.avatar}) : super(key: key);
-  Widget? avatar;
+  const AvatarPlaceholder({Key? key, required this.firstCharacter})
+      : super(key: key);
+  final String firstCharacter;
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 55,
-        width: 55,
-        decoration: BoxDecoration(
-          // color: Colors.black,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Center(
-            child: (avatar == null)
-                ? FaIcon(color: Colors.white, FontAwesomeIcons.user)
-                : avatar)
-        // Image.asset('assets/images/home/user_profile_avatar.png'),
-        );
+      height: 55,
+      width: 55,
+      decoration: BoxDecoration(
+        color: Colors.teal,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Center(
+          child: Text(
+        firstCharacter,
+        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+      )),
+    );
   }
 }
