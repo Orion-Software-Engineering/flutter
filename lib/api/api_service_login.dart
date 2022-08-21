@@ -18,9 +18,7 @@ class APIServiceLogin {
       print(response.body);
 
       if (response.statusCode == 200) {
-        print("entered statuscode");
         String userId = json.decode(response.body)["id"];
-        print(userId);
         saveUserIdAfterLogin(userId);
 
         return LoginResponseModel.fromJson(json.decode(response.body));

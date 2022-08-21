@@ -4,17 +4,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:matchmaking_demo/api/api_service_conversation.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/messaging/message_model.dart';
 import '../components/home/avatar_placeholder.dart';
 
-class ChatRoom extends StatelessWidget {
-  // const ChatRoom({Key? key}) : super(key: key);
+class ChatRoom extends StatefulWidget {
+  @override
+  State<ChatRoom> createState() => _ChatRoomState();
+}
 
-  //TODO conversations that jave just 2 members are chats.
-  //TODO val is to hold the Zodiac sign on the other member and based on that an avatar is selected. this cna be implemented after the backend is done
-  String val = "Leo";
+class _ChatRoomState extends State<ChatRoom> {
+  late Future<List> listOfConversationIds;
+  @override
+  void initState() {
+    super.initState();
+    APIServiceConversation apiServiceConversation = APIServiceConversation();
+    apiServiceConversation
+        .getConversationsOfUser()
+        .then((value) => apiServiceConversation.getUsersOfAllConversations());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(

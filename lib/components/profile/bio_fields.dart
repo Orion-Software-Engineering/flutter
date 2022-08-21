@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BioFields extends StatelessWidget {
   BioFields({required this.title, required this.value});
   String title;
-  String value;
+  String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class BioFields extends StatelessWidget {
                 fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w400),
           ),
           Text(
-            value,
+            value!,
             style: TextStyle(
-                fontSize: (title == 'Bio') ? 20 : 36,
+                fontSize: (title == 'Bio') ? 20 : 26,
                 color: Colors.black,
                 fontWeight:
                     (title == 'Bio') ? FontWeight.w400 : FontWeight.w700),

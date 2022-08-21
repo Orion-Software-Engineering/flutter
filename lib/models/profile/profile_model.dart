@@ -1,9 +1,7 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
 class ProfileResponseModel {
   String? id;
   String? email;
-  bool? isEmailVerified;
+  String? isEmailVerified;
   String? username;
   String? dateOfBirth;
   String? gender;
@@ -28,21 +26,3 @@ class ProfileResponseModel {
     );
   }
 }
-
-// class ProfileRequestModel {
-//   String? userId;
-//   // Future getUserId() async {
-//   //   final SharedPreferences sharedPreferences =
-//   //       await SharedPreferences.getInstance();
-//   //   print("from getUserId userId = ${sharedPreferences.getString("userId")}");
-//   //   userId = sharedPreferences.getString("userId");
-//   // }
-//
-//   Map<String, dynamic> toJson() {
-//     getUserId();
-//     print(userId);
-//     Map<String, dynamic> map = {'userId': userId};
-//
-//     return map;
-//   }
-// }

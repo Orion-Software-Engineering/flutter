@@ -11,7 +11,6 @@ import 'components/interests/all_set.dart';
 import 'interests/interests_3.dart';
 import 'signup/sign_up_page.dart';
 import 'login/login_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());

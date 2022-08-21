@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_profile.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/profile/active_interests_list.dart';
 import '../components/profile/bio_fields.dart';
@@ -14,13 +15,19 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String? username = "NA";
+  String? email = "NA";
+  String? dateOfBirth = "NA";
+  bool? gender;
+
   @override
   // ignore: must_call_super
   void initState() {
-    print(
-        "PPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\n");
     APIServiceProfile apiServiceProfile = APIServiceProfile();
     apiServiceProfile.getProfile();
+    getProfilePageData();
+    print(
+        "PPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\n");
   }
 
   @override
@@ -95,9 +102,10 @@ class _ProfileState extends State<Profile> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BioFields(title: 'Username', value: "Some Name"),
-                  BioFields(title: 'Date of Birth', value: "21"),
-                  BioFields(title: 'Gender', value: "M"),
+                  BioFields(title: 'Username', value: username),
+                  BioFields(title: 'Email', value: email),
+                  BioFields(title: 'Date of Birth', value: dateOfBirth),
+                  BioFields(title: 'Gender', value: (gender!) ? "M" : "F"),
                   BioFields(title: 'Bio', value: "Lorem Ipsum"),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
@@ -131,5 +139,19 @@ class _ProfileState extends State<Profile> {
         ],
       ),
     );
+  }
+
+  void getProfilePageData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    print("in getProfileData");
+    setState(() {
+      email = sharedPreferences.getString("email");
+      // sharedPreferences.getBool("isEmailVerified");
+      username = sharedPreferences.getString("username");
+      dateOfBirth = sharedPreferences.getString("dateOfBirth");
+      gender = sharedPreferences.getBool("gender");
+    });
+    print("dob: $dateOfBirth");
   }
 }

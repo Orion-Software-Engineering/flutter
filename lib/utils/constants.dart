@@ -13,7 +13,9 @@ const String host = "orion-meet-testing.herokuapp.com";
 const String logInPath = "/api/auth/signin";
 const String signUpPath = "/api/auth/signup";
 const String interestPath = "/api/interest/";
-const String profilePath = "/api/user/profile";
+const String profilePath = "/api/user/profile/";
+const String getConversationsPath = "/api/conversation/user/all/";
+const String getUsersOfAllConversationsPath = "/api/conversation/users/all/";
 
 const TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,
