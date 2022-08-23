@@ -8,14 +8,7 @@ const TextStyle signUpLoginTextFieldTextStyle =
 
 //apis
 
-const String scheme = "https";
-const String host = "orion-meet-testing.herokuapp.com";
-const String logInPath = "/api/auth/signin";
-const String signUpPath = "/api/auth/signup";
-const String interestPath = "/api/interest/";
-const String forgotPasswordPath = "/api/resetPassword";
-const String locationPath = "/api/user/location";
-const String eventsPath = "/api/events/getEvent/";
+
 
 const TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,
