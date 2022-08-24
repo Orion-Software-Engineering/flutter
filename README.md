@@ -4,7 +4,7 @@ Built with ❤️ and Flutter
 To test the build with full functionality one must be signed in
 You'd want to set the initialRoute in main.dart to do that
 
-###Pages within the application with complete business logic for backend functionality;
+### Pages within the application with complete business logic for backend functionality;
   1. Login Page
     -The Login page takes username and password
     -Username accepts alphanumeric characters excluding the space character and validates on submit.The username
@@ -28,7 +28,7 @@ You'd want to set the initialRoute in main.dart to do that
   9. Profile Pages
 
   
-###Components and special classes implemented;
+### Components and special classes implemented;
   1. LoginAPIService class and Login models
   2. SignUpAPIService class and Sign up models
   3. InterestAPIService class and Interest models
