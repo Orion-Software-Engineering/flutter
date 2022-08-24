@@ -6,6 +6,7 @@ You'd want to set the initialRoute in main.dart to do that
 
 ### Pages within the application with complete business logic for backend functionality;
   1. Login Page
+  
     -The Login page takes username and password
     
     -Username accepts alphanumeric characters excluding the space character and validates on submit.The username
