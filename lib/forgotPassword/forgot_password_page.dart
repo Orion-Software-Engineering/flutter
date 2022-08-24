@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_forgotpassword.dart';
+import 'package:matchmaking_demo/components/login_signup/back_button.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
 import 'package:matchmaking_demo/models/forgot_password_model.dart';
@@ -44,19 +45,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           key: _formKey,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(
-                      Icons.arrow_back_outlined,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                ],
-              ),
+              CustomBackButton(),
               SizedBox(
                 height: 60.0,
               ),
