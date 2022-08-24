@@ -69,6 +69,7 @@ You'd want to set the initialRoute in main.dart to do that
 
   3.Forgot Password Page
   <img src="https://user-images.githubusercontent.com/80262558/186320691-f76eb2ae-ba2f-4096-a20f-f184ac9f53d8.jpg" width="216" height="480">
+  
 
     -Forgot password page has takes only an email as input
 
