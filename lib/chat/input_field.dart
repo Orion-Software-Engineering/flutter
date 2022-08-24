@@ -25,6 +25,11 @@ class _InputFieldState extends State<InputField> {
       height: 70,
       child: Row(
         children: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.emoji_emotions),
+            iconSize: 25,
+          ),
           Expanded(
             child: TextField(
               controller: _textToBeSent,
