@@ -87,7 +87,7 @@ You'd want to set the initialRoute in main.dart to do that
 
   
 
-###Components and special classes implemented;
+### Components and special classes implemented;
   1. Chat tile class
   2. Custom password field
   3. Progress popup
