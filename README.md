@@ -49,8 +49,19 @@ You'd want to set the initialRoute in main.dart to do that
 
     -Login link routes to the Sign In page
 
-  3. Home Page
-  4. Forgot Password Page
+    -The Interest pages have 5 options per screen with each option selection being toggleable
+
+    -Each page except the last has a Next--> link which routes to the next page and each page except the first has a link <--Back routing to the previous page
+
+    -The 3rd and final page has a Done link which checks if the user has selected at least 3 interests. Failure to do so results in a prompt and success calls
+        the InterestAPIService class which makes an api post request to store the users interests. 
+
+    -All 3 interest pages have a Skip now--> link at the bottom that allows the user to skip the other pages if 3 interests have been selected and 
+        complete the sign up process.
+
+  3.Forgot Password Page
+    -
+  4. Home Page
   5. Messaging Pages
   6. Chat Room Page
   7. Events Page
