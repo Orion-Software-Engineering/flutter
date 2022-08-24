@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/models/interest_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
+import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import '../../utils/constants.dart';
 import 'interests_button.dart';
@@ -164,12 +165,12 @@ class _InterestsPageState extends State<InterestsPage> {
                       apiService.interest(requestModel).then((value) {
                         setState(() {
                           isApiCallProcess = false;
-                          Navigator.pushNamed(context, '/all_set');
+                          Navigator.of(context).goToAllSet();
                         });
                       });
                     }
                   } else {
-                    Navigator.pushNamed(context, widget.nextPage!);
+                    Navigator.of(context).goToAllSet();
                   }
                 },
                 child: Text(
@@ -192,7 +193,7 @@ class _InterestsPageState extends State<InterestsPage> {
                   apiService.interest(requestModel).then((value) {
                     setState(() {
                       isApiCallProcess = false;
-                      Navigator.pushNamed(context, '/all_set');
+                      Navigator.of(context).goToAllSet();
                     });
                   });
                 } else {

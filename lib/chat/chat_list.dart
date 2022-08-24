@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/chat/chat_item.dart';
 
+import '../models/messaging/message_model.dart';
+
 class ChatList extends StatefulWidget {
-  ChatList({Key? key}) : super(key: key);
-  final ScrollController listScrollController = new ScrollController();
+  List<Message> messagesList;
+  ChatList({required this.messagesList});
+  final ScrollController listScrollController = ScrollController();
 
   @override
   State<ChatList> createState() => _ChatListState();
@@ -14,11 +17,16 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     return Flexible(
         child: ListView.builder(
-      reverse: true,
-      itemBuilder: (context, index) => ChatItem(index: index),
-      controller: widget.listScrollController,
-      padding: EdgeInsets.all(0),
-      itemCount: 50,
-    ));
+            padding: EdgeInsets.all(0),
+            itemCount: widget.messagesList.length,
+            reverse: false,
+            itemBuilder: (BuildContext context, int index) {
+              return ChatItem(
+                messageIsFromMe: widget.messagesList[index].messageIsFromMe!,
+                text: widget.messagesList[index].text!,
+              );
+            }
+            // controller: widget.listScrollController,
+            ));
   }
 }

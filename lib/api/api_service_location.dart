@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/location_model.dart';
-import 'dart:convert';
 import '../utils/api_call_paths.dart';
 
 class LocationAPIService {

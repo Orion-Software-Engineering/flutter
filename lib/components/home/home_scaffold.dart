@@ -11,6 +11,7 @@ import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/components/home/avatar_placeholder.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
+import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,17 +29,17 @@ class HomeScaffold extends StatefulWidget {
 
 class _HomeScaffoldState extends State<HomeScaffold> {
   int _currentIndex = 0;
-  String? userID;
+  String? userId;
   Position? userPosition;
   void getCurrentPosition() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    userID = sharedPreferences.getString("userId");
+    userId = sharedPreferences.getString("userId");
     Position position = await askLocationPermission();
     setState(() {
       userPosition = position;
       postModel = LocationPostModel();
-      postModel.userID = userID!;
+      postModel.userID = userId!;
       postModel.latitude = userPosition!.latitude.toStringAsFixed(6).toString();
       postModel.longitude =
           userPosition!.longitude.toStringAsFixed(6).toString();
@@ -114,7 +115,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "/profile");
+              Navigator.of(context).goToProfile(userId!);
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

@@ -7,6 +7,7 @@ import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.d
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
+import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../utils/constants.dart';
@@ -120,10 +121,11 @@ class _LoginState extends State<Login> {
                               setState(() {
                                 isLoading = false;
                                 if (statusCode == 200) {
+                                  Navigator.of(context)
+                                      .enterAppThroughHomeScreen();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text('Login Successful')));
-                                  Navigator.pushNamed(context, '/home');
                                 } else {
                                   Fluttertoast.showToast(
                                     msg: message,
@@ -154,18 +156,18 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MaterialButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/forgot_password');
+                              Navigator.of(context).goToForgotPasswordScreen();
                             },
                             child: Text(
                               'Forgot password?',
                               style: TextStyle(
                                 color: signUpLoginOrange,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 16.0,
+                                fontSize: 12.0,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -186,7 +188,7 @@ class _LoginState extends State<Login> {
                             ),
                             MaterialButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/sign_up');
+                                Navigator.of(context).goToSignUpScreen();
                               },
                               child: Text(
                                 'Sign Up',
