@@ -12,7 +12,7 @@ class EventsDetails extends StatelessWidget {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/Events/Event1.png"),
+                image: AssetImage("assets/images/Events/Event1.png"),
                 fit: BoxFit.fill,
               ),
             ),
