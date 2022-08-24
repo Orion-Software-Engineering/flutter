@@ -8,7 +8,8 @@ class InterestResponseModel {
 
   InterestResponseModel({this.token, this.error});
 
-  factory InterestResponseModel.fromJson(Map<String, dynamic> json) {
+  factory InterestResponseModel.fromJson(List<dynamic> jsonIn) {
+    Map<String, dynamic> json = jsonIn[0];
     return InterestResponseModel(
       token: json["token"] != null ? json["token"] : "",
       error: json["error"] != null ? json["error"] : "",
