@@ -42,7 +42,7 @@ class _InterestsPageState extends State<InterestsPage> {
   String helpText = '';
   late InterestRequestModel requestModel;
   late InterestResponseModel responseModel;
-  bool isApiCallProcess = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _InterestsPageState extends State<InterestsPage> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      isLoading: isApiCallProcess,
+      isLoading: isLoading,
       opacity: 0.3,
       child: _ui(context),
     );
@@ -156,15 +156,15 @@ class _InterestsPageState extends State<InterestsPage> {
                           fontSize: 16);
                     } else {
                       setState(() {
-                        isApiCallProcess = true;
-                        //print(globalInterestsSet.toList());
-                        //print(globalInterestsSet.toList().runtimeType);
+                        isLoading = true;
                       });
                       requestModel.interests = globalInterestsSet.toList();
+                      print(globalInterestsSet.toList());
+                      print(globalInterestsSet.toList().runtimeType);
                       InterestAPIService apiService = InterestAPIService();
                       apiService.interest(requestModel).then((value) {
                         setState(() {
-                          isApiCallProcess = false;
+                          isLoading = false;
                           Navigator.of(context).goToAllSet();
                         });
                       });
@@ -187,12 +187,12 @@ class _InterestsPageState extends State<InterestsPage> {
           child: TextButton(
               onPressed: () {
                 if (globalInterestsSet.length > 2) {
-                  isApiCallProcess = true;
+                  isLoading = true;
                   requestModel.interests = globalInterestsSet.toList();
                   InterestAPIService apiService = InterestAPIService();
                   apiService.interest(requestModel).then((value) {
                     setState(() {
-                      isApiCallProcess = false;
+                      isLoading = false;
                       Navigator.of(context).goToAllSet();
                     });
                   });
