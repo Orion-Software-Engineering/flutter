@@ -1,11 +1,14 @@
 # Orion Meet Mobile App
 Built with ❤️ and Flutter
 
+
 To test the build with full functionality one must be signed in
+
 You'd want to set the initialRoute in main.dart to do that
 
-### Pages within the application with complete business logic for backend functionality;
+## Pages within the application with complete business logic for backend functionality;
   1. Login Page
+### Login Page
   <img src="https://user-images.githubusercontent.com/80262558/186311100-b2880f07-2a2c-4949-a808-ca157b29f910.jpg" width="216" height="480">
 
 
@@ -27,6 +30,7 @@ You'd want to set the initialRoute in main.dart to do that
     -Picture icons link to other means of signing in
 
   2. Sign Up Pages
+### Sign Up Pages
 <p float="left">
   <img src="https://user-images.githubusercontent.com/80262558/186315587-035f9d74-d5af-4ac0-808f-e95cb49f0ebd.jpg" width="216" height="480" />
   <img src="https://user-images.githubusercontent.com/80262558/186313290-8b085912-5aa0-472d-86fc-2d091c2b7c35.jpg" width="216" height="480" /> 
@@ -68,6 +72,7 @@ You'd want to set the initialRoute in main.dart to do that
         complete the sign up process.
 
   3.Forgot Password Page
+### Forgot Password Page
   <p float="left">
    <img src="https://user-images.githubusercontent.com/80262558/186320691-f76eb2ae-ba2f-4096-a20f-f184ac9f53d8.jpg" width="216" height="480">
 </p>
