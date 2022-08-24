@@ -15,12 +15,16 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ProfileResponseModel profileResponse = ProfileResponseModel();
+  APIServiceProfile apiServiceProfile = APIServiceProfile();
 
   @override
   // ignore: must_call_super
   void initState() {
     super.initState();
-    getProfileData();
+    apiServiceProfile
+        .getProfile(widget.userId)
+        .then((value) => getProfileData());
+
     print(
         "PPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\n");
   }
@@ -151,10 +155,8 @@ class _ProfileState extends State<Profile> {
   }
 
   void getProfileData() async {
-    APIServiceProfile apiServiceProfile = APIServiceProfile();
     setState(() {
-      apiServiceProfile.getProfile(widget.userId).then(
-          (value) => profileResponse = apiServiceProfile.profileResponseModel);
+      profileResponse = apiServiceProfile.profileResponseModel;
     });
   }
   // void getProfilePageData() async {

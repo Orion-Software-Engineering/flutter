@@ -48,7 +48,6 @@ class _ChatRoomState extends State<ChatRoom> {
                   apiServiceMessage.getMessagesOfConversation(
                       chatList[index].conversationId!);
                   Navigator.of(context).goToChatPage(chatList[index]);
-                  //TODO route to dm and put the function above in its initState instead
                 },
                 child: Container(
                   decoration: BoxDecoration(

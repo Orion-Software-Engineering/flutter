@@ -17,17 +17,17 @@ class BioFields extends StatelessWidget {
     if (isGender) {
       switch (genderValue) {
         case null:
-          text = "NA";
+          text = "...";
           break;
         case true:
-          text = "M";
+          text = "...";
           break;
         case false:
-          text = "F";
+          text = "...";
           break;
       }
     } else {
-      text = (value == null) ? "NA" : value!;
+      text = (value == null) ? "..." : value!;
     }
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),

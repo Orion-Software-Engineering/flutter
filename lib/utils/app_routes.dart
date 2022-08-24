@@ -6,7 +6,7 @@ import 'package:matchmaking_demo/interests/interests_2.dart';
 import 'package:matchmaking_demo/interests/interests_3.dart';
 import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/signup/sign_up_page.dart';
-import 'package:matchmaking_demo/splash_screen.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
 import '../components/interests/all_set.dart';
 import '../forgotPassword/forgot_password_page.dart';
 import '../login/login_page.dart';

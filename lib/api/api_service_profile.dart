@@ -5,12 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_call_paths.dart';
 
 class APIServiceProfile {
-  late ProfileResponseModel profileResponseModel;
+  ProfileResponseModel profileResponseModel = ProfileResponseModel();
 
   Future<void> getProfile(String userId) async {
-    // final SharedPreferences sharedPreferences =
-    //     await SharedPreferences.getInstance();
-    // String? userId = sharedPreferences.getString("userId");
     print(
         "APISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\n${userId}");
     Uri url = Uri(scheme: scheme, host: host, path: profilePath + userId);
@@ -21,12 +18,11 @@ class APIServiceProfile {
         var profileResponse = json.decode(response.body);
         print(json.decode(response.body));
         // saveProfileData(profileResponse);
-        profileResponseModel.id = profileResponse["user"]["id"];
-        profileResponseModel.email = profileResponse["user"]["email"];
-        profileResponseModel.username = profileResponse["user"]["username"];
-        profileResponseModel.dateOfBirth =
-            profileResponse["user"]["dateOfBirth"];
-        profileResponseModel.gender = profileResponse["user"]["gender"];
+        profileResponseModel.id = profileResponse["id"];
+        profileResponseModel.email = profileResponse["email"];
+        profileResponseModel.username = profileResponse["username"];
+        profileResponseModel.dateOfBirth = profileResponse["dateOfBirth"];
+        profileResponseModel.gender = profileResponse["gender"];
         // return ProfileResponseModel.fromJson(json.decode(response.body));
       } else {
         throw Exception('Failed to get profile ${response.statusCode}');

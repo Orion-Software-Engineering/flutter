@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_list.dart';
 import 'package:matchmaking_demo/chat/input_field.dart';
 import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
+import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../models/messaging/message_model.dart';
 
 class Chat extends StatefulWidget {
@@ -16,15 +19,24 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   APIServiceMessage apiServiceMessage = APIServiceMessage();
   List<Message> messagesList = [];
+  Timer? timer;
 
   @override
   void initState() {
     super.initState();
     print("convoId from chat page ${widget.conversationInfo.conversationId}");
 
-    apiServiceMessage
-        .getMessagesOfConversation(widget.conversationInfo.conversationId!)
-        .then((value) => updateMessageList());
+    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      apiServiceMessage
+          .getMessagesOfConversation(widget.conversationInfo.conversationId!)
+          .then((value) => updateMessageList());
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer!.cancel();
   }
 
   @override
@@ -43,7 +55,8 @@ class _ChatState extends State<Chat> {
                   colors: const <Color>[Color(0xFFE53935), Color(0xFF1A237E)])),
         ),
         title: GestureDetector(
-          onTap: () => Navigator.of(context).pushNamed('/profile'),
+          onTap: () => Navigator.of(context)
+              .goToProfile(widget.conversationInfo.receiverUserId),
           child: Row(
             children: [
               CircleAvatar(

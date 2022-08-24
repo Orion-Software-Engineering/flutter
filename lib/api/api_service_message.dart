@@ -8,6 +8,7 @@ class APIServiceMessage {
   List<Message> listOfMessages = [];
   late String myUserId;
   Future getMessagesOfConversation(String conversationId) async {
+    listOfMessages = [];
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     myUserId = sharedPreferences.getString("userId")!;
 
@@ -17,9 +18,6 @@ class APIServiceMessage {
         path: getMessagesOfConversationPath + conversationId);
 
     final response = await http.get(url);
-
-    print(
-        "GHGHHGHGHGHGHG\nGHGHHGHGHGHGHG\nGHGHHGHGHGHGHG\nGHGHHGHGHGHGHG\nGHGHHGHGHGHGHG\nGHGHHGHGHGHGHG\nGHGHHGHGHGHGHG\nGHGHHGHGHGHGHG\n");
     print(response.statusCode);
     // print(response.body);
 

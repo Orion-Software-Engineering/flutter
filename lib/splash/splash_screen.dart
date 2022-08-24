@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'api/api_service_login.dart';
-import 'models/login_model.dart';
+import '../api/api_service_login.dart';
+import '../models/login_model.dart';
 
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
