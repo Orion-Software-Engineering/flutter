@@ -14,14 +14,4 @@ class ProfileResponseModel {
     this.dateOfBirth,
     this.gender,
   });
-
-  // factory ProfileResponseModel.fromJson(Map<String, dynamic> json) {
-  //   return ProfileResponseModel(
-  //     id: json["id"] ?? "",
-  //     email: json["email"] ?? "",
-  //     isEmailVerified: json["isEmailVerified"] ?? "",
-  //     username: json["username"] ?? "",
-  //     dateOfBirth: json["dateOfBirth"] ?? "",
-  //     gender: json["gender"] ?? "",
-  //   );
 }

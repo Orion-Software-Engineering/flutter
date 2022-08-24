@@ -41,7 +41,7 @@ class _InputFieldState extends State<InputField> {
             onPressed: () {
               if (_textToBeSent.text.trim().isNotEmpty) {
                 messageToBeSent.conversationId = widget.conversationId;
-                messageToBeSent.messageText = _textToBeSent.text;
+                messageToBeSent.messageText = _textToBeSent.text.trim();
                 _textToBeSent.clear();
                 widget.apiServiceMessage.sendMessage(messageToBeSent);
               }
