@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_list.dart';
 import 'package:matchmaking_demo/chat/input_field.dart';
+import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
+import '../models/messaging/message_model.dart';
 
 class Chat extends StatefulWidget {
-  const Chat({Key? key}) : super(key: key);
+  final ConversationInfo conversationInfo;
+  const Chat({required this.conversationInfo});
 
   @override
   State<Chat> createState() => _ChatState();
 }
 
 class _ChatState extends State<Chat> {
-  String senderName = "Dillys";
-  String senderStatus = "online";
+  APIServiceMessage apiServiceMessage = APIServiceMessage();
+  List<Message> messagesList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    print("convoId from chat page ${widget.conversationInfo.conversationId}");
+
+    apiServiceMessage
+        .getMessagesOfConversation(widget.conversationInfo.conversationId!)
+        .then((value) => updateMessageList());
+  }
+
   @override
   Widget build(BuildContext context) {
+    String senderName = widget.conversationInfo.receiverUsername;
+    String senderStatus = "online";
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -67,12 +84,23 @@ class _ChatState extends State<Chat> {
         children: [
           Column(
             children: [
-              ChatList(),
-              InputField(),
+              ChatList(
+                messagesList: messagesList,
+              ),
+              InputField(
+                  conversationId: widget.conversationInfo.conversationId!,
+                  apiServiceMessage: apiServiceMessage),
             ],
           ),
         ],
       ),
     );
+  }
+
+  void updateMessageList() async {
+    setState(() {
+      messagesList = apiServiceMessage.listOfMessages;
+    });
+    print("here $messagesList");
   }
 }

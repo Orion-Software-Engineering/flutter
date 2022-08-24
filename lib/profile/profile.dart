@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_profile.dart';
+import 'package:matchmaking_demo/models/profile/profile_model.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../components/profile/active_interests_list.dart';
 import '../components/profile/bio_fields.dart';
-import '../components/profile/interests_bullet.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  final String userId;
+  const Profile({required this.userId});
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  String? username = "NA";
-  String? email = "NA";
-  String? dateOfBirth = "NA";
-  bool? gender;
+  ProfileResponseModel profileResponse = ProfileResponseModel();
 
   @override
   // ignore: must_call_super
   void initState() {
-    APIServiceProfile apiServiceProfile = APIServiceProfile();
-    apiServiceProfile.getProfile();
-    getProfilePageData();
+    super.initState();
+    getProfileData();
     print(
         "PPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\n");
   }
@@ -102,11 +97,25 @@ class _ProfileState extends State<Profile> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BioFields(title: 'Username', value: username),
-                  BioFields(title: 'Email', value: email),
-                  BioFields(title: 'Date of Birth', value: dateOfBirth),
-                  BioFields(title: 'Gender', value: (gender!) ? "M" : "F"),
-                  BioFields(title: 'Bio', value: "Lorem Ipsum"),
+                  BioFields(
+                      title: 'Username',
+                      value: profileResponse.username,
+                      isGender: false),
+                  BioFields(
+                      title: 'Email',
+                      value: profileResponse.email,
+                      isGender: false),
+                  BioFields(
+                      title: 'Date of Birth',
+                      value: profileResponse.dateOfBirth,
+                      isGender: false),
+                  BioFields(
+                    title: 'Gender',
+                    isGender: true,
+                    genderValue: profileResponse.gender,
+                  ),
+                  BioFields(
+                      title: 'Bio', value: "Lorem Ipsum", isGender: false),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                     child: Column(
@@ -141,17 +150,24 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  void getProfilePageData() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    print("in getProfileData");
+  void getProfileData() async {
+    APIServiceProfile apiServiceProfile = APIServiceProfile();
     setState(() {
-      email = sharedPreferences.getString("email");
-      // sharedPreferences.getBool("isEmailVerified");
-      username = sharedPreferences.getString("username");
-      dateOfBirth = sharedPreferences.getString("dateOfBirth");
-      gender = sharedPreferences.getBool("gender");
+      apiServiceProfile.getProfile(widget.userId).then(
+          (value) => profileResponse = apiServiceProfile.profileResponseModel);
     });
-    print("dob: $dateOfBirth");
   }
+  // void getProfilePageData() async {
+  //   final SharedPreferences sharedPreferences =
+  //       await SharedPreferences.getInstance();
+  //   print("in getProfileData");
+  //   setState(() {
+  //     email = sharedPreferences.getString("email");
+  //     // sharedPreferences.getBool("isEmailVerified");
+  //     username = sharedPreferences.getString("username");
+  //     dateOfBirth = sharedPreferences.getString("dateOfBirth");
+  //     gender = sharedPreferences.getBool("gender");
+  //   });
+  //   print("dob: $dateOfBirth");
+  // }
 }
