@@ -4,7 +4,7 @@ Built with ❤️ and Flutter
 To test the build with full functionality one must be signed in
 You'd want to set the initialRoute in main.dart to do that
 
-###Pages within the application with complete business logic for backend functionality;
+### Pages within the application with complete business logic for backend functionality;
   1. Login Page
 
     -The Login page takes username and password
@@ -58,6 +58,7 @@ You'd want to set the initialRoute in main.dart to do that
   9. Profile Pages
 
   
+
 ###Components and special classes implemented;
   1. Chat tile class
   2. Custom password field
