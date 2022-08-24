@@ -8,7 +8,16 @@ class EventsDetails extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(400.0),
-        child: AppBar(),
+        child: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/Events/Event1.png"),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
           child: Column(
@@ -135,18 +144,18 @@ class EventsDetails extends StatelessWidget {
                     ),*/
                     child: Text(
                         '[EVENT DATE GOES HERE]',
-                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                        style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 70.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 45.0, 0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
                     /*decoration: BoxDecoration(
                       color: Colors.black,
                     ),*/
                     child: Text(
                         'NAMES GO HERE',
-                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                        style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                 ],
               ),
@@ -188,18 +197,18 @@ class EventsDetails extends StatelessWidget {
                     ),*/
                     child: Text(
                         '[EVENT DATE GOES HERE]',
-                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                        style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 70.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 130.0, 0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
                    /* decoration: BoxDecoration(
                       color: Colors.black,
                     ),*/
                     child: Text(
-                        'NAMES GO HERE',
-                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                        '18+',
+                        style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                 ],
               ),
