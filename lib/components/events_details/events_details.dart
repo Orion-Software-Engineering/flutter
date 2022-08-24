@@ -12,6 +12,7 @@ class EventsDetails extends StatelessWidget {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
+                ///This image widget will be changed to a network image
                 image: AssetImage("assets/images/Events/Event1.png"),
                 fit: BoxFit.fill,
               ),
@@ -48,7 +49,7 @@ class EventsDetails extends StatelessWidget {
                       ' This description is given by the organizers on the web'
                       ' This description is given by the organizers on the web'
                       ' This description is given by the organizers on the web',
-                  style: TextStyle(fontSize: 10.0),
+                  style: TextStyle(fontSize: 11.0, fontFamily: "assets/fonts/Nunito/static/Nunito-Regular.ttf"),
                 ),
               ),
               Row(
