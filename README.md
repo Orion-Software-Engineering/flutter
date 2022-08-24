@@ -68,6 +68,13 @@ You'd want to set the initialRoute in main.dart to do that
         complete the sign up process.
 
   3.Forgot Password Page
+
+    -Forgot password page has takes only an email as input
+
+    -Email field accepts only inputs in email format with no trailing spaces. Validates on submit
+
+    -The SUBMIT button is of elevated button type and validates the input field as well as make and api post request that
+      allows a reset password link to be sent to the provided link. It calls the ForgotPasswordAPIService
   4. Home Page
   5. Messaging Pages
   6. Chat Room Page
