@@ -42,13 +42,139 @@ class EventsDetails extends StatelessWidget {
                   style: TextStyle(fontSize: 10.0),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(10.0),
-                margin: EdgeInsets.all(10.0),
-                child: Text(
-                    'Organizers',
-                style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold)),
-              )
+              Row(
+               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0,0.0),
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'Organizers',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                  Spacer(),//Use Spacer between row elements
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 110.0, 0.0),
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'MCs',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                ],
+              ),
+              //Text field sections for Organizer and MCs
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0,0.0),
+                    margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        '[ORGANIZER NAME GOES HERE]',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                  Spacer(),//Use Spacer between row elements
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 110.0, 0.0),
+                    margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'MCs',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                ],
+              ),
+              ///Date and Guests
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0,0.0),
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'Date',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                  Spacer(),//Use Spacer between row elements
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 110.0, 0.0),
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'Guests',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                ],
+              ),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0,0.0),
+                    margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        '[EVENT DATE GOES HERE]',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                  Spacer(),//Use Spacer between row elements
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 110.0, 0.0),
+                    margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'NAMES GO HERE',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                ],
+              ),
+              ///Time and Age Restrictions section
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0,0.0),
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'Organizers',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                  Spacer(),//Use Spacer between row elements
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 110.0, 0.0),
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                        'MCs',
+                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                  ),
+                ],
+              ),
             ],
           )
       ),
