@@ -44,6 +44,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           key: _formKey,
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(
+                      Icons.arrow_back_outlined,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(
                 height: 60.0,
               ),
