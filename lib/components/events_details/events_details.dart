@@ -57,7 +57,7 @@ class EventsDetails extends StatelessWidget {
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 110.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 130.0, 0.0),
                     margin: EdgeInsets.all(10.0),
                     /*decoration: BoxDecoration(
                       color: Colors.black,
@@ -75,23 +75,24 @@ class EventsDetails extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0,0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
-                    decoration: BoxDecoration(
+                    /*decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
-                        '[ORGANIZER NAME GOES HERE]',
-                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                        '[ORG NAME GOES HERE]',
+                        style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 110.0, 0.0),
+                    /*width: 160,*/
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 82.0, 0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
-                    decoration: BoxDecoration(
+                   /* decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
-                        'MCs',
-                        style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
+                        'MCs NAME',
+                        style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                 ],
               ),
@@ -111,7 +112,7 @@ class EventsDetails extends StatelessWidget {
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 110.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 120.0, 0.0),
                     margin: EdgeInsets.all(10.0),
                     /*decoration: BoxDecoration(
                       color: Colors.black,
@@ -122,54 +123,54 @@ class EventsDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              //Text fields for Date and Guests
+              ///-------------------------------Text fields for Date and Guests---------------------------------------
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0,0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
-                    decoration: BoxDecoration(
+                   /* decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
                         '[EVENT DATE GOES HERE]',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 110.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 70.0, 0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
-                    decoration: BoxDecoration(
+                    /*decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
                         'NAMES GO HERE',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                 ],
               ),
-              ///Time and Age Restrictions section
+              ///-----------------------------Time and Age Restrictions section-------------------------------------------
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0,0.0),
                     margin: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
+                   /* decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
                         'Time',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 110.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 80.0, 0.0),
                     margin: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
+                    /*decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
                         'Age restrictions',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
@@ -182,27 +183,26 @@ class EventsDetails extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0,0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
-                    decoration: BoxDecoration(
+                    /*decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
                         '[EVENT DATE GOES HERE]',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                   Spacer(),//Use Spacer between row elements
                   Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 110.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 70.0, 0.0),
                     margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
-                    decoration: BoxDecoration(
+                   /* decoration: BoxDecoration(
                       color: Colors.black,
-                    ),
+                    ),*/
                     child: Text(
                         'NAMES GO HERE',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                 ],
               ),
-
             ],
           )
       ),
