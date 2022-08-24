@@ -159,7 +159,7 @@ class EventsDetails extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: Text(
-                        'Organizers',
+                        'Time',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                   Spacer(),//Use Spacer between row elements
@@ -170,7 +170,7 @@ class EventsDetails extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: Text(
-                        'MCs',
+                        'Age restrictions',
                         style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                 ],
