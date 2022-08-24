@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      inAsyncCall: isLoading,
+      isLoading: isLoading,
       opacity: 0.3,
       child: _ui(context),
     );

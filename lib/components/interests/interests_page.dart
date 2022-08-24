@@ -54,7 +54,7 @@ class _InterestsPageState extends State<InterestsPage> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      inAsyncCall: isApiCallProcess,
+      isLoading: isApiCallProcess,
       opacity: 0.3,
       child: _ui(context),
     );
