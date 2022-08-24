@@ -122,6 +122,7 @@ class EventsDetails extends StatelessWidget {
                   ),
                 ],
               ),
+              //Text fields for Date and Guests
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
