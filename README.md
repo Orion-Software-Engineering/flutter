@@ -6,7 +6,7 @@ You'd want to set the initialRoute in main.dart to do that
 
 ### Pages within the application with complete business logic for backend functionality;
   1. Login Page
-  <img src="https://user-images.githubusercontent.com/80262558/186311100-b2880f07-2a2c-4949-a808-ca157b29f910.jpg" width="108" height="240">
+  <img src="https://user-images.githubusercontent.com/80262558/186311100-b2880f07-2a2c-4949-a808-ca157b29f910.jpg" width="216" height="480">
 
 
     -The Login page takes username and password
