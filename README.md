@@ -7,7 +7,7 @@ To test the build with full functionality one must be signed in
 You'd want to set the initialRoute in main.dart to do that
 
 ## Pages within the application with complete business logic for backend functionality;
-  [1. Login Page][Login Page]
+  1. [Login Page]
   2. Sign Up Pages
   3. Forgot Password Page 
   4. Home Page
