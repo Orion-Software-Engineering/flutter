@@ -27,6 +27,12 @@ You'd want to set the initialRoute in main.dart to do that
     -Picture icons link to other means of signing in
 
   2. Sign Up Pages
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/80262558/186313290-8b085912-5aa0-472d-86fc-2d091c2b7c35.jpg" width="216" height="480" />
+  <img src="https://user-images.githubusercontent.com/80262558/186313290-8b085912-5aa0-472d-86fc-2d091c2b7c35.jpg" width="216" height="480" /> 
+  <img src="https://user-images.githubusercontent.com/80262558/186313320-21385c43-c130-41d4-8851-1e0373cd07d4.jpg" width="216" height="480" />
+  <img src="https://user-images.githubusercontent.com/80262558/186313369-c697c452-c73f-4ab1-a359-46ea9aed1500.jpg" width="216" height="480" />
+</p>
 
     -The signup pages consist of the personal details page and 3 interest pages
 
