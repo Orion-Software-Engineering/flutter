@@ -8,7 +8,7 @@ Pages fully implemented as at now with complete business logic for backend funct
   1. Login Page
   2. Sign Up Pages
   3. Home Page
-  4. 
+
   
 Pages partially implemented;
   1. Messaging pages

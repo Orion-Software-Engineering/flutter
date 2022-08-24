@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
   RegExp passwordValid = RegExp(r".+");
-  bool isApiCallProcess = false;
+  bool isLoading = false;
   late LoginRequestModel requestModel;
 
   @override
@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      inAsyncCall: isApiCallProcess,
+      inAsyncCall: isLoading,
       opacity: 0.3,
       child: _ui(context),
     );
@@ -112,13 +112,13 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           if (validateAndSave()) {
                             setState(() {
-                              isApiCallProcess = true;
+                              isLoading = true;
                             });
                             saveCredentials();
                             LoginAPIService apiService = new LoginAPIService();
                             apiService.login(requestModel).then((value) {
                               setState(() {
-                                isApiCallProcess = false;
+                                isLoading = false;
                                 if (statusCode == 200) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
