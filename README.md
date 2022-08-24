@@ -68,7 +68,6 @@ You'd want to set the initialRoute in main.dart to do that
         complete the sign up process.
 
   3.Forgot Password Page
-    -
   4. Home Page
   5. Messaging Pages
   6. Chat Room Page
