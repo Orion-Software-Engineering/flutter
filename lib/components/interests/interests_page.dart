@@ -170,7 +170,14 @@ class _InterestsPageState extends State<InterestsPage> {
                       });
                     }
                   } else {
-                    Navigator.of(context).goToAllSet();
+                    switch (widget.pageNumber) {
+                      case 1:
+                        Navigator.of(context).goToInterests2();
+                        break;
+                      case 2:
+                        Navigator.of(context).goToInterests3();
+                        break;
+                    }
                   }
                 },
                 child: Text(
