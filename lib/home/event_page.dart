@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/components/events_details/events_details.dart';
 
 class EventsPage extends StatelessWidget {
   const EventsPage({Key? key}) : super(key: key);
@@ -23,20 +24,25 @@ class EventsPage extends StatelessWidget {
             ),
             Wrap(
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.all(20.0),
-                  width: 150.0,
-                  height: 200.0,
-                  decoration: BoxDecoration(image: DecorationImage(
-                    image: NetworkImage('https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg'),
-                    fit: BoxFit.fill,
+                GestureDetector(onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => EventsDetails()),);
+                },
+                  child: Container(
+                    padding: EdgeInsets.all(20.0),
+                    margin: EdgeInsets.all(20.0),
+                    width: 150.0,
+                    height: 200.0,
+                    decoration: BoxDecoration(image: DecorationImage(
+                      image: NetworkImage('https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg'),
+                      fit: BoxFit.fill,
+                    ),
+                        color: Colors.grey,
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8)),
+                    //child: Image.network('https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg'),
                   ),
-                      color: Colors.grey,
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8)),
-                  //child: Image.network('https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg'),
                 ),
+
                 Container(
                   padding: EdgeInsets.all(20.0),
                   margin: EdgeInsets.all(20.0),
@@ -168,7 +174,7 @@ class EventsPage extends StatelessWidget {
                 width: 150.0,
                 height: 200.0,
                 decoration: BoxDecoration(image: DecorationImage(
-                  image: NetworkImage('https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg'),
+                  image: NetworkImage('https://i.pinimg.com/564x/6a/fe/85/6afe8521df12353127db9e18c5937e15.jpg'),
                   fit: BoxFit.fill,
                 ),
                     color: Colors.grey,

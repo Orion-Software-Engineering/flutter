@@ -13,7 +13,7 @@ class EventsDetails extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 ///This image widget will be changed to a network image
-                image: AssetImage("assets/images/Events/Event1.png"),
+                image: NetworkImage("https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg"),
                 fit: BoxFit.fill,
               ),
             ),
