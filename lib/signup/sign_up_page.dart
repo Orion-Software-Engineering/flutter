@@ -29,7 +29,7 @@ class _SignUpState extends State<SignUp> {
   String password = '';
   late SignupRequestModel requestModel;
   late SignupResponseModel responseModel;
-  bool isApiCallProcess = false;
+  bool isLoading = false;
   String? dateValue;
   bool gender = true;
 
@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      inAsyncCall: isApiCallProcess,
+      isLoading: isLoading,
       opacity: 0.3,
       child: _ui(context),
     );
@@ -204,12 +204,12 @@ class _SignUpState extends State<SignUp> {
                         onPressed: () {
                           if (validateAndSave()) {
                             setState(() {
-                              isApiCallProcess = true;
+                              isLoading = true;
                             });
                             APIService apiService = APIService();
                             apiService.signup(requestModel).then((value) {
                               setState(() {
-                                isApiCallProcess = false;
+                                isLoading = false;
                                 if (statusCode == 201) {
                                   Navigator.of(context).goToInterests1();
                                 } else {

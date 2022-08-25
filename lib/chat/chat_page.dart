@@ -47,7 +47,7 @@ class _ChatState extends State<Chat> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_ios_sharp),
+          icon: Icon(Icons.arrow_back_outlined),
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
