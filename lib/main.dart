@@ -33,19 +33,6 @@ class MyApp extends StatelessWidget {
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
       initialRoute: AppRouter.splash,
-      // routes: {
-      //   '/splash': (context) => SplashScreen(),
-      //   '/login': (context) => Login(),
-      //   '/sign_up': (context) => SignUp(),
-      //   '/interests_1': (context) => InterestsOne(),
-      //   '/interests_2': (context) => InterestsTwo(),
-      //   '/interests_3': (context) => InterestsThree(),
-      //   '/all_set': (context) => AllSet(),
-      //   '/home': (context) => HomeScaffold(),
-      //   '/forgot_password': (context) => ForgotPassword(),
-      //   '/chat_page': (context) => Chat(conversationId: settings.arguments),
-      //   '/profile': (context) => Profile()
-      // },
     );
   }
 }
