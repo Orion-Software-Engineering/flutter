@@ -7,7 +7,6 @@ class Progress extends StatelessWidget {
   final bool isLoading;
   final double opacity;
   final Color color;
-  final Animation<Color>? valueColor;
 
   const Progress({
     Key? key,
@@ -15,7 +14,6 @@ class Progress extends StatelessWidget {
     required this.isLoading,
     this.opacity = 0.3,
     this.color = Colors.grey,
-    this.valueColor,
   }) : super(key: key);
 
   @override
