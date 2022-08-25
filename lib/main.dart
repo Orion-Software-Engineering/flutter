@@ -26,14 +26,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateRoute: AppRouter.onGenerateRoute,
+      // onGenerateRoute: AppRouter.onGenerateRoute,
       onUnknownRoute: AppRouter.onUnknownRoute,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      initialRoute: '/splash',
+      initialRoute: '/home',
       routes: {
         '/splash': (context) => SplashScreen(),
         '/login': (context) => Login(),
@@ -44,25 +44,10 @@ class MyApp extends StatelessWidget {
         '/all_set': (context) => AllSet(),
         '/home': (context) => HomeScaffold(),
         '/forgot_password': (context) => ForgotPassword(),
-        '/chat_page': (context) => Chat(),
-        '/profile': (context) => Profile(),
         '/events_details': (context) => EventsDetails()
+        // '/chat_page': (context) => Chat(conversationId: settings.arguments),
+        // '/profile': (context) => Profile()
       },
-      
-      initialRoute: AppRouter.splash,
-      // routes: {
-      //   '/splash': (context) => SplashScreen(),
-      //   '/login': (context) => Login(),
-      //   '/sign_up': (context) => SignUp(),
-      //   '/interests_1': (context) => InterestsOne(),
-      //   '/interests_2': (context) => InterestsTwo(),
-      //   '/interests_3': (context) => InterestsThree(),
-      //   '/all_set': (context) => AllSet(),
-      //   '/home': (context) => HomeScaffold(),
-      //   '/forgot_password': (context) => ForgotPassword(),
-      //   '/chat_page': (context) => Chat(conversationId: settings.arguments),
-      //   '/profile': (context) => Profile()
-      // },
     );
   }
 }
