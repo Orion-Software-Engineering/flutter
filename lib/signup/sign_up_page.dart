@@ -154,8 +154,7 @@ class _SignUpState extends State<SignUp> {
                         width: 500,
                         child: Row(
                           children: [
-                            Container(
-                              width: 110.0,
+                            Expanded(
                               child: RadioListTile(
                                   title: Text(
                                     "Male",
@@ -173,8 +172,7 @@ class _SignUpState extends State<SignUp> {
                                     });
                                   }),
                             ),
-                            Container(
-                              width: 110.0,
+                            Expanded(
                               child: RadioListTile(
                                   title: Text(
                                     "Female",
