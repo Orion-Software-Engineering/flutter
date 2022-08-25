@@ -6,6 +6,7 @@ import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_signup.dart';
 import 'package:matchmaking_demo/models/signup_model.dart';
+import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../components/login_signup/date_of_birth.dart';
 import '../components/login_signup/title_and_subtext.dart';
@@ -42,7 +43,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      inAsyncCall: isLoading,
+      isLoading: isLoading,
       opacity: 0.3,
       child: _ui(context),
     );
@@ -153,8 +154,7 @@ class _SignUpState extends State<SignUp> {
                         width: 500,
                         child: Row(
                           children: [
-                            Container(
-                              width: 110.0,
+                            Expanded(
                               child: RadioListTile(
                                   title: Text(
                                     "Male",
@@ -172,8 +172,7 @@ class _SignUpState extends State<SignUp> {
                                     });
                                   }),
                             ),
-                            Container(
-                              width: 110.0,
+                            Expanded(
                               child: RadioListTile(
                                   title: Text(
                                     "Female",
@@ -212,7 +211,7 @@ class _SignUpState extends State<SignUp> {
                               setState(() {
                                 isLoading = false;
                                 if (statusCode == 201) {
-                                  Navigator.pushNamed(context, '/interests_1');
+                                  Navigator.of(context).goToInterests1();
                                 } else {
                                   Fluttertoast.showToast(
                                       backgroundColor: Colors.black,
@@ -252,7 +251,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                           MaterialButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/login');
+                              Navigator.of(context)
+                                  .enterAppThroughLoginScreen();
                             },
                             child: Text(
                               'Login',

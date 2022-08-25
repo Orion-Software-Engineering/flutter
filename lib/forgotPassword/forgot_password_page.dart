@@ -30,7 +30,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      inAsyncCall: isApiCallProcess,
+      isLoading: isApiCallProcess,
       opacity: 0.3,
       child: _ui(context),
     );

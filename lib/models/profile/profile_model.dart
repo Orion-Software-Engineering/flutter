@@ -4,7 +4,7 @@ class ProfileResponseModel {
   String? isEmailVerified;
   String? username;
   String? dateOfBirth;
-  String? gender;
+  bool? gender;
 
   ProfileResponseModel({
     this.id,
@@ -14,15 +14,4 @@ class ProfileResponseModel {
     this.dateOfBirth,
     this.gender,
   });
-
-  factory ProfileResponseModel.fromJson(Map<String, dynamic> json) {
-    return ProfileResponseModel(
-      id: json["id"] ?? "",
-      email: json["email"] ?? "",
-      isEmailVerified: json["isEmailVerified"] ?? "",
-      username: json["username"] ?? "",
-      dateOfBirth: json["dateOfBirth"] ?? "",
-      gender: json["gender"] ?? "",
-    );
-  }
 }

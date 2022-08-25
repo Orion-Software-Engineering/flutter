@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 
 import 'interests_bullet.dart';
 

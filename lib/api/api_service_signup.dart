@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/signup_model.dart';
 import 'dart:convert';
 import '../utils/api_call_paths.dart';
-import '../utils/constants.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 
 String userID = "";
 String message = "";

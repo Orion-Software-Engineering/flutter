@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Progress extends StatelessWidget {
   final Widget child;
-  final bool inAsyncCall;
+  final bool isLoading;
   final double opacity;
   final Color color;
   final Animation<Color>? valueColor;
@@ -12,7 +12,7 @@ class Progress extends StatelessWidget {
   const Progress({
     Key? key,
     required this.child,
-    required this.inAsyncCall,
+    required this.isLoading,
     this.opacity = 0.3,
     this.color = Colors.grey,
     this.valueColor,
@@ -22,7 +22,7 @@ class Progress extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> widgetList = <Widget>[];
     widgetList.add(child);
-    if (inAsyncCall) {
+    if (isLoading) {
       final modal = new Stack(
         children: [
           new Opacity(

@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'api/api_service_login.dart';
-import 'models/login_model.dart';
+import '../api/api_service_login.dart';
+import '../models/login_model.dart';
 
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
@@ -56,14 +57,17 @@ class _SplashScreenState extends State<SplashScreen> {
       LoginAPIService apiService = LoginAPIService();
       apiService.login(widget.requestModel!).then((value) {
         checkIfLoginSuccessful = true;
-        Navigator.pushNamed(context, '/home');
+        Navigator.of(context).enterAppThroughHomeScreen();
+        print("username ${widget.obtainedUsername}");
+        print("password ${widget.obtainedPassword}");
+      }).then((value) {
+        if (!checkIfLoginSuccessful) {
+          Navigator.of(context).enterAppThroughLoginScreen();
+          print("splash login unsuccessful");
+        }
       });
-      if (!checkIfLoginSuccessful) {
-        Navigator.pushNamed(context, '/login');
-        print("splash login unsuccessful");
-      }
     } else {
-      Navigator.pushNamed(context, '/login');
+      Navigator.of(context).enterAppThroughLoginScreen();
       print("noting saved");
     }
   }

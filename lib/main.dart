@@ -7,7 +7,8 @@ import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
 import 'package:matchmaking_demo/chat/chat_page.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
-import 'package:matchmaking_demo/splash_screen.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
+import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'Profile/profile.dart';
 import 'components/interests/all_set.dart';
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: AppRouter.onGenerateRoute,
+      onUnknownRoute: AppRouter.onUnknownRoute,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       themeMode: ThemeMode.light,
@@ -45,6 +48,21 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => Profile(),
         '/events_details': (context) => EventsDetails()
       },
+      
+      initialRoute: AppRouter.splash,
+      // routes: {
+      //   '/splash': (context) => SplashScreen(),
+      //   '/login': (context) => Login(),
+      //   '/sign_up': (context) => SignUp(),
+      //   '/interests_1': (context) => InterestsOne(),
+      //   '/interests_2': (context) => InterestsTwo(),
+      //   '/interests_3': (context) => InterestsThree(),
+      //   '/all_set': (context) => AllSet(),
+      //   '/home': (context) => HomeScaffold(),
+      //   '/forgot_password': (context) => ForgotPassword(),
+      //   '/chat_page': (context) => Chat(conversationId: settings.arguments),
+      //   '/profile': (context) => Profile()
+      // },
     );
   }
 }
