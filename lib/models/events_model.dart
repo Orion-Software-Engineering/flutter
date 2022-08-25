@@ -1,0 +1,11 @@
+
+class EventDetailsRequestModel {
+
+
+}
+
+
+class EventDetailsResponseModel{
+
+
+}
