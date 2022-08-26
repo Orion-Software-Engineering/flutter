@@ -202,54 +202,78 @@ class EventsPage extends StatelessWidget {
                   child: Text('Event', style: TextStyle(fontSize: 30.0)),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(20.0),
-                margin: EdgeInsets.all(20.0),
-                width: 150.0,
-                height: 200.0,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-                      fit: BoxFit.fill,
-                    ),
-                    color: Colors.grey,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Text('Event', style: TextStyle(fontSize: 30.0)),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EventsDetails()),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(20.0),
+                  width: 150.0,
+                  height: 200.0,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+                        fit: BoxFit.fill,
+                      ),
+                      color: Colors.grey,
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
+                ),
               ),
-              Container(
-                padding: EdgeInsets.all(20.0),
-                margin: EdgeInsets.all(20.0),
-                width: 150.0,
-                height: 200.0,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://i.pinimg.com/564x/db/e6/9a/dbe69a692eca0f5f51589fac736336a1.jpg'),
-                      fit: BoxFit.fill,
-                    ),
-                    color: Colors.grey,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Text('Event', style: TextStyle(fontSize: 30.0)),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EventsDetails()),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(20.0),
+                  width: 150.0,
+                  height: 200.0,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            'https://i.pinimg.com/564x/db/e6/9a/dbe69a692eca0f5f51589fac736336a1.jpg'),
+                        fit: BoxFit.fill,
+                      ),
+                      color: Colors.grey,
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
+                ),
               ),
-              Container(
-                padding: EdgeInsets.all(20.0),
-                margin: EdgeInsets.all(20.0),
-                width: 150.0,
-                height: 200.0,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://i.pinimg.com/564x/6a/fe/85/6afe8521df12353127db9e18c5937e15.jpg'),
-                      fit: BoxFit.fill,
-                    ),
-                    color: Colors.grey,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Text('Event', style: TextStyle(fontSize: 30.0)),
-              )
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EventsDetails()),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(20.0),
+                  width: 150.0,
+                  height: 200.0,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            'https://i.pinimg.com/564x/6a/fe/85/6afe8521df12353127db9e18c5937e15.jpg'),
+                        fit: BoxFit.fill,
+                      ),
+                      color: Colors.grey,
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
+                ),
+              ),
             ])
           ],
         ),
