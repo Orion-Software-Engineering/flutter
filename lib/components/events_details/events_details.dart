@@ -101,6 +101,7 @@ class EventsDetails extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
+                  width: 150,
                   padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
                   margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
                   /*decoration: BoxDecoration(
@@ -112,10 +113,17 @@ class EventsDetails extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black)),
                 ),
-                Spacer(), //Use Spacer between row elements
+                Container(
+                  width: 30,
+                  height: 10,
+                  padding: EdgeInsets.all(10.0),
+                  margin: EdgeInsets.fromLTRB( 10.0, 10.0 ,0.0 ,10.0 ),
+                  color: Colors.black.withOpacity(0.0),
+                  
+                ),
                 Container(
                   /*width: 160,*/
-                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 82.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
                   margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
                   /* decoration: BoxDecoration(
                       color: Colors.black,
@@ -255,7 +263,7 @@ class EventsDetails extends StatelessWidget {
                   height: 10,
                   padding: EdgeInsets.all(10.0),
                   margin: EdgeInsets.all(10.0),
-                  color: Colors.black,
+                  color: Colors.black.withOpacity(0.0),
                 ), //Use Spacer between row elements
                 Container(
                   padding: EdgeInsets.fromLTRB(10.0, 0.0, 130.0, 0.0),

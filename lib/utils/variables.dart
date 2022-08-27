@@ -41,14 +41,12 @@ List<EventDetailsModel> Details = [
       date: '9099-20-4',
       time: '10:00',
       venue: "A110",
-      organizers: 'Beanzz',
-      mcs: 'Pyro, Geeeee, Hehe',
+      organizers: 'Beanzz Logoszn',
+      mcs: 'Pyro, Geeeee',
       guests: 'None',
-      description: 'kdnfnadnflkanflkad jdlkf akdfakdjf lkadlfkj adf'
-          'df akdjflkja dljf alkdjflk ajdfk jalkdj flkdajf lkajdlfk jadkfj ad'
-          'fkla djfkj adkjfa dof;hfadifhajdknk fhdnkds p  d '
-          ' dhfoi akdhfiadjf oiajdf ioajdfoidhfoadoif jaoidg oi goir oiskadv'
-          'oivsdlkv jdo vdpov kad;vk ;do k opdvkapdvkapdova po;',
+      description: 'This is where the description is displayed. The content of this space is given by the organizer of the event '
+          'on the web form and then it is put here after it has been fetched from the backend by the api'
+          'Over here I just realised we did not limit the user as to how many words they should use here.',
       age_restriction: true,
       organizer: 'OP man',
       cover_image:
