@@ -206,7 +206,7 @@ class _SignUpState extends State<SignUp> {
                             setState(() {
                               isLoading = true;
                             });
-                            APIService apiService = APIService();
+                            SignUpAPIService apiService = SignUpAPIService();
                             apiService.signup(requestModel).then((value) {
                               setState(() {
                                 isLoading = false;

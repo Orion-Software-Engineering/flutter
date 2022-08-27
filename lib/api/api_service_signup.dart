@@ -9,7 +9,7 @@ String userID = "";
 String message = "";
 int statusCode = 0;
 
-class APIService {
+class SignUpAPIService {
   Future<SignupResponseModel> signup(SignupRequestModel requestModel) async {
     var url = Uri(
       scheme: scheme,
