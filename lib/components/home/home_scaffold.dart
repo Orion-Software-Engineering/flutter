@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:matchmaking_demo/api/api_service_events.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/components/home/avatar_placeholder.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
@@ -190,6 +191,12 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
+            if(index==2){
+              EventAPIService apiService = new EventAPIService();
+              apiService.event().then((value){
+                print("got it");
+              });
+            }
           });
         },
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_events.dart';
 import 'package:matchmaking_demo/components/events_details/events_details.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
+
 
 class EventsPage extends StatelessWidget {
   const EventsPage({Key? key}) : super(key: key);

@@ -6,12 +6,11 @@ import 'dart:convert';
 import '../utils/api_call_paths.dart';
 
 class EventAPIService {
-  Future<EventListResponseModel> interest(
-      EventListRequestModel requestModel) async {
+  Future<EventListResponseModel> event() async {
     var url = Uri(
       scheme: scheme,
       host: host,
-      path: interestPath + userID,
+      path: eventsPath,
     );
 
     Map<String, String> headers = {
@@ -20,16 +19,16 @@ class EventAPIService {
     };
 
     try {
-      print(jsonEncode(requestModel));
-      final response = await http.post(url,
-          body: jsonEncode(requestModel), headers: headers);
-
+      final response = await http.get(url);
       print(response.body);
-      if (response.statusCode == 200) {
+      print(response.statusCode);
+      print(response.body.runtimeType);
+
+      if(response.statusCode == 200){
         return EventListResponseModel.fromJson(json.decode(response.body));
-      } else {
-        // print(response.body);
-        throw Exception("Failed to load data ${response.statusCode}");
+      }
+      else{
+        throw Exception("Benas");
       }
     } catch (e) {
       rethrow;
