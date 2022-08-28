@@ -7,11 +7,11 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+      padding: EdgeInsets.only(left: 16, top: 1, right: 16),
       child: ListView(
         children: [
           SizedBox(
-            height: 60,
+            height: 15,
           ),
           Row(
             children: const [
@@ -41,7 +41,7 @@ class SettingsPage extends StatelessWidget {
           buildAccountOptionRow(context, "Language"),
           buildAccountOptionRow(context, "Privacy and security"),
           SizedBox(
-            height: 40,
+            height: 20,
           ),
           Row(
             children: const [
