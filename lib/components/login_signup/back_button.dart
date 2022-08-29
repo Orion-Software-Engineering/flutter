@@ -9,7 +9,7 @@ class CustomBackButton extends StatelessWidget {
       children: [
         GestureDetector(
           child: Icon(
-            Icons.arrow_back_outlined,
+            Icons.arrow_back_ios,
             size: 40,
             color: Colors.white,
           ),
