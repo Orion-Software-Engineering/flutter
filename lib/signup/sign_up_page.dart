@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isLoading = false;
   String? dateValue;
-  bool gender = true;
+  String gender = "true";
 
   @override
   void initState() {
@@ -164,11 +164,12 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.all(0),
-                                  value: true,
+                                  value: "true",
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = true;
+                                      gender = value as String;
+                                      print(gender);
                                     });
                                   }),
                             ),
@@ -182,11 +183,12 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.all(0),
-                                  value: false,
+                                  value: "false",
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = false;
+                                      gender = value as String;
+                                      print(gender);
                                     });
                                   }),
                             ),
@@ -205,6 +207,7 @@ class _SignUpState extends State<SignUp> {
                           if (validateAndSave()) {
                             setState(() {
                               isLoading = true;
+                              requestModel.gender = gender;
                             });
                             SignUpAPIService apiService = SignUpAPIService();
                             apiService.signup(requestModel).then((value) {

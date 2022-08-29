@@ -19,6 +19,7 @@ class SignupRequestModel {
   String email = '';
   String password = '';
   String dob = '';
+  String gender = '';
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
@@ -26,6 +27,7 @@ class SignupRequestModel {
       'email': email.trim(),
       'password': password.trim(),
       'dob': dob.trim(),
+      'gender': gender.trim(),
     };
 
     return map;
