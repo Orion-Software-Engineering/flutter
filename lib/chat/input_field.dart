@@ -4,7 +4,7 @@ import 'package:matchmaking_demo/models/messaging/message_model.dart';
 
 class InputField extends StatefulWidget {
   final String conversationId;
-  final APIServiceMessage apiServiceMessage;
+  final MessageAPIService apiServiceMessage;
   const InputField(
       {required this.apiServiceMessage, required this.conversationId});
 

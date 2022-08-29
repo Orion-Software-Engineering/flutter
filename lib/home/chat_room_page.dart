@@ -44,7 +44,7 @@ class _ChatRoomState extends State<ChatRoom> {
               padding: const EdgeInsets.symmetric(vertical: 1.2),
               child: GestureDetector(
                 onTap: () {
-                  APIServiceMessage apiServiceMessage = APIServiceMessage();
+                  MessageAPIService apiServiceMessage = MessageAPIService();
                   apiServiceMessage.getMessagesOfConversation(
                       chatList[index].conversationId!);
                   Navigator.of(context).goToChatPage(chatList[index]);

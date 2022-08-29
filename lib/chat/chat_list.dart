@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_item.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 
 import '../models/messaging/message_model.dart';
 
 class ChatList extends StatefulWidget {
+  MessageToBeDeleted messageToBeDeleted = MessageToBeDeleted();
+  MessageAPIService apiServiceMessage;
   List<Message> messagesList;
-  ChatList({required this.messagesList});
+  ChatList({required this.messagesList, required this.apiServiceMessage});
   final ScrollController listScrollController = ScrollController();
 
   @override
@@ -21,12 +25,48 @@ class _ChatListState extends State<ChatList> {
             itemCount: widget.messagesList.length,
             reverse: false,
             itemBuilder: (BuildContext context, int index) {
-              return ChatItem(
-                messageIsFromMe: widget.messagesList[index].messageIsFromMe!,
-                text: widget.messagesList[index].text!,
+              return GestureDetector(
+                onLongPress: () {
+                  showOptionsWhenMessageLongPressed(index);
+                },
+                child: ChatItem(
+                  messageIsFromMe: widget.messagesList[index].messageIsFromMe!,
+                  text: widget.messagesList[index].text!,
+                ),
               );
             }
             // controller: widget.listScrollController,
             ));
+  }
+
+  showOptionsWhenMessageLongPressed(int messageIndex) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return GestureDetector(
+            onTap: () {
+              widget.messageToBeDeleted.messageId =
+                  widget.messagesList[messageIndex].messageId!;
+              widget.apiServiceMessage.deleteMessage(widget.messageToBeDeleted);
+              Navigator.pop(context);
+            },
+            child: Center(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(5)),
+                child: Text(
+                  "Delete",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Nunito'),
+                ),
+              ),
+            ),
+          );
+        });
   }
 }
