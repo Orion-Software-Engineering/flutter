@@ -17,7 +17,7 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  APIServiceMessage apiServiceMessage = APIServiceMessage();
+  MessageAPIService apiServiceMessage = MessageAPIService();
   List<Message> messagesList = [];
   Timer? timer;
 
@@ -98,6 +98,7 @@ class _ChatState extends State<Chat> {
           Column(
             children: [
               ChatList(
+                apiServiceMessage: apiServiceMessage,
                 messagesList: messagesList,
               ),
               InputField(

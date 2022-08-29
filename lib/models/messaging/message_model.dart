@@ -21,3 +21,12 @@ class MessageToBeSent {
     return map;
   }
 }
+
+class MessageToBeDeleted {
+  String messageId = '';
+
+  Map<String, String> toJson() {
+    Map<String, String> map = {"messageId": messageId};
+    return map;
+  }
+}

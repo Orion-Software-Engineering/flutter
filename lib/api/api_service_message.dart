@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/messaging/message_model.dart';
 import '../utils/api_call_paths.dart';
 
-class APIServiceMessage {
+class MessageAPIService {
   List<Message> listOfMessages = [];
   late String myUserId;
   Future getMessagesOfConversation(String conversationId) async {
@@ -52,5 +52,20 @@ class APIServiceMessage {
 
     print("Send message code: ${response.statusCode}");
     print("Send message body: ${response.body}");
+  }
+
+  Future deleteMessage(MessageToBeDeleted messageToBeDeleted) async {
+    Uri url = Uri(scheme: scheme, host: host, path: deleteMessagePath);
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    final response = await http.delete(url,
+        headers: headers, body: jsonEncode(messageToBeDeleted));
+    if (response.statusCode == 200) {
+      print("Deleted");
+    }
   }
 }
