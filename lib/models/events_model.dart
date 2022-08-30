@@ -41,5 +41,18 @@ class Event {
       required this.description,
       required this.coverImage});
 
-
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(
+        id: json['id'],
+        name: json['name'],
+        date: json['date'],
+        time: json['time'],
+        venue: json['venue'],
+        organizers: json['organizers'],
+        mcs: json['mcs'],
+        guests: json['guests'],
+        ageRestriction: json['age_restriction'],
+        description: json['description'],
+        coverImage: json['cover_image']);
+  }
 }
