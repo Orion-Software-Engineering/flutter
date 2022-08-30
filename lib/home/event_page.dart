@@ -12,7 +12,7 @@ class EventsPage extends StatelessWidget {
     return GridView.builder(
         itemCount: FlyerURLs.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: 150.0 / 200.0),
+            crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
               onTap: () {
@@ -23,7 +23,7 @@ class EventsPage extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
                 margin: EdgeInsets.all(20.0),
                 width: 150.0,
-                height: 200.0,
+                height: 190.0,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(FlyerURLs[index].urls),
