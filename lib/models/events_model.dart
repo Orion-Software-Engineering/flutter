@@ -2,22 +2,44 @@ class EventDetailsRequestModel {}
 
 class EventDetailsResponseModel {}
 
-class EventListRequestModel {
-
-}
+class EventListRequestModel {}
 
 class EventListResponseModel {
+  String? token;
+  String? error;
 
-    String? token;
-    String? error;
+  EventListResponseModel({this.token, this.error});
 
-    EventListResponseModel({this.token, this.error});
-
-    factory EventListResponseModel.fromJson(List<dynamic> events) {
-      return EventListResponseModel(
-
-      );
-
+  factory EventListResponseModel.fromJson(List<dynamic> events) {
+    return EventListResponseModel();
   }
+}
+
+class Event {
+  final String id;
+  final String name;
+  final String date;
+  final String time;
+  final String venue;
+  final String organizers;
+  final String mcs;
+  final String guests;
+  final bool ageRestriction;
+  final String description;
+  final String coverImage;
+
+  const Event(
+      {required this.id,
+      required this.name,
+      required this.date,
+      required this.time,
+      required this.venue,
+      required this.organizers,
+      required this.mcs,
+      required this.guests,
+      required this.ageRestriction,
+      required this.description,
+      required this.coverImage});
+
 
 }
