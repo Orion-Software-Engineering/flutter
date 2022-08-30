@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_list.dart';
 import 'package:matchmaking_demo/chat/input_field.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../models/messaging/message_model.dart';
@@ -42,13 +43,9 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     String senderName = widget.conversationInfo.receiverUsername;
-    String senderStatus = "online";
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back_outlined),
-        ),
+        leading: CustomBackButton(),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -77,21 +74,14 @@ class _ChatState extends State<Chat> {
                       fontSize: 16,
                     ),
                   ),
-                  Text(
-                    senderStatus,
-                    style: TextStyle(
-                      fontFamily: "Nunito",
-                      fontSize: 12,
-                    ),
-                  ),
                 ],
               ),
             ],
           ),
         ),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
-        ],
+        // actions: const [
+        // IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
+        // ],
       ),
       body: Stack(
         children: [

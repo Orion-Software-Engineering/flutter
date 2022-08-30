@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_profile.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/models/profile/profile_model.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import '../components/profile/active_interests_list.dart';
@@ -143,11 +144,7 @@ class _ProfileState extends State<Profile> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 40, 0, 0),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 40,
-            ),
+            child: CustomBackButton(),
           ),
         ],
       ),

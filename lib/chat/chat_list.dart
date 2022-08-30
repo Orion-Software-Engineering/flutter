@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_item.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 
 import '../models/messaging/message_model.dart';
 
@@ -30,6 +29,7 @@ class _ChatListState extends State<ChatList> {
                   showOptionsWhenMessageLongPressed(index);
                 },
                 child: ChatItem(
+                  time: widget.messagesList[index].createdAt!,
                   messageIsFromMe: widget.messagesList[index].messageIsFromMe!,
                   text: widget.messagesList[index].text!,
                 ),
@@ -42,7 +42,7 @@ class _ChatListState extends State<ChatList> {
   showOptionsWhenMessageLongPressed(int messageIndex) {
     showDialog(
         context: context,
-        barrierDismissible: false,
+        barrierDismissible: true,
         builder: (context) {
           return GestureDetector(
             onTap: () {

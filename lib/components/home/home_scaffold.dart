@@ -8,10 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
-import 'package:matchmaking_demo/components/home/avatar_placeholder.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
-import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,118 +78,97 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             ? FontAwesomeIcons.solidSun
             : FontAwesomeIcons.solidMoon;
 
-    return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: const <Color>[Color(0xFFFF0000), Color(0xFF0000FF)],
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, false);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: const <Color>[Color(0xFFFF0000), Color(0xFF0000FF)],
+              ),
             ),
           ),
+          toolbarHeight: 70,
+          title: Center(
+            child: Text(titles[_currentIndex]),
+          ),
         ),
-        toolbarHeight: 70,
-        leading: GestureDetector(
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Color(0x80FFFFFF),
-                  borderRadius: BorderRadius.circular(50)),
-              child: Center(
-                child: FaIcon(
-                  changeThemeIcon,
+        body: tabs[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          iconSize: 30,
+          currentIndex: _currentIndex,
+          landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            // BottomNavigationBarItem(icon: )
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_outlined,
                   color: Colors.black,
+                  size: widget.iconSize,
                 ),
-              ),
-            ),
-          ),
+                activeIcon: Icon(
+                  Icons.home,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
+                label: 'Home',
+                backgroundColor: Colors.white),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.chat_bubble_outline,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
+                activeIcon: Icon(
+                  Icons.chat_bubble,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
+                label: 'Chat Room',
+                backgroundColor: Colors.white),
+            BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.newspaper,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
+                activeIcon: FaIcon(
+                  FontAwesomeIcons.solidNewspaper,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
+                label: 'News',
+                backgroundColor: Colors.white),
+            BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.sliders,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
+                activeIcon: FaIcon(
+                  FontAwesomeIcons.sliders,
+                  color: Colors.black,
+                  size: widget.iconSize,
+                ),
+                label: 'Settings',
+                backgroundColor: Colors.white),
+          ],
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
         ),
-        title: Center(
-          child: Text(titles[_currentIndex]),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).goToProfile(userId!);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AvatarPlaceholder(firstCharacter: 'H'),
-            ),
-          ),
-        ],
-      ),
-      body: tabs[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 30,
-        currentIndex: _currentIndex,
-        landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          // BottomNavigationBarItem(icon: )
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              activeIcon: Icon(
-                Icons.home,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              label: 'Home',
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.chat_bubble_outline,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              activeIcon: Icon(
-                Icons.chat_bubble,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              label: 'Chat Room',
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.newspaper,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              activeIcon: FaIcon(
-                FontAwesomeIcons.solidNewspaper,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              label: 'News',
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.sliders,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              activeIcon: FaIcon(
-                FontAwesomeIcons.sliders,
-                color: Colors.black,
-                size: widget.iconSize,
-              ),
-              label: 'Settings',
-              backgroundColor: Colors.white),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
     );
   }

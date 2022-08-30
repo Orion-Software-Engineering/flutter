@@ -3,13 +3,14 @@
 class LoginResponseModel {
   String? token;
   String? error;
-  LoginResponseModel({this.token, this.error});
+  int? statusCode;
+  LoginResponseModel({this.token, this.error, this.statusCode});
 
-  factory LoginResponseModel.fromJson(String message) {
+  factory LoginResponseModel.fromJson(int statusCode, String message) {
     return LoginResponseModel(
-      token: message != null ? message : "",
-      error: message != null ? message : "",
-    );
+        token: message != null ? message : "",
+        error: message != null ? message : "",
+        statusCode: statusCode);
   }
 }
 

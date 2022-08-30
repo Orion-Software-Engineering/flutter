@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
       color: Colors.white,
       child: Center(
         child: Image.asset("assets/images/interests/Orion logo(!BG) 3.png",
-            scale: 2.5),
+            scale: 3.5),
       ),
     );
   }
@@ -56,10 +56,12 @@ class _SplashScreenState extends State<SplashScreen> {
       widget.requestModel!.password = widget.obtainedPassword!;
       LoginAPIService apiService = LoginAPIService();
       apiService.login(widget.requestModel!).then((value) {
-        checkIfLoginSuccessful = true;
-        Navigator.of(context).enterAppThroughHomeScreen();
-        print("username ${widget.obtainedUsername}");
-        print("password ${widget.obtainedPassword}");
+        if (value.statusCode == 200) {
+          checkIfLoginSuccessful = true;
+          Navigator.of(context).enterAppThroughHomeScreen();
+          print("username ${widget.obtainedUsername}");
+          print("password ${widget.obtainedPassword}");
+        }
       }).then((value) {
         if (!checkIfLoginSuccessful) {
           Navigator.of(context).enterAppThroughLoginScreen();
