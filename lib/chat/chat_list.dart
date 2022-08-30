@@ -53,17 +53,24 @@ class _ChatListState extends State<ChatList> {
             },
             child: Center(
               child: Container(
+                width: 60,
+                height: 60,
                 padding: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
                 decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(5)),
-                child: Text(
-                  "Delete",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Nunito'),
+                    color: Colors.red, borderRadius: BorderRadius.circular(40)),
+                child: Icon(
+                  Icons.delete_outline_outlined,
+                  color: Colors.white,
+                  size: 35,
                 ),
+                // child: Text(
+                //   "Delete",
+                //   style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w400,
+                //       fontFamily: 'Nunito'),
+                // ),
               ),
             ),
           );

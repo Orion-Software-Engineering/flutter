@@ -103,15 +103,15 @@ getCustomFormattedDateTime(String givenDateTime) {
     time = DateFormat(dateFormat).format(docDateTime);
   } else if (diff.inDays > 0 && diff.inDays < 7) {
     if (diff.inDays == 1) {
-      time = diff.inDays.toString() + ' DAY AGO';
+      time = '${diff.inDays} DAY AGO';
     } else {
-      time = diff.inDays.toString() + ' DAYS AGO';
+      time = '${diff.inDays} DAYS AGO';
     }
   } else {
     if (diff.inDays == 7) {
-      time = (diff.inDays / 7).floor().toString() + ' WEEK AGO';
+      time = '${(diff.inDays / 7).floor()} WEEK AGO';
     } else {
-      time = (diff.inDays / 7).floor().toString() + ' WEEKS AGO';
+      time = '${(diff.inDays / 7).floor()} WEEKS AGO';
     }
   }
 
