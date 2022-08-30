@@ -17,13 +17,13 @@ class SettingsPage extends StatelessWidget {
             children: const [
               Icon(
                 Icons.person,
-                color: Colors.green,
+                color: Colors.black,
               ),
               SizedBox(
                 width: 8,
               ),
               Text(
-                "User",
+                "",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
@@ -36,10 +36,8 @@ class SettingsPage extends StatelessWidget {
             height: 10,
           ),
           buildAccountOptionRow(context, "Change password"),
-          buildAccountOptionRow(context, "Content settings"),
-          buildAccountOptionRow(context, "Social"),
-          buildAccountOptionRow(context, "Language"),
-          buildAccountOptionRow(context, "Privacy and security"),
+          buildAccountOptionRow(context, "Hide my location"),
+          buildAccountOptionRow(context, "Profile"),
           SizedBox(
             height: 20,
           ),
@@ -53,7 +51,7 @@ class SettingsPage extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                "Notifications",
+                "Others",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
@@ -65,11 +63,15 @@ class SettingsPage extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          buildNotificationOptionRow("New for you", true),
-          buildNotificationOptionRow("Account activity", true),
-          buildNotificationOptionRow("Opportunity", false),
+          buildNotificationOptionRow("Read receipt", true),
+          buildNotificationOptionRow("Clear chat history", true),
+          buildNotificationOptionRow("Dark mode", true),
+          buildAccountOptionRow(context, "About"),
+          buildAccountOptionRow(context, "Invite a friend"),
+          buildAccountOptionRow(context, "FAQ and help"),
+          buildAccountOptionRow(context, "Privacy Policy"),
           SizedBox(
-            height: 50,
+            height: 20,
           ),
           Center(
             child: OutlinedButton(
