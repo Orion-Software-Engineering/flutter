@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
+import 'package:matchmaking_demo/models/events_model.dart';
 
 class EventsDetails extends StatelessWidget {
-  EventsDetails({Key? key}) : super(key: key);
+  EventsDetails({Key? key, required this.event}) : super(key: key);
+  final Event event;
   final eventDetailsModel = EventDetailsModel(
       id: Details[0].id,
       name: Details[0].name,
@@ -27,8 +29,7 @@ class EventsDetails extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 ///This image widget will be changed to a network image
-                image: NetworkImage(
-                    "https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg"),
+                image: NetworkImage(event.coverImage),
                 fit: BoxFit.fill,
               ),
             ),
@@ -59,7 +60,7 @@ class EventsDetails extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 0.00),
               margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.00),
               child: Text(
-                eventDetailsModel.description,
+                event.description,
                 style: TextStyle(
                     fontSize: 11.0,
                     fontFamily:
@@ -107,7 +108,7 @@ class EventsDetails extends StatelessWidget {
                   /*decoration: BoxDecoration(
                       color: Colors.black,
                     ),*/
-                  child: Text(eventDetailsModel.organizers,
+                  child: Text(event.organizers,
                       style: TextStyle(
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,
@@ -117,9 +118,8 @@ class EventsDetails extends StatelessWidget {
                   width: 30,
                   height: 10,
                   padding: EdgeInsets.all(10.0),
-                  margin: EdgeInsets.fromLTRB( 10.0, 10.0 ,0.0 ,10.0 ),
+                  margin: EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 10.0),
                   color: Colors.black.withOpacity(0.0),
-                  
                 ),
                 Container(
                   /*width: 160,*/
@@ -128,7 +128,7 @@ class EventsDetails extends StatelessWidget {
                   /* decoration: BoxDecoration(
                       color: Colors.black,
                     ),*/
-                  child: Text(eventDetailsModel.mcs,
+                  child: Text(event.mcs,
                       style: TextStyle(
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,
@@ -179,7 +179,7 @@ class EventsDetails extends StatelessWidget {
                   /* decoration: BoxDecoration(
                       color: Colors.black,
                     ),*/
-                  child: Text(eventDetailsModel.date,
+                  child: Text(event.date,
                       style: TextStyle(
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,
@@ -200,7 +200,7 @@ class EventsDetails extends StatelessWidget {
                       color: Colors.black,
                     ),*/
                   child: Text(
-                    eventDetailsModel.guests,
+                    event.guests,
                     style: TextStyle(
                       fontSize: 13.0,
                       fontWeight: FontWeight.bold,
@@ -252,7 +252,7 @@ class EventsDetails extends StatelessWidget {
                   /*decoration: BoxDecoration(
                       color: Colors.black,
                     ),*/
-                  child: Text(eventDetailsModel.time,
+                  child: Text(event.time,
                       style: TextStyle(
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,
@@ -268,11 +268,11 @@ class EventsDetails extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.fromLTRB(10.0, 0.0, 130.0, 0.0),
                   margin: EdgeInsets.fromLTRB(10.0, 0.00, 10.0, 10.0),
-                  
+
                   /* decoration: BoxDecoration(
                       color: Colors.black,
                     ),*/
-                  child: Text(eventDetailsModel.age_restriction ? "18+" : "",
+                  child: Text(event.ageRestriction ? "18+" : "",
                       style: TextStyle(
                           fontSize: 13.0,
                           fontWeight: FontWeight.bold,

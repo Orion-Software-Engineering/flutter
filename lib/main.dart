@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         '/all_set': (context) => AllSet(),
         '/home': (context) => HomeScaffold(),
         '/forgot_password': (context) => ForgotPassword(),
-        '/events_details': (context) => EventsDetails()
+        // '/events_details': (context) => EventsDetails()
         // '/chat_page': (context) => Chat(conversationId: settings.arguments),
         // '/profile': (context) => Profile()
       },

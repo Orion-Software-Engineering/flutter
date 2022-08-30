@@ -193,7 +193,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
           setState(() {
             _currentIndex = index;
             if (index == 2) {
-              getEvents("");
+              getEvents();
             }
           });
         },

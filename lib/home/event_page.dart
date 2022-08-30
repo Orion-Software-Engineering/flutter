@@ -13,13 +13,12 @@ class EventsPage extends StatefulWidget {
 }
 
 class EventsPageState extends State<EventsPage> {
-  final prefs = SharedPreferences.getInstance();
   late Future<List<Event>> _futureEvents;
   int eventCount = 4;
 
   @override
   Widget build(BuildContext context) {
-    _futureEvents = getEvents('');
+    _futureEvents = getEvents();
 
     return FutureBuilder<List<Event>>(
       future: _futureEvents,
@@ -35,7 +34,9 @@ class EventsPageState extends State<EventsPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EventsDetails()));
+                              builder: (context) => EventsDetails(
+                                    event: snapshot.data![index],
+                                  )));
                     },
                     child: Container(
                       padding: EdgeInsets.all(20.0),
@@ -44,7 +45,8 @@ class EventsPageState extends State<EventsPage> {
                       height: 200.0,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(FlyerURLs[index].urls),
+                            image:
+                                NetworkImage(snapshot.data![index].coverImage),
                             fit: BoxFit.fill,
                           ),
                           color: Colors.grey,

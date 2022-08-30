@@ -3,8 +3,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/events_model.dart';
 import 'package:matchmaking_demo/utils/api_call_paths.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Future<List<Event>> getEvents(String userId) async {
+Future<List<Event>> getEvents() async {
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  String userId = sharedPreferences.getString("userId") != null
+      ? sharedPreferences.getString("userId")!
+      : "";
   var url = Uri(
     scheme: scheme,
     host: host,
