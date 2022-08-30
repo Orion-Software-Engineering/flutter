@@ -22,18 +22,18 @@ class APIServiceConversation {
 
     final response = await http.get(url);
     print(response.statusCode);
-    // print(response.body);
+    print("response body = ${json.decode(response.body)}");
+    print("userId = $userId");
 
     List conversationsList = json.decode(response.body);
     print(conversationsList);
     for (var i in conversationsList) {
       listOfConversationIds.add(i["id"]);
     }
-    // print("list of conversations of a user = $listOfConversationIds");
   }
 
   Future getUsersOfAllConversations() async {
-    // print("list of conversation users = $listOfConversationIds");
+    print("list of conversation users = $listOfConversationIds");
     // print(" in getUsersOfAllConversations");
     if (listOfConversationIds.isNotEmpty) {
       // print('convoList not empty');

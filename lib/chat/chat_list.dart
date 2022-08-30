@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_item.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 
 import '../models/messaging/message_model.dart';
 
@@ -30,6 +29,7 @@ class _ChatListState extends State<ChatList> {
                   showOptionsWhenMessageLongPressed(index);
                 },
                 child: ChatItem(
+                  time: widget.messagesList[index].createdAt!,
                   messageIsFromMe: widget.messagesList[index].messageIsFromMe!,
                   text: widget.messagesList[index].text!,
                 ),
@@ -42,7 +42,7 @@ class _ChatListState extends State<ChatList> {
   showOptionsWhenMessageLongPressed(int messageIndex) {
     showDialog(
         context: context,
-        barrierDismissible: false,
+        barrierDismissible: true,
         builder: (context) {
           return GestureDetector(
             onTap: () {
@@ -53,17 +53,24 @@ class _ChatListState extends State<ChatList> {
             },
             child: Center(
               child: Container(
+                width: 60,
+                height: 60,
                 padding: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
                 decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(5)),
-                child: Text(
-                  "Delete",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Nunito'),
+                    color: Colors.red, borderRadius: BorderRadius.circular(40)),
+                child: Icon(
+                  Icons.delete_outline_outlined,
+                  color: Colors.white,
+                  size: 35,
                 ),
+                // child: Text(
+                //   "Delete",
+                //   style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w400,
+                //       fontFamily: 'Nunito'),
+                // ),
               ),
             ),
           );

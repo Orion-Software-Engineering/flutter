@@ -28,7 +28,7 @@ class LoginAPIService {
         throw Exception('Failed to load data ${response.statusCode}');
       }
       statusCode = response.statusCode;
-      return LoginResponseModel.fromJson(response.body);
+      return LoginResponseModel.fromJson(response.statusCode, response.body);
     } catch (e) {
       rethrow;
     }
