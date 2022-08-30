@@ -32,6 +32,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
   int _currentIndex = 0;
   String? userId;
   Position? userPosition;
+
   void getCurrentPosition() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -191,12 +192,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            if(index==2){
-              EventAPIService apiService = new EventAPIService();
-              apiService.event().then((value){
-                print("got it");
-              });
-            }
+            if (index == 2) {}
           });
         },
       ),

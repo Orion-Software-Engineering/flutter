@@ -14,5 +14,5 @@ const String getConversationsPath = "/api/conversation/user/all/";
 const String getUsersOfAllConversationsPath = "/api/conversation/users/all/";
 
 const String getMessagesOfConversationPath = "/api/messages/";
-const String eventsPath = "/api/events";
+const String eventsPath = "/api/events/";
 const String sendMessagePath = "/api/message/";

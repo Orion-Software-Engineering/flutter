@@ -1,37 +1,23 @@
-import 'package:http/http.dart' as http;
-import 'package:matchmaking_demo/models/events_model.dart';
-import 'package:matchmaking_demo/api/api_service_signup.dart';
 import 'dart:convert';
 
-import '../utils/api_call_paths.dart';
+import 'package:http/http.dart' as http;
+import 'package:matchmaking_demo/models/events_model.dart';
+import 'package:matchmaking_demo/utils/api_call_paths.dart';
 
-class EventAPIService {
-  Future<EventListResponseModel> event() async {
-    var url = Uri(
-      scheme: scheme,
-      host: host,
-      path: eventsPath,
-    );
+Future<List<Event>> getEvents(String userId) async {
+  final response = await http.get(Uri.parse(eventsPath + userId));
+  List<Event> events = <Event>[];
 
-    Map<String, String> headers = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-    };
-
-    try {
-      final response = await http.get(url);
-      print(response.body);
-      print(response.statusCode);
-      print(response.body.runtimeType);
-
-      if(response.statusCode == 200){
-        return EventListResponseModel.fromJson(json.decode(response.body));
-      }
-      else{
-        throw Exception("Benas");
-      }
-    } catch (e) {
-      rethrow;
+  if (response.statusCode == 200) {
+    // generate a list of Events
+    for (var element in (response.body as List<dynamic>)) {
+      events.add(Event.fromJson(element));
     }
+    print(events);
+
+    // return the list of events
+    return events;
   }
+
+  throw Exception("Failed to retrieve events.");
 }
