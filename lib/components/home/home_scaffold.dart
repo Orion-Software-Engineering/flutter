@@ -173,7 +173,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
                 color: Colors.black,
                 size: widget.iconSize,
               ),
-              label: 'News',
+              label: 'Events',
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
               icon: FaIcon(
