@@ -192,7 +192,9 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            if (index == 2) {}
+            if (index == 2) {
+              getEvents("");
+            }
           });
         },
       ),
