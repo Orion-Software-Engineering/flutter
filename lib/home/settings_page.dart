@@ -13,73 +13,23 @@ class SettingsPage extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          Row(
-            children: const [
-              Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                "",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          Divider(
-            height: 15,
-            thickness: 2,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          buildAccountOptionRow(context, "Change password"),
-          buildAccountOptionRow(context, "Hide my location"),
-          buildAccountOptionRow(context, "Profile"),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.volume_up_outlined,
-                color: Colors.green,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                "Others",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          Divider(
-            height: 15,
-            thickness: 2,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          buildNotificationOptionRow("Read receipt", true),
-          buildNotificationOptionRow("Clear chat history", true),
+          buildAccountOptionRow(context, "Account"),
+          buildAccountOptionRow(context, "Privacy"),
           buildNotificationOptionRow("Dark mode", true),
-          buildAccountOptionRow(context, "About"),
-          buildAccountOptionRow(context, "Invite a friend"),
-          buildAccountOptionRow(context, "FAQ and help"),
-          buildAccountOptionRow(context, "Privacy Policy"),
+          buildAccountOptionRow(context, "Insights"),
+          buildAccountOptionRow(context, "About Us"),
+          buildAccountOptionRow(context, "Contact support"),
           SizedBox(
             height: 20,
           ),
           Center(
             child: OutlinedButton(
+              //style: ButtonStyle.foregroundColor, fix
               //padding: EdgeInsets.symmetric(horizontal: 40),
               //shape: RoundedRectangleBorder(
-              //    borderRadius: BorderRadius.circular(20)),
+              //borderRadius: BorderRadius.circular(20)),
               onPressed: () {},
-              child: Text("SIGN OUT",
+              child: Text("Delete Account",
                   style: TextStyle(
                       fontSize: 16, letterSpacing: 2.2, color: Colors.red)),
             ),
