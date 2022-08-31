@@ -13,14 +13,162 @@ class SettingsPage extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          buildAccountOptionRow(context, "Account"),
-          buildAccountOptionRow(context, "Privacy"),
-          buildNotificationOptionRow("Dark mode", true),
-          buildAccountOptionRow(context, "Insights"),
-          buildAccountOptionRow(context, "About Us"),
-          buildAccountOptionRow(context, "Contact support"),
+          GestureDetector(
+            onTap: () {
+              print('account');
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.account_circle,
+                  color: Colors.black,
+                ),
+                Text('Account',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    )),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          GestureDetector(
+            onTap: () {
+              print('privacy');
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.visibility_off,
+                  color: Colors.black,
+                ),
+                Text('Privacy',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    )),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+          ),
           SizedBox(
             height: 20,
+          ),
+          GestureDetector(
+            onTap: () {
+              print('dark mode');
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.dark_mode,
+                  color: Colors.black,
+                ),
+                Text(
+                  'Dark Mode',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+                Transform.scale(
+                    scale: 0.65,
+                    child: CupertinoSwitch(
+                      value: true,
+                      onChanged: (bool val) {},
+                    ))
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          GestureDetector(
+            onTap: () {
+              print('insights');
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.insights,
+                  color: Colors.black,
+                ),
+                Text('Insights',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    )),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          GestureDetector(
+            onTap: () {
+              print('about');
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.info,
+                  color: Colors.black,
+                ),
+                Text('About Us',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    )),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          GestureDetector(
+            onTap: () {
+              print('contact');
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.support_agent,
+                  color: Colors.black,
+                ),
+                Text('Contact Support',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    )),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )
+              ],
+            ),
           ),
           Center(
             child: OutlinedButton(
@@ -29,11 +177,13 @@ class SettingsPage extends StatelessWidget {
               //shape: RoundedRectangleBorder(
               //borderRadius: BorderRadius.circular(20)),
               onPressed: () {},
-              child: Text("Delete Account",
-                  style: TextStyle(
-                      fontSize: 16, letterSpacing: 2.2, color: Colors.red)),
+              child: Text(
+                "Delete Account",
+                style: TextStyle(
+                    fontSize: 16, letterSpacing: 2.2, color: Colors.red),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
