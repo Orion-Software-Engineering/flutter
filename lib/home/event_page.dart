@@ -26,7 +26,7 @@ class EventsPageState extends State<EventsPage> {
         if (snapshot.hasData) {
           if (snapshot.data!.isNotEmpty) {
             return GridView.builder(
-                itemCount: snapshot.data!.length - 1,
+                itemCount: snapshot.data!.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, childAspectRatio: 150.0 / 200.0),
                 itemBuilder: (BuildContext context, int index) {
