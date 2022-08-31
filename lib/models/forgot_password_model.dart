@@ -6,10 +6,10 @@ class ForgotPasswordResponseModel {
 
   ForgotPasswordResponseModel({this.token, this.error});
 
-  factory ForgotPasswordResponseModel.fromJson(Map<String, dynamic> json) {
+  factory ForgotPasswordResponseModel.fromJson(String json) {
     return ForgotPasswordResponseModel(
-      token: json["token"] != null ? json["token"] : "",
-      error: json["error"] != null ? json["error"] : "",
+      token: json != null ? json : "",
+      error: json != null ? json : "",
     );
   }
 }

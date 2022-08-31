@@ -46,11 +46,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           child: Column(
             children: [
               CustomBackButton(),
-              SizedBox(
-                height: 60.0,
+              Expanded(
+                flex: 0,
+                child: SizedBox(
+                  height: 30.0,
+                ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: TitleAndSubtext(
                     title: 'Forgot your\npassword huh?',
                     subtext: 'A password-reset link will be sent to your mail'),
@@ -103,8 +106,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             apiService.password(requestModel).then((value) {
                               setState(() {
                                 isApiCallProcess = false;
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Email sent')));
+                                if (statusCode == 200) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Email sent')));
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Could not reset password. Try again later')));
+                                }
                               });
                             });
                             print(requestModel.toJson());

@@ -8,8 +8,6 @@ const TextStyle signUpLoginTextFieldTextStyle =
 
 //apis
 
-
-
 const TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.w400,
@@ -81,8 +79,8 @@ class MyThemes {
   static final darkTheme = ThemeData(
       scaffoldBackgroundColor: orionLogoCenterColor,
       fontFamily: 'Nunito',
-      colorScheme: ColorScheme
-          .dark()); //TODO Icon Theme and primary icon theme as well as peimary color)
+      colorScheme: ColorScheme.dark()
+          .copyWith()); //TODO Icon Theme and primary icon theme as well as peimary color)
 
   //1b1129
 
