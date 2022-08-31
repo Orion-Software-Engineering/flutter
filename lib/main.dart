@@ -34,11 +34,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      // initialRoute: AppRouter.splash,
       initialRoute: AppRouter.splash,
-      // routes: {
-      //   '/chats':(context)=>Chat(conversationInfo: ConversationInfo()),
-      // },
     );
   }
 }
