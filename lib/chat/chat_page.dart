@@ -11,7 +11,7 @@ import '../models/messaging/message_model.dart';
 
 class Chat extends StatefulWidget {
   final ConversationInfo conversationInfo;
-  const Chat({required this.conversationInfo});
+  const Chat({Key? key, required this.conversationInfo});
 
   @override
   State<Chat> createState() => _ChatState();

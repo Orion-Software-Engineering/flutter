@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
                             });
                             return null;
                           } else {
-                            return "Enter a valid username address";
+                            return "Enter a valid username";
                           }
                         },
                       ),

@@ -7,6 +7,7 @@ import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
 import 'package:matchmaking_demo/chat/chat_page.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
+import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
@@ -33,7 +34,11 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
+      // initialRoute: AppRouter.splash,
       initialRoute: AppRouter.splash,
+      // routes: {
+      //   '/chats':(context)=>Chat(conversationInfo: ConversationInfo()),
+      // },
     );
   }
 }

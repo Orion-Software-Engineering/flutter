@@ -3,6 +3,8 @@ import 'package:matchmaking_demo/models/forgot_password_model.dart';
 import 'dart:convert';
 import '../utils/api_call_paths.dart';
 
+int statusCode = 0;
+
 class ForgotPasswordAPIService {
   Future<ForgotPasswordResponseModel> password(
       ForgotPasswordRequestModel requestModel) async {
@@ -13,12 +15,10 @@ class ForgotPasswordAPIService {
     );
     try {
       final response = await http.post(url, body: requestModel.toJson());
-
-      if (response.statusCode == 200) {
-        return ForgotPasswordResponseModel.fromJson(json.decode(response.body));
-      } else {
-        throw Exception('Failed to load data ${response.statusCode}');
-      }
+      print(response.body);
+      print(response.statusCode);
+      statusCode = response.statusCode;
+      return ForgotPasswordResponseModel.fromJson(response.body);
     } catch (e) {
       rethrow;
     }

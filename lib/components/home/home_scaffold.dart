@@ -26,7 +26,7 @@ class HomeScaffold extends StatefulWidget {
 }
 
 class _HomeScaffoldState extends State<HomeScaffold> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   String? userId;
   Position? userPosition;
   void getCurrentPosition() async {
