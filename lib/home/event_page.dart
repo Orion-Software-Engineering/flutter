@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_events.dart';
 import 'package:matchmaking_demo/components/events_details/events_details.dart';
@@ -43,7 +45,7 @@ class EventsPageState extends State<EventsPage> {
                         padding: EdgeInsets.all(20.0),
                         margin: EdgeInsets.all(20.0),
                         width: 150.0,
-                        height: 200.0,
+                        height: 190.0,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
@@ -57,7 +59,33 @@ class EventsPageState extends State<EventsPage> {
                 });
           }
           // TODO: make this beautiful (NK)
-          return Text("No Events available for you at this time");
+          return Column(children: <Widget>[
+            Container(
+              width: 120,
+              height: 90,
+              margin: EdgeInsets.fromLTRB(50, 180, 50, 0.0),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/Events/noresults.png',),
+                  fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5)
+                      , BlendMode.modulate),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(50.0, 40.0, 50.0, 20.0),
+              child: Text(
+                "Event organizers are probably cooking something fun. Check "
+                "again later!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.w100,
+                    fontSize: 20.0,
+                    color: Colors.grey),
+              ),
+            )
+          ]);
         }
         // TODO: make this awesome (Frank)
         return Text("Loading");
