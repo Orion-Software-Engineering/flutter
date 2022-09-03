@@ -22,17 +22,29 @@ class EventsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers:  const <Widget>[
+      slivers: <Widget>[
         SliverAppBar(
-          expandedHeight: 420.0,
+          expandedHeight: 480.0,
           pinned: false,
           snap: false,
-          floating: false,
+          floating: true,
           flexibleSpace: FlexibleSpaceBar(
-            background: Image.network('https://i.pinimg.com/236x/39/ed/cf/39edcf969346dd916b082b8a39d4af0f.jpg'),
+            background: Image.network(
+                'https://i.pinimg'
+                '.com/564x/42/91/ec/4291ecdf87037abc45712311f89e236d.jpg',
+                fit: BoxFit.cover),
           ),
         ),
-      ]
+
+        SliverToBoxAdapter(
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            color: Colors.white,
+            child: Text(eventDetailsModel.name,
+            style: TextStyle(fontSize: 30, fontWeight: ),) ,
+          ),
+        )
+      ],
     );
   }
 }
