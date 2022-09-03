@@ -26,6 +26,7 @@ class Event {
   final String guests;
   final bool ageRestriction;
   final String description;
+  final String interests;
   final String coverImage;
 
   const Event(
@@ -39,6 +40,7 @@ class Event {
       required this.guests,
       required this.ageRestriction,
       required this.description,
+      required this.interests,
       required this.coverImage});
 
   factory Event.fromJson(Map<String, dynamic> json) {
@@ -53,6 +55,7 @@ class Event {
         guests: json['guests'],
         ageRestriction: json['age_restriction'],
         description: json['description'],
+        interests: json['interests'],
         coverImage: json['cover_image']);
   }
 }

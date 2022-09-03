@@ -17,60 +17,78 @@ class EventsDetails extends StatelessWidget {
       description: Details[0].description,
       age_restriction: Details[0].age_restriction,
       organizer: Details[0].organizer,
+      interests: Details[0].interests,
       cover_image: Details[0].cover_image);
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          expandedHeight: 480.0,
-          pinned: false,
-          snap: false,
-          floating: true,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Image.network(
-                'https://i.pinimg'
-                '.com/564x/42/91/ec/4291ecdf87037abc45712311f89e236d.jpg',
-                fit: BoxFit.cover),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 480.0,
+            pinned: false,
+            snap: false,
+            floating: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                  'https://i.pinimg'
+                  '.com/564x/42/91/ec/4291ecdf87037abc45712311f89e236d.jpg',
+                  fit: BoxFit.cover),
+            ),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                color: Colors.white,
-                padding: EdgeInsets.all(10.0),
-                child: Text(
-                  eventDetailsModel.name,
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                //-----------------------Event Name and Category--------------------------
+                Container(
+                  padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
+                  //color: Colors.black,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+                        //color: Colors.black,
+                        child: Text(
+                          eventDetailsModel.name,
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                        //color: Colors.black,
+                        child: Text(
+                          eventDetailsModel.interests,
+                          style: TextStyle(
+                              fontSize: 12.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(),
+                //-----------------------Event Time and Venue---------------------------
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child:  Row(
+                          children: [
+                            Container(),
+                            Container(),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    width: double.infinity,
-                    color: Colors.white,
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      eventDetailsModel.name,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
