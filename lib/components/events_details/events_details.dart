@@ -35,15 +35,41 @@ class EventsDetails extends StatelessWidget {
                 fit: BoxFit.cover),
           ),
         ),
-
         SliverToBoxAdapter(
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            color: Colors.white,
-            child: Text(eventDetailsModel.name,
-            style: TextStyle(fontSize: 30, fontWeight: ),) ,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                color: Colors.white,
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  eventDetailsModel.name,
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: Colors.white,
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      eventDetailsModel.name,
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
