@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/settings/about_page.dart';
+import 'package:matchmaking_demo/settings/privacy_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -26,6 +27,9 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             onTap: () {
               print('privacy');
+              Navigator.push(
+                context,
+              MaterialPageRoute(builder: (context) => const PrivacyPage()));
             },
             leading: Icon(Icons.visibility_off, color: Colors.black),
             title: Text('Privacy', style: TextStyle(color: Colors.black)),
@@ -37,7 +41,7 @@ class SettingsPage extends StatelessWidget {
           SwitchListTile(
             activeTrackColor: Colors.black,
             inactiveThumbColor: Colors.black,
-            // activeThumb
+            //fix activeThumbColor
             inactiveTrackColor: Colors.grey,
             value: true,
             onChanged: (bool value) {
@@ -63,6 +67,9 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             onTap: () {
               print('about');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AboutPage()));
             },
             leading: Icon(Icons.info, color: Colors.black),
             title: Text('About', style: TextStyle(color: Colors.black)),
@@ -91,6 +98,10 @@ class SettingsPage extends StatelessWidget {
             onTap: () {
               print('logout');
             },
+            leading: Icon(
+              Icons.logout_outlined,
+              color: Colors.black,
+            ),
             title: Text(
               'Logout',
               style: TextStyle(
@@ -99,19 +110,30 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 150,
+            child: Container(
+                //color: Colors.white,
+                ),
           ),
-          // ListTile(
-          //   //shape: ,
-          //
-          //   title: Text(
-          //     'Delete Account',
-          //     style: TextStyle(
-          //       color: Colors.white
-          //     ),
-          //   ),
-          // ),
-          //Row()
+          ListTile(
+            onTap: (){
+              print('delete');
+            },
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+            tileColor: Colors.red[600],
+            textColor: Colors.white,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'Delete Account',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
