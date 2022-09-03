@@ -40,8 +40,8 @@ List<EventDetailsModel> Details = [
   EventDetailsModel(
       id: 'dfghjk563fg',
       name: 'DezzzzNutssss',
-      date: '9099-20-4',
-      time: '10:00',
+      date: '07 AUGUST 2022',
+      time: '10:00pm GMT',
       venue: "A110",
       organizers: 'Beanzz Logoszn',
       mcs: 'Pyro, Geeeee',

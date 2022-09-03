@@ -61,7 +61,7 @@ class EventsDetails extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                         //color: Colors.black,
                         child: Text(
-                          eventDetailsModel.interests,
+                          ' #${eventDetailsModel.interests}',
                           style: TextStyle(
                               fontSize: 12.0, fontWeight: FontWeight.bold),
                         ),
@@ -71,22 +71,31 @@ class EventsDetails extends StatelessWidget {
                 ),
                 //-----------------------Event Time and Venue---------------------------
                 Container(
+                  padding: EdgeInsets.all(10.0),
                   child: Column(
                     children: <Widget>[
                       Container(
+                        //Date
                         child:  Row(
-                          children: [
+                          children: <Widget>[
+                            //Clock Icon
                             Container(),
-                            Container(),
+                            //Textfield
+                            Container(
+                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 5.0),
+                              child: Text('${eventDetailsModel.date} --- ${eventDetailsModel.time}',
+                              style: TextStyle(fontSize: 18.0),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
