@@ -30,7 +30,7 @@ class EventsPageState extends State<EventsPage> {
             return GridView.builder(
               itemCount: snapshot.data!.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 150.0 / 200.0),
+                  crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {

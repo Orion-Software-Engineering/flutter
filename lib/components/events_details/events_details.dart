@@ -24,10 +24,13 @@ class EventsDetails extends StatelessWidget {
     return CustomScrollView(
       slivers:  const <Widget>[
         SliverAppBar(
-          expandedHeight: 180.0,
+          expandedHeight: 420.0,
           pinned: false,
           snap: false,
           floating: false,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Image.network('https://i.pinimg.com/236x/39/ed/cf/39edcf969346dd916b082b8a39d4af0f.jpg'),
+          ),
         ),
       ]
     );
