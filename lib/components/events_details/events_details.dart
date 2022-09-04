@@ -17,7 +17,7 @@ class EventsDetails extends StatelessWidget {
       description: Details[0].description,
       age_restriction: Details[0].age_restriction,
       organizer: Details[0].organizer,
-      interests: Details[0].interests,
+      //interests: Details[0].interests,
       cover_image: Details[0].cover_image);
 
   @override
@@ -61,7 +61,7 @@ class EventsDetails extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                         //color: Colors.black,
                         child: Text(
-                          ' #${eventDetailsModel.interests}',
+                          '0',
                           style: TextStyle(
                               fontSize: 12.0, fontWeight: FontWeight.bold),
                         ),

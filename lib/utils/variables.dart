@@ -19,7 +19,7 @@ class EventDetailsModel {
         required this.description,
       required this.age_restriction,
       required this.organizer,
-        required this.interests,
+       // required this.interests,
       required this.cover_image});
 
   final String name;
@@ -32,7 +32,7 @@ class EventDetailsModel {
   final String description;
   final bool age_restriction;
   final String organizer;
-  final String interests;
+ // final String interests;
   final String cover_image;
 }
 
@@ -51,7 +51,7 @@ List<EventDetailsModel> Details = [
           'Over here I just realised we did not limit the user as to how many words they should use here.',
       age_restriction: true,
       organizer: 'OP man',
-      interests: 'Entertainment, Music',
+      //interests: 'Entertainment, Music',
       cover_image:
           'https://i.pinimg.com/564x/54/36/0b/54360bafe2f942fdeedce7a33ba11f7d.jpg')
 ];

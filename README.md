@@ -1,5 +1,5 @@
 # Orion Meet Mobile App
-Built with ❤️ and Flutter
+Built with ❤ and Flutter
 
 
 To test the build with full functionality one must be signed in.
@@ -112,7 +112,7 @@ You'd want to set the initialRoute in main.dart to do that.
 
     -Progress popup contains a Progress class which has a child widget.
     
-    -The widget returns a stack which contains an Opacity widget containing a ModalBarrier. It          also contains a CircularProgressIndicator.
+    -The widget returns a stack which contains an Opacity widget containing a ModalBarrier. It also contains a CircularProgressIndicator.
     
     -The ModalBarrier blocks user interaction until it is dismissed. The opacity of 0.3 puts the current user oage in the background of the ModalBarrier letting the user know they cannot interact with the app and that some processing is being done.
     
@@ -127,5 +127,5 @@ You'd want to set the initialRoute in main.dart to do that.
    
 ### LoginAPIService class and Login models
     -
-  
+
 😉
