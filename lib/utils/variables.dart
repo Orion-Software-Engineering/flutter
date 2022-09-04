@@ -45,6 +45,16 @@ List<EventDetailsModel> Details = [
       guests: 'None',
       description: 'This is where the description is displayed. The content of this space is given by the organizer of the event '
           'on the web form and then it is put here after it has been fetched from the backend by the api'
+          'Over here I just realised we did not limit the user as to how many words they should use here.This is where the description is displayed. The content of this space is given by the organizer of the event '
+          'on the web form and then it is put here after it has been fetched from the backend by the api'
+          'Over here I just realised we did not limit the user as to how many words they should use here.This is where the description is displayed. The content of this space is given by the organizer of the event '
+          'on the web form and then it is put here after it has been fetched from the backend by the api'
+          'Over here I just realised we did not limit the user as to how many words they should use here.This is where the description is displayed. The content of this space is given by the organizer of the event '
+          'on the web form and then it is put here after it has been fetched from the backend by the api'
+          'Over here I just realised we did not limit the user as to how many words they should use here.This is where the description is displayed. The content of this space is given by the organizer of the event '
+          'on the web form and then it is put here after it has been fetched from the backend by the api'
+          'Over here I just realised we did not limit the user as to how many words they should use here.This is where the description is displayed. The content of this space is given by the organizer of the event '
+          'on the web form and then it is put here after it has been fetched from the backend by the api'
           'Over here I just realised we did not limit the user as to how many words they should use here.',
       age_restriction: true,
       organizer: 'OP man',

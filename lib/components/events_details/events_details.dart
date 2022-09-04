@@ -52,8 +52,7 @@ class EventsDetails extends StatelessWidget {
                         //color: Colors.black,
                         child: Text(
                           eventDetailsModel.name,
-                          style: TextStyle(
-                              fontSize: 30.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
@@ -61,8 +60,7 @@ class EventsDetails extends StatelessWidget {
                         //color: Colors.black,
                         child: Text(
                           'Colors will go here',
-                          style: TextStyle(
-                              fontSize: 12.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -75,19 +73,175 @@ class EventsDetails extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         //Date
-                        child:  Row(
+                        child: Row(
                           children: <Widget>[
                             //Clock Icon
-                            Container(),
-                            //Textfield
                             Container(
-                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 5.0),
-                              child: Text('${eventDetailsModel.date} --- ${eventDetailsModel.time}',
-                              style: TextStyle(fontSize: 18.0),
+                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                              child: Icon(
+                                Icons.access_time_sharp,
+                                color: Colors.black,
+                              ),
+                            ),
+                            //TimeTextfield
+                            Container(
+                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 8.0),
+                              child: Text(
+                                '${eventDetailsModel.date} --- ${eventDetailsModel.time}',
+                                style: TextStyle(fontSize: 14.0),
                               ),
                             ),
                           ],
                         ),
+                      ),
+                      Container(
+                        //Venue
+                        child: Row(
+                          children: <Widget>[
+                            //Venue icon
+                            Container(
+                              width: 20.0,
+                              height: 20.0,
+                              padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                image: DecorationImage(
+                                  image: AssetImage('assets/icons/location-mark-svgrepo-com.svg'),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            //VenueTextField
+                            Container(
+                              padding: EdgeInsets.fromLTRB(2, 0.0, 10.0, 8.0),
+                              child: Text(
+                                '${eventDetailsModel.venue}',
+                                style: TextStyle(fontSize: 14.0),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        //Venue
+                        child: Row(
+                          children: <Widget>[
+                            //Ticket icon
+                            Container(
+                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                              child: Icon(
+                                Icons.airplane_ticket_outlined,
+                                size: 22,
+                              ),
+                            ),
+                            //VenueTextField
+                            Container(
+                              padding: EdgeInsets.fromLTRB(2, 0.0, 10.0, 25.0),
+                              child: Text(
+                                '[Ticket pricing goes here]',
+                                style: TextStyle(fontSize: 14.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        //Venue
+                        child: Row(
+                          children: <Widget>[
+                            //Warning icon
+                            Container(),
+                            //Warning TextField
+                            Container(
+                              padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 40.0),
+                              child: Text(
+                                'This event has an 18+ age restriction.',
+                                style: TextStyle(fontSize: 10.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      //-------------------------Line separator---------------------------------
+                      Container(
+                        width: 310.0,
+                        height: 1.0,
+                        margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
+                        padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 40.0),
+                        color: Colors.grey,
+                      ),
+                    ],
+                  ),
+                ),
+                //------------------------Description------------------------------------------
+                Container(
+                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
+                  child: Text(
+                    "Description",
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                ),
+                //Description Content
+                Container(
+                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20),
+                  child: Text(
+                    '${eventDetailsModel.description}',
+                    style: TextStyle(fontSize: 12.0),
+                  ),
+                ),
+                //-------------------------------Organizers------------------------------------
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                        child: Text(
+                          'Organizers',
+                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
+                        child: Text('${eventDetailsModel.organizers}'),
+                      ),
+                    ],
+                  ),
+                ),
+                //------------------------------------MCs----------------------------------------
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                        child: Text(
+                          'MCs',
+                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
+                        child: Text('${eventDetailsModel.mcs}'),
+                      ),
+                    ],
+                  ),
+                ),
+                //-------------------------------------Guests--------------------------------------
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                        child: Text(
+                          'Guests',
+                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
+                        child: Text('${eventDetailsModel.guests}'),
                       ),
                     ],
                   ),

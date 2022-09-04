@@ -95,6 +95,9 @@ flutter:
     - assets/images/messaging/Avatars/Virgoo.png
     - assets/images/Events/noresults.png
     - assets/images/Events/Event1.png
+    - assets/icons/warning-svgrepo-com (1).svg
+    - assets/icons/museum-ticket-outline-svgrepo-com.svg
+    - assets/icons/location-mark-svgrepo-com.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
