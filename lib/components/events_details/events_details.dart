@@ -100,25 +100,26 @@ class EventsDetails extends StatelessWidget {
                           children: <Widget>[
                             //Venue icon
                             Container(
-                              width: 20.0,
-                              height: 20.0,
-                              padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                              width: 16.0,
+                              height: 22.0,
+                              margin: EdgeInsets.fromLTRB(14.0, 10.0, 10.0, 10.0),
+                              padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
                               decoration: BoxDecoration(
-                                color: Colors.black,
+                                //color: Colors.black,
                                 image: DecorationImage(
-                                  image: AssetImage('assets/icons/location-mark-svgrepo-com.svg'),
+                                  image: AssetImage('assets/icons/location-mark.png'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
                             //VenueTextField
                             Container(
-                              padding: EdgeInsets.fromLTRB(2, 0.0, 10.0, 8.0),
+                              padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 8.0),
                               child: Text(
                                 '${eventDetailsModel.venue}',
                                 style: TextStyle(fontSize: 14.0),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -128,15 +129,21 @@ class EventsDetails extends StatelessWidget {
                           children: <Widget>[
                             //Ticket icon
                             Container(
+                              width: 16.0,
+                              height: 18.0,
+                              margin: EdgeInsets.fromLTRB(14.0, 10.0, 10.0, 10.0),
                               padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-                              child: Icon(
-                                Icons.airplane_ticket_outlined,
-                                size: 22,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                image: DecorationImage(
+                                  image: AssetImage('museum-ticket-outline.png'),
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                             //VenueTextField
                             Container(
-                              padding: EdgeInsets.fromLTRB(2, 0.0, 10.0, 25.0),
+                              padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 20.0),
                               child: Text(
                                 '[Ticket pricing goes here]',
                                 style: TextStyle(fontSize: 14.0),
@@ -150,7 +157,16 @@ class EventsDetails extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             //Warning icon
-                            Container(),
+                            Container(
+                              width: 16,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
+                                  image: AssetImage('assets/icons/warning.png'),
+                                )
+                              ),
+                            ),
                             //Warning TextField
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 40.0),
