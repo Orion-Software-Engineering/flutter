@@ -6,6 +6,7 @@ import 'package:matchmaking_demo/components/events_details/events_details.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
@@ -90,20 +91,24 @@ class EventsPageState extends State<EventsPage> {
           );
         }
         //Shimmer during fetching
-        return GridView.builder(
-          itemCount: 12,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              padding: EdgeInsets.all(20.0),
-              margin: EdgeInsets.all(20.0),
-              width: 150.0,
-              height: 190.0,
-              decoration:
+        return Shimmer.fromColors (
+          baseColor: Colors.grey[400]!,
+          highlightColor: Colors.grey[300]!,
+            child: GridView.builder(
+              itemCount: 12,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  padding: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(20.0),
+                  width: 150.0,
+                  height: 190.0,
+                  decoration:
                   BoxDecoration(color: Colors.grey.withOpacity(0.4), border: Border.all(color: Colors.grey.withOpacity(0.1)), borderRadius: BorderRadius
                       .circular(8)),
-            );
-          },
+                );
+              },
+            )
         );
       },
     );
