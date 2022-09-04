@@ -100,7 +100,7 @@ class EventsPageState extends State<EventsPage> {
               width: 150.0,
               height: 190.0,
               decoration:
-                  BoxDecoration(color: Colors.grey.withOpacity(0.5), border: Border.all(color: Colors.grey.withOpacity(0.1)), borderRadius: BorderRadius
+                  BoxDecoration(color: Colors.grey.withOpacity(0.4), border: Border.all(color: Colors.grey.withOpacity(0.1)), borderRadius: BorderRadius
                       .circular(8)),
             );
           },

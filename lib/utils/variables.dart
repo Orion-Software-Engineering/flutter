@@ -5,8 +5,6 @@ import 'dart:ffi';
 Set<String> globalInterestsSet = {};
 
 class EventDetailsModel {
-  final String id;
-
   EventDetailsModel(
       {required this.id,
       required this.name,
@@ -16,12 +14,12 @@ class EventDetailsModel {
       required this.organizers,
       required this.mcs,
       required this.guests,
-        required this.description,
+      required this.description,
       required this.age_restriction,
       required this.organizer,
-       // required this.interests,
       required this.cover_image});
 
+  final String id;
   final String name;
   final String date;
   final String time;
@@ -32,7 +30,6 @@ class EventDetailsModel {
   final String description;
   final bool age_restriction;
   final String organizer;
- // final String interests;
   final String cover_image;
 }
 
@@ -51,9 +48,7 @@ List<EventDetailsModel> Details = [
           'Over here I just realised we did not limit the user as to how many words they should use here.',
       age_restriction: true,
       organizer: 'OP man',
-      //interests: 'Entertainment, Music',
-      cover_image:
-          'https://i.pinimg.com/564x/54/36/0b/54360bafe2f942fdeedce7a33ba11f7d.jpg')
+      cover_image: 'https://i.pinimg.com/564x/54/36/0b/54360bafe2f942fdeedce7a33ba11f7d.jpg')
 ];
 
 class EventFlyerURLs {
@@ -63,36 +58,16 @@ class EventFlyerURLs {
 }
 
 List<EventFlyerURLs> FlyerURLs = [
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/54/36/0b/54360bafe2f942fdeedce7a33ba11f7d.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-  EventFlyerURLs(
-      urls:
-          'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg')
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/54/36/0b/54360bafe2f942fdeedce7a33ba11f7d.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
+  EventFlyerURLs(urls: 'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg')
 ];
 
 //This class is just for testing ui
@@ -125,41 +100,14 @@ List<ChatListModel> chatList = [
       numberOfUnreads: 0,
       sent: true,
       lastMessageType: MessageType.text),
+  ChatListModel(name: "Tony", lastMessage: "5.02", lastMessageTime: "10.00 AM", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.text),
+  ChatListModel(name: "Stark", lastMessage: "Wassup !", lastMessageTime: "5:00", numberOfUnreads: 1, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Tony",
-      lastMessage: "5.02",
-      lastMessageTime: "10.00 AM",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Rachel", lastMessage: "Love you", lastMessageTime: "8:39 AM", numberOfUnreads: 0, sent: true, lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Stark",
-      lastMessage: "Wassup !",
-      lastMessageTime: "5:00",
-      numberOfUnreads: 1,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Captain", lastMessage: "1.02", lastMessageTime: "8: 00 AM", numberOfUnreads: 4, sent: false, lastMessageType: MessageType.image),
   ChatListModel(
-      name: "Rachel",
-      lastMessage: "Love you",
-      lastMessageTime: "8:39 AM",
-      numberOfUnreads: 0,
-      sent: true,
-      lastMessageType: MessageType.text),
-  ChatListModel(
-      name: "Captain",
-      lastMessage: "1.02",
-      lastMessageTime: "8: 00 AM",
-      numberOfUnreads: 4,
-      sent: false,
-      lastMessageType: MessageType.image),
-  ChatListModel(
-      name: "Joe",
-      lastMessage: "Flutter Demo",
-      lastMessageTime: "6 AM",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Joe", lastMessage: "Flutter Demo", lastMessageTime: "6 AM", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
       name: "Richie",
       lastMessage: "Hey Joan, How do you do?",
@@ -189,26 +137,11 @@ List<ChatListModel> chatList = [
       sent: true,
       lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Louji",
-      lastMessage: "4.00",
-      lastMessageTime: "yesterday",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.image),
+      name: "Louji", lastMessage: "4.00", lastMessageTime: "yesterday", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.image),
   ChatListModel(
-      name: "Joan",
-      lastMessage: "politics",
-      lastMessageTime: "yesterday",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Joan", lastMessage: "politics", lastMessageTime: "yesterday", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Rion",
-      lastMessage: "How are you?",
-      lastMessageTime: "22/8/2020",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Rion", lastMessage: "How are you?", lastMessageTime: "22/8/2020", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
       name: "Johanna",
       lastMessage: "Hey whats up",
@@ -224,12 +157,7 @@ List<ChatListModel> chatList = [
       sent: true,
       lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Ibrahim",
-      lastMessage: "Who are you",
-      lastMessageTime: "22/8/2020",
-      numberOfUnreads: 3,
-      sent: true,
-      lastMessageType: MessageType.text),
+      name: "Ibrahim", lastMessage: "Who are you", lastMessageTime: "22/8/2020", numberOfUnreads: 3, sent: true, lastMessageType: MessageType.text),
   ChatListModel(
       name: "Edwin",
       lastMessage: "Let's play a match now",
@@ -245,12 +173,7 @@ List<ChatListModel> chatList = [
       sent: false,
       lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Rani",
-      lastMessage: "hey there",
-      lastMessageTime: "22/8/2020",
-      numberOfUnreads: 32,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Rani", lastMessage: "hey there", lastMessageTime: "22/8/2020", numberOfUnreads: 32, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
       name: "Prabu",
       lastMessage: "What about your job.",
@@ -259,33 +182,13 @@ List<ChatListModel> chatList = [
       sent: false,
       lastMessageType: MessageType.text),
   ChatListModel(
-      name: "EOP",
-      lastMessage: "Wrong politics",
-      lastMessageTime: "16/8/2020",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "EOP", lastMessage: "Wrong politics", lastMessageTime: "16/8/2020", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Joshep",
-      lastMessage: "Happy feast",
-      lastMessageTime: "16/8/2020",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Joshep", lastMessage: "Happy feast", lastMessageTime: "16/8/2020", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Dart",
-      lastMessage: "Happy coding..",
-      lastMessageTime: "12/8/2020",
-      numberOfUnreads: 0,
-      sent: false,
-      lastMessageType: MessageType.text),
+      name: "Dart", lastMessage: "Happy coding..", lastMessageTime: "12/8/2020", numberOfUnreads: 0, sent: false, lastMessageType: MessageType.text),
   ChatListModel(
-      name: "Java",
-      lastMessage: "00.32",
-      lastMessageTime: "16/8/2020",
-      numberOfUnreads: 53,
-      sent: true,
-      lastMessageType: MessageType.image),
+      name: "Java", lastMessage: "00.32", lastMessageTime: "16/8/2020", numberOfUnreads: 53, sent: true, lastMessageType: MessageType.image),
 ];
 
 class PossibleMatchCard {
