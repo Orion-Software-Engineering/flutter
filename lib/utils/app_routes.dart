@@ -79,16 +79,25 @@ class AppRouter {
 
 extension NavigatorStateExtension on NavigatorState {
   Future<void> enterAppThroughLoginScreen() => pushNamed(AppRouter.login);
+
   Future<void> enterAppThroughHomeScreen() => pushNamed(AppRouter.home);
+
   Future<void> goToForgotPasswordScreen() =>
       pushNamed(AppRouter.forgotPassword);
+
   Future<void> goToSignUpScreen() => pushNamed(AppRouter.signUp);
+
   Future<void> goToInterests1() => pushNamed(AppRouter.interests1);
+
   Future<void> goToInterests2() => pushNamed(AppRouter.interests2);
+
   Future<void> goToInterests3() => pushNamed(AppRouter.interests3);
+
   Future<void> goToChatPage(ConversationInfo conversationInfo) =>
       pushNamed(AppRouter.chatPage, arguments: conversationInfo);
+
   Future<void> goToProfile(String userId) =>
       pushNamed(AppRouter.profile, arguments: userId);
+
   Future<void> goToAllSet() => pushNamed(AppRouter.allSet);
 }
