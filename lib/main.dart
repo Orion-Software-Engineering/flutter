@@ -27,15 +27,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // onGenerateRoute: AppRouter.onGenerateRoute,
+      onGenerateRoute: AppRouter.onGenerateRoute,
       onUnknownRoute: AppRouter.onUnknownRoute,
       debugShowCheckedModeBanner: false,
       title: 'Orion Meet',
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      initialRoute: '/home',
-      routes: {'/home': (context) => HomeScaffold()},
+      initialRoute: AppRouter.splash,
     );
   }
 }
