@@ -124,19 +124,19 @@ class EventsDetails extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        //Venue
+                        //Ticketing
                         child: Row(
                           children: <Widget>[
                             //Ticket icon
                             Container(
                               width: 16.0,
                               height: 18.0,
-                              margin: EdgeInsets.fromLTRB(14.0, 10.0, 10.0, 10.0),
-                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                              margin: EdgeInsets.fromLTRB(14.0, 10.0, 5.0, 20.0),
+                              //padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                               decoration: BoxDecoration(
                                 //color: Colors.black,
                                 image: DecorationImage(
-                                  image: AssetImage('museum-ticket-outline.png'),
+                                  image: AssetImage('assets/icons/ticket-outline.png'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -153,14 +153,14 @@ class EventsDetails extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        //Venue
+                        //Age restriction message.
                         child: Row(
                           children: <Widget>[
                             //Warning icon
                             Container(
                               width: 16,
                               height: 18,
-                              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                              margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
