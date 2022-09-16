@@ -19,13 +19,17 @@ class SignUpAPIService {
 
     try {
       final response = await http.post(url, body: requestModel.toJson());
-      if (response.statusCode == 201) {
-        userID = json.decode(response.body)["userId"];
-      } else if (response.statusCode == 400) {
-        message = "The username or email is already in use";
+      if (response.statusCode == 201 || response.statusCode == 400) {
+        if (response.statusCode == 201) {
+          userID = json.decode(response.body)["userId"];
+        } else if (response.statusCode == 400) {
+          message = "The username or email is already in use";
+        }
+        statusCode = response.statusCode;
+        return SignupResponseModel.fromJson(json.decode(response.body));
+      } else {
+        throw Exception();
       }
-      statusCode = response.statusCode;
-      return SignupResponseModel.fromJson(json.decode(response.body));
     } catch (e) {
       rethrow;
     }
