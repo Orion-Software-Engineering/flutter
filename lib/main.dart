@@ -1,40 +1,58 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/components/events_details/events_details.dart';
-import 'package:matchmaking_demo/components/home/home_scaffold.dart';
-import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
-import 'package:matchmaking_demo/chat/chat_page.dart';
-import 'package:matchmaking_demo/interests/interests_1.dart';
-import 'package:matchmaking_demo/interests/interests_2.dart';
-import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
-import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'Profile/profile.dart';
-import 'components/interests/all_set.dart';
-import 'interests/interests_3.dart';
-import 'signup/sign_up_page.dart';
-import 'login/login_page.dart';
+import 'package:matchmaking_demo/home/settings_page.dart';
+import 'package:matchmaking_demo/utils/theme_listener.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  DarkThemeProvider themeChanger = DarkThemeProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  void getCurrentAppTheme() async {
+    themeChanger.darkTheme = await getTheme();
+    print("main${themeChanger.darkTheme}");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: AppRouter.onGenerateRoute,
-      onUnknownRoute: AppRouter.onUnknownRoute,
-      debugShowCheckedModeBanner: false,
-      title: 'Orion Meet',
-      themeMode: ThemeMode.light,
-      theme: MyThemes.lightTheme,
-      darkTheme: MyThemes.darkTheme,
-      initialRoute: AppRouter.splash,
+    return ChangeNotifierProvider(
+      create: (_) {
+        print(themeChanger.darkTheme);
+        return themeChanger;
+      },
+      child: Consumer<DarkThemeProvider>(
+          builder: (BuildContext context, value, child) {
+        return MaterialApp(
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          onUnknownRoute: AppRouter.onUnknownRoute,
+          debugShowCheckedModeBanner: false,
+          title: 'Orion Meet',
+          themeMode: null,
+          theme:
+              themeChanger.darkTheme ? MyThemes.darkTheme : MyThemes.lightTheme,
+          //darkTheme: MyThemes.darkTheme,
+          initialRoute: AppRouter.splash,
+        );
+      }),
     );
   }
 }

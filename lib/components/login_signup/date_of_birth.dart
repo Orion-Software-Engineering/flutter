@@ -30,12 +30,73 @@ class _DobFieldState extends State<DobField> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        int dayOfYear = 0;
+        switch (DateTime.now().month) {
+          case 12:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 334 + DateTime.now().day
+                : 335 + DateTime.now().day;
+            break;
+          case 11:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 304 + DateTime.now().day
+                : 305 + DateTime.now().day;
+            break;
+          case 10:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 273 + DateTime.now().day
+                : 274 + DateTime.now().day;
+            break;
+          case 9:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 243 + DateTime.now().day
+                : 244 + DateTime.now().day;
+            break;
+          case 8:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 212 + DateTime.now().day
+                : 213 + DateTime.now().day;
+            break;
+          case 7:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 181 + DateTime.now().day
+                : 182 + DateTime.now().day;
+            break;
+          case 6:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 151 + DateTime.now().day
+                : 152 + DateTime.now().day;
+            break;
+          case 5:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 120 + DateTime.now().day
+                : 121 + DateTime.now().day;
+            break;
+          case 4:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 90 + DateTime.now().day
+                : 91 + DateTime.now().day;
+            break;
+          case 3:
+            dayOfYear += (DateTime.now().year % 4 == 0)
+                ? 59 + DateTime.now().day
+                : 60 + DateTime.now().day;
+            break;
+          case 2:
+            dayOfYear += 31 + DateTime.now().day;
+            break;
+          case 1:
+            dayOfYear = DateTime.now().day;
+            break;
+        }
+        print(dayOfYear);
+
         showDatePicker(
                 context: context,
                 initialDate: DateTime(DateTime.now().year - 18),
                 firstDate: DateTime(1900),
-                lastDate:
-                    DateTime(DateTime.now().year - 18).add(Duration(days: 100)))
+                lastDate: DateTime(DateTime.now().year - 18)
+                    .add(Duration(days: dayOfYear)))
             .then((date) {
           setState(() {
             dateValue = dateFormat.format(date!).substring(0, 10);
