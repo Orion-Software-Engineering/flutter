@@ -79,10 +79,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             : FontAwesomeIcons.solidMoon;
 
     return WillPopScope(
-      onWillPop: () async {
-        Navigator.pop(context, false);
-        return false;
-      },
+      onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
