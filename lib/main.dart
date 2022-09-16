@@ -47,8 +47,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'Orion Meet',
           themeMode: null,
-          theme:
-              themeChanger.darkTheme ? MyThemes.darkTheme : MyThemes.lightTheme,
+          theme: MyThemes.themeData(true, context),
           //darkTheme: MyThemes.darkTheme,
           initialRoute: AppRouter.splash,
         );

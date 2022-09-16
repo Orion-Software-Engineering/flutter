@@ -75,17 +75,35 @@ const TextStyle interestsPageNextBackStyle = TextStyle(
 
 //THEMES
 
+// class MyThemes {
+//   static final darkTheme = ThemeData(
+//       scaffoldBackgroundColor: orionLogoCenterColor,
+//       fontFamily: 'Nunito',
+//       colorScheme: ColorScheme.dark()
+//           .copyWith()); //TODO Icon Theme and primary icon theme as well as primary color)
+//
+//   //1b1129
+//
+//   static final lightTheme = ThemeData(
+//       scaffoldBackgroundColor: Colors.white,
+//       fontFamily: 'Nunito',
+//       colorScheme: ColorScheme.light());
+// }
 class MyThemes {
-  static final darkTheme = ThemeData(
-      scaffoldBackgroundColor: orionLogoCenterColor,
-      fontFamily: 'Nunito',
-      colorScheme: ColorScheme.dark()
-          .copyWith()); //TODO Icon Theme and primary icon theme as well as peimary color)
-
-  //1b1129
-
-  static final lightTheme = ThemeData(
-      scaffoldBackgroundColor: Colors.white,
-      fontFamily: 'Nunito',
-      colorScheme: ColorScheme.light());
+  static ThemeData themeData(bool isDarkTheme, BuildContext context) {
+    return ThemeData(
+        primaryColor: isDarkTheme ? Colors.black : Colors.white,
+        backgroundColor: isDarkTheme ? Colors.black : Colors.white,
+        iconTheme: IconThemeData(
+          color: isDarkTheme ? Colors.white : Colors.black,
+        ),
+        primaryTextTheme: TextTheme(
+            bodyText1: TextStyle(
+          color: isDarkTheme ? Colors.white : Colors.black,
+        )),
+        buttonTheme: Theme.of(context).buttonTheme..copyWith(),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: isDarkTheme ? Colors.black : Colors.white,
+        ));
+  }
 }

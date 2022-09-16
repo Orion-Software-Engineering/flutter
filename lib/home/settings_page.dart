@@ -13,8 +13,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool darkModeTrack = false;
-
   @override
   Widget build(BuildContext context) {
     var themeChange = Provider.of<DarkThemeProvider>(context);
@@ -23,87 +21,111 @@ class _SettingsPageState extends State<SettingsPage> {
       child: ListView(
         children: [
           ListTile(
+            tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('account');
             },
-            leading: Icon(Icons.account_circle, color: Colors.black),
-            title: Text('Account', style: TextStyle(color: Colors.black)),
+            leading: Icon(Icons.account_circle,
+                color: Theme.of(context).iconTheme.color),
+            title: Text('Account',
+                style: TextStyle(
+                    color:
+                        Theme.of(context).primaryTextTheme.bodyText1?.color)),
             trailing: Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           ListTile(
+            tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('privacy');
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const PrivacyPage()));
             },
-            leading: Icon(Icons.visibility_off, color: Colors.black),
-            title: Text('Privacy', style: TextStyle(color: Colors.black)),
+            leading: Icon(Icons.visibility_off,
+                color: Theme.of(context).iconTheme.color),
+            title: Text('Privacy',
+                style: TextStyle(
+                    color:
+                        Theme.of(context).primaryTextTheme.bodyText1?.color)),
             trailing: Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           SwitchListTile(
-            activeTrackColor: Colors.black,
+            tileColor: Theme.of(context).primaryColor,
+            activeTrackColor: Colors.lightBlue[900],
             inactiveThumbColor: Colors.white,
             inactiveTrackColor: Colors.grey,
-            value: darkModeTrack,
+            value: themeChange.darkTheme,
             onChanged: (value) {
               setState(() {
-                darkModeTrack = value;
                 themeChange.darkTheme = value;
-                print(darkModeTrack);
                 print(themeChange.darkTheme);
               });
             },
-            title: const Text(
+            title: Text(
               'Dark Mode',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(
+                  color: Theme.of(context).primaryTextTheme.bodyText1?.color),
             ),
-            secondary: const Icon(Icons.dark_mode, color: Colors.black),
+            secondary:
+                Icon(Icons.dark_mode, color: Theme.of(context).iconTheme.color),
           ),
           ListTile(
+            tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('insights');
             },
-            leading: Icon(Icons.insights, color: Colors.black),
-            title: Text('Insights', style: TextStyle(color: Colors.black)),
+            leading:
+                Icon(Icons.insights, color: Theme.of(context).iconTheme.color),
+            title: Text('Insights',
+                style: TextStyle(
+                    color:
+                        Theme.of(context).primaryTextTheme.bodyText1?.color)),
             trailing: Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           ListTile(
+            tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('about');
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const AboutPage()));
             },
-            leading: Icon(Icons.info, color: Colors.black),
-            title: Text('About', style: TextStyle(color: Colors.black)),
+            leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color),
+            title: Text('About',
+                style: TextStyle(
+                    color:
+                        Theme.of(context).primaryTextTheme.bodyText1?.color)),
             trailing: Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           ListTile(
+            tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('contact');
             },
-            leading: Icon(Icons.support_agent, color: Colors.black),
-            title:
-                Text('Contact Support', style: TextStyle(color: Colors.black)),
+            leading: Icon(Icons.support_agent,
+                color: Theme.of(context).iconTheme.color),
+            title: Text('Contact Support',
+                style: TextStyle(
+                    color:
+                        Theme.of(context).primaryTextTheme.bodyText1?.color)),
             trailing: Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           Divider(
             thickness: 0.1,
-            color: Colors.black,
+            color: Theme.of(context).iconTheme.color,
           ),
           ListTile(
             onTap: () {
@@ -111,7 +133,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             leading: Icon(
               Icons.logout_outlined,
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             ),
             title: Text(
               'Logout',

@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
 import '../../home/chat_room_page.dart';
@@ -81,6 +82,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
@@ -110,55 +112,55 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home_outlined,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: Icon(
                   Icons.home,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 label: 'Home',
-                backgroundColor: Colors.white),
+                backgroundColor: Theme.of(context).bottomAppBarTheme.color),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.chat_bubble_outline,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: Icon(
                   Icons.chat_bubble,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 label: 'Chat Room',
-                backgroundColor: Colors.white),
+                backgroundColor: Theme.of(context).bottomAppBarTheme.color),
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.newspaper,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: FaIcon(
                   FontAwesomeIcons.solidNewspaper,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 label: 'News',
-                backgroundColor: Colors.white),
+                backgroundColor: Theme.of(context).bottomAppBarTheme.color),
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.sliders,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: FaIcon(
                   FontAwesomeIcons.sliders,
-                  color: Colors.black,
+                  color: Theme.of(context).iconTheme.color,
                   size: widget.iconSize,
                 ),
                 label: 'Settings',
-                backgroundColor: Colors.white),
+                backgroundColor: Theme.of(context).bottomAppBarTheme.color),
           ],
           onTap: (index) {
             setState(() {
