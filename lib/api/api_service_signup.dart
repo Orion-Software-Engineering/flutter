@@ -28,7 +28,7 @@ class SignUpAPIService {
         statusCode = response.statusCode;
         return SignupResponseModel.fromJson(json.decode(response.body));
       } else {
-        throw Exception();
+        throw Exception(response.statusCode);
       }
     } catch (e) {
       rethrow;
