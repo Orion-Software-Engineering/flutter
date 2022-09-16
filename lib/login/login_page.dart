@@ -65,6 +65,12 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextFormField(
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: signUpLoginTextFieldTextStyle,
@@ -105,7 +111,10 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 30.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: Theme.of(context)
+                                .buttonTheme
+                                .colorScheme
+                                ?.primary,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -129,8 +138,9 @@ class _LoginState extends State<Login> {
                                 } else {
                                   Fluttertoast.showToast(
                                     msg: message,
-                                    textColor: Colors.white,
-                                    backgroundColor: Colors.black,
+                                    textColor: Theme.of(context).primaryColor,
+                                    backgroundColor:
+                                        Theme.of(context).iconTheme.color,
                                     timeInSecForIosWeb: 2,
                                     fontSize: 16,
                                   );
@@ -149,7 +159,7 @@ class _LoginState extends State<Login> {
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.white,
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
                           ),
