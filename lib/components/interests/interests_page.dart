@@ -155,19 +155,7 @@ class _InterestsPageState extends State<InterestsPage> {
                           msg: 'Select at least 3 interests',
                           fontSize: 16);
                     } else {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      requestModel.interests = globalInterestsSet.toList();
-                      print(globalInterestsSet.toList());
-                      print(globalInterestsSet.toList().runtimeType);
-                      InterestAPIService apiService = InterestAPIService();
-                      apiService.interest(requestModel).then((value) {
-                        setState(() {
-                          isLoading = false;
-                          Navigator.of(context).goToAllSet();
-                        });
-                      });
+                      pushInterestListAndRoute();
                     }
                   } else {
                     switch (widget.pageNumber) {
@@ -211,12 +199,38 @@ class _InterestsPageState extends State<InterestsPage> {
                       fontSize: 16);
                 }
               },
-              child: Text(
-                'Skip now -->',
-                style: interestsPageNextBackStyle,
+              child: TextButton(
+                onPressed: () {
+                  print("Skipped");
+                  print(globalInterestsSet.length);
+                  if (globalInterestsSet.length > 2) {
+                    print("here");
+                    pushInterestListAndRoute();
+                  }
+                },
+                child: Text(
+                  'Skip now -->',
+                  style: interestsPageNextBackStyle,
+                ),
               )),
         )
       ],
     );
+  }
+
+  void pushInterestListAndRoute() {
+    setState(() {
+      isLoading = true;
+    });
+    requestModel.interests = globalInterestsSet.toList();
+    print(globalInterestsSet.toList());
+    print(globalInterestsSet.toList().runtimeType);
+    InterestAPIService apiService = InterestAPIService();
+    apiService.interest(requestModel).then((value) {
+      setState(() {
+        isLoading = false;
+        Navigator.of(context).goToAllSet();
+      });
+    });
   }
 }

@@ -64,6 +64,7 @@ class AppRouter {
             builder: (context) => Profile(userId: settings.arguments as String),
             settings: settings);
     }
+    return null;
   }
 
   static Route<dynamic>? onUnknownRoute(RouteSettings settings) {
