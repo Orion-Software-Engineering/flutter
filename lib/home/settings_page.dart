@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/settings/about_page.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
+import 'package:matchmaking_demo/utils/theme_listener.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
-  // bool _dark = false;
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  bool darkModeTrack = false;
 
   @override
   Widget build(BuildContext context) {
+    var themeChange = Provider.of<DarkThemeProvider>(context);
     return Container(
       padding: EdgeInsets.only(left: 16, top: 1, right: 16),
       child: ListView(
@@ -27,9 +36,8 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             onTap: () {
               print('privacy');
-              Navigator.push(
-                context,
-              MaterialPageRoute(builder: (context) => const PrivacyPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const PrivacyPage()));
             },
             leading: Icon(Icons.visibility_off, color: Colors.black),
             title: Text('Privacy', style: TextStyle(color: Colors.black)),
@@ -40,12 +48,16 @@ class SettingsPage extends StatelessWidget {
           ),
           SwitchListTile(
             activeTrackColor: Colors.black,
-            inactiveThumbColor: Colors.black,
-            //fix activeThumbColor
+            inactiveThumbColor: Colors.white,
             inactiveTrackColor: Colors.grey,
-            value: true,
-            onChanged: (bool value) {
-              print('dark');
+            value: darkModeTrack,
+            onChanged: (value) {
+              setState(() {
+                darkModeTrack = value;
+                themeChange.darkTheme = value;
+                print(darkModeTrack);
+                print(themeChange.darkTheme);
+              });
             },
             title: const Text(
               'Dark Mode',
@@ -67,8 +79,7 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             onTap: () {
               print('about');
-              Navigator.push(
-                  context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const AboutPage()));
             },
             leading: Icon(Icons.info, color: Colors.black),
@@ -116,7 +127,7 @@ class SettingsPage extends StatelessWidget {
                 ),
           ),
           ListTile(
-            onTap: (){
+            onTap: () {
               print('delete');
             },
             shape:
@@ -138,4 +149,14 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+}
+
+setDarkThemePreferences(bool value) async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setBool("themeStatus", value);
+}
+
+Future<bool> getTheme() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  return preferences.getBool("themeStatus") ?? false;
 }
