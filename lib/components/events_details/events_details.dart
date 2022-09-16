@@ -134,7 +134,7 @@ class EventsDetails extends StatelessWidget {
                               margin: EdgeInsets.fromLTRB(14.0, 10.0, 10.0, 10.0),
                               padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                               decoration: BoxDecoration(
-                                color: Colors.black,
+                                //color: Colors.black,
                                 image: DecorationImage(
                                   image: AssetImage('museum-ticket-outline.png'),
                                   fit: BoxFit.fill,
@@ -160,6 +160,7 @@ class EventsDetails extends StatelessWidget {
                             Container(
                               width: 16,
                               height: 18,
+                              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
@@ -169,7 +170,7 @@ class EventsDetails extends StatelessWidget {
                             ),
                             //Warning TextField
                             Container(
-                              padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 40.0),
+                              padding: EdgeInsets.fromLTRB(10, 10.0, 10.0, 40.0),
                               child: Text(
                                 'This event has an 18+ age restriction.',
                                 style: TextStyle(fontSize: 10.0),

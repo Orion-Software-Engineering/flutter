@@ -96,7 +96,7 @@ flutter:
     - assets/images/Events/noresults.png
     - assets/images/Events/Event1.png
     - assets/icons/location-mark.png
-    - assets/icons/museum-ticket-outline.png
+    - assets/icons/ticket-outline.png
     - assets/icons/warning.png
   #   - images/a_dot_ham.jpeg
 
