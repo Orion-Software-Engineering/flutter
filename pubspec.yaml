@@ -95,6 +95,7 @@ flutter:
     - assets/images/messaging/Avatars/Taurus.png
     - assets/images/messaging/Avatars/Virgoo.png
     - assets/images/Events/Event1.png
+    - assets/images/matching/doodle.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

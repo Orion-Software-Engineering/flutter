@@ -17,3 +17,5 @@ const String getMessagesOfConversationPath = "/api/messages/";
 const String eventsPath = "/api/events/getEvent/";
 const String sendMessagePath = "/api/message/";
 const String deleteMessagePath = "/api/message";
+
+const String getMatchesPath = "/api/test/matches/";

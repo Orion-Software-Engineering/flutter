@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_message.dart';
+import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_item.dart';
 
 import '../models/messaging/message_model.dart';

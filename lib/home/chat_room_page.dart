@@ -2,9 +2,13 @@
 * The Messaging page that shows a list of contacts you've been texting
 * */
 
+import 'dart:core';
+import 'dart:core';
+import 'dart:core';
+
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_conversation.dart';
-import 'package:matchmaking_demo/api/api_service_message.dart';
+import 'package:matchmaking_demo/api/messaging/api_service_conversation.dart';
+import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
