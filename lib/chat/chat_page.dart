@@ -71,7 +71,7 @@ class _ChatState extends State<Chat> {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: "Nunito",
-                      fontSize: 16,
+                      fontSize: 24,
                     ),
                   ),
                 ],
@@ -79,9 +79,6 @@ class _ChatState extends State<Chat> {
             ],
           ),
         ),
-        // actions: const [
-        // IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
-        // ],
       ),
       body: Stack(
         children: [
