@@ -36,17 +36,15 @@ class EventsDetails extends StatelessWidget {
                   '.com/564x/42/91/ec/4291ecdf87037abc45712311f89e236d.jpg',
                   fit: BoxFit.cover),
             ),
-            actions: <Widget>[
-              Container(
-                height: 100,
-                child: FavoriteButton(
-                    iconSize: 40.0,
-                    iconColor: Colors.red,
-                    isFavorite: false,
-                    valueChanged: (_isFavorite) {
-                      print('Is favorite: $_isFavorite');
-                    }),
-              ),
+            actions: [
+              FavoriteButton(
+                  iconSize: 40.0,
+                  iconColor: Colors.red,
+                  isFavorite: false,
+                  valueChanged: (_isFavorite) {
+                    print('Is favorite: $_isFavorite');
+                  }),
+              IconButton(onPressed: () =>{}, icon: Icon(Icons.bookmark))
             ],
           ),
           SliverToBoxAdapter(
