@@ -113,7 +113,10 @@ class _DobFieldState extends State<DobField> {
             labelText: dateValue == null ? 'DD/MM/YYYY' : 'Date of Birth',
             labelStyle: signUpLoginTextFieldTextStyle,
             border: inputBorder,
-            suffixIcon: Icon(Icons.calendar_month)),
+            suffixIcon: Icon(
+              Icons.calendar_month,
+              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+            )),
         validator: widget.validationFunction,
       ),
     );

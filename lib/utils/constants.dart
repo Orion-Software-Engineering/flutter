@@ -46,8 +46,8 @@ const List<String> interestsList = [
   'Sports'
 ];
 
-const TextStyle interestsTitleStyle =
-    TextStyle(fontSize: 40, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
+//const TextStyle interestsTitleStyle =
+//TextStyle(fontSize: 40, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
 
 const TextStyle interestsButtonTextStyle = TextStyle(
     color: Colors.white,
@@ -55,7 +55,7 @@ const TextStyle interestsButtonTextStyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontFamily: 'Nunito');
 
-const Color interestsButtonColorNormal = Color(0xFF222222);
+const Color interestsButtonColorNormal = Colors.black;
 
 const Color interestsButtonColorSelected = Color(0xFF205098);
 

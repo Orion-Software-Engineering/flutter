@@ -73,7 +73,11 @@ class _InterestsPageState extends State<InterestsPage> {
       children: [
         Text(
           "Let's know your interests!",
-          style: interestsTitleStyle,
+          style: TextStyle(
+              fontSize: 40,
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color),
           textAlign: TextAlign.center,
         ),
         SizedBox(
