@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 class EventsDetails extends StatelessWidget {
   EventsDetails({Key? key, required this.event}) : super(key: key);
@@ -35,6 +36,18 @@ class EventsDetails extends StatelessWidget {
                   '.com/564x/42/91/ec/4291ecdf87037abc45712311f89e236d.jpg',
                   fit: BoxFit.cover),
             ),
+            actions: <Widget>[
+              Container(
+                height: 100,
+                child: FavoriteButton(
+                    iconSize: 40.0,
+                    iconColor: Colors.red,
+                    isFavorite: false,
+                    valueChanged: (_isFavorite) {
+                      print('Is favorite: $_isFavorite');
+                    }),
+              ),
+            ],
           ),
           SliverToBoxAdapter(
             child: Column(
