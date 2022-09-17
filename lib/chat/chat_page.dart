@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_message.dart';
+import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_list.dart';
 import 'package:matchmaking_demo/chat/input_field.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';

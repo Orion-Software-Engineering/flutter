@@ -25,6 +25,9 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
     return Column(
       children: [
         TextFormField(
+          style: TextStyle(
+            color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+          ),
           keyboardType: TextInputType.emailAddress,
           obscureText: masked,
           decoration: InputDecoration(

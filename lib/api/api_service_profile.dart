@@ -17,13 +17,11 @@ class APIServiceProfile {
       if (response.statusCode == 200) {
         var profileResponse = json.decode(response.body);
         print(json.decode(response.body));
-        // saveProfileData(profileResponse);
         profileResponseModel.id = profileResponse["id"];
         profileResponseModel.email = profileResponse["email"];
         profileResponseModel.username = profileResponse["username"];
         profileResponseModel.dateOfBirth = profileResponse["dateOfBirth"];
         profileResponseModel.gender = profileResponse["gender"];
-        // return ProfileResponseModel.fromJson(json.decode(response.body));
       } else {
         throw Exception('Failed to get profile ${response.statusCode}');
       }
