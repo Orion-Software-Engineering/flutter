@@ -2,6 +2,7 @@ class ConversationInfo {
   final String? conversationId;
   String receiverUsername = '';
   String receiverUserId = '';
+  String lastMessage = '';
   final List<Map<String, String>> conversationUsers = [];
 
   ConversationInfo({this.conversationId});

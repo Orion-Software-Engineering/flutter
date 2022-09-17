@@ -7,6 +7,7 @@ import '../../utils/api_call_paths.dart';
 class MessageAPIService {
   List<Message> listOfMessages = [];
   late String myUserId;
+
   Future getMessagesOfConversation(String conversationId) async {
     listOfMessages = [];
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

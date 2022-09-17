@@ -35,7 +35,7 @@ class APIServiceConversation {
     }
   }
 
-  Future getUsersOfAllConversations() async {
+  Future getConversationInfo() async {
     print("list of conversation users = $listOfConversationIds");
     print(" in getUsersOfAllConversations");
     if (listOfConversationIds.isNotEmpty) {
@@ -43,14 +43,18 @@ class APIServiceConversation {
       for (String convoId in listOfConversationIds) {
         ConversationInfo conversationInfo =
             ConversationInfo(conversationId: convoId);
-        Uri url = Uri(
+        Uri getUsersUrl = Uri(
             scheme: scheme,
             host: host,
             path: getUsersOfAllConversationsPath + convoId);
 
-        final response = await http.get(url);
+        // Uri getLastMessageUrl = Uri(
+        //   scheme: scheme,host: host,path:
+        // );
 
-        List listOfUsers = json.decode(response.body);
+        final getUsersResponse = await http.get(getUsersUrl);
+
+        List listOfUsers = json.decode(getUsersResponse.body);
 
         for (Map i in listOfUsers) {
           Map<String, String> userIdAndUsername = {

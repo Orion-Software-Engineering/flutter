@@ -21,7 +21,7 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
-  List<ConversationInfo> chatList = [];
+  List<ConversationInfo> listOfConversations = [];
 
   @override
   void initState() {
@@ -29,11 +29,11 @@ class _ChatRoomState extends State<ChatRoom> {
     APIServiceConversation apiServiceConversation = APIServiceConversation();
     apiServiceConversation
         .getConversationsOfUser()
-        .then((value) => apiServiceConversation.getUsersOfAllConversations())
+        .then((value) => apiServiceConversation.getConversationInfo())
         .then(
           (value) => setState(() {
-            chatList = apiServiceConversation.listOfConversationInfo;
-            print("inside setstate chatList = $chatList");
+            listOfConversations = apiServiceConversation.listOfConversationInfo;
+            print("inside setState chatList = $listOfConversations");
           }),
         );
   }
@@ -43,16 +43,18 @@ class _ChatRoomState extends State<ChatRoom> {
     return Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
         child: ListView.builder(
-          itemCount: chatList.length,
+          itemCount: listOfConversations.length,
           itemBuilder: (BuildContext context, int index) {
-            // print("${chatList[index].}\n\n\n\n\n\n");
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 1.2),
               child: GestureDetector(
                 onTap: () {
                   MessageAPIService apiServiceMessage = MessageAPIService();
-                  apiServiceMessage.getMessagesOfConversation(
-                      chatList[index].conversationId!);
+                  apiServiceMessage
+                      .getMessagesOfConversation(
+                          listOfConversations[index].conversationId!)
+                      .then((value) => Navigator.of(context)
+                          .goToChatPage(listOfConversations[index]));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -63,7 +65,7 @@ class _ChatRoomState extends State<ChatRoom> {
                     // leading: AvatarPlaceholder(
                     //     firstCharacter: chatList[index].receiverUsername[0]
                     // ),
-                    title: Text(chatList[index].receiverUsername),
+                    title: Text(listOfConversations[index].receiverUsername),
                     subtitle: Row(
                       children: [
                         Text("to be implemented"),
