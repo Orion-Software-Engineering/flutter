@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'package:matchmaking_demo/home/settings_page.dart';
-import 'package:matchmaking_demo/utils/theme_listener.dart';
+import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,7 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  DarkThemeProvider themeChanger = DarkThemeProvider();
+  DarkThemeProvider themeChange = new DarkThemeProvider();
 
   @override
   void initState() {
@@ -28,16 +27,16 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getCurrentAppTheme() async {
-    themeChanger.darkTheme = await getTheme();
-    print("main${themeChanger.darkTheme}");
+    themeChange.darkTheme = await themeChange.darkThemePreference.getTheme();
+    print("main${themeChange.darkTheme}");
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) {
-        print(themeChanger.darkTheme);
-        return themeChanger;
+        print(themeChange.darkTheme);
+        return themeChange;
       },
       child: Consumer<DarkThemeProvider>(
           builder: (BuildContext context, value, child) {
@@ -47,6 +46,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'Orion Meet',
           themeMode: null,
+          //darkTheme: MyThemes.themeData(true, context),
           theme: MyThemes.themeData(true, context),
           //darkTheme: MyThemes.darkTheme,
           initialRoute: AppRouter.splash,

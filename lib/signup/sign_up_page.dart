@@ -216,7 +216,7 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(height: 50.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).buttonColor,
+                            primary: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),

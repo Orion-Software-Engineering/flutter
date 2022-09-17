@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/settings/about_page.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
-import 'package:matchmaking_demo/utils/theme_listener.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -171,14 +170,4 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
-}
-
-setDarkThemePreferences(bool value) async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  preferences.setBool("themeStatus", value);
-}
-
-Future<bool> getTheme() async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  return preferences.getBool("themeStatus") ?? false;
 }

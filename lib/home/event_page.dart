@@ -9,6 +9,7 @@ class EventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       /*ListView.builder(itemBuilder:
     itemBuilder)(*/
       //The Trending section will show the tpo 4 events with the most likes or interactions.
@@ -17,11 +18,15 @@ class EventsPage extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Container(
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 padding: EdgeInsets.all(10.0),
                 child: Text('Trending',
-                    style:
-                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color,
+                    )),
               ),
             ),
             Wrap(

@@ -103,8 +103,7 @@ class MyThemes {
             bodyText1: TextStyle(
               color: isDarkTheme ? Colors.white : Colors.black,
             )),
-        buttonTheme: Theme.of(context).buttonTheme.copyWith(),
-        buttonColor: isDarkTheme ? Colors.blue : Colors.black,
+        cardColor: isDarkTheme ? Colors.blue : Colors.black,
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: isDarkTheme ? Colors.black : Colors.white,
         ));
