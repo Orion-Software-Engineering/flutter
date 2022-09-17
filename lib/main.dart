@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  DarkThemeProvider themeChange = new DarkThemeProvider();
+  DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
 
   @override
   void initState() {
@@ -27,19 +27,19 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getCurrentAppTheme() async {
-    themeChange.darkTheme = await themeChange.darkThemePreference.getTheme();
-    print("main${themeChange.darkTheme}");
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+    print("main${themeChangeProvider.darkTheme}");
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) {
-        print(themeChange.darkTheme);
-        return themeChange;
+        return themeChangeProvider;
       },
       child: Consumer<DarkThemeProvider>(
-          builder: (BuildContext context, value, child) {
+          builder: (BuildContext context, value, Widget? child) {
         return MaterialApp(
           onGenerateRoute: AppRouter.onGenerateRoute,
           onUnknownRoute: AppRouter.onUnknownRoute,
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
           title: 'Orion Meet',
           themeMode: null,
           //darkTheme: MyThemes.themeData(true, context),
-          theme: MyThemes.themeData(true, context),
+          theme: MyThemes.themeData(themeChangeProvider.darkTheme, context),
           //darkTheme: MyThemes.darkTheme,
           initialRoute: AppRouter.splash,
         );

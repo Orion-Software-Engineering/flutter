@@ -55,7 +55,7 @@ class _InterestsPageState extends State<InterestsPage> {
   Widget build(BuildContext context) {
     return Progress(
       isLoading: isLoading,
-      opacity: 1,
+      opacity: 0,
       child: _ui(context),
     );
   }

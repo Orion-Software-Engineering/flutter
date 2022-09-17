@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/CustomIcon.ttf
 ///
-/// 
+///
 ///
 import 'package:flutter/widgets.dart';
 
@@ -21,5 +21,6 @@ class CustomIcon {
   static const _kFontFam = 'CustomIcon';
   static const String? _kFontPkg = null;
 
-  static const IconData outlook_icon = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData outlookIcon =
+      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

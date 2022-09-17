@@ -45,7 +45,6 @@ class _LoginState extends State<Login> {
   }
 
   Widget _ui(BuildContext context) {
-    //LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
     return LogInSignUpScaffold(
       key: scaffoldKey,
       child: Center(
@@ -251,7 +250,7 @@ class _LoginState extends State<Login> {
                           TextButton(
                             onPressed: () {},
                             child: Icon(
-                              CustomIcon.outlook_icon,
+                              CustomIcon.outlookIcon,
                               color: Theme.of(context).iconTheme.color,
                             ),
                           ),

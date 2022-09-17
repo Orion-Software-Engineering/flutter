@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:matchmaking_demo/utils/dark_theme_preference.dart';
 
 class DarkThemeProvider with ChangeNotifier {
-  DarkThemePreference darkThemePreference = new DarkThemePreference();
-  bool darkTheme = false;
-  bool get darkThemeSet => darkTheme;
+  DarkThemePreference darkThemePreference = DarkThemePreference();
+  bool _darkTheme = false;
+  bool get darkTheme => _darkTheme;
 
-  set darkThemeSet(bool value) {
-    darkTheme = value;
-    darkThemePreference.setDarkThemePreferences(value);
+  set darkTheme(bool value) {
+    _darkTheme = value;
+    darkThemePreference.setDarkTheme(value);
     notifyListeners();
   }
 }

@@ -14,7 +14,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    var themeChange = Provider.of<DarkThemeProvider>(context);
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Container(
       padding: EdgeInsets.only(left: 16, top: 1, right: 16),
       child: ListView(

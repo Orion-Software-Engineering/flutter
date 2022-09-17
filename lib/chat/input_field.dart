@@ -89,7 +89,7 @@ class _InputFieldState extends State<InputField> {
                     print("send");
                   }
                 },
-                icon: FaIcon(FontAwesomeIcons.arrowCircleUp),
+                icon: FaIcon(FontAwesomeIcons.circleArrowUp),
                 iconSize: 25,
               ),
             ],
