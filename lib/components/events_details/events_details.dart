@@ -26,7 +26,7 @@ class EventsDetails extends StatelessWidget {
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 480.0,
-            pinned: false,
+            pinned: true,
             snap: false,
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
@@ -162,11 +162,10 @@ class EventsDetails extends StatelessWidget {
                               height: 18,
                               margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
                               decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
-                                  image: AssetImage('assets/icons/warning.png'),
-                                )
-                              ),
+                                  image: DecorationImage(
+                                colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
+                                image: AssetImage('assets/icons/warning.png'),
+                              )),
                             ),
                             //Warning TextField
                             Container(
