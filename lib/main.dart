@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           theme:
               themeChanger.darkTheme ? MyThemes.darkTheme : MyThemes.lightTheme,
           //darkTheme: MyThemes.darkTheme,
-          initialRoute: AppRouter.login,
+          initialRoute: AppRouter.splash,
         );
       }),
     );

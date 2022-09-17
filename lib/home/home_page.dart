@@ -6,7 +6,6 @@ import 'package:matchmaking_demo/api/api_service_matching.dart';
 import 'package:matchmaking_demo/api/messaging/api_service_conversation.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'package:matchmaking_demo/utils/variables.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -61,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                       fit: BoxFit.fill,
                     ),
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
@@ -78,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'put user about here',
+                            '...', //120 characters
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.white,
