@@ -45,6 +45,7 @@ class _LoginState extends State<Login> {
   Widget _ui(BuildContext context) {
     //LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
     return LogInSignUpScaffold(
+      shouldPop: false,
       key: scaffoldKey,
       child: Center(
         child: Form(
@@ -178,7 +179,6 @@ class _LoginState extends State<Login> {
                                 color: signUpLoginOrange,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 12.0,
-                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
@@ -206,7 +206,6 @@ class _LoginState extends State<Login> {
                                   color: Color(0xFFcd5d27),
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16.0,
-                                  decoration: TextDecoration.underline,
                                 ),
                               ),
                             ),

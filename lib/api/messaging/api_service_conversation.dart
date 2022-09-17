@@ -100,8 +100,8 @@ class APIServiceConversation {
 
     conversationInfoFromMatchScreen =
         ConversationInfo(conversationId: conversationId);
-    conversationInfoFromMatchScreen!.receiverUserId = userIdOfMatch;
-    conversationInfoFromMatchScreen!.receiverUsername = usernameOfMatch;
+    conversationInfoFromMatchScreen.receiverUserId = userIdOfMatch;
+    conversationInfoFromMatchScreen.receiverUsername = usernameOfMatch;
 
     addUserToConversation(userIdOfMatch, conversationId!);
   }
