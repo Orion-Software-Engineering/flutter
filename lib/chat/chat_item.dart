@@ -52,7 +52,7 @@ class TextBubble extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
       child: Container(
-        constraints: BoxConstraints(maxWidth: 260),
+        constraints: BoxConstraints(minWidth: 110, maxWidth: 260),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: color,
@@ -64,14 +64,17 @@ class TextBubble extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                text,
-                maxLines: 10,
-                // textWidthBasis: TextWidthBasis.,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    overflow: TextOverflow.clip),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                child: Text(
+                  text,
+                  maxLines: 10,
+                  // textWidthBasis: TextWidthBasis.,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      overflow: TextOverflow.clip),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -79,6 +82,7 @@ class TextBubble extends StatelessWidget {
                 children: [
                   Text(
                     getCustomFormattedDateTime(time),
+                    textAlign: TextAlign.right,
                     style: TextStyle(color: Color(0xff2c2c2c), fontSize: 12),
                   ),
                 ],
