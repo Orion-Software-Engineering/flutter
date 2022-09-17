@@ -51,6 +51,7 @@ class _SignUpState extends State<SignUp> {
 
   Widget _ui(BuildContext context) {
     return LogInSignUpScaffold(
+      shouldPop: true,
       child: Center(
         child: Form(
           key: _formKey,
@@ -263,7 +264,6 @@ class _SignUpState extends State<SignUp> {
                                 color: signUpLoginOrange,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),

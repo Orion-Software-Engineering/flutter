@@ -61,10 +61,9 @@ class _ChatRoomState extends State<ChatRoom> {
                       borderRadius: BorderRadius.circular(10),
                       color: messageTileColor),
                   child: ListTile(
-                    //TOdo uncomment after max clears the conversations
-                    // leading: AvatarPlaceholder(
-                    //     firstCharacter: chatList[index].receiverUsername[0]
-                    // ),
+                    leading: AvatarPlaceholder(
+                        firstCharacter:
+                            listOfConversations[index].receiverUsername[0]),
                     title: Text(listOfConversations[index].receiverUsername),
                     subtitle: Row(
                       children: [

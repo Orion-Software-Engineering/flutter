@@ -39,6 +39,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Widget _ui(BuildContext context) {
     return LogInSignUpScaffold(
+      shouldPop: true,
       key: scaffoldKey,
       child: Center(
         child: Form(
