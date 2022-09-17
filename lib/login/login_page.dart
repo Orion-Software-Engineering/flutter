@@ -13,6 +13,7 @@ import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../utils/constants.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -75,9 +76,9 @@ class _LoginState extends State<Login> {
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
+                          enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: signUpLoginTextColor,
+                              color: themeMode ? Colors.white : Colors.grey,
                             ),
                           ),
                         ),

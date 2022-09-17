@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/api_service_login.dart';
 import '../models/login_model.dart';
 
+bool themeMode = false;
+
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
   String? obtainedUsername;
@@ -25,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
         await SharedPreferences.getInstance();
     widget.obtainedUsername = sharedPreferences.getString("username");
     widget.obtainedPassword = sharedPreferences.getString("password");
+    themeMode = sharedPreferences.getBool("ThemeStatus")!;
   }
 
   @override

@@ -10,6 +10,7 @@ import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../components/login_signup/date_of_birth.dart';
 import '../components/login_signup/title_and_subtext.dart';
+import '../splash/splash_screen.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -80,9 +81,9 @@ class _SignUpState extends State<SignUp> {
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
+                          enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: signUpLoginTextColor,
+                              color: themeMode ? Colors.white : Colors.grey,
                             ),
                           ),
                         ),
@@ -111,10 +112,11 @@ class _SignUpState extends State<SignUp> {
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: signUpLoginTextColor,
-                          )),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: themeMode ? Colors.white : Colors.grey,
+                            ),
+                          ),
                         ),
                         onSaved: (value) => requestModel.username = value!,
                         validator: (value) {

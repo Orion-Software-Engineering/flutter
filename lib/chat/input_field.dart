@@ -29,14 +29,14 @@ class _InputFieldState extends State<InputField> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: Theme.of(context).primaryColor, //Colors.grey[200],
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40.0),
                 topRight: Radius.circular(40.0)),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.shade300,
-                spreadRadius: 5,
+                color: Colors.grey.shade500,
+                spreadRadius: 2,
                 blurRadius: 10,
               )
             ],
@@ -51,20 +51,28 @@ class _InputFieldState extends State<InputField> {
                     setState(() {
                       emojiSelected = !emojiSelected;
                       FocusManager.instance.primaryFocus?.unfocus();
-                      print("emoji${emojiSelected}");
                     });
                   },
                   icon: Icon(
                     Icons.emoji_emotions,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   iconSize: 25,
                 ),
               ),
               Expanded(
                 child: TextField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  ),
                   controller: _textToBeSent,
                   decoration: InputDecoration(
                     hintText: "Type a message",
+                    hintStyle: TextStyle(
+                        color: Theme.of(context)
+                            .primaryTextTheme
+                            .bodyText2
+                            ?.color),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide.none,
                     ),
@@ -89,7 +97,10 @@ class _InputFieldState extends State<InputField> {
                     print("send");
                   }
                 },
-                icon: FaIcon(FontAwesomeIcons.circleArrowUp),
+                icon: FaIcon(
+                  FontAwesomeIcons.circleArrowUp,
+                  color: Theme.of(context).iconTheme.color,
+                ),
                 iconSize: 25,
               ),
             ],

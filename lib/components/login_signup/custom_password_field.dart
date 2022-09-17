@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants.dart';
+import '../../splash/splash_screen.dart';
 
 class CustomPasswordField extends StatefulWidget {
   const CustomPasswordField(
@@ -44,7 +45,11 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
               // icon: Icon(Icons.visibility),
               color: Color((masked == true) ? 0xFF8c8c8c : 0xFFcd5d27),
             ),
-            border: inputBorder,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: themeMode ? Colors.white : Colors.grey,
+              ),
+            ),
           ),
           validator: widget.validationFunction,
         ),

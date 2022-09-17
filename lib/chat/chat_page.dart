@@ -44,6 +44,7 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     String senderName = widget.conversationInfo.receiverUsername;
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: CustomBackButton(),
         flexibleSpace: Container(
