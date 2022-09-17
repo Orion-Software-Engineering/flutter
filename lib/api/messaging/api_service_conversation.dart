@@ -10,12 +10,15 @@ class APIServiceConversation {
   List<String> listOfConversationIds = [];
   Map<String, List<Map<String, String>>> conversationIdsAndTheirUsers = {};
   List<ConversationInfo> listOfConversationInfo = [];
+  late ConversationInfo conversationInfoFromMatchScreen;
 
   Future getConversationsOfUser() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     userId = sharedPreferences.getString("userId");
     myUsername = sharedPreferences.getString("username");
+
+    print("userid: $userId");
 
     Uri url =
         Uri(scheme: scheme, host: host, path: getConversationsPath + userId!);
@@ -34,7 +37,7 @@ class APIServiceConversation {
 
   Future getUsersOfAllConversations() async {
     print("list of conversation users = $listOfConversationIds");
-    // print(" in getUsersOfAllConversations");
+    print(" in getUsersOfAllConversations");
     if (listOfConversationIds.isNotEmpty) {
       // print('convoList not empty');
       for (String convoId in listOfConversationIds) {
@@ -46,7 +49,6 @@ class APIServiceConversation {
             path: getUsersOfAllConversationsPath + convoId);
 
         final response = await http.get(url);
-        // print("\n\n\nprint response.body =${json.decode(response.body)}");
 
         List listOfUsers = json.decode(response.body);
 
@@ -57,15 +59,60 @@ class APIServiceConversation {
           };
           if (userIdAndUsername["username"] != myUsername) {
             conversationInfo.receiverUsername = userIdAndUsername["username"]!;
+            print("username ${conversationInfo.receiverUsername}");
             conversationInfo.receiverUserId = userIdAndUsername["userId"]!;
+            print("id ${conversationInfo.receiverUserId}");
           }
           conversationInfo.conversationUsers.add(userIdAndUsername);
         }
         listOfConversationInfo.add(conversationInfo);
       }
       // print("print conversationIdsAndTheirUsers = $listOfConversationInfo");
-    } else {
-      // print("There are no conversation ids to work with");
     }
+  }
+
+  Future<void> createConversation(
+      String userIdOfMatch, String usernameOfMatch) async {
+    if (userId == null) {
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      userId = sharedPreferences.getString("userId");
+    }
+
+    Uri url = Uri(scheme: scheme, host: host, path: createConversationPath);
+
+    final createConversationResponse = await http.put(url,
+        headers: headers,
+        body: jsonEncode(CreateConversationInfo(userId: userId)));
+
+    print(createConversationResponse.statusCode);
+    print(createConversationResponse.body);
+
+    Map<String, dynamic> createConversationResponseDecoded =
+        json.decode(createConversationResponse.body);
+
+    String? conversationId = createConversationResponseDecoded["id"];
+    print("conversationId = $conversationId");
+
+    conversationInfoFromMatchScreen =
+        ConversationInfo(conversationId: conversationId);
+    conversationInfoFromMatchScreen!.receiverUserId = userIdOfMatch;
+    conversationInfoFromMatchScreen!.receiverUsername = usernameOfMatch;
+
+    addUserToConversation(userIdOfMatch, conversationId!);
+  }
+
+  Future<void> addUserToConversation(
+      String userId, String conversationId) async {
+    Uri urlAddUser =
+        Uri(scheme: scheme, host: host, path: addUserToConversationPath);
+
+    final addUserToConversationResponse = await http.put(urlAddUser,
+        headers: headers,
+        body: jsonEncode(AddUserToConversationRequest(
+            conversationId: conversationId, recipientUserId: userId)));
+
+    print(addUserToConversationResponse.statusCode);
+    print(addUserToConversationResponse.body);
   }
 }

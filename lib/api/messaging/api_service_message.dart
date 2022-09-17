@@ -42,10 +42,7 @@ class MessageAPIService {
     Uri url = Uri(scheme: scheme, host: host, path: sendMessagePath);
 
     messageToBeSent.userId = myUserId;
-    Map<String, String> headers = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-    };
+
     print("json endcode requestmodel ${jsonEncode(messageToBeSent)}");
     final response = await http.put(url,
         headers: headers, body: jsonEncode(messageToBeSent));
