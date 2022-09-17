@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).canvasColor,
       child: Center(
         child: Image.asset("assets/images/interests/Orion logo(!BG) 3.png",
             scale: 3.5),

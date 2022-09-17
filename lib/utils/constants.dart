@@ -92,16 +92,19 @@ const TextStyle interestsPageNextBackStyle = TextStyle(
 class MyThemes {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+        canvasColor: isDarkTheme ? Color(0xFF241837) : Colors.white,
         primaryColor: isDarkTheme ? Colors.black : Colors.white,
         backgroundColor: isDarkTheme ? Colors.black : Colors.white,
         iconTheme: IconThemeData(
           color: isDarkTheme ? Colors.white : Colors.black,
         ),
         primaryTextTheme: TextTheme(
+            bodyText2: TextStyle(color: Colors.grey),
             bodyText1: TextStyle(
-          color: isDarkTheme ? Colors.white : Colors.black,
-        )),
-        buttonTheme: Theme.of(context).buttonTheme..copyWith(),
+              color: isDarkTheme ? Colors.white : Colors.black,
+            )),
+        buttonTheme: Theme.of(context).buttonTheme.copyWith(),
+        buttonColor: isDarkTheme ? Colors.blue : Colors.black,
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: isDarkTheme ? Colors.black : Colors.white,
         ));

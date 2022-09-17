@@ -104,6 +104,9 @@ class _DobFieldState extends State<DobField> {
         });
       },
       child: TextFormField(
+        style: TextStyle(
+          color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+        ),
         controller: TextEditingController(text: dateValue),
         enabled: false,
         decoration: InputDecoration(

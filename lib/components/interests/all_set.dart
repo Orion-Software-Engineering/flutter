@@ -27,7 +27,7 @@ class _AllSetState extends State<AllSet> {
         child: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text(
             textAlign: TextAlign.center,
             "You're all set Happy Matching'!",

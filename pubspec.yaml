@@ -113,6 +113,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Nunito/static/Nunito-Bold.ttf
         - asset: assets/fonts/Nunito/static/Nunito-Regular.ttf
+
+    - family: CustomIcon
+      fonts:
+        - asset: assets/fonts/CustomIcon.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
