@@ -53,6 +53,50 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Theme.of(context).iconTheme.color,
             ),
           ),
+          // ListTile(
+          //   tileColor: Theme.of(context).primaryColor,
+          //   leading:
+          //       Icon(Icons.settings, color: Theme.of(context).iconTheme.color),
+          //   title: Text(
+          //     'Use system theme',
+          //     style: TextStyle(
+          //         color: Theme.of(context).primaryTextTheme.bodyText1?.color),
+          //   ),
+          //   trailing: Switch(
+          //     value: systemThemeMode,
+          //     activeTrackColor: Colors.lightBlue[900],
+          //     inactiveThumbColor: Colors.white,
+          //     inactiveTrackColor: Colors.grey,
+          //     onChanged: (value) {
+          //       setState(() {
+          //         systemThemeMode = value;
+          //         disableDarkThemeButton = value;
+          //       });
+          //     },
+          //   ),
+          // ),
+          // ListTile(
+          //   tileColor: Theme.of(context).primaryColor,
+          //   leading:
+          //       Icon(Icons.dark_mode, color: Theme.of(context).iconTheme.color),
+          //   title: Text(
+          //     'Dark Mode',
+          //     style: TextStyle(
+          //         color: Theme.of(context).primaryTextTheme.bodyText1?.color),
+          //   ),
+          //   trailing: Switch(
+          //     value: themeChange.darkTheme,
+          //     activeTrackColor: Colors.lightBlue[900],
+          //     inactiveThumbColor: Colors.white,
+          //     inactiveTrackColor: Colors.grey,
+          //     onChanged: (value) {
+          //             setState(() {
+          //               themeChange.darkTheme = value;
+          //               print(themeChange.darkTheme);
+          //             });
+          //           },
+          //   ),
+          // ),
           SwitchListTile(
             tileColor: Theme.of(context).primaryColor,
             activeTrackColor: Colors.lightBlue[900],
@@ -62,7 +106,6 @@ class _SettingsPageState extends State<SettingsPage> {
             onChanged: (value) {
               setState(() {
                 themeChange.darkTheme = value;
-                print(themeChange.darkTheme);
               });
             },
             title: Text(

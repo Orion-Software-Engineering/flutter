@@ -9,6 +9,7 @@ class InterestsScaffold extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         body: Stack(
           children: [
             Positioned(

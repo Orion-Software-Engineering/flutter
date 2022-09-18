@@ -102,6 +102,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         ),
         body: tabs[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          elevation: 20,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           iconSize: 30,

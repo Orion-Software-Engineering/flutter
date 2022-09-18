@@ -55,9 +55,9 @@ TextStyle interestsButtonTextStyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontFamily: 'Nunito');
 
-Color interestsButtonColorNormal = Colors.black;
+const Color interestsButtonColorNormal = Color(0xFF141415);
 
-Color interestsButtonColorSelected = Color(0xFF205098);
+const Color interestsButtonColorSelected = Color(0xFF205098);
 
 Color messageTileColor = Color(0x99D9D9D9);
 
@@ -113,6 +113,7 @@ TextStyle interestsPageNextBackStyle = TextStyle(
 class MyThemes {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+      disabledColor: isDarkTheme ? Colors.grey : Colors.grey,
       canvasColor: isDarkTheme ? Color(0xFF241837) : Colors.white,
       primaryColor: isDarkTheme ? Colors.black : Colors.white,
       backgroundColor: isDarkTheme ? Colors.black : Colors.white,
@@ -126,7 +127,7 @@ class MyThemes {
           )),
       cardColor: isDarkTheme ? Colors.blue : Colors.black,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: isDarkTheme ? Colors.black : Colors.white,
+        backgroundColor: isDarkTheme ? Color(0xFF373738) : Colors.white,
       ),
       appBarTheme: AppBarTheme(),
     );
