@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_call_paths.dart';
 
 class MatchingApiService {
-  List<Match> matches = [];
+  List<MatchModel> matches = [];
   Future<void> getMatches() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
@@ -20,7 +20,7 @@ class MatchingApiService {
 
     List responseMatches = json.decode(response.body);
     for (var m in responseMatches) {
-      Match match = Match(
+      MatchModel match = MatchModel(
           userId: m["userId"],
           userName: m["username"],
           commonInterests: m["commonInterests"]);

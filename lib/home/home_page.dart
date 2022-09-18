@@ -3,9 +3,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_matching.dart';
-import 'package:matchmaking_demo/api/messaging/api_service_conversation.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
+
+import '../api/messaging/api_service_conversation.dart';
+import '../models/matching/match_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List matches = [];
+  List<MatchModel> matches = [];
   @override
   void initState() {
     super.initState();
@@ -34,13 +36,20 @@ class _HomePageState extends State<HomePage> {
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: () {
+            showThatMachIsInProcess();
             APIServiceConversation apiServiceConversation =
                 APIServiceConversation();
             apiServiceConversation
                 .createConversation(
-                    matches[index].userId, matches[index].userName)
-                .then((value) => Navigator.of(context).goToChatPage(
-                    apiServiceConversation.conversationInfoFromMatchScreen));
+                    matches[index].userId!, matches[index].userName!)
+                .then((value) {
+              Navigator.pop(context);
+              Navigator.of(context).goToChatPage(
+                  apiServiceConversation.conversationInfoFromMatchScreen);
+              setState(() {
+                matches.removeAt(index);
+              });
+            });
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -66,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            matches[index].userName,
+                            matches[index].userName!,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.white,
@@ -95,5 +104,14 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
+  }
+
+  showThatMachIsInProcess() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return Container();
+        });
   }
 }
