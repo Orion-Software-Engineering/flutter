@@ -8,6 +8,7 @@ import 'package:matchmaking_demo/utils/constants.dart';
 
 import '../api/messaging/api_service_conversation.dart';
 import '../models/matching/match_model.dart';
+import '../models/messaging/conversation_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,20 +37,17 @@ class _HomePageState extends State<HomePage> {
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: () {
-            showThatMachIsInProcess();
-            APIServiceConversation apiServiceConversation =
-                APIServiceConversation();
-            apiServiceConversation
-                .createConversation(
-                    matches[index].userId!, matches[index].userName!)
-                .then((value) {
-              Navigator.pop(context);
-              Navigator.of(context).goToChatPage(
-                  apiServiceConversation.conversationInfoFromMatchScreen);
-              setState(() {
-                matches.removeAt(index);
-              });
-            });
+            Navigator.of(context).goToChatPage(
+                ConversationInfo.withoutConversationId(
+                    matches[index].userId, matches[index].userName));
+            //
+            //     .then((value) {
+            //   Navigator.pop(context);
+            //
+            //   setState(() {
+            //     matches.removeAt(index);
+            //   });
+            // });
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -106,12 +104,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  showThatMachIsInProcess() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return Container();
-        });
-  }
+  // showThatMachIsInProcess() {
+  //   showDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       builder: (context) {
+  //         return Container();
+  //       });
+  // }
 }

@@ -9,6 +9,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 class InputField extends StatefulWidget {
   final String conversationId;
   final MessageAPIService apiServiceMessage;
+  VoidCallBack createConver
   const InputField(
       {Key? key,
       required this.apiServiceMessage,

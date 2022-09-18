@@ -75,7 +75,8 @@ class _ChatRoomState extends State<ChatRoom> {
               if (listOfConversations[index].lastMessageIsMine) {
                 lastMessageSender = "me";
               } else {
-                lastMessageSender = listOfConversations[index].receiverUsername;
+                lastMessageSender =
+                    listOfConversations[index].receiverUsername!;
               }
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 1.2),
@@ -95,8 +96,8 @@ class _ChatRoomState extends State<ChatRoom> {
                     child: ListTile(
                       leading: AvatarPlaceholder(
                           firstCharacter:
-                              listOfConversations[index].receiverUsername[0]),
-                      title: Text(listOfConversations[index].receiverUsername),
+                              listOfConversations[index].receiverUsername![0]),
+                      title: Text(listOfConversations[index].receiverUsername!),
                       subtitle: Row(
                         children: [
                           Text(

@@ -50,8 +50,8 @@ class _MyAppState extends State<MyApp> {
           themeMode: null,
           theme: MyThemes.themeData(themeChanger.darkTheme, context),
           //darkTheme: MyThemes.darkTheme,
-          // initialRoute: AppRouter.interests1,
-          home: InterestsOne(),
+          initialRoute: AppRouter.splash,
+          // home: InterestsOne(),todo use home when testing specific pages
         );
       }),
     );

@@ -7,11 +7,13 @@ import 'package:matchmaking_demo/chat/input_field.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
+import '../api/messaging/api_service_conversation.dart';
+import '../models/matching/match_model.dart';
 import '../models/messaging/message_model.dart';
 
 class Chat extends StatefulWidget {
   final ConversationInfo conversationInfo;
-  const Chat({Key? key, required this.conversationInfo});
+  const Chat({super.key, required this.conversationInfo});
 
   @override
   State<Chat> createState() => _ChatState();
@@ -25,11 +27,13 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 5), (timer) {
-      apiServiceMessage
-          .getMessagesOfConversation(widget.conversationInfo.conversationId!)
-          .then((value) => updateMessageList());
-    });
+    if (widget.conversationInfo.conversationId != null) {
+      timer = Timer.periodic(Duration(seconds: 5), (timer) {
+        apiServiceMessage
+            .getMessagesOfConversation(widget.conversationInfo.conversationId!)
+            .then((value) => updateMessageList());
+      });
+    }
   }
 
   @override
@@ -40,7 +44,7 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-    String senderName = widget.conversationInfo.receiverUsername;
+    String? senderName = widget.conversationInfo.receiverUsername;
     return Scaffold(
       appBar: AppBar(
         leading: CustomBackButton(),
@@ -56,7 +60,7 @@ class _ChatState extends State<Chat> {
             children: [
               CircleAvatar(
                 backgroundColor: Colors.black,
-                child: Text(senderName[0]),
+                child: Text(senderName![0]),
               ),
               SizedBox(
                 width: 20.0,
@@ -101,5 +105,12 @@ class _ChatState extends State<Chat> {
       messagesList = apiServiceMessage.listOfMessages;
     });
     print("here $messagesList");
+  }
+
+  void createConversation() async {
+    APIServiceConversation apiServiceConversation = APIServiceConversation();
+    apiServiceConversation.createConversation(
+        widget.conversationInfo.receiverUserId!,
+        widget.conversationInfo.receiverUsername!);
   }
 }
