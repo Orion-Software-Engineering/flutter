@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
@@ -49,7 +50,8 @@ class _MyAppState extends State<MyApp> {
           themeMode: null,
           theme: MyThemes.themeData(themeChanger.darkTheme, context),
           //darkTheme: MyThemes.darkTheme,
-          initialRoute: AppRouter.splash,
+          // initialRoute: AppRouter.interests1,
+          home: InterestsOne(),
         );
       }),
     );
