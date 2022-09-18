@@ -1,9 +1,9 @@
-class Match {
+class MatchModel {
   String? userId;
   String? userName;
   List<dynamic>? commonInterests;
 
-  Match({this.userId, this.userName, this.commonInterests});
+  MatchModel({this.userId, this.userName, this.commonInterests});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {

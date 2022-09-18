@@ -48,9 +48,8 @@ class APIServiceConversation {
             host: host,
             path: getUsersOfAllConversationsPath + convoId);
 
-        // Uri getLastMessageUrl = Uri(
-        //   scheme: scheme,host: host,path:
-        // );
+        Uri getLastMessageUrl =
+            Uri(scheme: scheme, host: host, path: getLastMessagePath + convoId);
 
         final getUsersResponse = await http.get(getUsersUrl);
 
@@ -68,10 +67,27 @@ class APIServiceConversation {
             print("id ${conversationInfo.receiverUserId}");
           }
           conversationInfo.conversationUsers.add(userIdAndUsername);
+
+          final lastMessageResponse =
+              await http.get(getLastMessageUrl, headers: headers);
+          print("last message body = ${lastMessageResponse.body}");
+          if (lastMessageResponse.body != "No message found") {
+            var lastMessageResponseDecoded =
+                json.decode(lastMessageResponse.body);
+
+            conversationInfo.lastMessage =
+                lastMessageResponseDecoded["text"] ?? "";
+            if (lastMessageResponseDecoded["userId"] == userId) {
+              conversationInfo.lastMessageIsMine = true;
+            } else {
+              conversationInfo.lastMessageIsMine = false;
+            }
+          } else {
+            conversationInfo.lastMessage = '';
+          }
         }
         listOfConversationInfo.add(conversationInfo);
       }
-      // print("print conversationIdsAndTheirUsers = $listOfConversationInfo");
     }
   }
 

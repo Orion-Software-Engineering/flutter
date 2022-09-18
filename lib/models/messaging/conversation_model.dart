@@ -3,6 +3,7 @@ class ConversationInfo {
   String receiverUsername = '';
   String receiverUserId = '';
   String lastMessage = '';
+  bool lastMessageIsMine = true;
   final List<Map<String, String>> conversationUsers = [];
 
   ConversationInfo({this.conversationId});

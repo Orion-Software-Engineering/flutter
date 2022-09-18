@@ -19,7 +19,8 @@ class LoginAPIService {
       print(response.statusCode);
       if (response.statusCode == 200) {
         String userId = json.decode(response.body)["id"];
-        saveUserIdAfterLogin(userId);
+        String username = json.decode(response.body)["username"];
+        saveUserDetailsAfterLogin(userId, username);
       } else if (response.statusCode == 403) {
         message = "Your account is not verified. Please check your mail";
       } else if (response.statusCode == 404) {
@@ -34,9 +35,10 @@ class LoginAPIService {
     }
   }
 
-  void saveUserIdAfterLogin(String userId) async {
+  void saveUserDetailsAfterLogin(String userId, String username) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.setString("userId", userId);
+    sharedPreferences.setString("username", username);
   }
 }

@@ -10,6 +10,7 @@ import 'package:matchmaking_demo/splash/splash_screen.dart';
 import '../components/interests/all_set.dart';
 import '../forgotPassword/forgot_password_page.dart';
 import '../login/login_page.dart';
+import '../models/matching/match_model.dart';
 import '../profile/profile.dart';
 
 class AppRouter {
@@ -24,6 +25,7 @@ class AppRouter {
   static const forgotPassword = '/forgot_password';
   static const chatPage = '/chat_page';
   static const profile = '/profile';
+  static const matchingInProcess = '/matching_in_process';
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {

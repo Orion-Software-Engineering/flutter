@@ -2,16 +2,15 @@
 * The Messaging page that shows a list of contacts you've been texting
 * */
 
+import 'dart:async';
 import 'dart:core';
-import 'dart:core';
-import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/messaging/api_service_conversation.dart';
 import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/models/messaging/conversation_model.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import '../components/home/avatar_placeholder.dart';
 
@@ -21,7 +20,11 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
+  late SharedPreferences sharedPreferences;
+  String? myUsername;
   List<ConversationInfo> listOfConversations = [];
+  APIServiceConversation apiServiceConversation = APIServiceConversation();
+  Timer? timer;
 
   @override
   void initState() {
@@ -36,7 +39,25 @@ class _ChatRoomState extends State<ChatRoom> {
             print("inside setState chatList = $listOfConversations");
           }),
         );
+    // timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    //   apiServiceConversation
+    //       .getConversationsOfUser()
+    //       .then((value) => apiServiceConversation.getConversationInfo())
+    //       .then(
+    //         (value) => setState(() {
+    //       listOfConversations =
+    //           apiServiceConversation.listOfConversationInfo;
+    //       print("inside setState chatList = $listOfConversations");
+    //     }),
+    //   );
+    // });
   }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   timer!.cancel();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +66,13 @@ class _ChatRoomState extends State<ChatRoom> {
         child: ListView.builder(
           itemCount: listOfConversations.length,
           itemBuilder: (BuildContext context, int index) {
+            print("last messafge${listOfConversations[0].lastMessageIsMine}");
+            String lastMessageSender;
+            if (listOfConversations[index].lastMessageIsMine) {
+              lastMessageSender = "me";
+            } else {
+              lastMessageSender = listOfConversations[index].receiverUsername;
+            }
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 1.2),
               child: GestureDetector(
@@ -67,8 +95,8 @@ class _ChatRoomState extends State<ChatRoom> {
                     title: Text(listOfConversations[index].receiverUsername),
                     subtitle: Row(
                       children: [
-                        Text("to be implemented"),
-                        //TODO dont change to constant if prompted
+                        Text(
+                            " $lastMessageSender : ${listOfConversations[index].lastMessage} "),
                       ],
                     ),
                   ),
@@ -104,5 +132,10 @@ class _ChatRoomState extends State<ChatRoom> {
             // }
           },
         ));
+  }
+
+  void getUserDetails() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    myUsername = sharedPreferences.getString("username");
   }
 }

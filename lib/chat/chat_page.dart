@@ -25,8 +25,6 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     super.initState();
-    print("convoId from chat page ${widget.conversationInfo.conversationId}");
-
     timer = Timer.periodic(Duration(seconds: 5), (timer) {
       apiServiceMessage
           .getMessagesOfConversation(widget.conversationInfo.conversationId!)
