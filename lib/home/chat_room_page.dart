@@ -14,7 +14,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import '../components/home/avatar_placeholder.dart';
 
+// ignore: must_be_immutable
 class ChatRoom extends StatefulWidget {
+  VoidCallback home;
+  ChatRoom({super.key, required this.home});
   @override
   State<ChatRoom> createState() => _ChatRoomState();
 }
@@ -61,77 +64,88 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-        child: ListView.builder(
-          itemCount: listOfConversations.length,
-          itemBuilder: (BuildContext context, int index) {
-            print("last messafge${listOfConversations[0].lastMessageIsMine}");
-            String lastMessageSender;
-            if (listOfConversations[index].lastMessageIsMine) {
-              lastMessageSender = "me";
-            } else {
-              lastMessageSender = listOfConversations[index].receiverUsername;
-            }
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 1.2),
-              child: GestureDetector(
-                onTap: () {
-                  MessageAPIService apiServiceMessage = MessageAPIService();
-                  apiServiceMessage
-                      .getMessagesOfConversation(
-                          listOfConversations[index].conversationId!)
-                      .then((value) => Navigator.of(context)
-                          .goToChatPage(listOfConversations[index]));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: messageTileColor),
-                  child: ListTile(
-                    leading: AvatarPlaceholder(
-                        firstCharacter:
-                            listOfConversations[index].receiverUsername[0]),
-                    title: Text(listOfConversations[index].receiverUsername),
-                    subtitle: Row(
-                      children: [
-                        Text(
-                            " $lastMessageSender : ${listOfConversations[index].lastMessage} "),
-                      ],
+    if (listOfConversations.isNotEmpty) {
+      return Padding(
+          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+          child: ListView.builder(
+            itemCount: listOfConversations.length,
+            itemBuilder: (BuildContext context, int index) {
+              print("last messafge${listOfConversations[0].lastMessageIsMine}");
+              String lastMessageSender;
+              if (listOfConversations[index].lastMessageIsMine) {
+                lastMessageSender = "me";
+              } else {
+                lastMessageSender = listOfConversations[index].receiverUsername;
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 1.2),
+                child: GestureDetector(
+                  onTap: () {
+                    MessageAPIService apiServiceMessage = MessageAPIService();
+                    apiServiceMessage
+                        .getMessagesOfConversation(
+                            listOfConversations[index].conversationId!)
+                        .then((value) => Navigator.of(context)
+                            .goToChatPage(listOfConversations[index]));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: messageTileColor),
+                    child: ListTile(
+                      leading: AvatarPlaceholder(
+                          firstCharacter:
+                              listOfConversations[index].receiverUsername[0]),
+                      title: Text(listOfConversations[index].receiverUsername),
+                      subtitle: Row(
+                        children: [
+                          Text(
+                              " $lastMessageSender : ${listOfConversations[index].lastMessage} "),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-            // else {
-            //   return Shimmer.fromColors(
-            //       baseColor: Colors.teal,
-            //       highlightColor: Colors.white,
-            //       child: Padding(
-            //           padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-            //           child: ListView.builder(
-            //               itemCount: 10,
-            //               itemBuilder: (BuildContext context, int index) {
-            //                 return ListTile(
-            //                   leading: Container(
-            //                     height: 55,
-            //                     width: 55,
-            //                     decoration: BoxDecoration(
-            //                       color: Colors.teal,
-            //                       borderRadius: BorderRadius.circular(30),
-            //                     ),
-            //                   ),
-            //                   title: SizedBox(
-            //                     child: Container(
-            //                       color: Colors.green,
-            //                     ),
-            //                     height: 20,
-            //                   ),
-            //                 );
-            //               })));
-            // }
-          },
-        ));
+              );
+              // else {
+              //   return Shimmer.fromColors(
+              //       baseColor: Colors.teal,
+              //       highlightColor: Colors.white,
+              //       child: Padding(
+              //           padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+              //           child: ListView.builder(
+              //               itemCount: 10,
+              //               itemBuilder: (BuildContext context, int index) {
+              //                 return ListTile(
+              //                   leading: Container(
+              //                     height: 55,
+              //                     width: 55,
+              //                     decoration: BoxDecoration(
+              //                       color: Colors.teal,
+              //                       borderRadius: BorderRadius.circular(30),
+              //                     ),
+              //                   ),
+              //                   title: SizedBox(
+              //                     child: Container(
+              //                       color: Colors.green,
+              //                     ),
+              //                     height: 20,
+              //                   ),
+              //                 );
+              //               })));
+              // }
+            },
+          ));
+    } else {
+      return Container(
+        child: Center(
+          child: MaterialButton(
+              color: Colors.orange,
+              onPressed: widget.home,
+              child: Text("Match to create your first conversation")),
+        ),
+      );
+    }
   }
 
   void getUserDetails() async {

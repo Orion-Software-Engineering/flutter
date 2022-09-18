@@ -5,9 +5,8 @@ import 'package:matchmaking_demo/utils/theme_listener.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
-
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
