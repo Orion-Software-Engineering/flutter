@@ -90,26 +90,23 @@ class _InputFieldState extends State<InputField> {
                 IconButton(
                   onPressed: () {
                     if (_textToBeSent.text.trim().isNotEmpty) {
-                      if (!widget.createNewConversation) {
-                        print("not new conversation");
-                        sendMessageButtonFunction();
-                      } else {
-                        APIServiceConversation apiServiceConversation =
-                            APIServiceConversation();
-                        apiServiceConversation
-                            .createConversation(
-                                widget.conversationInfo.receiverUserId!,
-                                widget.conversationInfo.receiverUsername!)
-                            .then((value) {
-                          widget.conversationInfo.conversationId =
-                              apiServiceConversation.newlyCreatedConversationId;
-                          sendMessageButtonFunction();
-                        }).then((value) {
-                          Navigator.pop(context);
-                          Navigator.of(context)
-                              .goToChatPage(widget.conversationInfo);
-                        });
-                      }
+                      String text = _textToBeSent.text.trim();
+                      _textToBeSent.clear();
+                      APIServiceConversation apiServiceConversation =
+                          APIServiceConversation();
+                      apiServiceConversation
+                          .createConversation(
+                              widget.conversationInfo.receiverUserId!,
+                              widget.conversationInfo.receiverUsername!)
+                          .then((value) {
+                        widget.conversationInfo.conversationId =
+                            apiServiceConversation.newlyCreatedConversationId;
+                        sendMessageButtonFunction(text);
+                      }).then((value) {
+                        Navigator.pop(context);
+                        Navigator.of(context)
+                            .goToChatPage(widget.conversationInfo);
+                      });
                     }
                   },
                   icon: FaIcon(FontAwesomeIcons.arrowCircleUp),
@@ -197,8 +194,9 @@ class _InputFieldState extends State<InputField> {
                 IconButton(
                   onPressed: () {
                     if (_textToBeSent.text.trim().isNotEmpty) {
+                      String text = _textToBeSent.text.trim();
                       _textToBeSent.clear();
-                      sendMessageButtonFunction();
+                      sendMessageButtonFunction(text);
                       print("send");
                     }
                   },
@@ -231,9 +229,9 @@ class _InputFieldState extends State<InputField> {
     }
   }
 
-  void sendMessageButtonFunction() {
+  void sendMessageButtonFunction(String text) {
     messageToBeSent.conversationId = widget.conversationInfo.conversationId;
-    messageToBeSent.messageText = _textToBeSent.text.trim();
+    messageToBeSent.messageText = text;
     _textToBeSent.clear();
     print("message to be sent = ${messageToBeSent.messageText}");
     print("message to be convoId = ${messageToBeSent.conversationId}");

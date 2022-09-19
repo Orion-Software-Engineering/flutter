@@ -34,6 +34,7 @@ class _AllSetState extends State<AllSet> {
             style: interestsTitleStyle,
           ),
           Text(
+            textAlign: TextAlign.center,
             "Please check your email to verify your account",
             style: TextStyle(fontSize: 16),
           )

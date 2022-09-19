@@ -27,7 +27,7 @@ class _ChatRoomState extends State<ChatRoom> {
   String? myUsername;
   List<ConversationInfo> listOfConversations = [];
   APIServiceConversation apiServiceConversation = APIServiceConversation();
-  Timer? timer;
+  // Timer? timer;
 
   @override
   void initState() {
@@ -56,11 +56,11 @@ class _ChatRoomState extends State<ChatRoom> {
     // });
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   timer!.cancel();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    // timer!.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {

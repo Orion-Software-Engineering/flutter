@@ -14,8 +14,6 @@ class MessageAPIService {
   }
 
   Future getMessagesOfConversation(String conversationId) async {
-    listOfMessages = [];
-
     getUserId();
 
     Uri url = Uri(

@@ -18,10 +18,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:matchmaking_demo/models/location_model.dart';
 
+// ignore: must_be_immutable
 class HomeScaffold extends StatefulWidget {
   final double iconSize = 24.0;
 
-  const HomeScaffold({Key? key}) : super(key: key);
+  HomeScaffold({super.key});
 
   @override
   State<HomeScaffold> createState() => _HomeScaffoldState();
@@ -67,7 +68,60 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     });
   }
 
-  final titles = <String>['Matching', 'Messages', 'Events', 'Settings'];
+  final titles = <List<Widget>>[
+    [
+      Text(
+        'Matching',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+    ],
+    [
+      Text(
+        'Messages',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+      FaIcon(
+        FontAwesomeIcons.solidBell,
+        color: Color(0xFFFFBA00),
+      )
+    ],
+    [
+      Text(
+        'Events',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+      FaIcon(
+        FontAwesomeIcons.solidBell,
+        color: Color(0xFFFFBA00),
+      )
+    ],
+    [
+      Text(
+        'Settings',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+      FaIcon(
+        FontAwesomeIcons.solidBell,
+        color: Color(0xFFFFBA00),
+      )
+    ]
+  ];
 
   late LocationPostModel postModel;
 
@@ -97,19 +151,13 @@ class _HomeScaffoldState extends State<HomeScaffold> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
+          elevation: 0.5,
+          backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: const <Color>[Color(0xFFFF0000), Color(0xFF0000FF)],
-              ),
-            ),
-          ),
           toolbarHeight: 70,
-          title: Center(
-            child: Text(titles[_currentIndex]),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: titles[_currentIndex],
           ),
         ),
         body: tabs[_currentIndex],
