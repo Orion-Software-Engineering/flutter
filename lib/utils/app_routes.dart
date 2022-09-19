@@ -81,7 +81,7 @@ class AppRouter {
 }
 
 extension NavigatorStateExtension on NavigatorState {
-  Future<void> enterAppThroughLoginScreen() => pushNamed(AppRouter.home);
+  Future<void> enterAppThroughLoginScreen() => pushNamed(AppRouter.login);
 
   Future<void> enterAppThroughHomeScreen() => pushNamed(AppRouter.home);
 

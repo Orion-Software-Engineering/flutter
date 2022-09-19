@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/login_signup_interests/api_service_login.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
-import 'package:matchmaking_demo/custom_icon_icons.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
@@ -214,54 +212,6 @@ class _LoginState extends State<Login> {
                             ),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                        child: Row(children: <Widget>[
-                          Expanded(
-                              child: Divider(
-                            color: Theme.of(context).iconTheme.color,
-                          )),
-                          Text(
-                            "    Sign In With    ",
-                            style: TextStyle(
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodyText1
-                                  ?.color,
-                            ),
-                          ),
-                          Expanded(
-                              child: Divider(
-                            color: Theme.of(context).iconTheme.color,
-                          )),
-                        ]),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: Icon(
-                              FontAwesomeIcons.apple,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Icon(
-                              CustomIcon.outlookIcon,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Icon(
-                              FontAwesomeIcons.google,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                          )
-                        ],
                       ),
                     ],
                   ),
