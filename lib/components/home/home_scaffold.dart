@@ -84,15 +84,13 @@ class _HomeScaffoldState extends State<HomeScaffold> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
+          foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
+          shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
           backgroundColor: Theme.of(context).primaryColor,
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: const <Color>[Color(0xFFFF0000), Color(0xFF0000FF)],
-              ),
+              color: Theme.of(context).appBarTheme.backgroundColor,
             ),
           ),
           toolbarHeight: 70,
@@ -102,7 +100,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         ),
         body: tabs[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-          elevation: 20,
+          elevation: 50,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           iconSize: 30,
@@ -114,12 +112,12 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home_outlined,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: Icon(
                   Icons.home,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).indicatorColor,
                   size: widget.iconSize,
                 ),
                 label: 'Home',
@@ -127,12 +125,12 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.chat_bubble_outline,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: Icon(
                   Icons.chat_bubble,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).indicatorColor,
                   size: widget.iconSize,
                 ),
                 label: 'Chat Room',
@@ -140,12 +138,12 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.newspaper,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: FaIcon(
                   FontAwesomeIcons.solidNewspaper,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).indicatorColor,
                   size: widget.iconSize,
                 ),
                 label: 'News',
@@ -153,12 +151,12 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.sliders,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).appBarTheme.iconTheme?.color,
                   size: widget.iconSize,
                 ),
                 activeIcon: FaIcon(
                   FontAwesomeIcons.sliders,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).indicatorColor,
                   size: widget.iconSize,
                 ),
                 label: 'Settings',

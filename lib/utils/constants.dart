@@ -113,7 +113,8 @@ TextStyle interestsPageNextBackStyle = TextStyle(
 class MyThemes {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      disabledColor: isDarkTheme ? Colors.grey : Colors.grey,
+      indicatorColor: isDarkTheme ? Colors.white : Colors.black,
+      disabledColor: Color(0xFFBEBDBE),
       canvasColor: isDarkTheme ? Color(0xFF241837) : Colors.white,
       primaryColor: isDarkTheme ? Colors.black : Colors.white,
       backgroundColor: isDarkTheme ? Colors.black : Colors.white,
@@ -127,9 +128,13 @@ class MyThemes {
           )),
       cardColor: isDarkTheme ? Colors.blue : Colors.black,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: isDarkTheme ? Color(0xFF373738) : Colors.white,
+        backgroundColor: isDarkTheme ? Color(0xFF0A0101) : Color(0x99E9E9EA),
       ),
-      appBarTheme: AppBarTheme(),
+      appBarTheme: AppBarTheme(
+          shadowColor: Colors.grey,
+          iconTheme: IconThemeData(
+              color: isDarkTheme ? Colors.grey : Color(0xFF494949)),
+          backgroundColor: isDarkTheme ? Colors.black : Colors.white),
     );
   }
 }

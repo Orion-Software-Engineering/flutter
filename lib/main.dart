@@ -27,8 +27,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getCurrentAppTheme() async {
-    themeChangeProvider.darkTheme =
+    String selectedTheme =
         await themeChangeProvider.darkThemePreference.getTheme();
+    if (selectedTheme == 'dark') {
+      themeChangeProvider.darkTheme = ThemeMode.dark;
+    } else if (selectedTheme == 'light') {
+      themeChangeProvider.darkTheme = ThemeMode.light;
+    } else if (selectedTheme == 'system') {
+      themeChangeProvider.darkTheme = ThemeMode.system;
+    }
   }
 
   @override
@@ -44,8 +51,9 @@ class _MyAppState extends State<MyApp> {
           onUnknownRoute: AppRouter.onUnknownRoute,
           debugShowCheckedModeBanner: false,
           title: 'Orion Meet',
-          themeMode: null,
-          theme: MyThemes.themeData(themeChangeProvider.darkTheme, context),
+          themeMode: themeChangeProvider.darkTheme,
+          theme: MyThemes.themeData(false, context),
+          darkTheme: MyThemes.themeData(true, context),
           initialRoute: AppRouter.splash,
         );
       }),
