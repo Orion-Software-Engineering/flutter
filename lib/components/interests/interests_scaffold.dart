@@ -13,9 +13,9 @@ class InterestsScaffold extends StatelessWidget {
         body: Stack(
           children: [
             Positioned(
-              top: 630,
-              right: -10,
-              left: -10,
+              top: MediaQuery.of(context).size.height * 0.7,
+              right: MediaQuery.of(context).size.height * -0.05,
+              left: MediaQuery.of(context).size.height * -0.05,
               child:
                   Image.asset('assets/images/interests/Orion logo(!BG) 3.png'),
             ),
