@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/login/login_page.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
+import 'package:matchmaking_demo/signup/sign_up_page.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -210,6 +212,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               print('logout');
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Login()));
             },
             leading: Icon(
               Icons.logout_outlined,
@@ -231,6 +235,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               print('delete');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SignUp()));
             },
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
