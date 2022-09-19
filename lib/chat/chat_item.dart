@@ -48,10 +48,11 @@ class TextBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double maxWidth = MediaQuery.of(context).size.width * 0.8;
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
       child: Container(
-        constraints: BoxConstraints(maxWidth: 240),
+        constraints: BoxConstraints(minWidth: 110, maxWidth: 260),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: color,
@@ -61,20 +62,27 @@ class TextBubble extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                text,
-                maxLines: 10,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    overflow: TextOverflow.clip),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                child: Text(
+                  text,
+                  maxLines: 10,
+                  // textWidthBasis: TextWidthBasis.,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      overflow: TextOverflow.clip),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     getCustomFormattedDateTime(time),
+                    textAlign: TextAlign.right,
                     style: TextStyle(color: Color(0xff2c2c2c), fontSize: 12),
                   ),
                 ],

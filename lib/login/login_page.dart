@@ -47,6 +47,7 @@ class _LoginState extends State<Login> {
 
   Widget _ui(BuildContext context) {
     return LogInSignUpScaffold(
+      shouldPop: false,
       key: scaffoldKey,
       child: Center(
         child: Form(
@@ -86,7 +87,7 @@ class _LoginState extends State<Login> {
                         validator: (value) {
                           if (userNameValid.hasMatch(value!) &&
                               value.isNotEmpty) {
-                            String username = value;
+                            String username = value.trim();
                             setState(() {
                               requestModel.username = username;
                             });
@@ -177,7 +178,6 @@ class _LoginState extends State<Login> {
                                 color: signUpLoginOrange,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 12.0,
-                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
@@ -209,7 +209,6 @@ class _LoginState extends State<Login> {
                                   color: signUpLoginOrange,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16.0,
-                                  decoration: TextDecoration.underline,
                                 ),
                               ),
                             ),

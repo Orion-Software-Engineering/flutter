@@ -6,6 +6,7 @@
 *  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
@@ -27,7 +28,7 @@ class HomeScaffold extends StatefulWidget {
 }
 
 class _HomeScaffoldState extends State<HomeScaffold> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   String? userId;
   Position? userPosition;
   void getCurrentPosition() async {
@@ -60,7 +61,11 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         desiredAccuracy: LocationAccuracy.best);
   }
 
-  final tabs = <Widget>[HomePage(), ChatRoom(), EventsPage(), SettingsPage()];
+  void goHome() {
+    setState(() {
+      _currentIndex = 0;
+    });
+  }
 
   final titles = <String>['Matching', 'Messages', 'Events', 'Settings'];
 
@@ -74,13 +79,21 @@ class _HomeScaffoldState extends State<HomeScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    IconData changeThemeIcon =
-        (MediaQuery.of(context).platformBrightness == Brightness.light)
-            ? FontAwesomeIcons.solidSun
-            : FontAwesomeIcons.solidMoon;
-
+    final tabs = <Widget>[
+      HomePage(),
+      ChatRoom(home: goHome),
+      EventsPage(),
+      SettingsPage()
+    ];
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async {
+        if (_currentIndex == 0) {
+          SystemNavigator.pop();
+        } else {
+          goHome();
+        }
+        return false;
+      },
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(

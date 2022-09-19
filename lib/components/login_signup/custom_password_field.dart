@@ -26,6 +26,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
     return Column(
       children: [
         TextFormField(
+          enableSuggestions: false,
           style: TextStyle(
             color: Theme.of(context).primaryTextTheme.bodyText1?.color,
           ),

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_forgotpassword.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_forgotpassword.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
@@ -39,6 +39,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Widget _ui(BuildContext context) {
     return LogInSignUpScaffold(
+      shouldPop: true,
       key: scaffoldKey,
       child: Center(
         child: Form(

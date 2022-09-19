@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_message.dart';
+import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_item.dart';
 
 import '../models/messaging/message_model.dart';
@@ -20,6 +20,7 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     return Flexible(
         child: ListView.builder(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.all(0),
             itemCount: widget.messagesList.length,
             reverse: false,

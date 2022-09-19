@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_signup.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_signup.dart';
 import 'package:matchmaking_demo/models/signup_model.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../components/login_signup/custom_password_field.dart';
@@ -52,6 +52,7 @@ class _SignUpState extends State<SignUp> {
 
   Widget _ui(BuildContext context) {
     return LogInSignUpScaffold(
+      shouldPop: true,
       child: Center(
         child: Form(
           key: _formKey,
@@ -288,7 +289,6 @@ class _SignUpState extends State<SignUp> {
                                 color: signUpLoginOrange,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),

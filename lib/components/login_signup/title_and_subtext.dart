@@ -15,10 +15,10 @@ class TitleAndSubtext extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            fontFamily: 'Nunito',
             color: Theme.of(context).primaryTextTheme.bodyText1?.color,
             fontSize: 40.0,
             fontWeight: FontWeight.w700,
+            fontFamily: 'Nunito',
           ),
         ),
         Text(
@@ -27,6 +27,7 @@ class TitleAndSubtext extends StatelessWidget {
             color: Theme.of(context).primaryTextTheme.bodyText2?.color,
             fontSize: 16.0,
             fontWeight: FontWeight.w700,
+            fontFamily: 'Nunito',
           ),
         )
       ],

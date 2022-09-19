@@ -16,7 +16,7 @@ class _AllSetState extends State<AllSet> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 1),
+    Timer(Duration(seconds: 5),
         () => Navigator.of(context).enterAppThroughLoginScreen());
   }
 

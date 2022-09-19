@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LogInSignUpScaffold extends StatelessWidget {
-  const LogInSignUpScaffold({Key? key, required this.child}) : super(key: key);
+  bool shouldPop = false;
+  LogInSignUpScaffold({Key? key, required this.shouldPop, required this.child})
+      : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => shouldPop,
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         body: Stack(

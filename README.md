@@ -172,3 +172,5 @@ You'd want to set the initialRoute in main.dart to do that.
       -200: shows that post request was successful
     -Any other response throws an exception.
 😉
+
+### EventsPage

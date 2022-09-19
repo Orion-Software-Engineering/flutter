@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_message.dart';
+import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_list.dart';
 import 'package:matchmaking_demo/chat/input_field.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
@@ -25,8 +25,6 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     super.initState();
-    print("convoId from chat page ${widget.conversationInfo.conversationId}");
-
     timer = Timer.periodic(Duration(seconds: 5), (timer) {
       apiServiceMessage
           .getMessagesOfConversation(widget.conversationInfo.conversationId!)
@@ -72,7 +70,7 @@ class _ChatState extends State<Chat> {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: "Nunito",
-                      fontSize: 16,
+                      fontSize: 24,
                     ),
                   ),
                 ],
@@ -80,9 +78,6 @@ class _ChatState extends State<Chat> {
             ],
           ),
         ),
-        // actions: const [
-        // IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
-        // ],
       ),
       body: Stack(
         children: [

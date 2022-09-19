@@ -11,13 +11,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_interests.dart';
 import 'package:matchmaking_demo/models/interest_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
-import '../../utils/constants.dart';
 import 'interests_button.dart';
-import 'package:matchmaking_demo/api/api_service_interests.dart';
 
 class InterestsPage extends StatefulWidget {
   InterestsPage(

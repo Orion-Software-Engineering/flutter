@@ -4,12 +4,10 @@ import 'package:matchmaking_demo/settings/privacy_page.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 
+
 IconData? systemIcon;
 bool displayThemeSettings = false;
-
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
-
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }

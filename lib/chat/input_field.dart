@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:matchmaking_demo/api/api_service_message.dart';
+import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/models/messaging/message_model.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 

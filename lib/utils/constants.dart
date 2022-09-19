@@ -6,7 +6,13 @@ Color orionLogoCenterColor = Color(0xFF1B1129);
 TextStyle signUpLoginTextFieldTextStyle =
     TextStyle(color: signUpLoginTextColor, fontFamily: 'Nunito', fontSize: 16);
 
-//apis
+const List<Color> matchingCardColors = [
+  Color(0xFF007AFF),
+  Color(0xFF241837),
+  Color(0xFFFF5A00),
+  Color(0xFFFFD500),
+  Color(0xFF007E24),
+];
 
 TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,
