@@ -68,61 +68,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     });
   }
 
-  final titles = <List<Widget>>[
-    [
-      Text(
-        'Matching',
-        style: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black,
-            fontSize: 32,
-            fontWeight: FontWeight.w700),
-      ),
-    ],
-    [
-      Text(
-        'Messages',
-        style: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black,
-            fontSize: 32,
-            fontWeight: FontWeight.w700),
-      ),
-      FaIcon(
-        FontAwesomeIcons.solidBell,
-        color: Color(0xFFFFBA00),
-      )
-    ],
-    [
-      Text(
-        'Events',
-        style: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black,
-            fontSize: 32,
-            fontWeight: FontWeight.w700),
-      ),
-      FaIcon(
-        FontAwesomeIcons.solidBell,
-        color: Color(0xFFFFBA00),
-      )
-    ],
-    [
-      Text(
-        'Settings',
-        style: TextStyle(
-            fontFamily: "Nunito",
-            color: Colors.black,
-            fontSize: 32,
-            fontWeight: FontWeight.w700),
-      ),
-      FaIcon(
-        FontAwesomeIcons.solidBell,
-        color: Color(0xFFFFBA00),
-      )
-    ]
-  ];
-
   late LocationPostModel postModel;
 
   @override
@@ -133,6 +78,60 @@ class _HomeScaffoldState extends State<HomeScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    final titles = <List<Widget>>[
+      [
+        Text(
+          'Matching',
+          style: TextStyle(
+              fontFamily: "Nunito",
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+              fontSize: 32,
+              fontWeight: FontWeight.w700),
+        ),
+      ],
+      [
+        Text(
+          'Messages',
+          style: TextStyle(
+              fontFamily: "Nunito",
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+              fontSize: 32,
+              fontWeight: FontWeight.w700),
+        ),
+        FaIcon(
+          FontAwesomeIcons.solidBell,
+          color: Color(0xFFFFBA00),
+        )
+      ],
+      [
+        Text(
+          'Events',
+          style: TextStyle(
+              fontFamily: "Nunito",
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+              fontSize: 32,
+              fontWeight: FontWeight.w700),
+        ),
+        FaIcon(
+          FontAwesomeIcons.solidBell,
+          color: Color(0xFFFFBA00),
+        )
+      ],
+      [
+        Text(
+          'Settings',
+          style: TextStyle(
+              fontFamily: "Nunito",
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+              fontSize: 32,
+              fontWeight: FontWeight.w700),
+        ),
+        FaIcon(
+          FontAwesomeIcons.solidBell,
+          color: Color(0xFFFFBA00),
+        )
+      ]
+    ];
     final tabs = <Widget>[
       HomePage(),
       ChatRoom(home: goHome),
