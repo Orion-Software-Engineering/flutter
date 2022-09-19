@@ -1,12 +1,16 @@
 class ConversationInfo {
-  final String? conversationId;
-  String receiverUsername = '';
-  String receiverUserId = '';
+  String? conversationId = '';
+  String? receiverUsername = '';
+  String? receiverUserId = '';
+  String? senderUserId = '';
+  String? senderUsername = '';
   String lastMessage = '';
   bool lastMessageIsMine = true;
   final List<Map<String, String>> conversationUsers = [];
 
   ConversationInfo({this.conversationId});
+  ConversationInfo.withoutConversationId(
+      this.receiverUserId, this.receiverUsername, this.senderUserId);
 }
 
 class CreateConversationInfo {
