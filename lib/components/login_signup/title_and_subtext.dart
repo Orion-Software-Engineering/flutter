@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../utils/constants.dart';
 
 class TitleAndSubtext extends StatelessWidget {
   const TitleAndSubtext({Key? key, required this.title, required this.subtext})

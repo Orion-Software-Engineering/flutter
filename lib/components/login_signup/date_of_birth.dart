@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../splash/splash_screen.dart';
 import '../../utils/constants.dart';
 
 class DobField extends StatefulWidget {
@@ -104,13 +105,23 @@ class _DobFieldState extends State<DobField> {
         });
       },
       child: TextFormField(
+        style: TextStyle(
+          color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+        ),
         controller: TextEditingController(text: dateValue),
         enabled: false,
         decoration: InputDecoration(
             labelText: dateValue == null ? 'DD/MM/YYYY' : 'Date of Birth',
             labelStyle: signUpLoginTextFieldTextStyle,
-            border: inputBorder,
-            suffixIcon: Icon(Icons.calendar_month)),
+            disabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: themeMode ? Colors.white : Colors.grey,
+              ),
+            ),
+            suffixIcon: Icon(
+              Icons.calendar_month,
+              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+            )),
         validator: widget.validationFunction,
       ),
     );

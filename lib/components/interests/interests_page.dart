@@ -55,7 +55,7 @@ class _InterestsPageState extends State<InterestsPage> {
   Widget build(BuildContext context) {
     return Progress(
       isLoading: isLoading,
-      opacity: 0.3,
+      opacity: 0,
       child: _ui(context),
     );
   }
@@ -73,7 +73,11 @@ class _InterestsPageState extends State<InterestsPage> {
       children: [
         Text(
           "Let's know your interests!",
-          style: interestsTitleStyle,
+          style: TextStyle(
+              fontSize: 40,
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color),
           textAlign: TextAlign.center,
         ),
         SizedBox(

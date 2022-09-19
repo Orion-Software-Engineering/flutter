@@ -2,15 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:matchmaking_demo/api/login_signup_interests/api_service_login.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:matchmaking_demo/api/api_service_login.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
+import 'package:matchmaking_demo/custom_icon_icons.dart';
 import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../utils/constants.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -43,7 +46,6 @@ class _LoginState extends State<Login> {
   }
 
   Widget _ui(BuildContext context) {
-    //LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
     return LogInSignUpScaffold(
       shouldPop: false,
       key: scaffoldKey,
@@ -75,9 +77,9 @@ class _LoginState extends State<Login> {
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
+                          enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: signUpLoginTextColor,
+                              color: themeMode ? Colors.white : Colors.grey,
                             ),
                           ),
                         ),
@@ -112,10 +114,7 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 30.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context)
-                                .buttonTheme
-                                .colorScheme
-                                ?.primary,
+                            primary: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -160,7 +159,7 @@ class _LoginState extends State<Login> {
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w400,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -194,6 +193,10 @@ class _LoginState extends State<Login> {
                               "Don't have an account?",
                               style: TextStyle(
                                 fontSize: 15.0,
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText1
+                                    ?.color,
                               ),
                             ),
                             MaterialButton(
@@ -203,7 +206,7 @@ class _LoginState extends State<Login> {
                               child: Text(
                                 'Sign Up',
                                 style: TextStyle(
-                                  color: Color(0xFFcd5d27),
+                                  color: signUpLoginOrange,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16.0,
                                 ),
@@ -217,12 +220,20 @@ class _LoginState extends State<Login> {
                         child: Row(children: <Widget>[
                           Expanded(
                               child: Divider(
-                            color: Colors.black,
+                            color: Theme.of(context).iconTheme.color,
                           )),
-                          Text("    Sign In With    "),
+                          Text(
+                            "    Sign In With    ",
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color,
+                            ),
+                          ),
                           Expanded(
                               child: Divider(
-                            color: Colors.black,
+                            color: Theme.of(context).iconTheme.color,
                           )),
                         ]),
                       ),
@@ -231,26 +242,25 @@ class _LoginState extends State<Login> {
                         children: [
                           TextButton(
                             onPressed: () {},
-                            child: const Image(
-                              image: AssetImage(
-                                'assets/images/sign_in/logo_apple.png',
-                              ),
-                              height: 44,
-                              width: 45,
+                            child: Icon(
+                              FontAwesomeIcons.apple,
+                              color: Theme.of(context).iconTheme.color,
                             ),
                           ),
                           TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                  'assets/images/sign_in/logo_outlook.png',
-                                  height: 44,
-                                  width: 45)),
+                            onPressed: () {},
+                            child: Icon(
+                              CustomIcon.outlookIcon,
+                              color: Theme.of(context).iconTheme.color,
+                            ),
+                          ),
                           TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                  'assets/images/sign_in/logo_google.png',
-                                  height: 44,
-                                  width: 45))
+                            onPressed: () {},
+                            child: Icon(
+                              FontAwesomeIcons.google,
+                              color: Theme.of(context).iconTheme.color,
+                            ),
+                          )
                         ],
                       ),
                     ],

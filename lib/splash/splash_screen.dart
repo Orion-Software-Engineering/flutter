@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/login_signup_interests/api_service_login.dart';
 import '../models/login_model.dart';
 
+bool themeMode = false;
+
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
   String? obtainedUsername;
@@ -25,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
         await SharedPreferences.getInstance();
     widget.obtainedUsername = sharedPreferences.getString("username");
     widget.obtainedPassword = sharedPreferences.getString("password");
+    themeMode = sharedPreferences.getBool("ThemeStatus")!;
   }
 
   @override
@@ -37,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).canvasColor,
       child: Center(
         child: Image.asset("assets/images/interests/Orion logo(!BG) 3.png",
             scale: 3.5),
