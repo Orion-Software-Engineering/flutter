@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,6 +25,15 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     getCurrentAppTheme();
+    initPlatformState();
+  }
+
+  static final String oneSignalAppId = '0bfcc099-9621-4dba-a906-7aa5cefae056';
+  Future<void> initPlatformState() async {
+    OneSignal.shared.setAppId(oneSignalAppId);
+    OneSignal.shared
+        .promptUserForPushNotificationPermission()
+        .then((accepted) {});
   }
 
   void getCurrentAppTheme() async {
