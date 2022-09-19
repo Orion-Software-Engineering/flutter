@@ -18,10 +18,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:matchmaking_demo/models/location_model.dart';
 
+// ignore: must_be_immutable
 class HomeScaffold extends StatefulWidget {
   final double iconSize = 24.0;
 
-  const HomeScaffold({Key? key}) : super(key: key);
+  HomeScaffold({super.key});
 
   @override
   State<HomeScaffold> createState() => _HomeScaffoldState();
@@ -67,7 +68,60 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     });
   }
 
-  final titles = <String>['Matching', 'Messages', 'Events', 'Settings'];
+  final titles = <List<Widget>>[
+    [
+      Text(
+        'Matching',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+    ],
+    [
+      Text(
+        'Messages',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+      FaIcon(
+        FontAwesomeIcons.solidBell,
+        color: Color(0xFFFFBA00),
+      )
+    ],
+    [
+      Text(
+        'Events',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+      FaIcon(
+        FontAwesomeIcons.solidBell,
+        color: Color(0xFFFFBA00),
+      )
+    ],
+    [
+      Text(
+        'Settings',
+        style: TextStyle(
+            fontFamily: "Nunito",
+            color: Colors.black,
+            fontSize: 32,
+            fontWeight: FontWeight.w700),
+      ),
+      FaIcon(
+        FontAwesomeIcons.solidBell,
+        color: Color(0xFFFFBA00),
+      )
+    ]
+  ];
 
   late LocationPostModel postModel;
 
@@ -97,6 +151,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
+          elevation: 0.5,
           foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
           shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
           backgroundColor: Theme.of(context).primaryColor,
@@ -107,8 +162,9 @@ class _HomeScaffoldState extends State<HomeScaffold> {
             ),
           ),
           toolbarHeight: 70,
-          title: Center(
-            child: Text(titles[_currentIndex]),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: titles[_currentIndex],
           ),
         ),
         body: tabs[_currentIndex],
