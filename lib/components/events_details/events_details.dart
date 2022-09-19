@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
 import 'package:favorite_button/favorite_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EventsDetails extends StatelessWidget {
   EventsDetails({Key? key, required this.event}) : super(key: key);
@@ -44,7 +45,7 @@ class EventsDetails extends StatelessWidget {
                   valueChanged: (_isFavorite) {
                     print('Is favorite: $_isFavorite');
                   }),
-              IconButton(onPressed: () =>{}, icon: Icon(Icons.bookmark))
+              IconButton(onPressed: () => {}, icon: Icon(Icons.bookmark))
             ],
           ),
           SliverToBoxAdapter(
@@ -279,5 +280,10 @@ class EventsDetails extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> setEventsData(eventDetailsModel) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool('eventsDetails', eventDetailsModel);
   }
 }
