@@ -27,7 +27,7 @@ class _ChatRoomState extends State<ChatRoom> {
   String? myUsername;
   List<ConversationInfo> listOfConversations = [];
   APIServiceConversation apiServiceConversation = APIServiceConversation();
-  // Timer? timer;
+  Timer? timer;
 
   @override
   void initState() {
@@ -56,11 +56,11 @@ class _ChatRoomState extends State<ChatRoom> {
     // });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // timer!.cancel();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   timer!.cancel();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +75,7 @@ class _ChatRoomState extends State<ChatRoom> {
               if (listOfConversations[index].lastMessageIsMine) {
                 lastMessageSender = "me";
               } else {
-                lastMessageSender =
-                    listOfConversations[index].receiverUsername!;
+                lastMessageSender = listOfConversations[index].receiverUsername;
               }
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 1.2),
@@ -96,8 +95,8 @@ class _ChatRoomState extends State<ChatRoom> {
                     child: ListTile(
                       leading: AvatarPlaceholder(
                           firstCharacter:
-                              listOfConversations[index].receiverUsername![0]),
-                      title: Text(listOfConversations[index].receiverUsername!),
+                              listOfConversations[index].receiverUsername[0]),
+                      title: Text(listOfConversations[index].receiverUsername),
                       subtitle: Row(
                         children: [
                           Text(

@@ -38,28 +38,27 @@ class _ProfileState extends State<Profile> {
           Column(
             children: [
               Expanded(
-                flex: 2,
                 child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: const <Color>[
+                        Color(0xFFFF0000),
+                        Color(0xFF0000FF)
+                      ],
+                    ),
+                  ),
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(color: Color(0x00338742)),
                         Container(
-                          height: 100,
-                          width: 100,
+                          height: 250,
+                          width: 250,
                           decoration: BoxDecoration(
-                            color: Colors.white,
                             borderRadius: BorderRadius.circular(200),
                           ),
-                          child: Center(
-                              child: Text(
-                            "K",
-                            style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "Nunito"),
-                          )),
+                          child: Image.asset(
+                              'assets/images/messaging/Avatars/Aquarius.png'),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -86,11 +85,11 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              Expanded(flex: 3, child: Container())
+              Expanded(child: Container())
             ],
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.35,
+            top: MediaQuery.of(context).size.height * 0.46,
             right: 0,
             bottom: 0,
             left: 0,
@@ -103,7 +102,6 @@ class _ProfileState extends State<Profile> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextField(),
                   BioFields(
                       title: 'Username',
                       value: profileResponse.username,
