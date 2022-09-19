@@ -177,7 +177,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
-              _launchUrl("pages.flycricket.io", "/orion-meet/privacy.html");
+              _launchUrl('orionmeet.vercel.app', '/about');
             },
             leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color),
             title: Text('About',
@@ -193,6 +193,7 @@ class _SettingsPageState extends State<SettingsPage> {
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('contact');
+              _launchUrl('orionmeet.vercel.app', '/support');
             },
             leading: Icon(Icons.support_agent,
                 color: Theme.of(context).iconTheme.color),
