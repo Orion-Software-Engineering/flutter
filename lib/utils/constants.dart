@@ -134,7 +134,7 @@ class MyThemes {
           )),
       cardColor: isDarkTheme ? Colors.blue : Colors.black,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: isDarkTheme ? Color(0xFF0A0101) : Color(0x99E9E9EA),
+        backgroundColor: isDarkTheme ? Color(0xFF0A0101) : Color(0xFFE9E9EA),
       ),
       appBarTheme: AppBarTheme(
           shadowColor: Colors.grey,

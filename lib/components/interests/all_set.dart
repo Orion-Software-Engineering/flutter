@@ -36,10 +36,16 @@ class _AllSetState extends State<AllSet> {
                 fontWeight: FontWeight.w700,
                 color: Theme.of(context).primaryTextTheme.bodyText1?.color),
           ),
+          SizedBox(
+            height: 40,
+          ),
           Text(
             textAlign: TextAlign.center,
             "Please check your email to verify your account",
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Nunito',
+                color: Theme.of(context).primaryTextTheme.bodyText1?.color),
           )
         ],
       ),
