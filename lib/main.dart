@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
@@ -56,7 +55,6 @@ class _MyAppState extends State<MyApp> {
           theme: MyThemes.themeData(false, context),
           darkTheme: MyThemes.themeData(true, context),
           initialRoute: AppRouter.splash,
-          // home: InterestsOne(),todo use home when testing specific pages
         );
       }),
     );
