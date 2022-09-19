@@ -52,6 +52,7 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
+
     print("senderuserid = ${widget.conversationInfo.senderUserId}");
     print("rUsername = ${widget.conversationInfo.receiverUsername}");
     print("rUserId = ${widget.conversationInfo.receiverUserId}");
@@ -59,6 +60,7 @@ class _ChatState extends State<Chat> {
     String? senderName = widget.conversationInfo.receiverUsername;
     if (widget.conversationInfo.conversationId != '') {
       return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           leading: CustomBackButton(),
           flexibleSpace: Container(

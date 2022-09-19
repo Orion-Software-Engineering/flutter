@@ -203,6 +203,7 @@ class _InputFieldState extends State<InputField> {
                   icon: FaIcon(FontAwesomeIcons.arrowCircleUp),
                   iconSize: 25,
                 ),
+
               ],
             ),
           ),

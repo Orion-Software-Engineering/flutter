@@ -67,6 +67,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextFormField(
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: signUpLoginTextFieldTextStyle,
@@ -92,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       SizedBox(height: 30.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),

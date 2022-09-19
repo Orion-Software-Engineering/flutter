@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'package:matchmaking_demo/home/settings_page.dart';
-import 'package:matchmaking_demo/utils/theme_listener.dart';
+import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,7 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  DarkThemeProvider themeChanger = DarkThemeProvider();
+  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
 
   @override
   void initState() {
@@ -29,27 +28,33 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getCurrentAppTheme() async {
-    themeChanger.darkTheme = await getTheme();
-    print("main${themeChanger.darkTheme}");
+    String selectedTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+    if (selectedTheme == 'dark') {
+      themeChangeProvider.darkTheme = ThemeMode.dark;
+    } else if (selectedTheme == 'light') {
+      themeChangeProvider.darkTheme = ThemeMode.light;
+    } else if (selectedTheme == 'system') {
+      themeChangeProvider.darkTheme = ThemeMode.system;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) {
-        print(themeChanger.darkTheme);
-        return themeChanger;
+        return themeChangeProvider;
       },
       child: Consumer<DarkThemeProvider>(
-          builder: (BuildContext context, value, child) {
+          builder: (BuildContext context, value, Widget? child) {
         return MaterialApp(
           onGenerateRoute: AppRouter.onGenerateRoute,
           onUnknownRoute: AppRouter.onUnknownRoute,
           debugShowCheckedModeBanner: false,
           title: 'Orion Meet',
-          themeMode: null,
-          theme: MyThemes.themeData(themeChanger.darkTheme, context),
-          //darkTheme: MyThemes.darkTheme,
+          themeMode: themeChangeProvider.darkTheme,
+          theme: MyThemes.themeData(false, context),
+          darkTheme: MyThemes.themeData(true, context),
           initialRoute: AppRouter.splash,
           // home: InterestsOne(),todo use home when testing specific pages
         );

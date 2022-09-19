@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/components/interests/interests_scaffold.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 
 class AllSet extends StatefulWidget {
   @override
@@ -27,11 +26,15 @@ class _AllSetState extends State<AllSet> {
         child: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text(
             textAlign: TextAlign.center,
             "You're all set Happy Matching'!",
-            style: interestsTitleStyle,
+            style: TextStyle(
+                fontSize: 40,
+                fontFamily: 'Nunito',
+                fontWeight: FontWeight.w700,
+                color: Theme.of(context).primaryTextTheme.bodyText1?.color),
           ),
           Text(
             textAlign: TextAlign.center,

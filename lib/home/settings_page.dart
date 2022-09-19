@@ -1,20 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/settings/about_page.dart';
+import 'package:matchmaking_demo/login/login_page.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
-import 'package:matchmaking_demo/utils/theme_listener.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:matchmaking_demo/signup/sign_up_page.dart';
+import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-// ignore: must_be_immutable
+IconData? systemIcon;
+bool displayThemeSettings = false;
+
 class SettingsPage extends StatefulWidget {
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  Future<void> _launchUrl(String url, String path) async {
+    final Uri uri = Uri(scheme: "https", host: url, path: path);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw "Cannot launch url";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var themeChange = Provider.of<DarkThemeProvider>(context);
+    final themeChange = Provider.of<DarkThemeProvider>(context);
+    switch (themeChange.darkTheme) {
+      case ThemeMode.dark:
+        systemIcon = Icons.dark_mode;
+        break;
+      case ThemeMode.light:
+        systemIcon = Icons.light_mode;
+        break;
+      case ThemeMode.system:
+        systemIcon = Icons.settings;
+        break;
+    }
     return Container(
       padding: EdgeInsets.only(left: 16, top: 1, right: 16),
       child: ListView(
@@ -53,25 +77,86 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Theme.of(context).iconTheme.color,
             ),
           ),
-          SwitchListTile(
-            tileColor: Theme.of(context).primaryColor,
-            activeTrackColor: Colors.lightBlue[900],
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey,
-            value: themeChange.darkTheme,
-            onChanged: (value) {
-              setState(() {
-                themeChange.darkTheme = value;
-                print(themeChange.darkTheme);
-              });
-            },
+          ListTile(
+            leading: Icon(systemIcon, color: Theme.of(context).iconTheme.color),
             title: Text(
-              'Dark Mode',
+              'Theme',
               style: TextStyle(
                   color: Theme.of(context).primaryTextTheme.bodyText1?.color),
             ),
-            secondary:
-                Icon(Icons.dark_mode, color: Theme.of(context).iconTheme.color),
+            onTap: () {
+              setState(() {
+                displayThemeSettings = !displayThemeSettings;
+                print(displayThemeSettings);
+              });
+            },
+          ),
+          Offstage(
+            offstage: displayThemeSettings,
+            child: Card(
+              elevation: 0,
+              color: Theme.of(context).primaryColor,
+              child: Theme(
+                data: ThemeData(
+                    unselectedWidgetColor:
+                        Theme.of(context).primaryTextTheme.bodyText2?.color),
+                child: Column(
+                  children: [
+                    RadioListTile(
+                        title: Text(
+                          'Dark Mode',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color),
+                        ),
+                        value: ThemeMode.dark,
+                        groupValue: themeChange.darkTheme,
+                        onChanged: (value) {
+                          setState(() {
+                            themeChange.darkTheme = ThemeMode.dark;
+                            systemIcon = Icons.dark_mode;
+                          });
+                        }),
+                    RadioListTile(
+                        title: Text(
+                          'Light Mode',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color),
+                        ),
+                        value: ThemeMode.light,
+                        groupValue: themeChange.darkTheme,
+                        onChanged: (value) {
+                          setState(() {
+                            themeChange.darkTheme = ThemeMode.light;
+                            systemIcon = Icons.light_mode;
+                          });
+                        }),
+                    RadioListTile(
+                        title: Text(
+                          'System Theme',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color),
+                        ),
+                        value: ThemeMode.system,
+                        groupValue: themeChange.darkTheme,
+                        onChanged: (value) {
+                          setState(() {
+                            themeChange.darkTheme = ThemeMode.system;
+                            systemIcon = Icons.settings;
+                          });
+                        }),
+                  ],
+                ),
+              ),
+            ),
           ),
           ListTile(
             tileColor: Theme.of(context).primaryColor,
@@ -92,9 +177,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
-              print('about');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const AboutPage()));
+              _launchUrl('orionmeet.vercel.app', '/about');
             },
             leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color),
             title: Text('About',
@@ -110,6 +193,7 @@ class _SettingsPageState extends State<SettingsPage> {
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('contact');
+              _launchUrl('orionmeet.vercel.app', '/support');
             },
             leading: Icon(Icons.support_agent,
                 color: Theme.of(context).iconTheme.color),
@@ -129,20 +213,22 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               print('logout');
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Login()));
             },
             leading: Icon(
               Icons.logout_outlined,
               color: Theme.of(context).iconTheme.color,
             ),
             title: Text(
-              'Logout',
+              'Log out',
               style: TextStyle(
                 color: Colors.blue,
               ),
             ),
           ),
           SizedBox(
-            height: 150,
+            height: 50,
             child: Container(
                 //color: Colors.white,
                 ),
@@ -150,6 +236,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               print('delete');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SignUp()));
             },
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
@@ -161,7 +249,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 Text(
                   'Delete Account',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ],
             ),
@@ -170,14 +260,4 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
-}
-
-setDarkThemePreferences(bool value) async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  preferences.setBool("themeStatus", value);
-}
-
-Future<bool> getTheme() async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  return preferences.getBool("themeStatus") ?? false;
 }
