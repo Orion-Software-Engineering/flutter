@@ -1,18 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/settings/about_page.dart';
+import 'package:matchmaking_demo/login/login_page.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
+import 'package:matchmaking_demo/signup/sign_up_page.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 IconData? systemIcon;
 bool displayThemeSettings = false;
+
 class SettingsPage extends StatefulWidget {
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  Future<void> _launchUrl(String url, String path) async {
+    final Uri uri = Uri(scheme: "https", host: url, path: path);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw "Cannot launch url";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
@@ -165,9 +177,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
-              print('about');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const AboutPage()));
+              _launchUrl('orionmeet.vercel.app', '/about');
             },
             leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color),
             title: Text('About',
@@ -183,6 +193,7 @@ class _SettingsPageState extends State<SettingsPage> {
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
               print('contact');
+              _launchUrl('orionmeet.vercel.app', '/support');
             },
             leading: Icon(Icons.support_agent,
                 color: Theme.of(context).iconTheme.color),
@@ -202,6 +213,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               print('logout');
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Login()));
             },
             leading: Icon(
               Icons.logout_outlined,
@@ -223,6 +236,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               print('delete');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SignUp()));
             },
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
