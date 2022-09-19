@@ -10,7 +10,8 @@ class APIServiceConversation {
   List<String> listOfConversationIds = [];
   Map<String, List<Map<String, String>>> conversationIdsAndTheirUsers = {};
   List<ConversationInfo> listOfConversationInfo = [];
-  late ConversationInfo conversationInfoFromMatchScreen;
+  // late ConversationInfo conversationInfoFromMatchScreen;
+  String? newlyCreatedConversationId;
 
   Future getConversationsOfUser() async {
     final SharedPreferences sharedPreferences =
@@ -24,6 +25,7 @@ class APIServiceConversation {
         Uri(scheme: scheme, host: host, path: getConversationsPath + userId!);
 
     final response = await http.get(url);
+    print("get conversations of user");
     print(response.statusCode);
     print("response body = ${json.decode(response.body)}");
     print("userId = $userId");
@@ -65,6 +67,11 @@ class APIServiceConversation {
             print("username ${conversationInfo.receiverUsername}");
             conversationInfo.receiverUserId = userIdAndUsername["userId"]!;
             print("id ${conversationInfo.receiverUserId}");
+          } else {
+            conversationInfo.senderUsername = userIdAndUsername["username"]!;
+            print("sender username ${conversationInfo.senderUsername}");
+            conversationInfo.senderUserId = userIdAndUsername["userId"]!;
+            print("sender id ${conversationInfo.senderUserId}");
           }
           conversationInfo.conversationUsers.add(userIdAndUsername);
 
@@ -105,6 +112,7 @@ class APIServiceConversation {
         headers: headers,
         body: jsonEncode(CreateConversationInfo(userId: userId)));
 
+    print("create conversation response");
     print(createConversationResponse.statusCode);
     print(createConversationResponse.body);
 
@@ -113,11 +121,11 @@ class APIServiceConversation {
 
     String? conversationId = createConversationResponseDecoded["id"];
     print("conversationId = $conversationId");
-
-    conversationInfoFromMatchScreen =
-        ConversationInfo(conversationId: conversationId);
-    // conversationInfoFromMatchScreen.receiverUserId = userIdOfMatch;
-    conversationInfoFromMatchScreen.receiverUsername = usernameOfMatch;
+    newlyCreatedConversationId = conversationId;
+    // conversationInfoFromMatchScreen =
+    //     ConversationInfo(conversationId: conversationId);
+    // // conversationInfoFromMatchScreen.receiverUserId = userIdOfMatch;
+    // conversationInfoFromMatchScreen.receiverUsername = usernameOfMatch;
 
     addUserToConversation(userIdOfMatch, conversationId!);
   }
@@ -132,6 +140,7 @@ class APIServiceConversation {
         body: jsonEncode(AddUserToConversationRequest(
             conversationId: conversationId, recipientUserId: userId)));
 
+    print("add user to conversation response");
     print(addUserToConversationResponse.statusCode);
     print(addUserToConversationResponse.body);
   }

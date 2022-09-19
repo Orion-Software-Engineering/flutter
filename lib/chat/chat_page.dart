@@ -27,7 +27,13 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     super.initState();
-    if (widget.conversationInfo.conversationId != null) {
+    if (widget.conversationInfo.conversationId != '') {
+      pollForMessages();
+    }
+  }
+
+  void pollForMessages() {
+    if (widget.conversationInfo.conversationId != '') {
       timer = Timer.periodic(Duration(seconds: 5), (timer) {
         apiServiceMessage
             .getMessagesOfConversation(widget.conversationInfo.conversationId!)
@@ -39,65 +45,135 @@ class _ChatState extends State<Chat> {
   @override
   void dispose() {
     super.dispose();
-    timer!.cancel();
+    if (timer != null) {
+      timer!.cancel();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    print("senderuserid = ${widget.conversationInfo.senderUserId}");
+    print("rUsername = ${widget.conversationInfo.receiverUsername}");
+    print("rUserId = ${widget.conversationInfo.receiverUserId}");
+
     String? senderName = widget.conversationInfo.receiverUsername;
-    return Scaffold(
-      appBar: AppBar(
-        leading: CustomBackButton(),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: const <Color>[Color(0xFFE53935), Color(0xFF1A237E)])),
-        ),
-        title: GestureDetector(
-          onTap: () => Navigator.of(context)
-              .goToProfile(widget.conversationInfo.receiverUserId),
-          child: Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: Colors.black,
-                child: Text(senderName![0]),
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    senderName,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontFamily: "Nunito",
-                      fontSize: 24,
+    if (widget.conversationInfo.conversationId != '') {
+      return Scaffold(
+        appBar: AppBar(
+          leading: CustomBackButton(),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: const <Color>[
+              Color(0xFFE53935),
+              Color(0xFF1A237E)
+            ])),
+          ),
+          title: GestureDetector(
+            onTap: () => Navigator.of(context)
+                .goToProfile(widget.conversationInfo.receiverUserId),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Text(senderName![0]),
+                ),
+                SizedBox(
+                  width: 20.0,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      senderName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "Nunito",
+                        fontSize: 24,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              ChatList(
-                apiServiceMessage: apiServiceMessage,
-                messagesList: messagesList,
-              ),
-              InputField(
-                  conversationId: widget.conversationInfo.conversationId!,
-                  apiServiceMessage: apiServiceMessage),
-            ],
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                ChatList(
+                  apiServiceMessage: apiServiceMessage,
+                  messagesList: messagesList,
+                ),
+                InputField(
+                    conversationInfo: widget.conversationInfo,
+                    apiServiceMessage: apiServiceMessage,
+                    createNewConversation: false),
+              ],
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          leading: CustomBackButton(),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: const <Color>[
+              Color(0xFFE53935),
+              Color(0xFF1A237E)
+            ])),
           ),
-        ],
-      ),
-    );
+          title: GestureDetector(
+            onTap: () => Navigator.of(context)
+                .goToProfile(widget.conversationInfo.receiverUserId),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Text(senderName![0]),
+                ),
+                SizedBox(
+                  width: 20.0,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      senderName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "Nunito",
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(),
+                Center(
+                  child: Text("Send a message to match"),
+                ),
+                InputField(
+                  conversationInfo: widget.conversationInfo,
+                  apiServiceMessage: apiServiceMessage,
+                  createNewConversation: true,
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   void updateMessageList() async {
@@ -105,12 +181,5 @@ class _ChatState extends State<Chat> {
       messagesList = apiServiceMessage.listOfMessages;
     });
     print("here $messagesList");
-  }
-
-  void createConversation() async {
-    APIServiceConversation apiServiceConversation = APIServiceConversation();
-    apiServiceConversation.createConversation(
-        widget.conversationInfo.receiverUserId!,
-        widget.conversationInfo.receiverUsername!);
   }
 }
