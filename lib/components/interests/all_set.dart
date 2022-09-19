@@ -37,7 +37,6 @@ class _AllSetState extends State<AllSet> {
                 color: Theme.of(context).primaryTextTheme.bodyText1?.color),
           ),
           Text(
-            textAlign: TextAlign.center,
             "Please check your email to verify your account",
             style: TextStyle(fontSize: 16),
           )

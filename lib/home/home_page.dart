@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_matching.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/messaging/api_service_conversation.dart';
 import '../models/matching/match_model.dart';
-import '../models/messaging/conversation_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,11 +18,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<MatchModel> matches = [];
-  String? userId;
   @override
   void initState() {
     super.initState();
-    getUserId();
     MatchingApiService matchingApiService = MatchingApiService();
     matchingApiService.getMatches().then((value) {
       setState(() {
@@ -40,9 +36,20 @@ class _HomePageState extends State<HomePage> {
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: () {
-            Navigator.of(context).goToChatPage(
-                ConversationInfo.withoutConversationId(
-                    matches[index].userId, matches[index].userName, userId));
+            showThatMachIsInProcess();
+            APIServiceConversation apiServiceConversation =
+                APIServiceConversation();
+            apiServiceConversation
+                .createConversation(
+                    matches[index].userId!, matches[index].userName!)
+                .then((value) {
+              Navigator.pop(context);
+              Navigator.of(context).goToChatPage(
+                  apiServiceConversation.conversationInfoFromMatchScreen);
+              setState(() {
+                matches.removeAt(index);
+              });
+            });
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -99,17 +106,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void getUserId() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    userId = sharedPreferences.getString("userId");
+  showThatMachIsInProcess() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return Container();
+        });
   }
-  // showThatMachIsInProcess() {
-  //   showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (context) {
-  //         return Container();
-  //       });
-  // }
 }

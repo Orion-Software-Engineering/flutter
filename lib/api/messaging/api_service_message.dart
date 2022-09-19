@@ -6,15 +6,12 @@ import '../../utils/api_call_paths.dart';
 
 class MessageAPIService {
   List<Message> listOfMessages = [];
-  late String? myUserId;
-
-  void getUserId() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    myUserId = sharedPreferences.getString("userId")!;
-  }
+  late String myUserId;
 
   Future getMessagesOfConversation(String conversationId) async {
-    getUserId();
+    listOfMessages = [];
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    myUserId = sharedPreferences.getString("userId")!;
 
     Uri url = Uri(
         scheme: scheme,
@@ -22,7 +19,6 @@ class MessageAPIService {
         path: getMessagesOfConversationPath + conversationId);
 
     final response = await http.get(url);
-    print("get messages of conversation response");
     print(response.statusCode);
     // print(response.body);
 
@@ -43,10 +39,10 @@ class MessageAPIService {
     }
   }
 
-  Future sendMessage(MessageToBeSent messageToBeSent, String userId) async {
+  Future sendMessage(MessageToBeSent messageToBeSent) async {
     Uri url = Uri(scheme: scheme, host: host, path: sendMessagePath);
 
-    messageToBeSent.userId = userId;
+    messageToBeSent.userId = myUserId;
 
     print("json endcode requestmodel ${jsonEncode(messageToBeSent)}");
     final response = await http.put(url,

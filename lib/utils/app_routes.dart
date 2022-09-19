@@ -99,7 +99,7 @@ extension NavigatorStateExtension on NavigatorState {
   Future<void> goToChatPage(ConversationInfo conversationInfo) =>
       pushNamed(AppRouter.chatPage, arguments: conversationInfo);
 
-  Future<void> goToProfile(String? userId) =>
+  Future<void> goToProfile(String userId) =>
       pushNamed(AppRouter.profile, arguments: userId);
 
   Future<void> goToAllSet() => pushNamed(AppRouter.allSet);
