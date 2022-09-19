@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/settings/about_page.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 IconData? systemIcon;
 bool displayThemeSettings = false;
+
 class SettingsPage extends StatefulWidget {
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  Future<void> _launchUrl(String url, String path) async {
+    final Uri uri = Uri(scheme: "https", host: url, path: path);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw "Cannot launch url";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
@@ -165,9 +175,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
-              print('about');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const AboutPage()));
+              _launchUrl("pages.flycricket.io", "/orion-meet/privacy.html");
             },
             leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color),
             title: Text('About',
