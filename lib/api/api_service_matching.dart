@@ -13,18 +13,24 @@ class MatchingApiService {
 
     Uri url = Uri(scheme: scheme, host: host, path: getMatchesPath + userId!);
 
-    final response = await http.get(url);
+    try {
+      final response = await http.get(url);
 
-    print(response.statusCode);
-    print(response.body);
+      print(response.statusCode);
+      print(response.body);
 
-    List responseMatches = json.decode(response.body);
-    for (var m in responseMatches) {
-      MatchModel match = MatchModel(
-          userId: m["userId"],
-          userName: m["username"],
-          commonInterests: m["commonInterests"]);
-      matches.add(match);
+      if (response.statusCode == 200) {
+        List responseMatches = json.decode(response.body);
+        for (var m in responseMatches) {
+          MatchModel match = MatchModel(
+              userId: m["userId"],
+              userName: m["username"],
+              commonInterests: m["commonInterests"]);
+          matches.add(match);
+        }
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

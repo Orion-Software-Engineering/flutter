@@ -6,6 +6,7 @@ import '../../utils/api_call_paths.dart';
 
 class MessageAPIService {
   List<Message> listOfMessages = [];
+  List<Message> listOfNewMessages = [];
   late String? myUserId;
 
   void getUserId() async {
@@ -24,7 +25,7 @@ class MessageAPIService {
     final response = await http.get(url);
     print("get messages of conversation response");
     print(response.statusCode);
-    // print(response.body);
+    print(response.body);
 
     List messagesResponse = json.decode(response.body);
 
@@ -39,8 +40,10 @@ class MessageAPIService {
       } else {
         message.messageIsFromMe = false;
       }
-      listOfMessages.add(message);
+      listOfNewMessages.add(message);
     }
+    listOfMessages.addAll(listOfNewMessages.where((newMessage) => listOfMessages
+        .every((message) => (newMessage.messageId != message.messageId))));
   }
 
   Future sendMessage(MessageToBeSent messageToBeSent, String userId) async {
