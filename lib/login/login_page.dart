@@ -77,7 +77,9 @@ class _LoginState extends State<Login> {
                           labelStyle: signUpLoginTextFieldTextStyle,
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: themeMode ? Colors.white : Colors.grey,
+                              color: SplashScreen.themeMode
+                                  ? Colors.white
+                                  : Colors.grey,
                             ),
                           ),
                         ),
@@ -122,12 +124,12 @@ class _LoginState extends State<Login> {
                             setState(() {
                               isLoading = true;
                             });
-                            saveCredentials();
                             LoginAPIService apiService = new LoginAPIService();
                             apiService.login(requestModel).then((value) {
                               setState(() {
                                 isLoading = false;
                                 if (statusCode == 200) {
+                                  saveCredentials();
                                   Navigator.of(context)
                                       .enterAppThroughHomeScreen();
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -239,5 +241,8 @@ class _LoginState extends State<Login> {
         await SharedPreferences.getInstance();
     sharedPreferences.setString("username", requestModel.username);
     sharedPreferences.setString("password", requestModel.password);
+    print("saved");
+    print(sharedPreferences.get("username"));
+    print(sharedPreferences.get("password"));
   }
 }
