@@ -28,12 +28,6 @@ class _ChatState extends State<Chat> {
   void initState() {
     super.initState();
     if (widget.conversationInfo.conversationId != '') {
-      pollForMessages();
-    }
-  }
-
-  void pollForMessages() {
-    if (widget.conversationInfo.conversationId != '') {
       timer = Timer.periodic(Duration(seconds: 5), (timer) {
         apiServiceMessage
             .getMessagesOfConversation(widget.conversationInfo.conversationId!)
@@ -52,7 +46,6 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-
     print("senderuserid = ${widget.conversationInfo.senderUserId}");
     print("rUsername = ${widget.conversationInfo.receiverUsername}");
     print("rUserId = ${widget.conversationInfo.receiverUserId}");
@@ -60,7 +53,7 @@ class _ChatState extends State<Chat> {
     String? senderName = widget.conversationInfo.receiverUsername;
     if (widget.conversationInfo.conversationId != '') {
       return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           leading: CustomBackButton(),
           flexibleSpace: Container(

@@ -48,7 +48,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
             ),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: themeMode ? Colors.white : Colors.grey,
+                color: SplashScreen.themeMode ? Colors.white : Colors.grey,
               ),
             ),
           ),

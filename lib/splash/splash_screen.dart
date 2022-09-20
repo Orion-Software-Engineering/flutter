@@ -7,13 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/login_signup_interests/api_service_login.dart';
 import '../models/login_model.dart';
 
-bool themeMode = false;
-
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
   String? obtainedUsername;
   String? obtainedPassword;
   LoginRequestModel? requestModel;
+  static bool themeMode = false;
 
   SplashScreen({Key? key}) : super(key: key);
 
@@ -27,14 +26,15 @@ class _SplashScreenState extends State<SplashScreen> {
         await SharedPreferences.getInstance();
     widget.obtainedUsername = sharedPreferences.getString("username");
     widget.obtainedPassword = sharedPreferences.getString("password");
-    themeMode = sharedPreferences.getBool("ThemeStatus")!;
+    //todo it seems the corresponding sharedPreferences.setBool for the call below is never made.
+    // todo that has to be fixed before the line below is uncommented else the app would be stuck on splash screen
+    // SplashScreen.themeMode = sharedPreferences.getBool("ThemeStatus")!;
   }
 
   @override
   void initState() {
     super.initState();
-    checkForPreviousLoginDetails();
-    Timer(Duration(seconds: 1), () => routeToApp());
+    checkForPreviousLoginDetails().then((value) => routeToApp());
   }
 
   @override
@@ -51,12 +51,17 @@ class _SplashScreenState extends State<SplashScreen> {
   void routeToApp() {
     bool checkIfLoginSuccessful = false;
 
+    print("nnsnnsnns");
+    print("username ${widget.obtainedUsername}");
+    print("password ${widget.obtainedPassword}");
+
     if (widget.obtainedUsername != null && widget.obtainedPassword != null) {
       print(
           "user: ${widget.obtainedUsername} \n pass: ${widget.obtainedPassword}");
       widget.requestModel = LoginRequestModel();
       widget.requestModel!.username = widget.obtainedUsername!;
       widget.requestModel!.password = widget.obtainedPassword!;
+
       LoginAPIService apiService = LoginAPIService();
       apiService.login(widget.requestModel!).then((value) {
         if (value.statusCode == 200) {
