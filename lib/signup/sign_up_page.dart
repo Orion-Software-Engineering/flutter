@@ -84,9 +84,7 @@ class _SignUpState extends State<SignUp> {
                           labelStyle: signUpLoginTextFieldTextStyle,
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: SplashScreen.themeMode
-                                  ? Colors.white
-                                  : Colors.grey,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -117,9 +115,7 @@ class _SignUpState extends State<SignUp> {
                           labelStyle: signUpLoginTextFieldTextStyle,
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: SplashScreen.themeMode
-                                  ? Colors.white
-                                  : Colors.grey,
+                              color: Colors.grey,
                             ),
                           ),
                         ),

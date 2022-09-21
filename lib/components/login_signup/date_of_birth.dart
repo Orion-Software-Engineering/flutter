@@ -115,7 +115,7 @@ class _DobFieldState extends State<DobField> {
             labelStyle: signUpLoginTextFieldTextStyle,
             disabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: SplashScreen.themeMode ? Colors.white : Colors.grey,
+                color: Colors.grey,
               ),
             ),
             suffixIcon: Icon(

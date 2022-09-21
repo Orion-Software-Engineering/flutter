@@ -77,9 +77,7 @@ class _LoginState extends State<Login> {
                           labelStyle: signUpLoginTextFieldTextStyle,
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: SplashScreen.themeMode
-                                  ? Colors.white
-                                  : Colors.grey,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -241,6 +239,7 @@ class _LoginState extends State<Login> {
         await SharedPreferences.getInstance();
     sharedPreferences.setString("username", requestModel.username);
     sharedPreferences.setString("password", requestModel.password);
+    sharedPreferences.setBool("allowLocation", false);
     print("saved");
     print(sharedPreferences.get("username"));
     print(sharedPreferences.get("password"));
