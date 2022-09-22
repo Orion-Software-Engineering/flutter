@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/utils/like_event.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
 import 'package:favorite_button/favorite_button.dart';
 import '../../utils/save_event.dart';
 
-class EventsDetails extends StatelessWidget {
-  EventsDetails({Key? key, required this.event}) : super(key: key);
+class EventsDetailsPage extends StatefulWidget {
+  const EventsDetailsPage({Key? key, required this.event}) : super(key: key);
   final Event event;
+
+  @override
+  State<StatefulWidget> createState() => EventsDetailsPageState();
+}
+
+class EventsDetailsPageState extends State<EventsDetailsPage> {
   final eventDetailsModel = EventDetailsModel(
       id: Details[0].id,
       name: Details[0].name,
@@ -23,6 +30,10 @@ class EventsDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Event event = widget.event;
+    List<Color> likeButtonColors = <Color>[Colors.white, Colors.red];
+    bool isLiked = event.liked != null ? event.liked : false;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -35,13 +46,14 @@ class EventsDetails extends StatelessWidget {
               background: Image.network(event.coverImage, fit: BoxFit.cover),
             ),
             actions: [
-              FavoriteButton(
-                  iconSize: 40.0,
-                  iconColor: Colors.red,
-                  isFavorite: false,
-                  valueChanged: (_isFavorite) {
-                    print('Is favorite: $_isFavorite');
-                  }),
+              IconButton(
+                onPressed: () => {
+                  // like/unlike event
+                  likeEvent(event),
+                },
+                icon: Icon(Icons.favorite),
+                color: likeButtonColors[isLiked ? 1 : 0],
+              ),
               FutureBuilder(
                   builder: (BuildContext context, snapshot) {
                     bool isSaved = false;
@@ -52,7 +64,10 @@ class EventsDetails extends StatelessWidget {
                     return IconButton(
                       onPressed: () => {
                         // TODO: store event id in our saved list or remove it
-                        saveEvent(event)
+                        saveEvent(event),
+                        setState(() {
+                          isSaved = !isSaved;
+                        })
                       },
                       icon: Icon(Icons.bookmark),
                       color: isSaved ? Colors.yellow : Colors.white,
@@ -291,5 +306,11 @@ class EventsDetails extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }

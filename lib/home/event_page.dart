@@ -37,7 +37,7 @@ class EventsPageState extends State<EventsPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EventsDetails(
+                        builder: (context) => EventsDetailsPage(
                           event: snapshot.data![index],
                         ),
                       ),
@@ -91,9 +91,9 @@ class EventsPageState extends State<EventsPage> {
           );
         }
         //Shimmer during fetching
-        return Shimmer.fromColors (
-          baseColor: Colors.grey[400]!,
-          highlightColor: Colors.grey[300]!,
+        return Shimmer.fromColors(
+            baseColor: Colors.grey[400]!,
+            highlightColor: Colors.grey[300]!,
             child: GridView.builder(
               itemCount: 12,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
@@ -103,13 +103,13 @@ class EventsPageState extends State<EventsPage> {
                   margin: EdgeInsets.all(20.0),
                   width: 150.0,
                   height: 190.0,
-                  decoration:
-                  BoxDecoration(color: Colors.grey.withOpacity(0.4), border: Border.all(color: Colors.grey.withOpacity(0.1)), borderRadius: BorderRadius
-                      .circular(8)),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.4),
+                      border: Border.all(color: Colors.grey.withOpacity(0.1)),
+                      borderRadius: BorderRadius.circular(8)),
                 );
               },
-            )
-        );
+            ));
       },
     );
   }

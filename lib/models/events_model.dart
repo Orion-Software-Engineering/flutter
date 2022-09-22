@@ -26,8 +26,10 @@ class Event {
   final String guests;
   final bool ageRestriction;
   final String description;
-  // final String interests;
+  final String interests;
   final String coverImage;
+  final bool liked;
+  final String ticketPrice;
 
   const Event(
       {required this.id,
@@ -40,22 +42,27 @@ class Event {
       required this.guests,
       required this.ageRestriction,
       required this.description,
-      // required this.interests,
-      required this.coverImage});
+      required this.interests,
+      required this.coverImage,
+      required this.liked,
+      required this.ticketPrice});
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-        id: json['id'],
-        name: json['name'],
-        date: json['date'],
-        time: json['time'],
-        venue: json['venue'],
-        organizers: json['organizers'],
-        mcs: json['mcs'],
-        guests: json['guests'],
-        ageRestriction: json['age_restriction'],
-        description: json['description'],
-        // interests: json['interests'],
-        coverImage: json['cover_image']);
+      id: json['id'],
+      name: json['name'],
+      date: json['date'],
+      time: json['time'],
+      venue: json['venue'],
+      organizers: json['organizers'],
+      mcs: json['mcs'],
+      guests: json['guests'],
+      ageRestriction: json['age_restriction'],
+      description: json['description'],
+      interests: json['interests'],
+      coverImage: json['cover_image'],
+      liked: json['liked'],
+      ticketPrice: json['ticket_price'],
+    );
   }
 }

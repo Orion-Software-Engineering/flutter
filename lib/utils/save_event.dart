@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/events_model.dart';
 
+//Save Events Method
 Future<void> saveEvent(Event event) async {
   final SharedPreferences pref = await SharedPreferences.getInstance();
   // get existing string list
@@ -18,6 +19,7 @@ Future<void> saveEvent(Event event) async {
     // check if already saved:
     if (eventsToSave.contains(event.id)) {
       // already saved, so remove event
+      eventsToSave.remove(event.id);
     } else {
       // new save, add it
       eventsToSave.add(event.id);

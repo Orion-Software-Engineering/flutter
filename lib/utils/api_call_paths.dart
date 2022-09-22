@@ -16,3 +16,7 @@ const String getUsersOfAllConversationsPath = "/api/conversation/users/all/";
 const String getMessagesOfConversationPath = "/api/messages/";
 const String eventsPath = "/api/events/";
 const String sendMessagePath = "/api/message/";
+
+const String likeEventPath = "/api/event/like";
+const String getEventLikesPath = 'api/event/likes/';
+const String unlikeEventPath = 'api/event/unlike/';
