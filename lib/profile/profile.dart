@@ -10,7 +10,7 @@ import '../components/profile/profile_fields.dart';
 
 class Profile extends StatefulWidget {
   final String userId;
-  const Profile({required this.userId});
+  const Profile({super.key, required this.userId});
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -170,7 +170,7 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 30),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -182,7 +182,9 @@ class _ProfileState extends State<Profile> {
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w400),
                               ),
-                              ActiveInterestsList(interestList: interestsList),
+                              ActiveInterestsList(
+                                  interestList:
+                                      profileResponse.interests ?? []),
                             ],
                           ),
                         ),
@@ -204,8 +206,6 @@ class _ProfileState extends State<Profile> {
 
   void getProfileData() async {
     setState(() {
-      print("me");
-
       profileResponse = apiServiceProfile.profileResponseModel;
     });
   }

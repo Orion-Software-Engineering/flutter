@@ -23,6 +23,13 @@ class ProfileApiService {
         profileResponseModel.dateOfBirth = profileResponse["dateOfBirth"];
         profileResponseModel.gender = profileResponse["gender"];
         profileResponseModel.bio = profileResponse["bio"];
+
+        List unfilteredInterestList = profileResponse["Interests"];
+        List<String> interestList = [];
+        for (var interest in unfilteredInterestList) {
+          interestList.add(interest["name"]);
+        }
+        profileResponseModel.interests = interestList;
       } else {
         throw Exception('Failed to get profile ${response.statusCode}');
       }
@@ -32,8 +39,6 @@ class ProfileApiService {
   }
 
   Future<void> updateBio(String text) async {
-    print("asasa\nasasa\nasasa\nasasa\nasasa\nasasa\n");
-
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
     Uri url = Uri(scheme: scheme, host: host, path: updateBioPath);
