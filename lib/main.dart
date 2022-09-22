@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
-  static final String oneSignalAppId = '0bfcc099-9621-4dba-a906-7aa5cefae056';
+  static final String oneSignalAppId = '78c54ce8-8e97-43ea-9d1f-0bf8a1375591';
   Future<void> initPlatformState() async {
     OneSignal.shared.setAppId(oneSignalAppId);
     OneSignal.shared
