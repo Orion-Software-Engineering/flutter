@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/chat/chat_page.dart';
 import 'package:matchmaking_demo/components/home/home_scaffold.dart';
+import 'package:matchmaking_demo/delete/delete_page.dart';
 import 'package:matchmaking_demo/interests/interests_1.dart';
 import 'package:matchmaking_demo/interests/interests_2.dart';
 import 'package:matchmaking_demo/interests/interests_3.dart';
@@ -26,6 +27,7 @@ class AppRouter {
   static const chatPage = '/chat_page';
   static const profile = '/profile';
   static const matchingInProcess = '/matching_in_process';
+  static const delete = '/delete';
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -65,6 +67,9 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => Profile(userId: settings.arguments as String),
             settings: settings);
+      case delete:
+        return MaterialPageRoute(
+            builder: (context) => Delete(), settings: settings);
     }
     return null;
   }
@@ -103,4 +108,6 @@ extension NavigatorStateExtension on NavigatorState {
       pushNamed(AppRouter.profile, arguments: userId);
 
   Future<void> goToAllSet() => pushNamed(AppRouter.allSet);
+
+  Future<void> goToDelete() => pushNamed(AppRouter.delete);
 }
