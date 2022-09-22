@@ -6,8 +6,6 @@ import 'package:matchmaking_demo/api/api_service_matching.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../api/messaging/api_service_conversation.dart';
 import '../models/matching/match_model.dart';
 import '../models/messaging/conversation_model.dart';
 
@@ -21,16 +19,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<MatchModel> matches = [];
   String? userId;
+  bool isLocationAllowed = false;
   @override
   void initState() {
     super.initState();
-    getUserId();
+    getUserData();
     MatchingApiService matchingApiService = MatchingApiService();
-    matchingApiService.getMatches().then((value) {
-      setState(() {
-        matches = matchingApiService.matches;
+    if (!isLocationAllowed) {
+      matchingApiService.getMatches().then((value) {
+        setState(() {
+          matches = matchingApiService.matches;
+        });
       });
-    });
+    } else {
+      //todo location based matching goes here
+    }
   }
 
   @override
@@ -99,9 +102,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void getUserId() async {
+  void getUserData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     userId = sharedPreferences.getString("userId");
+    isLocationAllowed = sharedPreferences.getBool("allowLocation") ?? false;
+
+    print("is location allowed $isLocationAllowed");
   }
 }
