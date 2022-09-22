@@ -13,6 +13,7 @@ bool? allowLocation;
 class SplashScreen extends StatefulWidget {
   String? obtainedUsername;
   String? obtainedPassword;
+  String? obtainedUserId;
   LoginRequestModel? requestModel;
 
   SplashScreen({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         await SharedPreferences.getInstance();
     widget.obtainedUsername = sharedPreferences.getString("username");
     widget.obtainedPassword = sharedPreferences.getString("password");
+    widget.obtainedUserId = sharedPreferences.getString("userId");
     allowLocation = sharedPreferences.getBool("allowLocation");
     //todo it seems the corresponding sharedPreferences.setBool for the call below is never made.
     // todo that has to be fixed before the line below is uncommented else the app would be stuck on splash screen
