@@ -12,9 +12,11 @@ const String logInPath = "/api/auth/signin";
 const String signUpPath = "/api/auth/signup";
 const String interestPath = "/api/interest/";
 const String forgotPasswordPath = "/api/resetPassword";
+const String deleteAccountPath = "/api/account/delete";
 
 // profile
 const String profilePath = "/api/user/profile/";
+const String updateBioPath = "/api/user/bio";
 
 //location
 const String locationPath = "/api/user/location";

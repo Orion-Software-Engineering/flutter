@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BioFields extends StatelessWidget {
-  BioFields(
+class ProfileFields extends StatelessWidget {
+  ProfileFields(
       {required this.title,
       this.value,
       required this.isGender,
@@ -20,10 +20,10 @@ class BioFields extends StatelessWidget {
           text = "...";
           break;
         case true:
-          text = "...";
+          text = "M";
           break;
         case false:
-          text = "...";
+          text = "F";
           break;
       }
     } else {
@@ -45,7 +45,7 @@ class BioFields extends StatelessWidget {
                 fontSize: (title == 'Bio') ? 20 : 26,
                 color: Colors.black,
                 fontWeight:
-                    (title == 'Bio') ? FontWeight.w400 : FontWeight.w700),
+                    (title == 'Bio') ? FontWeight.w400 : FontWeight.w500),
           )
         ],
       ),

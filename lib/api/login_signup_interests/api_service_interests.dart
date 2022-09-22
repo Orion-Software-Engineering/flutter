@@ -1,8 +1,9 @@
 import 'package:http/http.dart' as http;
-import 'package:matchmaking_demo/models/interest_model.dart';
 import 'package:matchmaking_demo/api/login_signup_interests/api_service_signup.dart';
 import 'dart:convert';
 import 'package:matchmaking_demo/utils/api_call_paths.dart';
+
+import '../../models/login_signup_interests/interest_model.dart';
 
 class InterestAPIService {
   Future<InterestResponseModel> interest(
