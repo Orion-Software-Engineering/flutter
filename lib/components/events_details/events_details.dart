@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
 import 'package:favorite_button/favorite_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../utils/save_event.dart';
 
 class EventsDetails extends StatelessWidget {
   EventsDetails({Key? key, required this.event}) : super(key: key);
@@ -32,10 +32,7 @@ class EventsDetails extends StatelessWidget {
             snap: false,
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                  'https://i.pinimg'
-                  '.com/564x/42/91/ec/4291ecdf87037abc45712311f89e236d.jpg',
-                  fit: BoxFit.cover),
+              background: Image.network(event.coverImage, fit: BoxFit.cover),
             ),
             actions: [
               FavoriteButton(
@@ -45,7 +42,24 @@ class EventsDetails extends StatelessWidget {
                   valueChanged: (_isFavorite) {
                     print('Is favorite: $_isFavorite');
                   }),
-              IconButton(onPressed: () => {}, icon: Icon(Icons.bookmark))
+              FutureBuilder(
+                  builder: (BuildContext context, snapshot) {
+                    bool isSaved = false;
+                    switch (snapshot.data) {
+                      case true:
+                        isSaved = true;
+                    }
+                    return IconButton(
+                      onPressed: () => {
+                        // TODO: store event id in our saved list or remove it
+                        saveEvent(event)
+                      },
+                      icon: Icon(Icons.bookmark),
+                      color: isSaved ? Colors.yellow : Colors.white,
+                      // TODO: check if item is saved and change color
+                    );
+                  },
+                  future: isEventSaved(event)),
             ],
           ),
           SliverToBoxAdapter(
@@ -63,7 +77,7 @@ class EventsDetails extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                         //color: Colors.black,
                         child: Text(
-                          eventDetailsModel.name,
+                          event.name,
                           style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -99,7 +113,7 @@ class EventsDetails extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 8.0),
                               child: Text(
-                                '${eventDetailsModel.date} --- ${eventDetailsModel.time}',
+                                '${event.date} --- ${event.time}',
                                 style: TextStyle(fontSize: 14.0),
                               ),
                             ),
@@ -128,41 +142,38 @@ class EventsDetails extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 8.0),
                               child: Text(
-                                '${eventDetailsModel.venue}',
+                                '${event.venue}',
                                 style: TextStyle(fontSize: 14.0),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        //Ticketing
-                        child: Row(
-                          children: <Widget>[
-                            //Ticket icon
-                            Container(
-                              width: 16.0,
-                              height: 18.0,
-                              margin: EdgeInsets.fromLTRB(14.0, 10.0, 5.0, 20.0),
-                              //padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-                              decoration: BoxDecoration(
-                                //color: Colors.black,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/icons/ticket-outline.png'),
-                                  fit: BoxFit.fill,
-                                ),
+                      Row(
+                        children: <Widget>[
+                          //Ticket icon
+                          Container(
+                            width: 16.0,
+                            height: 18.0,
+                            margin: EdgeInsets.fromLTRB(14.0, 10.0, 5.0, 20.0),
+                            //padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                            decoration: BoxDecoration(
+                              //color: Colors.black,
+                              image: DecorationImage(
+                                image: AssetImage('assets/icons/ticket-outline.png'),
+                                fit: BoxFit.fill,
                               ),
                             ),
-                            //VenueTextField
-                            Container(
-                              padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 20.0),
-                              child: Text(
-                                '[Ticket pricing goes here]',
-                                style: TextStyle(fontSize: 14.0),
-                              ),
+                          ),
+                          //VenueTextField
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 20.0),
+                            child: Text(
+                              '{event.ticket_price}',
+                              style: TextStyle(fontSize: 14.0),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       Container(
                         //Age restriction message.
@@ -213,7 +224,7 @@ class EventsDetails extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20),
                   child: Text(
-                    '${eventDetailsModel.description}',
+                    '${event.description}',
                     style: TextStyle(fontSize: 12.0),
                   ),
                 ),
@@ -231,7 +242,7 @@ class EventsDetails extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
-                        child: Text('${eventDetailsModel.organizers}'),
+                        child: Text('${event.organizers}'),
                       ),
                     ],
                   ),
@@ -250,7 +261,7 @@ class EventsDetails extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
-                        child: Text('${eventDetailsModel.mcs}'),
+                        child: Text('${event.mcs}'),
                       ),
                     ],
                   ),
@@ -269,21 +280,16 @@ class EventsDetails extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
-                        child: Text('${eventDetailsModel.guests}'),
+                        child: Text('${event.guests}'),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
-  }
-
-  Future<void> setEventsData(eventDetailsModel) async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setBool('eventsDetails', eventDetailsModel);
   }
 }

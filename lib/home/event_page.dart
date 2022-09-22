@@ -61,7 +61,7 @@ class EventsPageState extends State<EventsPage> {
               }, //itemBuilder
             );
           }
-          // TODO: make this beautiful (NK)
+          // -----------------------------------------------No events to show screen------------------------------------------------------
           return Column(
             children: <Widget>[
               Container(
