@@ -33,6 +33,12 @@ class _DeleteState extends State<Delete> {
     requestModel.userId = sharedPreferences.getString("userId")!;
   }
 
+  Future<void> clearSharedPreferences() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -133,6 +139,7 @@ class _DeleteState extends State<Delete> {
                                 isLoading = false;
                                 if (statusCode == 200) {
                                   Navigator.of(context).goToSignUpScreen();
+                                  clearSharedPreferences();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text('Account Deleted')));
