@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 bool private = false;
@@ -53,6 +55,8 @@ class _PrivacyPageState extends State<PrivacyPage> {
               setState(() {
                 print(value);
                 private = value;
+                allowLocation = value;
+                setLocationPermission();
               });
             },
             title: const Text(
@@ -73,5 +77,11 @@ class _PrivacyPageState extends State<PrivacyPage> {
         ],
       ),
     );
+  }
+
+  Future setLocationPermission() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setBool("allowLocation", allowLocation!);
   }
 }

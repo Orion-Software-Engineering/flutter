@@ -12,6 +12,7 @@ import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,9 +56,11 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
+        allowLocation = false;
         return Future.error("Location permission denied");
       }
     }
+    allowLocation = true;
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
   }
