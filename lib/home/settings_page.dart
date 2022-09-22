@@ -4,6 +4,7 @@ import 'package:matchmaking_demo/api/login_signup_interests/api_service_delete_a
 import 'package:matchmaking_demo/login/login_page.dart';
 import 'package:matchmaking_demo/models/delete_model.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
+import 'package:matchmaking_demo/signup/sign_up_page.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,16 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+  String? userId;
+  void getUserData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    userId = sharedPreferences.getString("userId");
+  }
+
+
   bool isLoading = false;
+
   Future<void> _launchUrl(String url, String path) async {
     final Uri uri = Uri(scheme: "https", host: url, path: path);
     if (!await launchUrl(
@@ -37,6 +47,12 @@ class _SettingsPageState extends State<SettingsPage> {
     requestModel.username = sharedPreferences.getString("username")!;
     requestModel.userId = sharedPreferences.getString("userId")!;
     requestModel.password = sharedPreferences.getString("password")!;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
   }
 
   @override
@@ -61,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
-              print('account');
+              Navigator.of(context).goToProfile(userId);
             },
             leading: Icon(Icons.account_circle,
                 color: Theme.of(context).iconTheme.color),

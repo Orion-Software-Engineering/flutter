@@ -5,7 +5,7 @@ import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/login_signup_interests/api_service_login.dart';
-import '../models/login_model.dart';
+import '../models/login_signup_interests/login_model.dart';
 
 bool? allowLocation;
 

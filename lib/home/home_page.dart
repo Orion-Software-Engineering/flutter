@@ -104,12 +104,4 @@ class _HomePageState extends State<HomePage> {
         await SharedPreferences.getInstance();
     userId = sharedPreferences.getString("userId");
   }
-  // showThatMachIsInProcess() {
-  //   showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (context) {
-  //         return Container();
-  //       });
-  // }
 }
