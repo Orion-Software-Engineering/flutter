@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
-import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import '../../models/login_signup_interests/login_model.dart';
 import '../../utils/api_call_paths.dart';
 
 String message = "";

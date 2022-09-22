@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/profile/profile.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
@@ -66,7 +67,9 @@ class _MyAppState extends State<MyApp> {
           darkTheme: MyThemes.themeData(true, context),
           initialRoute: AppRouter.splash,
 
-          // home: AllSet(), //todo use home when testing specific pages
+          // home: Profile(
+          //     userId:
+          //         "0d9866c7-4a92-4532-bc39-c3893e28a56c"), //todo use home when testing specific pages
         );
       }),
     );

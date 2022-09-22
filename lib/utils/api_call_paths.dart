@@ -15,6 +15,7 @@ const String forgotPasswordPath = "/api/resetPassword";
 
 // profile
 const String profilePath = "/api/user/profile/";
+const String updateBioPath = "/api/user/bio";
 
 //location
 const String locationPath = "/api/user/location";

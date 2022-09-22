@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:http/http.dart' as http;
-import 'package:matchmaking_demo/models/signup_model.dart';
+import 'package:matchmaking_demo/models/login_signup_interests/signup_model.dart';
 import 'dart:convert';
 import '../../utils/api_call_paths.dart';
 
