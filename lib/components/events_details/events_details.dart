@@ -106,14 +106,21 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-                        //color: Colors.black,
-                        child: Row(
-                          children: <Widget>[
-
-                          ],
-                        ) ,
-                      ),
+                          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                          //color: Colors.black,
+                          child: ListView.builder(
+                              itemCount: event.interests.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  padding: EdgeInsets.all(10.00),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    color: Colors.lightGreenAccent,
+                                  ),
+                                  child: Text('Sports'),
+                                );
+                              })),
                     ],
                   ),
                 ),
