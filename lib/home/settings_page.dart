@@ -23,6 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
     userId = sharedPreferences.getString("userId");
   }
 
+
   Future<void> _launchUrl(String url, String path) async {
     final Uri uri = Uri(scheme: "https", host: url, path: path);
     if (!await launchUrl(

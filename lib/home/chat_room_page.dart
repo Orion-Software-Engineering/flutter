@@ -37,11 +37,16 @@ class _ChatRoomState extends State<ChatRoom> {
         .getConversationsOfUser()
         .then((value) => apiServiceConversation.getConversationInfo())
         .then(
-          (value) => setState(() {
-            listOfConversations = apiServiceConversation.listOfConversationInfo;
-            print("inside setState chatList = $listOfConversations");
-          }),
-        );
+      (value) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {
+          listOfConversations = apiServiceConversation.listOfConversationInfo;
+          print("inside setState chatList = $listOfConversations");
+        });
+      },
+    );
     // timer = Timer.periodic(Duration(seconds: 5), (timer) {
     //   apiServiceConversation
     //       .getConversationsOfUser()

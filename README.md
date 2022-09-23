@@ -1,5 +1,5 @@
 # Orion Meet Mobile App
-Built with ❤️ and Flutter
+Built with ❤ and Flutter
 
 
 To test the build with full functionality one must be signed in.
@@ -154,6 +154,7 @@ You'd want to set the initialRoute in main.dart to do that.
       -200: shows that post request was successful
     -Any other response throws an exception.
    
+
 ### LocationAPIService class and Location models
     -There are two location model classes; LocationResponseModel and LocationPostModel.
     -The LocationResponseModel returns an object of type LocationResponseModel which contains the response body as a token.

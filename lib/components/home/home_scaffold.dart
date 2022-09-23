@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:matchmaking_demo/api/api_service_events.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
@@ -33,6 +34,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
   int _currentIndex = 0;
   String? userId;
   Position? userPosition;
+
   void getCurrentPosition() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -163,6 +165,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               color: Theme.of(context).appBarTheme.backgroundColor,
             ),
           ),
+
           toolbarHeight: 70,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

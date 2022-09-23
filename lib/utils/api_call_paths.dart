@@ -29,10 +29,16 @@ const String addUserToConversationPath = "/api/conversation/user";
 
 //messages
 const String getMessagesOfConversationPath = "/api/messages/";
-const String eventsPath = "/api/events/getEvent/";
+const String eventsPath = "/api/events/";
 const String sendMessagePath = "/api/message/";
 const String deleteMessagePath = "/api/message";
 const String getLastMessagePath = "/api/message/last/";
 
 //matching
-const String getMatchesPath = "/api/test/matches/";
+const String getInterestBasedMatchesPath = "/api/test/matches/";
+const String getLocationBasedMatchesPath = "/api/test/match/location/";
+
+//liking_events
+const String likeEventPath = "/api/event/like";
+const String getEventLikesPath = 'api/event/likes/';
+const String unlikeEventPath = 'api/event/unlike/';
