@@ -17,6 +17,7 @@ class LoginResponseModel {
 class LoginRequestModel {
   String username = '';
   String password = '';
+  String player_id = '';
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
