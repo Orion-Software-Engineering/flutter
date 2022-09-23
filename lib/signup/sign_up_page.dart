@@ -4,12 +4,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_signup.dart';
-import 'package:matchmaking_demo/models/signup_model.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_signup.dart';
+import 'package:matchmaking_demo/models/login_signup_interests/signup_model.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../components/login_signup/date_of_birth.dart';
 import '../components/login_signup/title_and_subtext.dart';
+import '../splash/splash_screen.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SignUpState extends State<SignUp> {
   late SignupResponseModel responseModel;
   bool isLoading = false;
   String? dateValue;
-  bool gender = true;
+  String gender = "true";
 
   @override
   void initState() {
@@ -51,6 +52,7 @@ class _SignUpState extends State<SignUp> {
 
   Widget _ui(BuildContext context) {
     return LogInSignUpScaffold(
+      shouldPop: true,
       child: Center(
         child: Form(
           key: _formKey,
@@ -71,12 +73,18 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     children: [
                       TextFormField(
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
+                          enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: signUpLoginTextColor,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -95,14 +103,21 @@ class _SignUpState extends State<SignUp> {
                         },
                       ),
                       TextFormField(
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.grey,
-                          )),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
                         ),
                         onSaved: (value) => requestModel.username = value!,
                         validator: (value) {
@@ -160,15 +175,19 @@ class _SignUpState extends State<SignUp> {
                                     "Male",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
-                                      color: Colors.grey,
+                                      color: Theme.of(context)
+                                          .primaryTextTheme
+                                          .bodyText2
+                                          ?.color,
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.all(0),
-                                  value: true,
+                                  value: "true",
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = true;
+                                      gender = value as String;
+                                      print(gender);
                                     });
                                   }),
                             ),
@@ -178,15 +197,19 @@ class _SignUpState extends State<SignUp> {
                                     "Female",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
-                                      color: Colors.grey,
+                                      color: Theme.of(context)
+                                          .primaryTextTheme
+                                          .bodyText2
+                                          ?.color,
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.all(0),
-                                  value: false,
+                                  value: "false",
                                   groupValue: gender,
                                   onChanged: (value) {
                                     setState(() {
-                                      gender = false;
+                                      gender = value as String;
+                                      print(gender);
                                     });
                                   }),
                             ),
@@ -196,7 +219,7 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(height: 50.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -205,8 +228,9 @@ class _SignUpState extends State<SignUp> {
                           if (validateAndSave()) {
                             setState(() {
                               isLoading = true;
+                              requestModel.gender = gender;
                             });
-                            APIService apiService = APIService();
+                            SignUpAPIService apiService = SignUpAPIService();
                             apiService.signup(requestModel).then((value) {
                               setState(() {
                                 isLoading = false;
@@ -214,8 +238,9 @@ class _SignUpState extends State<SignUp> {
                                   Navigator.of(context).goToInterests1();
                                 } else {
                                   Fluttertoast.showToast(
-                                      backgroundColor: Colors.black,
-                                      textColor: Colors.white,
+                                      backgroundColor:
+                                          Theme.of(context).iconTheme.color,
+                                      textColor: Theme.of(context).primaryColor,
                                       msg: message,
                                       fontSize: 16);
                                 }
@@ -233,7 +258,7 @@ class _SignUpState extends State<SignUp> {
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.white,
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
                           ),
@@ -247,6 +272,10 @@ class _SignUpState extends State<SignUp> {
                             'Already have an account?',
                             style: TextStyle(
                               fontSize: 15.0,
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color,
                             ),
                           ),
                           MaterialButton(
@@ -260,7 +289,6 @@ class _SignUpState extends State<SignUp> {
                                 color: signUpLoginOrange,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),

@@ -90,7 +90,6 @@ You'd want to set the initialRoute in main.dart to do that.
     -The SUBMIT button is of Elevated button type and validates the input field as well as make and api post request that
       allows a reset password link to be sent to the provided email. It calls the ForgotPasswordAPIService.
  
-### Home Page
 
   
 
@@ -107,7 +106,11 @@ You'd want to set the initialRoute in main.dart to do that.
   11. ProfileAPIService class and Profile models
   12. ConversationAPIService class and Conversation models
 
-
+### Custom Password Field
+    -The custom password field extends the stateful widget and has the following required parameteres: hint text and validation function.
+    
+    -It makes use of a TextFormField widget. The text form field has osbcureText set to true on default. It also has a suffix Icon button for the toggling the visibility of the field text.
+    
 ### Progress popup
 
     -Progress popup contains a Progress class which has a child widget.
@@ -119,13 +122,56 @@ You'd want to set the initialRoute in main.dart to do that.
     -The CircularProgressIndicator is an indication of a loading process.
     
     -The widget has a boolean value. When set to true by a usage of the widget then the ModalBarrier and CircularProgressIndicator pops up on the screen.
-    
-### Custom Password Field
-    -The custom password field extends the stateful widget and has the following required parameteres: hint text and validation function.
-    
-    -It makes use of a TextFormField widget. The text form field has osbcureText set to true on default. It also has a suffix Icon button for the toggling the visibility of the field text. 
-   
+     
 ### LoginAPIService class and Login models
-    -
+    -There are two login model classes; LoginResponseModel and LoginRequestModel.
+    -The LoginResponseModel returns an object of type LoginResponseModel which contains the response body as a token.
+    -The LoginRequestModel has 2 string fields,username and password.
+    -It creates and returns a json map of the fields.
+    -The LoginAPIService class is an asynchronous class which send a post request body of type LoginRequestModel and returns a response of type LoginResponseModel if there was no error in making the request. The response body has the following status codes and associated meanings.
+      -200: "Login Successful"
+      -403: "Your account is not verified. Please check your email"
+      -404: "Incorrect username or password"
+    -Any other response throws an exception.
+    -The user's Id is saved after login using the class's saveUserIdAfterLogin method which saves the user's Id to SharedPreferences.
+    
+ ### SignUpAPIService class and Sign up models
+    -There are two sign up model classes; SignupResponseModel and SignupRequestModel.
+    -The SignupResponseModel returns an object of type SignupResponseModel which contains the response body as a token
+    -The SignupRequestModel has 4 string fields;username,email,password and dob.
+    -It creates and returns a json map of the fields.
+    -The SignUpAPIService class is an asynchronous class which send a post request body of type SignupRequestModel and returns a response of type SignupResponseModel if there was no error in making the request. The response body has the following status codes and associated meanings.
+      -201: "User registered successfully"
+      -400: This status code may result in one of 2 messages.
+          "Email already in use" or "Username already in use"
+    -Any other response throws an exception.
+    
+### InterestAPIService class and Interest models
+    -There are two interest model classes; InterestResponseModel and InterestResponseModel.
+    -The InterestResponseModel returns an object of type InterestResponseModel which contains the response body as a token.
+    -It creates and returns a json map of the field.
+    -The InterestAPIService class is an asynchronous class which send a post request body of type InterestRequestModel and returns a response of type InterestResponseModel if there was no error in making the request. The response body has the following status codes and associated meanings.
+      -200: shows that post request was successful
+    -Any other response throws an exception.
+   
 
+### LocationAPIService class and Location models
+    -There are two location model classes; LocationResponseModel and LocationPostModel.
+    -The LocationResponseModel returns an object of type LocationResponseModel which contains the response body as a token.
+    -The LocationPostModel has 3 string fields,userID,latitude and longitude.
+    -It creates and returns a json map of the fields.
+    -The LocationAPIService class is an asynchronous class which send a post request body of type LocationPostModel and returns a response of type LocationResponseModel if there was no error in making the request. The response body has the following status codes and associated meanings.
+      -200: shows that post request was successful
+    -Any other response throws an exception.
+    
+### ForgotPasswordAPIService class Password models
+    -There are two forgot password model classes; ForgotPasswordResponseModel and ForgotPasswordRequestModel.
+    -The ForgotPasswordResponseModel returns an object of type ForgotPasswordResponseModel which contains the response body as a token.
+    -The ForgotPasswordRequestModel has a single string field,email.
+    -It creates and returns a json map of the field.
+    -The ForgotPasswordAPIService class is an asynchronous class which send a post request body of type ForgotPasswordRequestModel and returns a response of type ForgotPasswordResponseModel if there was no error in making the request. The response body has the following status codes and associated meanings.
+      -200: shows that post request was successful
+    -Any other response throws an exception.
 😉
+
+### EventsPage

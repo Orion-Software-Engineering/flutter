@@ -8,16 +8,27 @@ class Message {
 }
 
 class MessageToBeSent {
-  String messageText = '';
-  String userId = '';
-  String conversationId = '';
+  String? messageText = '';
+  String? userId = '';
+  String? conversationId = '';
 
   Map<String, String> toJson() {
     Map<String, String> map = {
-      "userId": userId,
-      'messageText': messageText,
-      'conversationId': conversationId
+      "userId": userId!,
+      'messageText': messageText!,
+      'conversationId': conversationId!
     };
+    return map;
+  }
+
+  MessageToBeSent({this.messageText, this.userId, this.conversationId});
+}
+
+class MessageToBeDeleted {
+  String messageId = '';
+
+  Map<String, String> toJson() {
+    Map<String, String> map = {"messageId": messageId};
     return map;
   }
 }

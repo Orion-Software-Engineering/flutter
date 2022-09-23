@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/api_service_forgotpassword.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_forgotpassword.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
 import 'package:matchmaking_demo/models/forgot_password_model.dart';
@@ -38,30 +39,22 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Widget _ui(BuildContext context) {
     return LogInSignUpScaffold(
+      shouldPop: true,
       key: scaffoldKey,
       child: Center(
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(
-                      Icons.arrow_back_outlined,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 60.0,
+              CustomBackButton(),
+              Expanded(
+                flex: 0,
+                child: SizedBox(
+                  height: 30.0,
+                ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: TitleAndSubtext(
                     title: 'Forgot your\npassword huh?',
                     subtext: 'A password-reset link will be sent to your mail'),
@@ -74,6 +67,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextFormField(
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: signUpLoginTextFieldTextStyle,
@@ -99,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       SizedBox(height: 30.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -114,8 +113,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             apiService.password(requestModel).then((value) {
                               setState(() {
                                 isApiCallProcess = false;
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Email sent')));
+                                if (statusCode == 200) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Email sent')));
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Could not reset password. Try again later')));
+                                }
                               });
                             });
                             print(requestModel.toJson());

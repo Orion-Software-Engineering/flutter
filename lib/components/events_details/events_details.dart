@@ -87,6 +87,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                   future: isEventSaved(event)),
             ],
           ),
+          
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

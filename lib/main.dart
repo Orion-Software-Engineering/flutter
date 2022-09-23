@@ -1,53 +1,77 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/components/events_details/events_details.dart';
-import 'package:matchmaking_demo/components/home/home_scaffold.dart';
-import 'package:matchmaking_demo/forgotPassword/forgot_password_page.dart';
-import 'package:matchmaking_demo/chat/chat_page.dart';
-import 'package:matchmaking_demo/interests/interests_1.dart';
-import 'package:matchmaking_demo/interests/interests_2.dart';
-import 'package:matchmaking_demo/splash/splash_screen.dart';
+import 'package:matchmaking_demo/profile/profile.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
-import 'Profile/profile.dart';
-import 'components/interests/all_set.dart';
-import 'interests/interests_3.dart';
-import 'signup/sign_up_page.dart';
-import 'login/login_page.dart';
+import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+    initPlatformState();
+  }
+
+  static final String oneSignalAppId = '78c54ce8-8e97-43ea-9d1f-0bf8a1375591';
+  Future<void> initPlatformState() async {
+    OneSignal.shared.setAppId(oneSignalAppId);
+    OneSignal.shared
+        .promptUserForPushNotificationPermission()
+        .then((accepted) {});
+  }
+
+  void getCurrentAppTheme() async {
+    String selectedTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+    if (selectedTheme == 'dark') {
+      themeChangeProvider.darkTheme = ThemeMode.dark;
+    } else if (selectedTheme == 'light') {
+      themeChangeProvider.darkTheme = ThemeMode.light;
+    } else if (selectedTheme == 'system') {
+      themeChangeProvider.darkTheme = ThemeMode.system;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // onGenerateRoute: AppRouter.onGenerateRoute,
-      onUnknownRoute: AppRouter.onUnknownRoute,
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      themeMode: ThemeMode.light,
-      theme: MyThemes.lightTheme,
-      darkTheme: MyThemes.darkTheme,
-      initialRoute: '/home',
-      routes: {
-        '/splash': (context) => SplashScreen(),
-        '/login': (context) => Login(),
-        '/sign_up': (context) => SignUp(),
-        '/interests_1': (context) => InterestsOne(),
-        '/interests_2': (context) => InterestsTwo(),
-        '/interests_3': (context) => InterestsThree(),
-        '/all_set': (context) => AllSet(),
-        '/home': (context) => HomeScaffold(),
-        '/forgot_password': (context) => ForgotPassword(),
-        // '/events_details': (context) => EventsDetails(),
-        // '/chat_page': (context) => Chat(conversationId: settings.arguments),
-        // '/profile': (context) => Profile()
+    return ChangeNotifierProvider(
+      create: (_) {
+        return themeChangeProvider;
       },
+      child: Consumer<DarkThemeProvider>(
+          builder: (BuildContext context, value, Widget? child) {
+        return MaterialApp(
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          onUnknownRoute: AppRouter.onUnknownRoute,
+          debugShowCheckedModeBanner: false,
+          title: 'Orion Meet',
+          themeMode: themeChangeProvider.darkTheme,
+          theme: MyThemes.themeData(false, context),
+          darkTheme: MyThemes.themeData(true, context),
+          initialRoute: AppRouter.splash,
+
+          // home: Profile(
+          //     userId:
+          //         "0d9866c7-4a92-4532-bc39-c3893e28a56c"), //todo use home when testing specific pages
+        );
+      }),
     );
   }
 }

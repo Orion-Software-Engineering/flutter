@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:matchmaking_demo/api/api_service_login.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_login.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
-import 'package:matchmaking_demo/models/login_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
+import '../models/login_signup_interests/login_model.dart';
 import '../utils/constants.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -43,8 +44,8 @@ class _LoginState extends State<Login> {
   }
 
   Widget _ui(BuildContext context) {
-    //LoginRequestModel requestModel=new LoginRequestModel(email: email,password: password);
     return LogInSignUpScaffold(
+      shouldPop: false,
       key: scaffoldKey,
       child: Center(
         child: Form(
@@ -65,12 +66,18 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextFormField(
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: signUpLoginTextFieldTextStyle,
-                          border: UnderlineInputBorder(
+                          enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: signUpLoginTextColor,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -78,13 +85,13 @@ class _LoginState extends State<Login> {
                         validator: (value) {
                           if (userNameValid.hasMatch(value!) &&
                               value.isNotEmpty) {
-                            String username = value;
+                            String username = value.trim();
                             setState(() {
                               requestModel.username = username;
                             });
                             return null;
                           } else {
-                            return "Enter a valid username address";
+                            return "Enter a valid username";
                           }
                         },
                       ),
@@ -105,7 +112,7 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 30.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -115,12 +122,12 @@ class _LoginState extends State<Login> {
                             setState(() {
                               isLoading = true;
                             });
-                            saveCredentials();
                             LoginAPIService apiService = new LoginAPIService();
                             apiService.login(requestModel).then((value) {
                               setState(() {
                                 isLoading = false;
                                 if (statusCode == 200) {
+                                  saveCredentials();
                                   Navigator.of(context)
                                       .enterAppThroughHomeScreen();
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -129,8 +136,9 @@ class _LoginState extends State<Login> {
                                 } else {
                                   Fluttertoast.showToast(
                                     msg: message,
-                                    textColor: Colors.white,
-                                    backgroundColor: Colors.black,
+                                    textColor: Theme.of(context).primaryColor,
+                                    backgroundColor:
+                                        Theme.of(context).iconTheme.color,
                                     timeInSecForIosWeb: 2,
                                     fontSize: 16,
                                   );
@@ -168,7 +176,6 @@ class _LoginState extends State<Login> {
                                 color: signUpLoginOrange,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 12.0,
-                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
@@ -184,6 +191,10 @@ class _LoginState extends State<Login> {
                               "Don't have an account?",
                               style: TextStyle(
                                 fontSize: 15.0,
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText1
+                                    ?.color,
                               ),
                             ),
                             MaterialButton(
@@ -193,56 +204,14 @@ class _LoginState extends State<Login> {
                               child: Text(
                                 'Sign Up',
                                 style: TextStyle(
-                                  color: Color(0xFFcd5d27),
+                                  color: signUpLoginOrange,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16.0,
-                                  decoration: TextDecoration.underline,
                                 ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                        child: Row(children: <Widget>[
-                          Expanded(
-                              child: Divider(
-                            color: Colors.black,
-                          )),
-                          Text("    Sign In With    "),
-                          Expanded(
-                              child: Divider(
-                            color: Colors.black,
-                          )),
-                        ]),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: const Image(
-                              image: AssetImage(
-                                'assets/images/sign_in/logo_apple.png',
-                              ),
-                              height: 44,
-                              width: 45,
-                            ),
-                          ),
-                          TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                  'assets/images/sign_in/logo_outlook.png',
-                                  height: 44,
-                                  width: 45)),
-                          TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                  'assets/images/sign_in/logo_google.png',
-                                  height: 44,
-                                  width: 45))
-                        ],
                       ),
                     ],
                   ),
@@ -270,5 +239,9 @@ class _LoginState extends State<Login> {
         await SharedPreferences.getInstance();
     sharedPreferences.setString("username", requestModel.username);
     sharedPreferences.setString("password", requestModel.password);
+    sharedPreferences.setBool("allowLocation", false);
+    print("saved");
+    print(sharedPreferences.get("username"));
+    print(sharedPreferences.get("password"));
   }
 }

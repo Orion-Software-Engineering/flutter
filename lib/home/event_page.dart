@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 
 class EventsPage extends StatefulWidget {
+import '../utils/constants.dart';
+
   const EventsPage({Key? key}) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     _futureEvents = getEvents();
-
+    
     return FutureBuilder<List<Event>>(
       future: _futureEvents,
       builder: (context, snapshot) {
@@ -53,8 +55,9 @@ class EventsPageState extends State<EventsPage> {
                           image: NetworkImage(snapshot.data![index].coverImage),
                           fit: BoxFit.fill,
                         ),
-                        color: Colors.grey,
-                        border: Border.all(color: Colors.grey),
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText2?.color,
+                        border: Border.all(color: signUpLoginTextColor),
                         borderRadius: BorderRadius.circular(8)),
                   ),
                 );

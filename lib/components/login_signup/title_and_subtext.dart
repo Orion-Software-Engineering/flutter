@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../utils/constants.dart';
 
 class TitleAndSubtext extends StatelessWidget {
   const TitleAndSubtext({Key? key, required this.title, required this.subtext})
@@ -15,18 +14,20 @@ class TitleAndSubtext extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            // color: Colors.black,
+          style: TextStyle(
+            color: Theme.of(context).primaryTextTheme.bodyText1?.color,
             fontSize: 40.0,
             fontWeight: FontWeight.w700,
+            fontFamily: 'Nunito',
           ),
         ),
         Text(
           subtext,
-          style: const TextStyle(
-            color: signUpLoginTextColor,
+          style: TextStyle(
+            color: Theme.of(context).primaryTextTheme.bodyText2?.color,
             fontSize: 16.0,
             fontWeight: FontWeight.w700,
+            fontFamily: 'Nunito',
           ),
         )
       ],

@@ -11,13 +11,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:matchmaking_demo/models/interest_model.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_interests.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
-import '../../utils/constants.dart';
+import '../../models/login_signup_interests/interest_model.dart';
 import 'interests_button.dart';
-import 'package:matchmaking_demo/api/api_service_interests.dart';
 
 class InterestsPage extends StatefulWidget {
   InterestsPage(
@@ -42,7 +42,7 @@ class _InterestsPageState extends State<InterestsPage> {
   String helpText = '';
   late InterestRequestModel requestModel;
   late InterestResponseModel responseModel;
-  bool isApiCallProcess = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -54,8 +54,8 @@ class _InterestsPageState extends State<InterestsPage> {
   @override
   Widget build(BuildContext context) {
     return Progress(
-      isLoading: isApiCallProcess,
-      opacity: 0.3,
+      isLoading: isLoading,
+      opacity: 0,
       child: _ui(context),
     );
   }
@@ -73,7 +73,11 @@ class _InterestsPageState extends State<InterestsPage> {
       children: [
         Text(
           "Let's know your interests!",
-          style: interestsTitleStyle,
+          style: TextStyle(
+              fontSize: 40,
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color),
           textAlign: TextAlign.center,
         ),
         SizedBox(
@@ -155,19 +159,7 @@ class _InterestsPageState extends State<InterestsPage> {
                           msg: 'Select at least 3 interests',
                           fontSize: 16);
                     } else {
-                      setState(() {
-                        isApiCallProcess = true;
-                        //print(globalInterestsSet.toList());
-                        //print(globalInterestsSet.toList().runtimeType);
-                      });
-                      requestModel.interests = globalInterestsSet.toList();
-                      InterestAPIService apiService = InterestAPIService();
-                      apiService.interest(requestModel).then((value) {
-                        setState(() {
-                          isApiCallProcess = false;
-                          Navigator.of(context).goToAllSet();
-                        });
-                      });
+                      pushInterestListAndRoute();
                     }
                   } else {
                     switch (widget.pageNumber) {
@@ -194,12 +186,12 @@ class _InterestsPageState extends State<InterestsPage> {
           child: TextButton(
               onPressed: () {
                 if (globalInterestsSet.length > 2) {
-                  isApiCallProcess = true;
+                  isLoading = true;
                   requestModel.interests = globalInterestsSet.toList();
                   InterestAPIService apiService = InterestAPIService();
                   apiService.interest(requestModel).then((value) {
                     setState(() {
-                      isApiCallProcess = false;
+                      isLoading = false;
                       Navigator.of(context).goToAllSet();
                     });
                   });
@@ -211,12 +203,38 @@ class _InterestsPageState extends State<InterestsPage> {
                       fontSize: 16);
                 }
               },
-              child: Text(
-                'Skip now -->',
-                style: interestsPageNextBackStyle,
+              child: TextButton(
+                onPressed: () {
+                  print("Skipped");
+                  print(globalInterestsSet.length);
+                  if (globalInterestsSet.length > 2) {
+                    print("here");
+                    pushInterestListAndRoute();
+                  }
+                },
+                child: Text(
+                  'Skip now -->',
+                  style: interestsPageNextBackStyle,
+                ),
               )),
         )
       ],
     );
+  }
+
+  void pushInterestListAndRoute() {
+    setState(() {
+      isLoading = true;
+    });
+    requestModel.interests = globalInterestsSet.toList();
+    print(globalInterestsSet.toList());
+    print(globalInterestsSet.toList().runtimeType);
+    InterestAPIService apiService = InterestAPIService();
+    apiService.interest(requestModel).then((value) {
+      setState(() {
+        isLoading = false;
+        Navigator.of(context).goToAllSet();
+      });
+    });
   }
 }

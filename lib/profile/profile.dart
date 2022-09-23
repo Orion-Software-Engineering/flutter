@@ -1,94 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_profile.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/models/profile/profile_model.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/profile/active_interests_list.dart';
-import '../components/profile/bio_fields.dart';
+import '../components/profile/bio_field.dart';
+import '../components/profile/profile_fields.dart';
 
 class Profile extends StatefulWidget {
   final String userId;
-  const Profile({required this.userId});
+  const Profile({super.key, required this.userId});
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  String? myUserId;
   ProfileResponseModel profileResponse = ProfileResponseModel();
-  APIServiceProfile apiServiceProfile = APIServiceProfile();
+  ProfileApiService apiServiceProfile = ProfileApiService();
+  double? paddingTop;
+  bool? canEditBio;
 
   @override
-  // ignore: must_call_super
   void initState() {
     super.initState();
+    getProfileCall();
+    checkIfEditable();
+  }
+
+  void checkIfEditable() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    myUserId = sharedPreferences.getString("userId");
+    if (myUserId == widget.userId) {
+      canEditBio = true;
+    } else {
+      canEditBio = false;
+    }
+  }
+
+  void getProfileCall() {
     apiServiceProfile
         .getProfile(widget.userId)
         .then((value) => getProfileData());
+  }
 
-    print(
-        "PPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\nPPPPPPPPPPPPPP\n");
+  bool _keyboardIsVisible() {
+    return !(MediaQuery.of(context).viewInsets.bottom == 0.0);
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_keyboardIsVisible()) {
+      paddingTop = 0.2;
+    } else {
+      paddingTop = 0.35;
+    }
     return Scaffold(
       body: Stack(
         children: [
           Column(
             children: [
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: const <Color>[
-                        Color(0xFFFF0000),
-                        Color(0xFF0000FF)
-                      ],
-                    ),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 250,
-                          width: 250,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(200),
-                          ),
-                          child: Image.asset(
-                              'assets/images/messaging/Avatars/Aquarius.png'),
+                flex: 2,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(color: Color(0x00338742)),
+                      Container(
+                        height: (!_keyboardIsVisible()) ? 100 : 60,
+                        width: (!_keyboardIsVisible()) ? 100 : 60,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(200),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 100,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF00FF00),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'verified',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                        child: Center(
+                            child: Text(
+                          "K",
+                          style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "Nunito"),
+                        )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: (!_keyboardIsVisible()) ? 100 : 80,
+                          height: (!_keyboardIsVisible()) ? 30 : 20,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF00FF00),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'verified',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: (!_keyboardIsVisible()) ? 16 : 11,
+                                  fontWeight: FontWeight.w400),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
-              Expanded(child: Container())
+              Expanded(flex: 3, child: Container())
             ],
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.46,
+            top: MediaQuery.of(context).size.height * paddingTop!,
             right: 0,
             bottom: 0,
             left: 0,
@@ -96,44 +121,72 @@ class _ProfileState extends State<Profile> {
               padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
               decoration: BoxDecoration(
                   color: Color(0xffffffff),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BioFields(
-                      title: 'Username',
-                      value: profileResponse.username,
-                      isGender: false),
-                  BioFields(
-                      title: 'Email',
-                      value: profileResponse.email,
-                      isGender: false),
-                  BioFields(
-                      title: 'Date of Birth',
-                      value: profileResponse.dateOfBirth,
-                      isGender: false),
-                  BioFields(
-                    title: 'Gender',
-                    isGender: true,
-                    genderValue: profileResponse.gender,
-                  ),
-                  BioFields(
-                      title: 'Bio', value: "Lorem Ipsum", isGender: false),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25))),
+              child: CustomScrollView(
+                slivers: [
+                  SliverFillRemaining(
+                    hasScrollBody: false,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Active Interests',
-                          // textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w400),
+                        BioField(
+                          isEditable: canEditBio ?? false,
+                          bioText: (profileResponse.bio == null)
+                              ? ""
+                              : profileResponse.bio!,
+                          apiServiceProfile: apiServiceProfile,
+                          refresh: () {
+                            getProfileCall();
+                            Navigator.pop(context);
+                          },
                         ),
-                        ActiveInterestsList(interestList: interestsList),
+                        Expanded(
+                          child: ProfileFields(
+                              title: 'Username',
+                              value: profileResponse.username,
+                              isGender: false),
+                        ),
+                        Expanded(
+                          child: ProfileFields(
+                              title: 'Email',
+                              value: profileResponse.email,
+                              isGender: false),
+                        ),
+                        Expanded(
+                          child: ProfileFields(
+                              title: 'Date of Birth',
+                              value: profileResponse.dateOfBirth,
+                              isGender: false),
+                        ),
+                        Expanded(
+                          child: ProfileFields(
+                            title: 'Gender',
+                            isGender: true,
+                            genderValue: profileResponse.gender,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 30),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Active Interests',
+                                // textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              ActiveInterestsList(
+                                  interestList:
+                                      profileResponse.interests ?? []),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -143,11 +196,7 @@ class _ProfileState extends State<Profile> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 40, 0, 0),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 40,
-            ),
+            child: CustomBackButton(),
           ),
         ],
       ),
@@ -159,17 +208,4 @@ class _ProfileState extends State<Profile> {
       profileResponse = apiServiceProfile.profileResponseModel;
     });
   }
-  // void getProfilePageData() async {
-  //   final SharedPreferences sharedPreferences =
-  //       await SharedPreferences.getInstance();
-  //   print("in getProfileData");
-  //   setState(() {
-  //     email = sharedPreferences.getString("email");
-  //     // sharedPreferences.getBool("isEmailVerified");
-  //     username = sharedPreferences.getString("username");
-  //     dateOfBirth = sharedPreferences.getString("dateOfBirth");
-  //     gender = sharedPreferences.getBool("gender");
-  //   });
-  //   print("dob: $dateOfBirth");
-  // }
 }
