@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 
 class InterestsBullet extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  const InterestsBullet({required this.interest});
+  const InterestsBullet({super.key, required this.interest});
   final String interest;
 
   @override
   Widget build(BuildContext context) {
     Color color;
     switch (interest) {
-      case 'Art':
+      case 'art':
         {
           color = Colors.green;
         }
         break;
-      case 'Business':
+      case 'business':
         {
           color = Colors.black;
         }
         break;
       case 'Cars & Vehicles':
         {
-          color = Colors.teal;
+          color = Color(0xff605F5F);
         }
         break;
-      case 'Comedy':
+      case 'comedy':
         {
           color = Colors.yellow;
         }
@@ -35,22 +33,22 @@ class InterestsBullet extends StatelessWidget {
           color = Colors.green;
         }
         break;
-      case 'Entertainment':
+      case 'entertainment':
         {
-          color = Color(0xff480202);
+          color = Color(0xffe50404);
         }
         break;
-      case 'Food':
+      case 'food':
         {
-          color = Color(0xff007fff);
+          color = Color(0xffcc5500);
         }
         break;
-      case 'Fashion':
+      case 'fashion':
         {
-          color = Color(0xff007fff);
+          color = Color(0xffff00b7);
         }
         break;
-      case 'Gaming':
+      case 'gaming':
         {
           color = Color(0xff007fff);
         }
@@ -62,23 +60,36 @@ class InterestsBullet extends StatelessWidget {
         break;
       case 'News & Politics':
         {
-          color = Color(0xff007fff);
+          color = Color(0xff830303);
         }
         break;
-      case 'Photography':
+      case 'photography':
         {
-          color = Color(0xff007fff);
+          color = Color(0xff35880b);
         }
         break;
       case 'Science & Technology':
         {
-          color = Color(0xff007fff);
+          color = Color(0xFFFF8800);
         }
         break;
-      case 'Sports':
+      case 'sports':
         {
-          color = Color(0xff007fff);
+          color = Color(0xffb7ff00);
         }
+        break;
+      case 'Health & Fitness':
+        {
+          color = Color(0xff00ffff);
+        }
+        break;
+      case 'education':
+        {
+          color = Color(0xffc6d09b);
+        }
+        break;
+      default:
+        color = Color(0x00ffffff);
         break;
     }
     return Row(
@@ -88,9 +99,9 @@ class InterestsBullet extends StatelessWidget {
           height: 10,
           width: 10,
           decoration: BoxDecoration(
-              color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+              color: color, borderRadius: BorderRadius.circular(8)),
         ),
-        Text(interest)
+        Text(interest[0].toUpperCase() + interest.substring(1))
       ],
     );
   }

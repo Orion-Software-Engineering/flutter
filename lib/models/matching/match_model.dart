@@ -1,15 +1,17 @@
 class MatchModel {
   String? userId;
   String? userName;
-  List<dynamic>? commonInterests;
+  String? bio;
+  int? proximity;
 
-  MatchModel({this.userId, this.userName, this.commonInterests});
+  MatchModel({this.userId, this.userName, this.bio, this.proximity});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
       "userId": userId,
       'username': userName,
-      'commonInterests': commonInterests
+      'bio': bio,
+      "proximity": proximity
     };
     return map;
   }

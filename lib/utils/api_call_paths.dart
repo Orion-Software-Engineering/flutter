@@ -35,4 +35,5 @@ const String deleteMessagePath = "/api/message";
 const String getLastMessagePath = "/api/message/last/";
 
 //matching
-const String getMatchesPath = "/api/test/matches/";
+const String getInterestBasedMatchesPath = "/api/test/matches/";
+const String getLocationBasedMatchesPath = "/api/test/match/location/";
