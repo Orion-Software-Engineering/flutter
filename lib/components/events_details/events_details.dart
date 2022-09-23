@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/like_event.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
@@ -106,6 +107,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         ),
                       ),
                       Container(
+                          height: 35.0,
                           padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                           //color: Colors.black,
                           child: ListView.builder(
@@ -113,12 +115,17 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  padding: EdgeInsets.all(10.00),
+                                  padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 2.0, bottom: 4.0),
+                                  margin: EdgeInsets.only(left: 2.0, right: 2.0),
+                                  height: 40.0,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    color: Colors.lightGreenAccent,
+                                    color: InterestColors[event.interests[index]],
                                   ),
-                                  child: Text('Sports'),
+                                  child: Text(
+                                    event.interests[index],
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 );
                               })),
                     ],
