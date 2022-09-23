@@ -1,299 +1,124 @@
-import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/components/events_details/events_details.dart';
+//import 'dart:html';
 
+import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_events.dart';
+import 'package:matchmaking_demo/components/events_details/events_details.dart';
+import 'package:matchmaking_demo/utils/variables.dart';
+import 'package:matchmaking_demo/models/events_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 import '../utils/constants.dart';
 
-class EventsPage extends StatelessWidget {
+class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      /*ListView.builder(itemBuilder:
-    itemBuilder)(*/
-      //The Trending section will show the tpo 4 events with the most likes or interactions.
-      body: SingleChildScrollView(
-        child: Wrap(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                color: Theme.of(context).primaryColor,
-                padding: EdgeInsets.all(10.0),
-                child: Text('Trending',
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText1?.color,
-                    )),
-              ),
-            ),
-            Wrap(
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => EventsDetails()),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    margin: EdgeInsets.all(20.0),
-                    width: 150.0,
-                    height: 200.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg'),
-                          fit: BoxFit.fill,
-                        ),
-                        color:
-                            Theme.of(context).primaryTextTheme.bodyText2?.color,
-                        border: Border.all(color: signUpLoginTextColor),
-                        borderRadius: BorderRadius.circular(8)),
-                    //child: Image.network('https://i.pinimg.com/564x/fc/73/2a/fc732ab8c4fb8050449bef420d0e9146.jpg'),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => EventsDetails()),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    margin: EdgeInsets.all(20.0),
-                    width: 150.0,
-                    height: 200.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://i.pinimg.com/564x/15/eb/25/15eb25cc07a34c365eeddd995a31f15a.jpg')),
-                        color:
-                            Theme.of(context).primaryTextTheme.bodyText2?.color,
-                        border: Border.all(color: signUpLoginTextColor),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => EventsDetails()),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    margin: EdgeInsets.all(20.0),
-                    width: 150.0,
-                    height: 200.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://i.pinimg.com/564x/36/ed/03/36ed036209c304f4493b44e52e20be9b.jpg'),
-                          fit: BoxFit.fill,
-                        ),
-                        border: Border.all(color: signUpLoginTextColor),
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => EventsDetails()),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    margin: EdgeInsets.all(20.0),
-                    width: 150.0,
-                    height: 200.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://i.pinimg.com/564x/27/96/2e/27962e3b800edc226846111df14a7fc8.jpg'),
-                          fit: BoxFit.fill,
-                        ),
-                        color:
-                            Theme.of(context).primaryTextTheme.bodyText2?.color,
-                        border: Border.all(color: signUpLoginTextColor),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                  ),
-                ),
-              ],
-            ),
+  State<StatefulWidget> createState() => EventsPageState();
+}
 
-            //The new section based on filter settings show the events within a given time frame.
-            Expanded(
-                child: Container(
-              padding: EdgeInsets.all(20.0),
-              //margin: EdgeInsets.all(20.0),
-              child: Text(
-                'Happening this week',
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+class EventsPageState extends State<EventsPage> {
+  late Future<List<Event>> _futureEvents;
+  int eventCount = 4;
+
+  @override
+  Widget build(BuildContext context) {
+    _futureEvents = getEvents();
+
+    return FutureBuilder<List<Event>>(
+      future: _futureEvents,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data!.isNotEmpty) {
+            return GridView.builder(
+              itemCount: snapshot.data!.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventsDetailsPage(
+                          event: snapshot.data![index],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(20.0),
+                    margin: EdgeInsets.all(20.0),
+                    width: 150.0,
+                    height: 190.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(snapshot.data![index].coverImage),
+                          fit: BoxFit.fill,
+                        ),
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText2?.color,
+                        border: Border.all(color: signUpLoginTextColor),
+                        borderRadius: BorderRadius.circular(8)),
+                  ),
+                );
+              }, //itemBuilder
+            );
+          }
+          // -----------------------------------------------No events to show screen------------------------------------------------------
+          return Column(
+            children: <Widget>[
+              Container(
+                width: 120,
+                height: 90,
+                margin: EdgeInsets.fromLTRB(50, 180, 50, 0.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/images/Events/noresults.png',
+                    ),
+                    fit: BoxFit.fill,
+                    colorFilter: ColorFilter.mode(
+                        Colors.white.withOpacity(0.5), BlendMode.modulate),
+                  ),
+                ),
               ),
-            )),
-            Wrap(children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EventsDetails()),
-                  );
-                },
-                child: Container(
+              Container(
+                padding: EdgeInsets.fromLTRB(50.0, 40.0, 50.0, 20.0),
+                child: Text(
+                  "Event organizers are probably cooking something fun. Check "
+                  "again later!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20.0,
+                      color: Colors.grey),
+                ),
+              ),
+            ],
+          );
+        }
+        //Shimmer during fetching
+        return Shimmer.fromColors(
+            baseColor: Colors.grey[400]!,
+            highlightColor: Colors.grey[300]!,
+            child: GridView.builder(
+              itemCount: 12,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
                   padding: EdgeInsets.all(20.0),
                   margin: EdgeInsets.all(20.0),
                   width: 150.0,
-                  height: 200.0,
+                  height: 190.0,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://i.pinimg.com/564x/10/83/5c/10835c609966bef3aa5c1e26ae9b1df2.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      border: Border.all(color: signUpLoginTextColor),
+                      color: Colors.grey.withOpacity(0.4),
+                      border: Border.all(color: Colors.grey.withOpacity(0.1)),
                       borderRadius: BorderRadius.circular(8)),
-                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EventsDetails()),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.all(20.0),
-                  width: 150.0,
-                  height: 200.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://i.pinimg.com/564x/a7/e4/b6/a7e4b6d1c1a4afbdfd123bb5167082fc.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      border: Border.all(color: signUpLoginTextColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EventsDetails()),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.all(20.0),
-                  width: 150.0,
-                  height: 200.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://i.pinimg.com/564x/a3/a1/88/a3a188bd35939cc7436103c86b9cf291.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      border: Border.all(color: signUpLoginTextColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EventsDetails()),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.all(20.0),
-                  width: 150.0,
-                  height: 200.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://i.pinimg.com/564x/19/65/1d/19651dc492b705f7965831d1f221bf94.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      border: Border.all(color: signUpLoginTextColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EventsDetails()),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.all(20.0),
-                  width: 150.0,
-                  height: 200.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://i.pinimg.com/564x/db/e6/9a/dbe69a692eca0f5f51589fac736336a1.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      border: Border.all(color: signUpLoginTextColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EventsDetails()),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.all(20.0),
-                  width: 150.0,
-                  height: 200.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://i.pinimg.com/564x/6a/fe/85/6afe8521df12353127db9e18c5937e15.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      border: Border.all(color: signUpLoginTextColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Text('Event', style: TextStyle(fontSize: 30.0)),
-                ),
-              ),
-            ])
-          ],
-        ),
-      ),
+                );
+              },
+            ));
+      },
     );
   }
 }

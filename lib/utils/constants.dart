@@ -6,6 +6,28 @@ Color orionLogoCenterColor = Color(0xFF1B1129);
 TextStyle signUpLoginTextFieldTextStyle =
     TextStyle(color: signUpLoginTextColor, fontFamily: 'Nunito', fontSize: 16);
 
+//apis
+
+
+//Mapping Interests & Colors
+ final Map<String, Color> InterestColors = {
+  'art' : Colors.deepPurple[900]!,
+  'business': Colors.black,
+  'cars': Colors.grey[800]!,
+  'comedy': Colors.yellow,
+  'education': Colors.yellow[100]!,
+  'entertainment': Colors.red[900]!,
+  'food': Colors.deepOrange,
+  'fashion': Colors.pink,
+  'gaming': Colors.blueAccent[400]!,
+  'health': Colors.cyanAccent,
+  'beauty': Colors.deepPurpleAccent,
+  'news': Colors.deepOrange[900]!,
+  'photography': Colors.green,
+  'science' : Colors.orange,
+  'sports': Colors.lightGreenAccent[200]!
+};
+
 const List<Color> matchingCardColors = [
   Color(0xFF007AFF),
   Color(0xFF241837),
