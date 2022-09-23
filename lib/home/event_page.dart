@@ -7,10 +7,9 @@ import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
-
-class EventsPage extends StatefulWidget {
 import '../utils/constants.dart';
 
+class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
 
   @override
@@ -24,7 +23,7 @@ class EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     _futureEvents = getEvents();
-    
+
     return FutureBuilder<List<Event>>(
       future: _futureEvents,
       builder: (context, snapshot) {
@@ -32,7 +31,8 @@ class EventsPageState extends State<EventsPage> {
           if (snapshot.data!.isNotEmpty) {
             return GridView.builder(
               itemCount: snapshot.data!.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
@@ -77,7 +77,8 @@ class EventsPageState extends State<EventsPage> {
                       'assets/images/Events/noresults.png',
                     ),
                     fit: BoxFit.fill,
-                    colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5), BlendMode.modulate),
+                    colorFilter: ColorFilter.mode(
+                        Colors.white.withOpacity(0.5), BlendMode.modulate),
                   ),
                 ),
               ),
@@ -87,7 +88,10 @@ class EventsPageState extends State<EventsPage> {
                   "Event organizers are probably cooking something fun. Check "
                   "again later!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.grey),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20.0,
+                      color: Colors.grey),
                 ),
               ),
             ],
@@ -99,7 +103,8 @@ class EventsPageState extends State<EventsPage> {
             highlightColor: Colors.grey[300]!,
             child: GridView.builder(
               itemCount: 12,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   padding: EdgeInsets.all(20.0),
