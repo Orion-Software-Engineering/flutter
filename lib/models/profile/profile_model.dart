@@ -6,6 +6,7 @@ class ProfileResponseModel {
   String? dateOfBirth;
   bool? gender;
   String? bio;
+  List<String>? interests = [];
 
   ProfileResponseModel(
       {this.id,
@@ -14,7 +15,8 @@ class ProfileResponseModel {
       this.username,
       this.dateOfBirth,
       this.gender,
-      this.bio});
+      this.bio,
+      this.interests});
 }
 
 class UpdateBioRequestModel {

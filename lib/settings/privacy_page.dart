@@ -47,7 +47,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
           SwitchListTile(
             activeTrackColor: Colors.black,
             inactiveThumbColor: Colors.black,
-            //fix activeThumbColor
+            //todo fix activeThumbColor
             inactiveTrackColor: Colors.grey,
             tileColor: Colors.grey[400],
             value: private,

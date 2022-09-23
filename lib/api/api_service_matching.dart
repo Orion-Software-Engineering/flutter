@@ -6,15 +6,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_call_paths.dart';
 
 class MatchingApiService {
-  List<MatchModel> matches = [];
-  Future<void> getMatches() async {
+  List<MatchModel> matchList = [];
+  Future<void> getInterestBasedMatches() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
 
-    Uri url = Uri(scheme: scheme, host: host, path: getMatchesPath + userId!);
+    Uri url = Uri(
+        scheme: scheme,
+        host: host,
+        path: getInterestBasedMatchesPath + userId!);
 
     try {
-      final response = await http.get(url);
+      final response = await http.get(url, headers: headers);
 
       print(response.statusCode);
       print(response.body);
@@ -23,11 +26,36 @@ class MatchingApiService {
         List responseMatches = json.decode(response.body);
         for (var m in responseMatches) {
           MatchModel match = MatchModel(
-              userId: m["userId"],
-              userName: m["username"],
-              commonInterests: m["commonInterests"]);
-          matches.add(match);
+            userId: m["userId"], userName: m["username"], proximity: 10,
+            // bio: m["bio"]
+          );
+          matchList.add(match);
         }
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> getLocationBasedMatches() async {
+    print("in loc based matching");
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? userId = sharedPreferences.getString("userId");
+
+    Uri url = Uri(
+        scheme: scheme,
+        host: host,
+        path: getLocationBasedMatchesPath + userId!);
+
+    try {
+      final response = await http.get(url, headers: headers);
+
+      List responseMatches = json.decode(response.body);
+      print(responseMatches);
+      for (List m in responseMatches) {
+        MatchModel match = MatchModel(
+            userId: m[0], userName: m[1], bio: m[2], proximity: m[3]);
+        matchList.add(match);
       }
     } catch (e) {
       rethrow;
