@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/utils/like_event.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
-import 'package:favorite_button/favorite_button.dart';
 import '../../utils/save_event.dart';
 
 class EventsDetailsPage extends StatefulWidget {
@@ -28,11 +27,11 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
       organizer: Details[0].organizer,
       cover_image: Details[0].cover_image);
 
+  bool isLiked = false;
+
   @override
   Widget build(BuildContext context) {
     final Event event = widget.event;
-    List<Color> likeButtonColors = <Color>[Colors.white, Colors.red];
-    bool isLiked = event.liked != null ? event.liked : false;
 
     return Scaffold(
       body: CustomScrollView(
@@ -46,14 +45,25 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
               background: Image.network(event.coverImage, fit: BoxFit.cover),
             ),
             actions: [
-              IconButton(
-                onPressed: () => {
-                  // like/unlike event
-                  likeEvent(event),
-                },
-                icon: Icon(Icons.favorite),
-                color: likeButtonColors[isLiked ? 1 : 0],
-              ),
+              FutureBuilder(
+                  builder: (BuildContext context, snapshot) {
+                    bool isLiked = false;
+                    switch (snapshot.data) {
+                      case true:
+                        isLiked = true;
+                    }
+                    return IconButton(
+                      onPressed: () => {
+                        // TODO: store event id in our saved list or remove it
+                        likeEvent(event).whenComplete(() => setState(() {
+                              isLiked = !isLiked;
+                            })),
+                      },
+                      icon: Icon(Icons.favorite),
+                      color: isLiked ? Colors.red : Colors.white,
+                    );
+                  },
+                  future: isEventLiked(event)),
               FutureBuilder(
                   builder: (BuildContext context, snapshot) {
                     bool isSaved = false;
@@ -71,7 +81,6 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                       },
                       icon: Icon(Icons.bookmark),
                       color: isSaved ? Colors.yellow : Colors.white,
-                      // TODO: check if item is saved and change color
                     );
                   },
                   future: isEventSaved(event)),
@@ -157,7 +166,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             Container(
                               padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 8.0),
                               child: Text(
-                                '${event.venue}',
+                                event.venue,
                                 style: TextStyle(fontSize: 14.0),
                               ),
                             ),
@@ -184,7 +193,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           Container(
                             padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 20.0),
                             child: Text(
-                              '{event.ticket_price}',
+                              event.ticketPrice,
                               style: TextStyle(fontSize: 14.0),
                             ),
                           ),
@@ -239,7 +248,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                 Container(
                   padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20),
                   child: Text(
-                    '${event.description}',
+                    event.description,
                     style: TextStyle(fontSize: 12.0),
                   ),
                 ),
@@ -295,7 +304,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
-                        child: Text('${event.guests}'),
+                        child: Text(event.guests),
                       ),
                     ],
                   ),
@@ -306,11 +315,5 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
         ],
       ),
     );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
   }
 }

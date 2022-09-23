@@ -26,7 +26,7 @@ class Event {
   final String guests;
   final bool ageRestriction;
   final String description;
-  final String interests;
+  final List<dynamic> interests;
   final String coverImage;
   final bool liked;
   final String ticketPrice;
@@ -61,7 +61,7 @@ class Event {
       description: json['description'],
       interests: json['interests'],
       coverImage: json['cover_image'],
-      liked: json['liked'],
+      liked: json['liked'] ?? false,
       ticketPrice: json['ticket_price'],
     );
   }
