@@ -21,16 +21,23 @@ class _ProfileState extends State<Profile> {
   ProfileResponseModel profileResponse = ProfileResponseModel();
   ProfileApiService apiServiceProfile = ProfileApiService();
   double? paddingTop;
+  bool? canEditBio;
 
   @override
   void initState() {
     super.initState();
     getProfileCall();
+    checkIfEditable();
   }
 
-  void getMyUserId() async {
+  void checkIfEditable() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     myUserId = sharedPreferences.getString("userId");
+    if (myUserId == widget.userId) {
+      canEditBio = true;
+    } else {
+      canEditBio = false;
+    }
   }
 
   void getProfileCall() {
@@ -45,12 +52,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    bool canEditBio;
-    if (myUserId == widget.userId) {
-      canEditBio = true;
-    } else {
-      canEditBio = false;
-    }
     if (_keyboardIsVisible()) {
       paddingTop = 0.2;
     } else {
@@ -132,14 +133,12 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BioField(
-                          isEditable: canEditBio,
+                          isEditable: canEditBio ?? false,
                           bioText: (profileResponse.bio == null)
                               ? ""
                               : profileResponse.bio!,
                           apiServiceProfile: apiServiceProfile,
                           refresh: () {
-                            print("hoho\nhoho\nhoho\nhoho\nhoho\nhoho\nhoho\n");
-                            print("in refresh");
                             getProfileCall();
                             Navigator.pop(context);
                           },

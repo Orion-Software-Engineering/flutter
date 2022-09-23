@@ -42,8 +42,7 @@ class ProfileApiService {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
     Uri url = Uri(scheme: scheme, host: host, path: updateBioPath);
-    print(
-        "reqesti body ${jsonEncode(UpdateBioRequestModel(userId: userId!, bio: text))}");
+
     try {
       final response = await http.post(url,
           headers: headers,
@@ -55,16 +54,4 @@ class ProfileApiService {
       rethrow;
     }
   }
-
-  // void saveProfileData(var response) async {
-  //   final SharedPreferences sharedPreferences =
-  //       await SharedPreferences.getInstance();
-  //   print("profileResponse value = $response}");
-  //   sharedPreferences.setString("email", response["user"]["email"]);
-  //   // sharedPreferences.setBool("isEmailVerified", isEmailVerified!);
-  //   sharedPreferences.setString("username", response["user"]["username"]);
-  //   sharedPreferences.setString("dateOfBirth", response["user"]["dateOfBirth"]);
-  //   sharedPreferences.setBool("gender", response["user"]["gender"]);
-  //   print("in saveProfileData");
-  // }
 }
