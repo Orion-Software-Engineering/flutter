@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matchmaking_demo/api/login_signup_interests/api_service_delete_account.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
 import 'package:matchmaking_demo/models/delete_model.dart';
@@ -63,6 +64,7 @@ class _DeleteState extends State<Delete> {
           key: _formKey,
           child: Column(
             children: [
+              CustomBackButton(),
               Expanded(
                 flex: 2,
                 child: TitleAndSubtext(
