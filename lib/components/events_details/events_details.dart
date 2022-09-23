@@ -108,10 +108,11 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                       Container(
                         padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                         //color: Colors.black,
-                        child: Text(
-                          'Colors will go here',
-                          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-                        ),
+                        child: Row(
+                          children: <Widget>[
+
+                          ],
+                        ) ,
                       ),
                     ],
                   ),

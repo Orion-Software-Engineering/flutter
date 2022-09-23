@@ -9,6 +9,25 @@ const TextStyle signUpLoginTextFieldTextStyle =
 //apis
 
 
+//Mapping Interests & Colors
+ Map<String, Color> InterestColors = {
+  'Art' : Colors.deepPurple[900]!,
+  'Business': Colors.black,
+  'Cars & vehicles': Colors.grey[800]!,
+  'Comedy': Colors.yellow,
+  'Education': Colors.yellow[100]!,
+  'Entertainment': Colors.red[900]!,
+  'Food': Colors.deepOrange,
+  'Fashion': Colors.pink,
+  'Gaming': Colors.blueAccent[400]!,
+  'Health & Fitness': Colors.cyanAccent,
+  'Hair & Beauty': Colors.deepPurpleAccent,
+  'News & Politics': Colors.deepOrange[900]!,
+  'Photography': Colors.green,
+  'Science & Technology' : Colors.orange,
+  'Sports': Colors.lightGreenAccent[200]!
+};
+
 
 const TextStyle loginSignUpButtonTextStyle = TextStyle(
   fontSize: 22.0,
