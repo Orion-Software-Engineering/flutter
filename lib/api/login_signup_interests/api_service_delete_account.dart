@@ -4,6 +4,7 @@ import 'dart:convert';
 import '../../utils/api_call_paths.dart';
 
 String message = "";
+int statusCode = 0;
 
 class DeleteAccountAPIService {
   Future<DeleteAccountResponseModel> delete(
@@ -22,6 +23,7 @@ class DeleteAccountAPIService {
       } else {
         message = "Could not delete account. Try again";
       }
+      statusCode = response.statusCode;
       return DeleteAccountResponseModel.fromJson(json.decode(response.body));
     } catch (e) {
       rethrow;

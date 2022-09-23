@@ -56,13 +56,11 @@ class _ChatState extends State<Chat> {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           leading: CustomBackButton(),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: const <Color>[
-              Color(0xFFE53935),
-              Color(0xFF1A237E)
-            ])),
-          ),
+          elevation: 0.5,
+          foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
+          shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+          backgroundColor: Theme.of(context).primaryColor,
+          automaticallyImplyLeading: false,
           title: GestureDetector(
             onTap: () => Navigator.of(context)
                 .goToProfile(widget.conversationInfo.receiverUserId),

@@ -259,7 +259,7 @@ class _SignUpState extends State<SignUp> {
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w400,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.white,
                               ),
                             ),
                           ),
