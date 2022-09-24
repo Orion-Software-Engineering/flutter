@@ -2,34 +2,48 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:matchmaking_demo/api/login_signup_interests/api_service_login.dart';
+import 'package:matchmaking_demo/api/login_signup_interests/api_service_delete_account.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
+import 'package:matchmaking_demo/models/delete_model.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
-import '../models/login_signup_interests/login_model.dart';
 import '../utils/constants.dart';
-import 'package:matchmaking_demo/splash/splash_screen.dart';
 
-class Login extends StatefulWidget {
+DeleteAccountRequestModel requestModel = DeleteAccountRequestModel();
+
+class Delete extends StatefulWidget {
   @override
-  State<Login> createState() => _LoginState();
+  State<Delete> createState() => _DeleteState();
 }
 
-class _LoginState extends State<Login> {
+class _DeleteState extends State<Delete> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   RegExp userNameValid = RegExp(r"^[a-zA-Z0-9_]*$");
   RegExp passwordValid = RegExp(r".+");
   bool isLoading = false;
-  late LoginRequestModel requestModel;
+  String? username;
+  String? password;
+  Future<void> getUserInfo() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    requestModel.userId = sharedPreferences.getString("userId")!;
+  }
+
+  Future<void> clearSharedPreferences() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+  }
 
   @override
   void initState() {
     super.initState();
-    requestModel = new LoginRequestModel();
+    getUserInfo();
   }
 
   @override
@@ -50,11 +64,12 @@ class _LoginState extends State<Login> {
           key: _formKey,
           child: Column(
             children: [
+              CustomBackButton(),
               Expanded(
                 flex: 2,
                 child: TitleAndSubtext(
-                    title: 'Sign In',
-                    subtext: 'Enter your username and password'),
+                    title: "Aww,leaving?",
+                    subtext: 'Confirm your username and password'),
               ),
               Expanded(
                 flex: 3,
@@ -79,10 +94,9 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
-                        onSaved: (value) => requestModel.username = value!,
                         validator: (value) {
-                          if (userNameValid.hasMatch(value!) &&
-                              value.isNotEmpty) {
+                          if (value!.isNotEmpty &&
+                              userNameValid.hasMatch(value)) {
                             String username = value.trim();
                             setState(() {
                               requestModel.username = username;
@@ -107,7 +121,7 @@ class _LoginState extends State<Login> {
                               return 'Enter a valid password';
                             }
                           }),
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 64.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Theme.of(context).cardColor,
@@ -120,17 +134,17 @@ class _LoginState extends State<Login> {
                             setState(() {
                               isLoading = true;
                             });
-                            LoginAPIService apiService = new LoginAPIService();
-                            apiService.login(requestModel).then((value) {
+                            DeleteAccountAPIService apiService =
+                                new DeleteAccountAPIService();
+                            apiService.delete(requestModel).then((value) {
                               setState(() {
                                 isLoading = false;
                                 if (statusCode == 200) {
-                                  saveCredentials();
-                                  Navigator.of(context)
-                                      .enterAppThroughHomeScreen();
+                                  Navigator.of(context).goToSignUpScreen();
+                                  clearSharedPreferences();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                          content: Text('Login Successful')));
+                                          content: Text('Account Deleted')));
                                 } else {
                                   Fluttertoast.showToast(
                                     msg: message,
@@ -151,7 +165,7 @@ class _LoginState extends State<Login> {
                               vertical: 8.0, horizontal: 0.0),
                           child: Center(
                             child: Text(
-                              'LOG IN',
+                              'DELETE ACCOUNT',
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w400,
@@ -159,56 +173,6 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.of(context).goToForgotPasswordScreen();
-                            },
-                            child: Text(
-                              'Forgot password?',
-                              style: TextStyle(
-                                color: signUpLoginOrange,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15.0),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have an account?",
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Theme.of(context)
-                                    .primaryTextTheme
-                                    .bodyText1
-                                    ?.color,
-                              ),
-                            ),
-                            MaterialButton(
-                              onPressed: () {
-                                Navigator.of(context).goToSignUpScreen();
-                              },
-                              child: Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: signUpLoginOrange,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ],
@@ -230,16 +194,5 @@ class _LoginState extends State<Login> {
     } else {
       return false;
     }
-  }
-
-  void saveCredentials() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    sharedPreferences.setString("username", requestModel.username);
-    sharedPreferences.setString("password", requestModel.password);
-    sharedPreferences.setBool("allowLocation", false);
-    print("saved");
-    print(sharedPreferences.get("username"));
-    print(sharedPreferences.get("password"));
   }
 }
