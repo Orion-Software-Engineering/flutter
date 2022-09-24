@@ -56,21 +56,29 @@ class _ChatState extends State<Chat> {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           leading: CustomBackButton(),
+          elevation: 0.5,
+          foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
+          shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+          backgroundColor: Theme.of(context).primaryColor,
+          automaticallyImplyLeading: false,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(colors: const <Color>[
-              Color(0xFFE53935),
-              Color(0xFF1A237E)
-            ])),
+              color: Theme.of(context).appBarTheme.backgroundColor,
+            ),
           ),
+          toolbarHeight: 70,
           title: GestureDetector(
             onTap: () => Navigator.of(context)
                 .goToProfile(widget.conversationInfo.receiverUserId),
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.black,
-                  child: Text(senderName![0]),
+                  backgroundColor:
+                      Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  child: Text(
+                    senderName![0],
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
                 ),
                 SizedBox(
                   width: 20.0,
@@ -84,6 +92,8 @@ class _ChatState extends State<Chat> {
                         fontWeight: FontWeight.w700,
                         fontFamily: "Nunito",
                         fontSize: 24,
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText1?.color,
                       ),
                     ),
                   ],
@@ -113,21 +123,29 @@ class _ChatState extends State<Chat> {
       return Scaffold(
         appBar: AppBar(
           leading: CustomBackButton(),
+          elevation: 0.5,
+          foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
+          shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+          backgroundColor: Theme.of(context).primaryColor,
+          automaticallyImplyLeading: false,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(colors: const <Color>[
-              Color(0xFFE53935),
-              Color(0xFF1A237E)
-            ])),
+              color: Theme.of(context).appBarTheme.backgroundColor,
+            ),
           ),
+          toolbarHeight: 70,
           title: GestureDetector(
             onTap: () => Navigator.of(context)
                 .goToProfile(widget.conversationInfo.receiverUserId),
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.black,
-                  child: Text(senderName![0]),
+                  backgroundColor:
+                      Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  child: Text(
+                    senderName![0],
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
                 ),
                 SizedBox(
                   width: 20.0,
@@ -141,6 +159,8 @@ class _ChatState extends State<Chat> {
                         fontWeight: FontWeight.w700,
                         fontFamily: "Nunito",
                         fontSize: 24,
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText1?.color,
                       ),
                     ),
                   ],
@@ -156,7 +176,14 @@ class _ChatState extends State<Chat> {
               children: [
                 Container(),
                 Center(
-                  child: Text("Send a message to match"),
+                  child: Text(
+                    "Send a message to match",
+                    style: TextStyle(
+                        color: Theme.of(context)
+                            .primaryTextTheme
+                            .bodyText2
+                            ?.color),
+                  ),
                 ),
                 InputField(
                   conversationInfo: widget.conversationInfo,
