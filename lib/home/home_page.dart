@@ -67,10 +67,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Stack(
                   children: [
-                    Image.asset(
-                      'assets/images/matching/doodle.png',
-                      width: double.infinity,
-                      fit: BoxFit.fill,
+                    Opacity(
+                      opacity: 0.4,
+                      child: Image.asset(
+                        'assets/images/matching/doodle.png',
+                        width: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

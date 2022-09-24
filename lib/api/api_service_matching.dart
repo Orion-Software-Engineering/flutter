@@ -26,9 +26,10 @@ class MatchingApiService {
         List responseMatches = json.decode(response.body);
         for (var m in responseMatches) {
           MatchModel match = MatchModel(
-            userId: m["userId"], userName: m["username"], proximity: 10,
-            // bio: m["bio"]
-          );
+              userId: m["userId"],
+              userName: m["username"],
+              proximity: 10,
+              bio: m["bio"]);
           matchList.add(match);
         }
       }
