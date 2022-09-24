@@ -109,6 +109,7 @@ class _ChatState extends State<Chat> {
       );
     } else {
       return Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           leading: CustomBackButton(),
           elevation: 0.5,
