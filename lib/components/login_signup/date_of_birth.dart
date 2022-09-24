@@ -23,9 +23,9 @@ class DobField extends StatefulWidget {
 }
 
 class _DobFieldState extends State<DobField> {
-  String? dateValue;
+  String? dateValueForApiCall;
 
-  var dateFormat = DateFormat('dd/MM/yyyy - kk:mm');
+  var dateFormat = DateFormat('yyyy-MM-dd');
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,6 @@ class _DobFieldState extends State<DobField> {
             dayOfYear = DateTime.now().day;
             break;
         }
-        print(dayOfYear);
 
         showDatePicker(
                 context: context,
@@ -100,7 +99,9 @@ class _DobFieldState extends State<DobField> {
                     .add(Duration(days: dayOfYear)))
             .then((date) {
           setState(() {
-            dateValue = dateFormat.format(date!).substring(0, 10);
+            // dateValue = dateFormat.format(date!).substring(0, 10);
+            dateValueForApiCall = dateFormat.format(date!);
+            print("date value for api call $dateValueForApiCall");
           });
         });
       },
@@ -108,10 +109,11 @@ class _DobFieldState extends State<DobField> {
         style: TextStyle(
           color: Theme.of(context).primaryTextTheme.bodyText1?.color,
         ),
-        controller: TextEditingController(text: dateValue),
+        controller: TextEditingController(text: dateValueForApiCall),
         enabled: false,
         decoration: InputDecoration(
-            labelText: dateValue == null ? 'DD/MM/YYYY' : 'Date of Birth',
+            labelText:
+                dateValueForApiCall == null ? 'YYYY-MM-DD' : 'Date of Birth',
             labelStyle: signUpLoginTextFieldTextStyle,
             disabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(

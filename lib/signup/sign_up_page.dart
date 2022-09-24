@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 import 'dart:core';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
@@ -163,6 +164,7 @@ class _SignUpState extends State<SignUp> {
                       ),
 
                       DobField(validationFunction: (value) {
+                        print("text form field value $value");
                         requestModel.dob = value!;
                         return null;
                       }),
