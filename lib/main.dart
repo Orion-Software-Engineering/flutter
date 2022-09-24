@@ -63,10 +63,10 @@ class _MyAppState extends State<MyApp> {
             themeMode: themeChangeProvider.darkTheme,
             theme: MyThemes.themeData(false, context),
             darkTheme: MyThemes.themeData(true, context),
-            // initialRoute: AppRouter.splash,
-            home: SignUp()
+            initialRoute: AppRouter.splash,
+          //todo use home when testing specific pages
+            //home: SignUp()
 
-            //todo use home when testing specific pages
             );
       }),
     );
