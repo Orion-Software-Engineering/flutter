@@ -65,16 +65,16 @@ class _HomePageState extends State<HomePage> {
                   color: matchingCardColors[index % 5],
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        'assets/images/matching/doodle.png',
-                        width: double.infinity,
-                        fit: BoxFit.fill,
-                      ),
-                      Column(
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'assets/images/matching/doodle.png',
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -113,9 +113,9 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
