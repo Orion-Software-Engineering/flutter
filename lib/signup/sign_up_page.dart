@@ -66,7 +66,6 @@ class _SignUpState extends State<SignUp> {
                     title: 'Sign Up',
                     subtext: 'Create your account to start matching'),
               ),
-              SizedBox(height: 20.0),
               Expanded(
                 flex: 4,
                 child: SingleChildScrollView(
@@ -217,7 +216,7 @@ class _SignUpState extends State<SignUp> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 50.0),
+                      SizedBox(height: 20.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Theme.of(context).cardColor,
