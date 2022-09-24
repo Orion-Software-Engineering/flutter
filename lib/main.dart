@@ -1,12 +1,10 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/profile/profile.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'signup/sign_up_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,19 +56,18 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<DarkThemeProvider>(
           builder: (BuildContext context, value, Widget? child) {
         return MaterialApp(
-          onGenerateRoute: AppRouter.onGenerateRoute,
-          onUnknownRoute: AppRouter.onUnknownRoute,
-          debugShowCheckedModeBanner: false,
-          title: 'Orion Meet',
-          themeMode: themeChangeProvider.darkTheme,
-          theme: MyThemes.themeData(false, context),
-          darkTheme: MyThemes.themeData(true, context),
-          initialRoute: AppRouter.splash,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            onUnknownRoute: AppRouter.onUnknownRoute,
+            debugShowCheckedModeBanner: false,
+            title: 'Orion Meet',
+            themeMode: themeChangeProvider.darkTheme,
+            theme: MyThemes.themeData(false, context),
+            darkTheme: MyThemes.themeData(true, context),
+            // initialRoute: AppRouter.splash,
+            home: SignUp()
 
-          // home: Profile(
-          //     userId:
-          //         "0d9866c7-4a92-4532-bc39-c3893e28a56c"), //todo use home when testing specific pages
-        );
+            //todo use home when testing specific pages
+            );
       }),
     );
   }
