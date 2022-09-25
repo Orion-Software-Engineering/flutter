@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
-  static final String oneSignalAppId = '0bfcc099-9621-4dba-a906-7aa5cefae056';
+  static final String oneSignalAppId = '78c54ce8-8e97-43ea-9d1f-0bf8a1375591';
   Future<void> initPlatformState() async {
     OneSignal.shared.setAppId(oneSignalAppId);
     OneSignal.shared
@@ -56,17 +56,18 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<DarkThemeProvider>(
           builder: (BuildContext context, value, Widget? child) {
         return MaterialApp(
-          onGenerateRoute: AppRouter.onGenerateRoute,
-          onUnknownRoute: AppRouter.onUnknownRoute,
-          debugShowCheckedModeBanner: false,
-          title: 'Orion Meet',
-          themeMode: themeChangeProvider.darkTheme,
-          theme: MyThemes.themeData(false, context),
-          darkTheme: MyThemes.themeData(true, context),
-          initialRoute: AppRouter.splash,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            onUnknownRoute: AppRouter.onUnknownRoute,
+            debugShowCheckedModeBanner: false,
+            title: 'Orion Meet',
+            themeMode: themeChangeProvider.darkTheme,
+            theme: MyThemes.themeData(false, context),
+            darkTheme: MyThemes.themeData(true, context),
+            initialRoute: AppRouter.splash,
           //todo use home when testing specific pages
-          //home: SignUp()
-        );
+            //home: SignUp()
+
+            );
       }),
     );
   }

@@ -37,13 +37,15 @@ class ProfileFields extends StatelessWidget {
           Text(
             title!,
             style: TextStyle(
-                fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w400),
+                fontSize: 14,
+                color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                fontWeight: FontWeight.w400),
           ),
           Text(
             text,
             style: TextStyle(
                 fontSize: (title == 'Bio') ? 20 : 26,
-                color: Colors.black,
+                color: Theme.of(context).primaryTextTheme.bodyText1?.color,
                 fontWeight:
                     (title == 'Bio') ? FontWeight.w400 : FontWeight.w500),
           )

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class AvatarPlaceholder extends StatelessWidget {
-  const AvatarPlaceholder({Key? key, required this.firstCharacter})
+  const AvatarPlaceholder(
+      {Key? key, required this.firstCharacter, required this.characterColor})
       : super(key: key);
   final String firstCharacter;
+  final Color? characterColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +22,8 @@ class AvatarPlaceholder extends StatelessWidget {
       child: Center(
           child: Text(
         firstCharacter,
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+        style: TextStyle(
+            fontSize: 25, fontWeight: FontWeight.w900, color: characterColor),
       )),
     );
   }

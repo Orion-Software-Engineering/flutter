@@ -12,7 +12,6 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../components/login_signup/date_of_birth.dart';
 import '../components/login_signup/title_and_subtext.dart';
-import '../splash/splash_screen.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -67,7 +66,6 @@ class _SignUpState extends State<SignUp> {
                     title: 'Sign Up',
                     subtext: 'Create your account to start matching'),
               ),
-              SizedBox(height: 20.0),
               Expanded(
                 flex: 4,
                 child: SingleChildScrollView(
@@ -170,56 +168,63 @@ class _SignUpState extends State<SignUp> {
                       }),
                       Container(
                         width: 500,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: RadioListTile(
-                                  title: Text(
-                                    "Male",
-                                    style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      color: Theme.of(context)
-                                          .primaryTextTheme
-                                          .bodyText2
-                                          ?.color,
+                        child: Theme(
+                          data: ThemeData(
+                              unselectedWidgetColor: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText2
+                                  ?.color),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: RadioListTile(
+                                    title: Text(
+                                      "Male",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        color: Theme.of(context)
+                                            .primaryTextTheme
+                                            .bodyText2
+                                            ?.color,
+                                      ),
                                     ),
-                                  ),
-                                  contentPadding: EdgeInsets.all(0),
-                                  value: "true",
-                                  groupValue: gender,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      gender = value as String;
-                                      print(gender);
-                                    });
-                                  }),
-                            ),
-                            Expanded(
-                              child: RadioListTile(
-                                  title: Text(
-                                    "Female",
-                                    style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      color: Theme.of(context)
-                                          .primaryTextTheme
-                                          .bodyText2
-                                          ?.color,
+                                    contentPadding: EdgeInsets.all(0),
+                                    value: "true",
+                                    groupValue: gender,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        gender = value as String;
+                                        print(gender);
+                                      });
+                                    }),
+                              ),
+                              Expanded(
+                                child: RadioListTile(
+                                    title: Text(
+                                      "Female",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        color: Theme.of(context)
+                                            .primaryTextTheme
+                                            .bodyText2
+                                            ?.color,
+                                      ),
                                     ),
-                                  ),
-                                  contentPadding: EdgeInsets.all(0),
-                                  value: "false",
-                                  groupValue: gender,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      gender = value as String;
-                                      print(gender);
-                                    });
-                                  }),
-                            ),
-                          ],
+                                    contentPadding: EdgeInsets.all(0),
+                                    value: "false",
+                                    groupValue: gender,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        gender = value as String;
+                                        print(gender);
+                                      });
+                                    }),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      SizedBox(height: 50.0),
+                      SizedBox(height: 20.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Theme.of(context).cardColor,
@@ -238,14 +243,6 @@ class _SignUpState extends State<SignUp> {
                               setState(() {
                                 isLoading = false;
                                 if (statusCode == 201) {
-                                  OneSignal.shared
-                                      .setExternalUserId(userID)
-                                      .then((results) {
-                                    print(
-                                        "one signal result${results.toString()}");
-                                  }).catchError((error) {
-                                    print("udgyhdb ${error.toString()}");
-                                  });
                                   Navigator.of(context).goToInterests1();
                                 } else {
                                   Fluttertoast.showToast(
@@ -262,7 +259,7 @@ class _SignUpState extends State<SignUp> {
                         child: Container(
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(
-                              vertical: 5.0, horizontal: 0.0),
+                              vertical: 8.0, horizontal: 0.0),
                           child: Center(
                             child: Text(
                               'SIGN UP',
@@ -274,6 +271,21 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
+                        // child: Container(
+                        //   width: double.infinity,
+                        //   padding: EdgeInsets.symmetric(
+                        //       vertical: 5.0, horizontal: 0.0),
+                        //   child: Center(
+                        //     child: Text(
+                        //       'SIGN UP',
+                        //       style: TextStyle(
+                        //         fontSize: 22.0,
+                        //         fontWeight: FontWeight.w400,
+                        //         color: Colors.white,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ),
                       SizedBox(height: 12.0),
                       Row(

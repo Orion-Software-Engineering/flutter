@@ -55,7 +55,8 @@ class _ChatState extends State<Chat> {
       return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          leading: CustomBackButton(),
+          leading: CustomBackButton(
+              backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
           elevation: 0.5,
           foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
           shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
@@ -67,8 +68,12 @@ class _ChatState extends State<Chat> {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.black,
-                  child: Text(receiverName![0]),
+                  backgroundColor:
+                      Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  child: Text(
+                    receiverName![0],
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
                 ),
                 SizedBox(
                   width: 20.0,
@@ -82,6 +87,8 @@ class _ChatState extends State<Chat> {
                         fontWeight: FontWeight.w700,
                         fontFamily: "Nunito",
                         fontSize: 24,
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText1?.color,
                       ),
                     ),
                   ],
@@ -111,7 +118,8 @@ class _ChatState extends State<Chat> {
       return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          leading: CustomBackButton(),
+          leading: CustomBackButton(
+              backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
           elevation: 0.5,
           foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
           shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
@@ -123,8 +131,12 @@ class _ChatState extends State<Chat> {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.black,
-                  child: Text(receiverName![0]),
+                  backgroundColor:
+                      Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  child: Text(
+                    receiverName![0],
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
                 ),
                 SizedBox(
                   width: 20.0,
@@ -138,6 +150,8 @@ class _ChatState extends State<Chat> {
                         fontWeight: FontWeight.w700,
                         fontFamily: "Nunito",
                         fontSize: 24,
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText1?.color,
                       ),
                     ),
                   ],
@@ -158,7 +172,7 @@ class _ChatState extends State<Chat> {
                     style: TextStyle(
                         color: Theme.of(context)
                             .primaryTextTheme
-                            .bodyText1
+                            .bodyText2
                             ?.color),
                   ),
                 ),

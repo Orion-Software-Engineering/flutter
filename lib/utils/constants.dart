@@ -8,10 +8,9 @@ TextStyle signUpLoginTextFieldTextStyle =
 
 //apis
 
-
 //Mapping Interests & Colors
- final Map<String, Color> InterestColors = {
-  'art' : Colors.deepPurple[900]!,
+final Map<String, Color> InterestColors = {
+  'art': Colors.deepPurple[900]!,
   'business': Colors.black,
   'cars': Colors.grey[800]!,
   'comedy': Colors.yellow,
@@ -24,7 +23,7 @@ TextStyle signUpLoginTextFieldTextStyle =
   'beauty': Colors.deepPurpleAccent,
   'news': Colors.deepOrange[900]!,
   'photography': Colors.green,
-  'science' : Colors.orange,
+  'science': Colors.orange,
   'sports': Colors.lightGreenAccent[200]!
 };
 
@@ -56,12 +55,29 @@ UnderlineInputBorder inputBorder = UnderlineInputBorder(
 );
 
 //INTERESTS
+Map<String, String> interestsMap = {
+  'Art': 'art',
+  'Business': 'business',
+  'Cars & Vehicles': 'cars',
+  'Comedy': 'comedy',
+  'Education': 'education',
+  'Entertainment': 'entertainment',
+  'Food': 'food',
+  'Fashion': 'fashion',
+  'Gaming': 'gaming',
+  'Health & Fitness': 'health',
+  'Hair & Beauty': 'beauty',
+  'News & Politics': 'news',
+  'Photography': 'photography',
+  'Science & Technology': 'science',
+  'Sports': 'sports'
+};
 List<String> interestsList = [
   'Art',
   'Business',
   'Cars & Vehicles',
   'Comedy',
-  'Vacation',
+  'Education',
   'Entertainment',
   'Food',
   'Fashion',
@@ -73,7 +89,6 @@ List<String> interestsList = [
   'Science & Technology',
   'Sports'
 ];
-
 // TextStyle interestsTitleStyle =
 //TextStyle(fontSize: 40, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
 
@@ -87,7 +102,7 @@ const Color interestsButtonColorNormal = Color(0xFF141415);
 
 const Color interestsButtonColorSelected = Color(0xFF205098);
 
-Color messageTileColor = Color(0x99D9D9D9);
+Color messageTileColor = Color(0x5FD9D9D9);
 
 TextStyle interestsPageNumberStyle = TextStyle(
     fontFamily: 'Nunito',
@@ -103,41 +118,6 @@ TextStyle interestsPageNextBackStyle = TextStyle(
 
 //THEMES
 
-// class MyThemes {
-//   static final darkTheme = ThemeData(
-//      canvasColor:Color(0xFF241837),
-//         primaryColor:Colors.black,
-//         backgroundColor:Colors.black,
-//         iconTheme: IconThemeData(
-//           color:Colors.white,
-//         ),
-//         primaryTextTheme: TextTheme(
-//             bodyText2: TextStyle(color: Colors.grey),
-//             bodyText1: TextStyle(
-//               color:Colors.white,
-//             )),
-//         cardColor:Colors.blue,
-//         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-//           backgroundColor:Colors.black,
-//         ));
-//
-//   static final lightTheme = ThemeData(
-//       canvasColor:Colors.white,
-//         primaryColor:Colors.white,
-//         backgroundColor:Colors.white,
-//         iconTheme: IconThemeData(
-//           color: Colors.black,
-//         ),
-//         primaryTextTheme: TextTheme(
-//             bodyText2: TextStyle(color: Colors.grey),
-//             bodyText1: TextStyle(
-//               color: Colors.black,
-//             )),
-//         cardColor:Colors.black,
-//         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-//   backgroundColor:Colors.white,
-//         ));
-// }
 class MyThemes {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(

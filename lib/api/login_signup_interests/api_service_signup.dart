@@ -22,7 +22,6 @@ class SignUpAPIService {
       if (response.statusCode == 201 || response.statusCode == 400) {
         if (response.statusCode == 201) {
           userID = json.decode(response.body)["userId"];
-          print("This is the id $userID");
         } else if (response.statusCode == 400) {
           message = "The username or email is already in use";
         }

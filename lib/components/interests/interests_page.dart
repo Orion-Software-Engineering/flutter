@@ -41,14 +41,12 @@ class _InterestsPageState extends State<InterestsPage> {
   int? interestListStartIndex;
   String helpText = '';
   late InterestRequestModel requestModel;
-  late InterestResponseModel responseModel;
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
     requestModel = InterestRequestModel();
-    responseModel = InterestResponseModel();
   }
 
   @override
