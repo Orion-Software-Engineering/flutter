@@ -243,6 +243,14 @@ class _SignUpState extends State<SignUp> {
                               setState(() {
                                 isLoading = false;
                                 if (statusCode == 201) {
+                                  OneSignal.shared
+                                      .setExternalUserId(userID)
+                                      .then((results) {
+                                    print(
+                                        "one signal result${results.toString()}");
+                                  }).catchError((error) {
+                                    print("udgyhdb ${error.toString()}");
+                                  });
                                   Navigator.of(context).goToInterests1();
                                 } else {
                                   Fluttertoast.showToast(
