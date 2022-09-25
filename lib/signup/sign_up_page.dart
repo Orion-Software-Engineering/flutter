@@ -166,53 +166,60 @@ class _SignUpState extends State<SignUp> {
                       }),
                       Container(
                         width: 500,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: RadioListTile(
-                                  title: Text(
-                                    "Male",
-                                    style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      color: Theme.of(context)
-                                          .primaryTextTheme
-                                          .bodyText2
-                                          ?.color,
+                        child: Theme(
+                          data: ThemeData(
+                              unselectedWidgetColor: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText2
+                                  ?.color),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: RadioListTile(
+                                    title: Text(
+                                      "Male",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        color: Theme.of(context)
+                                            .primaryTextTheme
+                                            .bodyText2
+                                            ?.color,
+                                      ),
                                     ),
-                                  ),
-                                  contentPadding: EdgeInsets.all(0),
-                                  value: "true",
-                                  groupValue: gender,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      gender = value as String;
-                                      print(gender);
-                                    });
-                                  }),
-                            ),
-                            Expanded(
-                              child: RadioListTile(
-                                  title: Text(
-                                    "Female",
-                                    style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      color: Theme.of(context)
-                                          .primaryTextTheme
-                                          .bodyText2
-                                          ?.color,
+                                    contentPadding: EdgeInsets.all(0),
+                                    value: "true",
+                                    groupValue: gender,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        gender = value as String;
+                                        print(gender);
+                                      });
+                                    }),
+                              ),
+                              Expanded(
+                                child: RadioListTile(
+                                    title: Text(
+                                      "Female",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        color: Theme.of(context)
+                                            .primaryTextTheme
+                                            .bodyText2
+                                            ?.color,
+                                      ),
                                     ),
-                                  ),
-                                  contentPadding: EdgeInsets.all(0),
-                                  value: "false",
-                                  groupValue: gender,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      gender = value as String;
-                                      print(gender);
-                                    });
-                                  }),
-                            ),
-                          ],
+                                    contentPadding: EdgeInsets.all(0),
+                                    value: "false",
+                                    groupValue: gender,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        gender = value as String;
+                                        print(gender);
+                                      });
+                                    }),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 20.0),
