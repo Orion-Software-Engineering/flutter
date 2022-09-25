@@ -4,8 +4,9 @@ import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart
 import 'package:matchmaking_demo/models/profile/profile_model.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../components/profile/active_interests_list.dart';
+import '../components/profile/interests/active_interests_list.dart';
 import '../components/profile/bio_field.dart';
+import '../components/profile/interests/interest_field.dart';
 import '../components/profile/profile_fields.dart';
 
 class Profile extends StatefulWidget {
@@ -78,7 +79,9 @@ class _ProfileState extends State<Profile> {
                         ),
                         child: Center(
                             child: Text(
-                          "K",
+                          (profileResponse.username != null)
+                              ? profileResponse.username![0]
+                              : "",
                           style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.w700,
@@ -168,25 +171,9 @@ class _ProfileState extends State<Profile> {
                             genderValue: profileResponse.gender,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Active Interests',
-                                // textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              ActiveInterestsList(
-                                  interestList:
-                                      profileResponse.interests ?? []),
-                            ],
-                          ),
-                        ),
+                        InterestField(
+                            localInterestList: profileResponse.interests ?? [],
+                            isEditable: true),
                       ],
                     ),
                   ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class InterestsBullet extends StatelessWidget {
-  const InterestsBullet({super.key, required this.interest});
-  final String interest;
+  InterestsBullet({super.key, required this.interest});
+  String interest;
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +18,15 @@ class InterestsBullet extends StatelessWidget {
           color = Colors.black;
         }
         break;
-      case 'Cars & Vehicles':
+      case 'cars':
         {
           color = Color(0xff605F5F);
+          interest = "Cars & Vehicles";
         }
         break;
       case 'comedy':
         {
           color = Colors.yellow;
-        }
-        break;
-      case 'Vacation':
-        {
-          color = Colors.green;
         }
         break;
       case 'entertainment':
@@ -53,14 +49,16 @@ class InterestsBullet extends StatelessWidget {
           color = Color(0xff007fff);
         }
         break;
-      case 'Hair and Beauty':
+      case 'hair':
         {
           color = Color(0xff6d008d);
+          interest = "Hair and Beauty";
         }
         break;
-      case 'News & Politics':
+      case 'news':
         {
           color = Color(0xff830303);
+          interest = "News & Politics";
         }
         break;
       case 'photography':
@@ -68,9 +66,10 @@ class InterestsBullet extends StatelessWidget {
           color = Color(0xff35880b);
         }
         break;
-      case 'Science & Technology':
+      case 'science':
         {
           color = Color(0xFFFF8800);
+          interest = "Science & Technology";
         }
         break;
       case 'sports':
@@ -78,9 +77,10 @@ class InterestsBullet extends StatelessWidget {
           color = Color(0xffb7ff00);
         }
         break;
-      case 'Health & Fitness':
+      case 'health':
         {
           color = Color(0xff00ffff);
+          interest = 'Health & Fitness';
         }
         break;
       case 'education':

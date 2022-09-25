@@ -8,10 +8,9 @@ TextStyle signUpLoginTextFieldTextStyle =
 
 //apis
 
-
 //Mapping Interests & Colors
- final Map<String, Color> InterestColors = {
-  'art' : Colors.deepPurple[900]!,
+final Map<String, Color> InterestColors = {
+  'art': Colors.deepPurple[900]!,
   'business': Colors.black,
   'cars': Colors.grey[800]!,
   'comedy': Colors.yellow,
@@ -24,7 +23,7 @@ TextStyle signUpLoginTextFieldTextStyle =
   'beauty': Colors.deepPurpleAccent,
   'news': Colors.deepOrange[900]!,
   'photography': Colors.green,
-  'science' : Colors.orange,
+  'science': Colors.orange,
   'sports': Colors.lightGreenAccent[200]!
 };
 
@@ -61,7 +60,7 @@ List<String> interestsList = [
   'Business',
   'Cars & Vehicles',
   'Comedy',
-  'Vacation',
+  'Education',
   'Entertainment',
   'Food',
   'Fashion',

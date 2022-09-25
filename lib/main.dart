@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/profile/profile.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
-  static final String oneSignalAppId = '78c54ce8-8e97-43ea-9d1f-0bf8a1375591';
+  static const String oneSignalAppId = '78c54ce8-8e97-43ea-9d1f-0bf8a1375591';
   Future<void> initPlatformState() async {
     OneSignal.shared.setAppId(oneSignalAppId);
     OneSignal.shared
@@ -64,7 +65,7 @@ class _MyAppState extends State<MyApp> {
             theme: MyThemes.themeData(false, context),
             darkTheme: MyThemes.themeData(true, context),
             // initialRoute: AppRouter.splash,
-            home: SignUp()
+            home: Profile(userId: "153ce83f-4275-442c-b357-f52b290d73b2")
 
             //todo use home when testing specific pages
             );
