@@ -55,7 +55,8 @@ class _ChatState extends State<Chat> {
       return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          leading: CustomBackButton(),
+          leading: CustomBackButton(
+              backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
           elevation: 0.5,
           foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
           shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
@@ -122,7 +123,8 @@ class _ChatState extends State<Chat> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          leading: CustomBackButton(),
+          leading: CustomBackButton(
+              backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
           elevation: 0.5,
           foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
           shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,

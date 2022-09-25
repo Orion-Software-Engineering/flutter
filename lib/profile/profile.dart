@@ -204,7 +204,8 @@ class _ProfileState extends State<Profile> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 40, 0, 0),
-            child: CustomBackButton(),
+            child: CustomBackButton(
+                backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
           ),
         ],
       ),

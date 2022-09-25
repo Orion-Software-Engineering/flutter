@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class CustomBackButton extends StatelessWidget {
   GestureTapCallback? navigateTo;
-  Color? backColor = Colors.white;
-  CustomBackButton({Key? key, this.navigateTo, this.backColor})
+  Color? backColor;
+  CustomBackButton({Key? key, this.navigateTo, required this.backColor})
       : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class CustomBackButton extends StatelessWidget {
             child: Icon(
               Icons.arrow_back_ios,
               size: 30,
-              color: Colors.white,
+              color: backColor,
             ),
           ),
         ),
