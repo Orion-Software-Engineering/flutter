@@ -75,7 +75,7 @@ class _ChatRoomState extends State<ChatRoom> {
           child: ListView.builder(
             itemCount: listOfConversations.length,
             itemBuilder: (BuildContext context, int index) {
-              print("last messafge${listOfConversations[0].lastMessageIsMine}");
+              print("last message${listOfConversations[0].lastMessageIsMine}");
               String lastMessageSender;
               if (listOfConversations[index].lastMessageIsMine) {
                 lastMessageSender = "me";
@@ -95,18 +95,32 @@ class _ChatRoomState extends State<ChatRoom> {
                             .goToChatPage(listOfConversations[index]));
                   },
                   child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: messageTileColor),
+                    decoration: BoxDecoration(color: messageTileColor),
                     child: ListTile(
                       leading: AvatarPlaceholder(
-                          firstCharacter:
-                              listOfConversations[index].receiverUsername![0]),
-                      title: Text(listOfConversations[index].receiverUsername!),
+                        firstCharacter:
+                            listOfConversations[index].receiverUsername![0],
+                        characterColor:
+                            Theme.of(context).primaryTextTheme.bodyText1?.color,
+                      ),
+                      title: Text(
+                        listOfConversations[index].receiverUsername!,
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText1
+                                ?.color),
+                      ),
                       subtitle: Row(
                         children: [
                           Text(
-                              " $lastMessageSender : ${listOfConversations[index].lastMessage} "),
+                            " $lastMessageSender : ${listOfConversations[index].lastMessage} ",
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText1
+                                    ?.color),
+                          ),
                         ],
                       ),
                     ),
