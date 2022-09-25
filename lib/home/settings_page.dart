@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/login/login_page.dart';
+import 'package:matchmaking_demo/models/delete_model.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
@@ -11,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 IconData? systemIcon;
 bool displayThemeSettings = false;
+DeleteAccountRequestModel requestModel = DeleteAccountRequestModel();
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -24,7 +26,6 @@ class _SettingsPageState extends State<SettingsPage> {
     userId = sharedPreferences.getString("userId");
   }
 
-
   Future<void> _launchUrl(String url, String path) async {
     final Uri uri = Uri(scheme: "https", host: url, path: path);
     if (!await launchUrl(
@@ -34,6 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
       throw "Cannot launch url";
     }
   }
+
   Future<void> getUserInfo() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -48,6 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
     sharedPreferences.remove("username");
     sharedPreferences.remove("password");
   }
+
   @override
   void initState() {
     super.initState();

@@ -71,7 +71,7 @@ class _ChatState extends State<Chat> {
                   backgroundColor:
                       Theme.of(context).primaryTextTheme.bodyText1?.color,
                   child: Text(
-                    senderName![0],
+                    receiverName![0],
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 ),
@@ -134,7 +134,7 @@ class _ChatState extends State<Chat> {
                   backgroundColor:
                       Theme.of(context).primaryTextTheme.bodyText1?.color,
                   child: Text(
-                    senderName![0],
+                    receiverName![0],
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 ),
