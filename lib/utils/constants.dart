@@ -118,41 +118,6 @@ TextStyle interestsPageNextBackStyle = TextStyle(
 
 //THEMES
 
-// class MyThemes {
-//   static final darkTheme = ThemeData(
-//      canvasColor:Color(0xFF241837),
-//         primaryColor:Colors.black,
-//         backgroundColor:Colors.black,
-//         iconTheme: IconThemeData(
-//           color:Colors.white,
-//         ),
-//         primaryTextTheme: TextTheme(
-//             bodyText2: TextStyle(color: Colors.grey),
-//             bodyText1: TextStyle(
-//               color:Colors.white,
-//             )),
-//         cardColor:Colors.blue,
-//         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-//           backgroundColor:Colors.black,
-//         ));
-//
-//   static final lightTheme = ThemeData(
-//       canvasColor:Colors.white,
-//         primaryColor:Colors.white,
-//         backgroundColor:Colors.white,
-//         iconTheme: IconThemeData(
-//           color: Colors.black,
-//         ),
-//         primaryTextTheme: TextTheme(
-//             bodyText2: TextStyle(color: Colors.grey),
-//             bodyText1: TextStyle(
-//               color: Colors.black,
-//             )),
-//         cardColor:Colors.black,
-//         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-//   backgroundColor:Colors.white,
-//         ));
-// }
 class MyThemes {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
