@@ -101,7 +101,11 @@ class InterestsBullet extends StatelessWidget {
           decoration: BoxDecoration(
               color: color, borderRadius: BorderRadius.circular(8)),
         ),
-        Text(interest[0].toUpperCase() + interest.substring(1))
+        Text(
+          interest[0].toUpperCase() + interest.substring(1),
+          style: TextStyle(
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color),
+        )
       ],
     );
   }

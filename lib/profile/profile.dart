@@ -58,6 +58,7 @@ class _ProfileState extends State<Profile> {
       paddingTop = 0.35;
     }
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: Stack(
         children: [
           Column(
@@ -120,7 +121,14 @@ class _ProfileState extends State<Profile> {
             child: Container(
               padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
               decoration: BoxDecoration(
-                  color: Color(0xffffffff),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade500,
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                    )
+                  ],
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25))),

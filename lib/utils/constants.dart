@@ -8,10 +8,9 @@ TextStyle signUpLoginTextFieldTextStyle =
 
 //apis
 
-
 //Mapping Interests & Colors
- final Map<String, Color> InterestColors = {
-  'art' : Colors.deepPurple[900]!,
+final Map<String, Color> InterestColors = {
+  'art': Colors.deepPurple[900]!,
   'business': Colors.black,
   'cars': Colors.grey[800]!,
   'comedy': Colors.yellow,
@@ -24,7 +23,7 @@ TextStyle signUpLoginTextFieldTextStyle =
   'beauty': Colors.deepPurpleAccent,
   'news': Colors.deepOrange[900]!,
   'photography': Colors.green,
-  'science' : Colors.orange,
+  'science': Colors.orange,
   'sports': Colors.lightGreenAccent[200]!
 };
 
@@ -87,7 +86,7 @@ const Color interestsButtonColorNormal = Color(0xFF141415);
 
 const Color interestsButtonColorSelected = Color(0xFF205098);
 
-Color messageTileColor = Color(0x99D9D9D9);
+Color messageTileColor = Color(0x5FD9D9D9);
 
 TextStyle interestsPageNumberStyle = TextStyle(
     fontFamily: 'Nunito',
