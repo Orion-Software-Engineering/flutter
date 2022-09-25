@@ -1,9 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:matchmaking_demo/api/login_signup_interests/api_service_delete_account.dart';
 import 'package:matchmaking_demo/login/login_page.dart';
-import 'package:matchmaking_demo/models/delete_model.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
@@ -13,7 +11,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 IconData? systemIcon;
 bool displayThemeSettings = false;
-DeleteAccountRequestModel requestModel = DeleteAccountRequestModel();
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -27,7 +24,6 @@ class _SettingsPageState extends State<SettingsPage> {
     userId = sharedPreferences.getString("userId");
   }
 
-  bool isLoading = false;
 
   Future<void> _launchUrl(String url, String path) async {
     final Uri uri = Uri(scheme: "https", host: url, path: path);
@@ -38,7 +34,6 @@ class _SettingsPageState extends State<SettingsPage> {
       throw "Cannot launch url";
     }
   }
-
   Future<void> getUserInfo() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -53,7 +48,6 @@ class _SettingsPageState extends State<SettingsPage> {
     sharedPreferences.remove("username");
     sharedPreferences.remove("password");
   }
-
   @override
   void initState() {
     super.initState();
@@ -62,7 +56,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    getUserInfo();
     final themeChange = Provider.of<DarkThemeProvider>(context);
     switch (themeChange.darkTheme) {
       case ThemeMode.dark:
@@ -296,14 +289,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         actions: [
                           TextButton(
                             onPressed: () {
-                              DeleteAccountAPIService apiService =
-                                  DeleteAccountAPIService();
-                              apiService.delete(requestModel).then((value) {
-                                Navigator.pop(context);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(message)));
-                                Navigator.of(context).goToSignUpScreen();
-                              });
+                              Navigator.pop(context);
+                              Navigator.of(context).goToDelete();
                             },
                             child: Text("OK"),
                           ),

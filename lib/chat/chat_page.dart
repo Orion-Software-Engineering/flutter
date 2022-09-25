@@ -50,7 +50,7 @@ class _ChatState extends State<Chat> {
     print("rUsername = ${widget.conversationInfo.receiverUsername}");
     print("rUserId = ${widget.conversationInfo.receiverUserId}");
 
-    String? senderName = widget.conversationInfo.receiverUsername;
+    String? receiverName = widget.conversationInfo.receiverUsername;
     if (widget.conversationInfo.conversationId != '') {
       return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
@@ -62,12 +62,6 @@ class _ChatState extends State<Chat> {
           shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
           backgroundColor: Theme.of(context).primaryColor,
           automaticallyImplyLeading: false,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).appBarTheme.backgroundColor,
-            ),
-          ),
-          toolbarHeight: 70,
           title: GestureDetector(
             onTap: () => Navigator.of(context)
                 .goToProfile(widget.conversationInfo.receiverUserId),
@@ -88,7 +82,7 @@ class _ChatState extends State<Chat> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      senderName,
+                      receiverName,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontFamily: "Nunito",
@@ -122,6 +116,7 @@ class _ChatState extends State<Chat> {
       );
     } else {
       return Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           leading: CustomBackButton(
               backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
@@ -130,12 +125,6 @@ class _ChatState extends State<Chat> {
           shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
           backgroundColor: Theme.of(context).primaryColor,
           automaticallyImplyLeading: false,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).appBarTheme.backgroundColor,
-            ),
-          ),
-          toolbarHeight: 70,
           title: GestureDetector(
             onTap: () => Navigator.of(context)
                 .goToProfile(widget.conversationInfo.receiverUserId),
@@ -156,7 +145,7 @@ class _ChatState extends State<Chat> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      senderName,
+                      receiverName,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontFamily: "Nunito",
