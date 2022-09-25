@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/login_signup_interests/api_service_delete_account.dart';
 import 'package:matchmaking_demo/login/login_page.dart';
@@ -44,6 +45,13 @@ class _SettingsPageState extends State<SettingsPage> {
     requestModel.username = sharedPreferences.getString("username")!;
     requestModel.userId = sharedPreferences.getString("userId")!;
     requestModel.password = sharedPreferences.getString("password")!;
+  }
+
+  Future<void> deleteLoginCredentials() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.remove("username");
+    sharedPreferences.remove("password");
   }
 
   @override
@@ -243,6 +251,7 @@ class _SettingsPageState extends State<SettingsPage> {
               print('logout');
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Login()));
+              deleteLoginCredentials();
             },
             leading: Icon(
               Icons.logout_outlined,
