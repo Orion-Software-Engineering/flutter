@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/login/login_page.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
@@ -33,7 +34,20 @@ class _SettingsPageState extends State<SettingsPage> {
       throw "Cannot launch url";
     }
   }
+  Future<void> getUserInfo() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    requestModel.username = sharedPreferences.getString("username")!;
+    requestModel.userId = sharedPreferences.getString("userId")!;
+    requestModel.password = sharedPreferences.getString("password")!;
+  }
 
+  Future<void> deleteLoginCredentials() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.remove("username");
+    sharedPreferences.remove("password");
+  }
   @override
   void initState() {
     super.initState();
@@ -230,6 +244,7 @@ class _SettingsPageState extends State<SettingsPage> {
               print('logout');
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Login()));
+              deleteLoginCredentials();
             },
             leading: Icon(
               Icons.logout_outlined,

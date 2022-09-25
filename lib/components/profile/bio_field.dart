@@ -30,7 +30,9 @@ class _BioFieldState extends State<BioField> {
         Text(
           "Bio",
           style: TextStyle(
-              fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w400),
+              fontSize: 14,
+              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+              fontWeight: FontWeight.w400),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +41,7 @@ class _BioFieldState extends State<BioField> {
               widget.bioText,
               style: TextStyle(
                   fontSize: 20,
-                  color: Colors.black,
+                  color: Theme.of(context).primaryTextTheme.bodyText1?.color,
                   fontWeight: FontWeight.w400),
             ),
             GestureDetector(
@@ -60,7 +62,9 @@ class _BioFieldState extends State<BioField> {
         Text(
           "Bio",
           style: TextStyle(
-              fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w400),
+              fontSize: 14,
+              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+              fontWeight: FontWeight.w400),
         ),
         Center(
           child: Row(
@@ -70,6 +74,10 @@ class _BioFieldState extends State<BioField> {
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
+                  style: TextStyle(
+                      fontFamily: 'Nunito',
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color),
                   controller: newBioText,
                   expands: true,
                   maxLines: null,
@@ -119,7 +127,8 @@ class _BioFieldState extends State<BioField> {
                       child: Icon(
                         Icons.close,
                         // size: 1,
-                        color: Colors.white,
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText2?.color,
                       ),
                     ),
                   ),
@@ -141,14 +150,16 @@ class _BioFieldState extends State<BioField> {
                   "Bio",
                   style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey,
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText2?.color,
                       fontWeight: FontWeight.w400),
                 ),
                 Text(
                   widget.bioText,
                   style: TextStyle(
                       fontSize: 20,
-                      color: Colors.black,
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color,
                       fontWeight: FontWeight.w400),
                 ),
               ],

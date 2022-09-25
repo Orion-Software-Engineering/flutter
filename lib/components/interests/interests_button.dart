@@ -25,8 +25,8 @@ class _InterestsButtonState extends State<InterestsButton> {
         setState(() {
           selected = !selected;
           selected
-              ? globalInterestsSet.add(widget.text.toLowerCase())
-              : globalInterestsSet.remove(widget.text);
+              ? globalInterestsSet.add(interestsMap[widget.text]!)
+              : globalInterestsSet.remove(interestsMap[widget.text]!);
           //print('hit');
         });
       },

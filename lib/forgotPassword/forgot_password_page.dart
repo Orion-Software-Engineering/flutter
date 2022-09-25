@@ -46,7 +46,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           key: _formKey,
           child: Column(
             children: [
-              CustomBackButton(),
+              CustomBackButton(
+                  backColor:
+                      Theme.of(context).primaryTextTheme.bodyText1?.color),
               Expanded(
                 flex: 0,
                 child: SizedBox(
