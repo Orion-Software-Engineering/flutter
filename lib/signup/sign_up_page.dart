@@ -11,7 +11,6 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../components/login_signup/date_of_birth.dart';
 import '../components/login_signup/title_and_subtext.dart';
-import '../splash/splash_screen.dart';
 import '../utils/constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -258,7 +257,7 @@ class _SignUpState extends State<SignUp> {
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w400,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.white,
                               ),
                             ),
                           ),

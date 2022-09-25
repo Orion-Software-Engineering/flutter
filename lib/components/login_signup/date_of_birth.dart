@@ -8,8 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../../splash/splash_screen.dart';
 import '../../utils/constants.dart';
 
 class DobField extends StatefulWidget {
@@ -111,7 +109,7 @@ class _DobFieldState extends State<DobField> {
         controller: TextEditingController(text: dateValue),
         enabled: false,
         decoration: InputDecoration(
-            labelText: dateValue == null ? 'DD/MM/YYYY' : 'Date of Birth',
+            labelText: 'Date of Birth',
             labelStyle: signUpLoginTextFieldTextStyle,
             disabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(

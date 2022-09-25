@@ -55,12 +55,29 @@ UnderlineInputBorder inputBorder = UnderlineInputBorder(
 );
 
 //INTERESTS
+Map<String, String> interestsMap = {
+  'Art': 'art',
+  'Business': 'business',
+  'Cars & Vehicles': 'cars',
+  'Comedy': 'comedy',
+  'Education': 'education',
+  'Entertainment': 'entertainment',
+  'Food': 'food',
+  'Fashion': 'fashion',
+  'Gaming': 'gaming',
+  'Health & Fitness': 'health',
+  'Hair & Beauty': 'beauty',
+  'News & Politics': 'news',
+  'Photography': 'photography',
+  'Science & Technology': 'science',
+  'Sports': 'sports'
+};
 List<String> interestsList = [
   'Art',
   'Business',
   'Cars & Vehicles',
   'Comedy',
-  'Vacation',
+  'Education',
   'Entertainment',
   'Food',
   'Fashion',
@@ -72,7 +89,6 @@ List<String> interestsList = [
   'Science & Technology',
   'Sports'
 ];
-
 // TextStyle interestsTitleStyle =
 //TextStyle(fontSize: 40, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
 
