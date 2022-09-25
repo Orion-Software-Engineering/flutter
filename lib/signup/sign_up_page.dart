@@ -250,7 +250,7 @@ class _SignUpState extends State<SignUp> {
                         child: Container(
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(
-                              vertical: 5.0, horizontal: 0.0),
+                              vertical: 8.0, horizontal: 0.0),
                           child: Center(
                             child: Text(
                               'SIGN UP',
@@ -262,6 +262,21 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
+                        // child: Container(
+                        //   width: double.infinity,
+                        //   padding: EdgeInsets.symmetric(
+                        //       vertical: 5.0, horizontal: 0.0),
+                        //   child: Center(
+                        //     child: Text(
+                        //       'SIGN UP',
+                        //       style: TextStyle(
+                        //         fontSize: 22.0,
+                        //         fontWeight: FontWeight.w400,
+                        //         color: Colors.white,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ),
                       SizedBox(height: 12.0),
                       Row(
