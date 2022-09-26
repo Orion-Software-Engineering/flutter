@@ -10,9 +10,11 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_events.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
+import 'package:matchmaking_demo/api/api_service_profile.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
+import 'package:matchmaking_demo/models/profile/profile_model.dart';
 import 'package:matchmaking_demo/splash/splash_screen.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
@@ -53,6 +55,23 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     });
   }
 
+  void getAndSaveProfile() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    ProfileResponseModel profileResponseModel = ProfileResponseModel();
+    userId = sharedPreferences.getString("userId");
+    ProfileApiService profileApiService = ProfileApiService();
+    profileApiService.getProfile(userId!).then((value) {
+      profileResponseModel = profileApiService.profileResponseModel;
+      sharedPreferences.setString("bio", profileResponseModel.bio!);
+      sharedPreferences.setString("email", profileResponseModel.email!);
+      sharedPreferences.setString("dob", profileResponseModel.dateOfBirth!);
+      sharedPreferences.setBool("gender", profileResponseModel.gender!);
+      sharedPreferences.setStringList(
+          "interests", profileResponseModel.interests!);
+    });
+  }
+
   Future<Position> askLocationPermission() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -79,6 +98,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
   void initState() {
     super.initState();
     getCurrentPosition();
+    getAndSaveProfile();
   }
 
   @override
@@ -165,7 +185,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               color: Theme.of(context).appBarTheme.backgroundColor,
             ),
           ),
-
           toolbarHeight: 70,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
