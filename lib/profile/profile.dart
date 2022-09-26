@@ -36,6 +36,16 @@ class _ProfileState extends State<Profile> {
     myUserId = sharedPreferences.getString("userId");
     if (myUserId == widget.userId) {
       canEditBio = true;
+
+      setState(() {
+        profileResponse.interests =
+            sharedPreferences.getStringList("interests");
+        profileResponse.gender = sharedPreferences.getBool("gender");
+        profileResponse.dateOfBirth = sharedPreferences.getString("dob");
+        profileResponse.email = sharedPreferences.getString("email");
+        profileResponse.bio = sharedPreferences.getString("bio");
+        profileResponse.username = sharedPreferences.getString("username");
+      });
     } else {
       canEditBio = false;
     }
