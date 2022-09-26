@@ -49,20 +49,20 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      id: json['id'],
-      name: json['name'],
-      date: json['date'],
-      time: json['time'],
-      venue: json['venue'],
-      organizers: json['organizers'],
-      mcs: json['mcs'],
-      guests: json['guests'],
-      ageRestriction: json['age_restriction'],
-      description: json['description'],
-      interests: json['interests'],
-      coverImage: json['cover_image'],
+      id: json['id'] ?? "Unavailable",
+      name: json['name'] ?? "Unavailable",
+      date: json['date'] ?? "Unavailable",
+      time: json['time'] ?? "Unavailable",
+      venue: json['venue'] ?? "Unavailable",
+      organizers: json['organizers'] ?? "Unavailable",
+      mcs: json['mcs'] ?? "Unavailable",
+      guests: json['guests'] ?? "Unavailable",
+      ageRestriction: json['age_restriction'] ?? "Unavailable",
+      description: json['description'] ?? "Unavailable",
+      interests: json['interests'] ?? "Unavailable",
+      coverImage: json['cover_image'] ?? "Unavailable",
       liked: json['liked'] ?? false,
-      ticketPrice: json['ticket_price'],
+      ticketPrice: json['ticket_price'] ?? "Unavailable",
     );
   }
 }
