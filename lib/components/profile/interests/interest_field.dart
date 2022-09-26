@@ -83,6 +83,7 @@ class _InterestFieldState extends State<InterestField> {
                         print(
                             "edit interest list length${editInterestList.length}");
                         return Dialog(
+                          backgroundColor: Theme.of(context).primaryColor,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
