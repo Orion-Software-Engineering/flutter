@@ -37,12 +37,15 @@ class _BioFieldState extends State<BioField> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              widget.bioText,
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Theme.of(context).primaryTextTheme.bodyText1?.color,
-                  fontWeight: FontWeight.w400),
+            Flexible(
+              child: Text(
+                widget.bioText,
+                maxLines: 3,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+                    fontWeight: FontWeight.w400),
+              ),
             ),
             GestureDetector(
               onTap: () {

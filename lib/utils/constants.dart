@@ -89,6 +89,25 @@ List<String> interestsList = [
   'Science & Technology',
   'Sports'
 ];
+
+Map<String, String> interestMap = {
+  "art": "Art",
+  "business": "Business",
+  "cars": "Cars & Vehicles",
+  "comedy": "Comedy",
+  "education": "Education",
+  "entertainment": "Entertainment",
+  "food": "Food",
+  "fashion": "Fashion",
+  "gaming": "Gaming",
+  "health": "Health & Fitness",
+  "beauty": "Hair & Beauty",
+  "news": "News & Politics",
+  "photography": "Photography",
+  "science": "Science & Technology",
+  "sports": "Sports"
+};
+
 // TextStyle interestsTitleStyle =
 //TextStyle(fontSize: 40, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
 
