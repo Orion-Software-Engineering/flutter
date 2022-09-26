@@ -91,7 +91,8 @@ class EventsPageState extends State<EventsPage> {
                   style: TextStyle(
                       fontWeight: FontWeight.w100,
                       fontSize: 20.0,
-                      color: Colors.grey),
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color),
                 ),
               ),
             ],
