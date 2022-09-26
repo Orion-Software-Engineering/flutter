@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../../models/login_signup_interests/login_model.dart';
@@ -21,6 +22,13 @@ class LoginAPIService {
         String userId = json.decode(response.body)["id"];
         String username = json.decode(response.body)["username"];
         saveUserDetailsAfterLogin(userId, username);
+
+        print('hi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\n$userId');
+        OneSignal.shared.setExternalUserId(userId).then((results) {
+          print("one signal result${results.toString()}");
+        }).catchError((error) {
+          print("udgyhdb ${error.toString()}");
+        });
       } else if (response.statusCode == 403) {
         message = "Your account is not verified. Please check your mail";
       } else if (response.statusCode == 404) {

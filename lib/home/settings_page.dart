@@ -6,6 +6,7 @@ import 'package:matchmaking_demo/models/delete_model.dart';
 import 'package:matchmaking_demo/settings/privacy_page.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/dark_theme_provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -248,6 +249,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Login()));
               deleteLoginCredentials();
+              OneSignal.shared.removeExternalUserId();
             },
             leading: Icon(
               Icons.logout_outlined,
