@@ -27,11 +27,14 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     super.initState();
-    getProfileCall();
-    checkIfEditable();
+    checkIfEditable().then((value) {
+      if (!canEditBio!) {
+        getProfileCall();
+      }
+    });
   }
 
-  void checkIfEditable() async {
+  Future<void> checkIfEditable() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     myUserId = sharedPreferences.getString("userId");
     if (myUserId == widget.userId) {
@@ -44,6 +47,7 @@ class _ProfileState extends State<Profile> {
         profileResponse.dateOfBirth = sharedPreferences.getString("dob");
         profileResponse.email = sharedPreferences.getString("email");
         profileResponse.bio = sharedPreferences.getString("bio");
+
         profileResponse.username = sharedPreferences.getString("username");
       });
     } else {
@@ -219,8 +223,11 @@ class _ProfileState extends State<Profile> {
   }
 
   void getProfileData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       profileResponse = apiServiceProfile.profileResponseModel;
     });
+    sharedPreferences.setStringList("interests", profileResponse.interests!);
+    sharedPreferences.setString("bio", profileResponse.bio!);
   }
 }
