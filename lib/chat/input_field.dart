@@ -14,12 +14,13 @@ class InputField extends StatefulWidget {
   final ConversationInfo conversationInfo;
   final MessageAPIService apiServiceMessage;
   bool createNewConversation = false;
-
+  void Function(String text) addToPending;
   InputField(
       {super.key,
       required this.apiServiceMessage,
       required this.conversationInfo,
-      required this.createNewConversation});
+      required this.createNewConversation,
+      required this.addToPending});
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -46,7 +47,7 @@ class _InputFieldState extends State<InputField> {
                   color: Colors.grey.shade500,
                   spreadRadius: 2,
                   blurRadius: 10,
-                )
+                ),
               ],
             ),
             height: 66,
@@ -101,6 +102,7 @@ class _InputFieldState extends State<InputField> {
                     if (_textToBeSent.text.trim().isNotEmpty) {
                       String text = _textToBeSent.text.trim();
                       _textToBeSent.clear();
+
                       APIServiceConversation apiServiceConversation =
                           APIServiceConversation();
                       apiServiceConversation
@@ -217,6 +219,7 @@ class _InputFieldState extends State<InputField> {
                     if (_textToBeSent.text.trim().isNotEmpty) {
                       String text = _textToBeSent.text.trim();
                       _textToBeSent.clear();
+                      widget.addToPending(text);
                       sendMessageButtonFunction(text);
                       print("send");
                     }

@@ -30,8 +30,9 @@ class _ChatListState extends State<ChatList> {
                   showOptionsWhenMessageLongPressed(index);
                 },
                 child: ChatItem(
-                  time: widget.messagesList[index].createdAt!,
-                  messageIsFromMe: widget.messagesList[index].messageIsFromMe!,
+                  time: widget.messagesList[index].createdAt,
+                  messageIsFromMe:
+                      widget.messagesList[index].messageIsFromMe ?? true,
                   text: widget.messagesList[index].text!,
                 ),
               );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ChatItem extends StatelessWidget {
-  final String time;
+  final String? time;
   final bool messageIsFromMe;
   final String text;
   // ignore: use_key_in_widget_constructors
@@ -41,7 +41,7 @@ class TextBubble extends StatelessWidget {
       required this.color,
       required this.time,
       required this.isFromMe});
-  final String time;
+  final String? time;
   final String text;
   final Color color;
   final bool isFromMe;
@@ -95,31 +95,33 @@ class TextBubble extends StatelessWidget {
   }
 }
 
-getCustomFormattedDateTime(String givenDateTime) {
-  String time;
-  String? dateFormat = 'hh:mm a';
-  DateTime now = DateTime.now();
-  final DateTime docDateTime = DateTime.parse(givenDateTime);
-  DateTime messageDate =
-      DateTime(docDateTime.year, docDateTime.month, docDateTime.day);
-  var diff = now.difference(messageDate);
+getCustomFormattedDateTime(String? givenDateTime) {
+  String time = '...';
+  if (givenDateTime != null) {
+    String? dateFormat = 'hh:mm a';
+    DateTime now = DateTime.now();
+    final DateTime docDateTime = DateTime.parse(givenDateTime);
+    DateTime messageDate =
+        DateTime(docDateTime.year, docDateTime.month, docDateTime.day);
+    var diff = now.difference(messageDate);
 
-  if (diff.inSeconds <= 0 ||
-      diff.inSeconds > 0 && diff.inMinutes == 0 ||
-      diff.inMinutes > 0 && diff.inHours == 0 ||
-      diff.inHours > 0 && diff.inDays == 0) {
-    time = DateFormat(dateFormat).format(docDateTime);
-  } else if (diff.inDays > 0 && diff.inDays < 7) {
-    if (diff.inDays == 1) {
-      time = '${diff.inDays} DAY AGO';
+    if (diff.inSeconds <= 0 ||
+        diff.inSeconds > 0 && diff.inMinutes == 0 ||
+        diff.inMinutes > 0 && diff.inHours == 0 ||
+        diff.inHours > 0 && diff.inDays == 0) {
+      time = DateFormat(dateFormat).format(docDateTime);
+    } else if (diff.inDays > 0 && diff.inDays < 7) {
+      if (diff.inDays == 1) {
+        time = '${diff.inDays} DAY AGO';
+      } else {
+        time = '${diff.inDays} DAYS AGO';
+      }
     } else {
-      time = '${diff.inDays} DAYS AGO';
-    }
-  } else {
-    if (diff.inDays == 7) {
-      time = '${(diff.inDays / 7).floor()} WEEK AGO';
-    } else {
-      time = '${(diff.inDays / 7).floor()} WEEKS AGO';
+      if (diff.inDays == 7) {
+        time = '${(diff.inDays / 7).floor()} WEEK AGO';
+      } else {
+        time = '${(diff.inDays / 7).floor()} WEEKS AGO';
+      }
     }
   }
 

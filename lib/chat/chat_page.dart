@@ -108,7 +108,16 @@ class _ChatState extends State<Chat> {
                 InputField(
                     conversationInfo: widget.conversationInfo,
                     apiServiceMessage: apiServiceMessage,
-                    createNewConversation: false),
+                    createNewConversation: false,
+                    addToPending: (String text) {
+                      setState(() {
+                        print(
+                            "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
+                        print("before bebree nu $messagesList");
+                        messagesList.add(Message(text: text));
+                        print("after bebree nu $messagesList");
+                      });
+                    }),
               ],
             ),
           ],
@@ -180,6 +189,16 @@ class _ChatState extends State<Chat> {
                   conversationInfo: widget.conversationInfo,
                   apiServiceMessage: apiServiceMessage,
                   createNewConversation: true,
+                  addToPending: (String text) {
+                    setState(() {
+                      print(
+                          "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
+                      print("before bebree nu $messagesList");
+
+                      messagesList.add(Message(text: text));
+                      print("after bebree nu $messagesList");
+                    });
+                  },
                 ),
               ],
             ),
@@ -191,6 +210,7 @@ class _ChatState extends State<Chat> {
 
   void updateMessageList() async {
     setState(() {
+      messagesList.removeWhere((message) => message.messageId == null);
       messagesList = apiServiceMessage.listOfMessages;
     });
     print("here $messagesList");
