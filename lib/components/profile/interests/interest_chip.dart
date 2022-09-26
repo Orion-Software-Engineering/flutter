@@ -1,50 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/utils/constants.dart';
 
 // ignore: must_be_immutable
 class InterestChip extends StatefulWidget {
   String text;
   bool selected;
-  InterestChip({super.key, required this.text, required this.selected});
+  void Function(String name) remove;
+  void Function(String name) add;
+
+  InterestChip({
+    super.key,
+    required this.text,
+    required this.selected,
+    required this.remove,
+    required this.add,
+  });
 
   @override
   State<InterestChip> createState() => _InterestChipState();
 }
 
 class _InterestChipState extends State<InterestChip> {
+  String chipText = '';
   @override
   Widget build(BuildContext context) {
-    switch (widget.text) {
-      case "science":
-        widget.text = "Science & Technology";
-        break;
-      case "health":
-        widget.text = "Health & Fitness";
-        break;
-      case "cars":
-        widget.text = "Cars & Vehicles";
-        break;
-      case "hair":
-        widget.text = "Hair & Beauty";
-        break;
-      case "news":
-        widget.text = "News & Politics";
-        break;
-    }
+    chipText = interestMap[widget.text]!;
     Color? textAndIconColor =
         Theme.of(context).primaryTextTheme.bodyText1?.color;
     List<List<Widget>> versions = [
       [
-        Text(widget.text[0].toUpperCase() + widget.text.substring(1),
-            style: TextStyle(color: textAndIconColor)),
+        Text(chipText, style: TextStyle(color: textAndIconColor)),
       ],
       [
         Icon(Icons.check, color: textAndIconColor),
-        Text(widget.text[0].toUpperCase() + widget.text.substring(1),
-            style: TextStyle(color: textAndIconColor)),
+        Text(chipText, style: TextStyle(color: textAndIconColor)),
       ]
     ];
     return GestureDetector(
       onTap: () {
+        if (widget.selected) {
+          widget.remove(widget.text);
+        } else {
+          widget.add(widget.text);
+        }
         setState(() {
           widget.selected = !widget.selected;
         });

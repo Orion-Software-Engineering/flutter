@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/components/profile/interests/interest_chip.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
+import '../../../api/api_service_profile.dart';
 import 'active_interests_list.dart';
-
-class EditInterestModel {
-  String name;
-  bool selected;
-  EditInterestModel({required this.name, required this.selected});
-}
 
 // ignore: must_be_immutable
 class InterestField extends StatefulWidget {
+  ProfileApiService profileApiService;
+  VoidCallback refresh;
+  List<String> localInterestList = [];
+  bool? isEditable;
   List<String> allInterests = [
     'art',
     "business",
@@ -22,22 +20,27 @@ class InterestField extends StatefulWidget {
     "fashion",
     "gaming",
     "health",
-    "hair",
+    "beauty",
     "news",
     "photography",
     "science",
     "sports"
   ];
-  List<String> localInterestList = [];
-  bool? isEditable;
   InterestField(
-      {super.key, required this.localInterestList, required this.isEditable});
+      {super.key,
+      required this.localInterestList,
+      required this.isEditable,
+      required this.profileApiService,
+      required this.refresh});
 
   @override
   State<InterestField> createState() => _InterestFieldState();
 }
 
 class _InterestFieldState extends State<InterestField> {
+  List<String> interestListToAdd = [];
+  List<String> interestListToRemoveFromOriginal = [];
+
   @override
   Widget build(BuildContext context) {
     List<EditInterestModel> editInterestList = [];
@@ -106,15 +109,61 @@ class _InterestFieldState extends State<InterestField> {
                                       for (EditInterestModel i
                                           in editInterestList)
                                         InterestChip(
-                                            text: i.name, selected: i.selected)
+                                          text: i.name,
+                                          selected: i.selected,
+                                          add: (String interest) {
+                                            if (widget.localInterestList
+                                                .contains(interest)) {
+                                              interestListToRemoveFromOriginal
+                                                  .remove(interest);
+                                            } else {
+                                              interestListToAdd.add(interest);
+                                            }
+                                            print(
+                                                "original $interestListToRemoveFromOriginal");
+                                            print("new $interestListToAdd");
+                                          },
+                                          remove: (String interest) {
+                                            if (widget.localInterestList
+                                                .contains(interest)) {
+                                              interestListToRemoveFromOriginal
+                                                  .add(interest);
+                                            } else {
+                                              interestListToAdd
+                                                  .remove(interest);
+                                              print("here");
+                                            }
+                                            print(
+                                                "original $interestListToRemoveFromOriginal");
+                                            print("new $interestListToAdd");
+                                          },
+                                        ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
                           ),
                         );
-                      });
+                      }).then((value) {
+                    print("to add $interestListToAdd");
+                    if (interestListToAdd.isNotEmpty) {
+                      widget.profileApiService
+                          .addInterests(interestListToAdd)
+                          .then((value) {
+                        if (interestListToRemoveFromOriginal.isNotEmpty) {
+                          print("to remove $interestListToRemoveFromOriginal");
+                          widget.profileApiService.deleteInterests(
+                              interestListToRemoveFromOriginal);
+                        }
+                      }).then((value) => widget.refresh());
+                    } else if (interestListToRemoveFromOriginal.isNotEmpty) {
+                      print("to remove $interestListToRemoveFromOriginal");
+                      widget.profileApiService
+                          .deleteInterests(interestListToRemoveFromOriginal)
+                          .then((value) => widget.refresh());
+                    }
+                  });
                 },
                 child: Icon(Icons.edit, color: Colors.grey)))
       ],
@@ -145,4 +194,10 @@ class _InterestFieldState extends State<InterestField> {
       ),
     );
   }
+}
+
+class EditInterestModel {
+  String name;
+  bool selected;
+  EditInterestModel({required this.name, required this.selected});
 }

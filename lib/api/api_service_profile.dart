@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:matchmaking_demo/models/profile/profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/profile/interest_model.dart';
 import '../utils/api_call_paths.dart';
 
 class ProfileApiService {
@@ -53,5 +54,39 @@ class ProfileApiService {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<void> addInterests(List<String> interestsToAdd) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? userId = sharedPreferences.getString("userId");
+
+    Uri url = Uri(
+        scheme: scheme,
+        host: host,
+        path: addInterestsPath + "153ce83f-4275-442c-b357-f52b290d73b2");
+
+    final response = await http.put(url,
+        headers: headers,
+        body: jsonEncode(InterestCallModel(interests: interestsToAdd)));
+
+    print("Addintersts response code ${response.statusCode}");
+    print("Addintersts response code ${response.body}");
+  }
+
+  Future<void> deleteInterests(List<String> interestsToDelete) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? userId = sharedPreferences.getString("userId");
+
+    Uri url = Uri(
+        scheme: scheme,
+        host: host,
+        path: removeInterestsPath + "153ce83f-4275-442c-b357-f52b290d73b2");
+
+    final response = await http.delete(url,
+        headers: headers,
+        body: jsonEncode(InterestCallModel(interests: interestsToDelete)));
+
+    print("delete intersts response code ${response.statusCode}");
+    print("delete intersts response code ${response.body}");
   }
 }

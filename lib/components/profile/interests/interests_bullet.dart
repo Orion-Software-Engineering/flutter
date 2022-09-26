@@ -49,10 +49,10 @@ class InterestsBullet extends StatelessWidget {
           color = Color(0xff007fff);
         }
         break;
-      case 'hair':
+      case 'beauty':
         {
           color = Color(0xff6d008d);
-          interest = "Hair and Beauty";
+          interest = "Hair & Beauty";
         }
         break;
       case 'news':

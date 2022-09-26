@@ -172,8 +172,13 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         InterestField(
-                            localInterestList: profileResponse.interests ?? [],
-                            isEditable: true),
+                          localInterestList: profileResponse.interests ?? [],
+                          isEditable: canEditBio ?? false,
+                          profileApiService: apiServiceProfile,
+                          refresh: () {
+                            getProfileCall();
+                          },
+                        ),
                       ],
                     ),
                   ),

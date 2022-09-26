@@ -57,18 +57,18 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<DarkThemeProvider>(
           builder: (BuildContext context, value, Widget? child) {
         return MaterialApp(
-            onGenerateRoute: AppRouter.onGenerateRoute,
-            onUnknownRoute: AppRouter.onUnknownRoute,
-            debugShowCheckedModeBanner: false,
-            title: 'Orion Meet',
-            themeMode: themeChangeProvider.darkTheme,
-            theme: MyThemes.themeData(false, context),
-            darkTheme: MyThemes.themeData(true, context),
-            // initialRoute: AppRouter.splash,
-            home: Profile(userId: "153ce83f-4275-442c-b357-f52b290d73b2")
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          onUnknownRoute: AppRouter.onUnknownRoute,
+          debugShowCheckedModeBanner: false,
+          title: 'Orion Meet',
+          themeMode: themeChangeProvider.darkTheme,
+          theme: MyThemes.themeData(false, context),
+          darkTheme: MyThemes.themeData(true, context),
+          initialRoute: AppRouter.splash,
+          // home: Profile(userId: "153ce83f-4275-442c-b357-f52b290d73b2")
 
-            //todo use home when testing specific pages
-            );
+          //todo use home when testing specific pages
+        );
       }),
     );
   }

@@ -17,6 +17,8 @@ const String deleteAccountPath = "/api/account/delete";
 // profile
 const String profilePath = "/api/user/profile/";
 const String updateBioPath = "/api/user/bio";
+const String addInterestsPath = "/api/interest/";
+const String removeInterestsPath = "/api/interest/";
 
 //location
 const String locationPath = "/api/user/location";
