@@ -75,7 +75,10 @@ class _ProfileState extends State<Profile> {
                         height: (!_keyboardIsVisible()) ? 100 : 60,
                         width: (!_keyboardIsVisible()) ? 100 : 60,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
                           borderRadius: BorderRadius.circular(200),
                         ),
                         child: Center(
@@ -84,6 +87,7 @@ class _ProfileState extends State<Profile> {
                               ? profileResponse.username![0]
                               : "",
                           style: TextStyle(
+                              color: Theme.of(context).primaryColor,
                               fontSize: 40,
                               fontWeight: FontWeight.w700,
                               fontFamily: "Nunito"),
