@@ -7,7 +7,6 @@ import '../../utils/api_call_paths.dart';
 class APIServiceConversation {
   String? userId;
   String? myUsername;
-  bool isLoading = false;
   List<String> listOfConversationIds = [];
   Map<String, List<Map<String, String>>> conversationIdsAndTheirUsers = {};
   List<ConversationInfo> listOfConversationInfo = [];

@@ -150,9 +150,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildShimmer() => ListTile(
-        title: ShimmerWidget.rectangular(
+        title: ShimmerWidget.rectangle(
           height: 160,
           width: 380,
+          homeNotChat: true,
         ),
       );
 }
