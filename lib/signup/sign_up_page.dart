@@ -14,6 +14,8 @@ import '../components/login_signup/date_of_birth.dart';
 import '../components/login_signup/title_and_subtext.dart';
 import '../utils/constants.dart';
 
+String userEmail = "";
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -125,6 +127,7 @@ class _SignUpState extends State<SignUp> {
                             String email = value;
                             setState(() {
                               requestModel.email = email;
+                              userEmail = email;
                             });
                             return null;
                           } else {

@@ -44,8 +44,8 @@ class _InputFieldState extends State<InputField> {
                   topRight: Radius.circular(40.0)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.shade500,
-                  spreadRadius: 2,
+                  color: Theme.of(context).shadowColor,
+                  spreadRadius: 1,
                   blurRadius: 10,
                 ),
               ],
