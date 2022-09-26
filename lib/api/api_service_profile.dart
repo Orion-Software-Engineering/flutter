@@ -60,10 +60,7 @@ class ProfileApiService {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
 
-    Uri url = Uri(
-        scheme: scheme,
-        host: host,
-        path: addInterestsPath + "153ce83f-4275-442c-b357-f52b290d73b2");
+    Uri url = Uri(scheme: scheme, host: host, path: addInterestsPath + userId!);
 
     final response = await http.put(url,
         headers: headers,
@@ -77,10 +74,8 @@ class ProfileApiService {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
 
-    Uri url = Uri(
-        scheme: scheme,
-        host: host,
-        path: removeInterestsPath + "153ce83f-4275-442c-b357-f52b290d73b2");
+    Uri url =
+        Uri(scheme: scheme, host: host, path: removeInterestsPath + userId!);
 
     final response = await http.delete(url,
         headers: headers,
