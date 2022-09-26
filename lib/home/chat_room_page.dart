@@ -184,9 +184,16 @@ class _ChatRoomState extends State<ChatRoom> {
   }
 
   Widget buildShimmer() => ListTile(
-        title: ShimmerWidget.rectangle(
-          height: 80,
+        leading: ShimmerWidget.circle(
+          height: 55,
           homeNotChat: false,
+          width: 55,
         ),
+        title: Align(
+            alignment: Alignment.centerLeft,
+            child: ShimmerWidget.rectangle(
+                height: 15, width: 120, homeNotChat: false)),
+        subtitle: ShimmerWidget.rectangle(
+            height: 15, width: double.infinity, homeNotChat: false),
       );
 }

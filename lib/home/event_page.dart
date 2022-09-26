@@ -100,6 +100,7 @@ class EventsPageState extends State<EventsPage> {
         //Shimmer during fetching
         return Shimmer.fromColors(
             baseColor: Colors.grey[400]!,
+            direction: ShimmerDirection.ltr,
             highlightColor: Colors.grey[300]!,
             child: GridView.builder(
               itemCount: 12,

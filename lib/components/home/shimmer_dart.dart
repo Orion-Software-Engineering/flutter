@@ -5,16 +5,22 @@ class ShimmerWidget extends StatelessWidget {
   final double width;
   final double height;
   final bool homeNotChat;
+  final ShapeBorder shapeBorder;
 
   const ShimmerWidget.rectangle(
-      {this.width = double.infinity,
-      required this.height,
-      required this.homeNotChat});
+      {required this.width, required this.height, required this.homeNotChat})
+      : this.shapeBorder = const RoundedRectangleBorder();
+
+  const ShimmerWidget.circle(
+      {required this.height,
+      required this.width,
+      required this.homeNotChat,
+      this.shapeBorder = const CircleBorder()});
 
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      direction: ShimmerDirection.ttb,
+      direction: ShimmerDirection.ltr,
       baseColor: Theme.of(context).dividerColor,
       highlightColor: Theme.of(context).primaryColorDark,
       child: homeNotChat
@@ -26,15 +32,13 @@ class ShimmerWidget extends StatelessWidget {
               width: width,
               height: height,
             )
-          : Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                ),
-                width: width,
-                height: height,
+          : Container(
+              decoration: ShapeDecoration(
+                color: Colors.grey,
+                shape: shapeBorder,
               ),
+              width: width,
+              height: height,
             ),
     );
   }
