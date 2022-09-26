@@ -140,6 +140,8 @@ TextStyle interestsPageNextBackStyle = TextStyle(
 class MyThemes {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+      dividerColor: isDarkTheme ? Colors.grey[800]! : Colors.grey[400]!,
+      primaryColorDark: isDarkTheme ? Colors.grey[700]! : Colors.grey[300]!,
       indicatorColor: isDarkTheme ? Colors.white : Colors.black,
       disabledColor: Color(0xFFBEBDBE),
       canvasColor: isDarkTheme ? Color(0xFF241837) : Colors.white,

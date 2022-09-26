@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_call_paths.dart';
 
 class MatchingApiService {
+  bool isLoading = true;
   List<MatchModel> matchList = [];
   Future<void> getInterestBasedMatches() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -23,6 +24,7 @@ class MatchingApiService {
       print(response.body);
 
       if (response.statusCode == 200) {
+        isLoading = false;
         List responseMatches = json.decode(response.body);
         for (var m in responseMatches) {
           MatchModel match = MatchModel(
