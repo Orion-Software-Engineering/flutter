@@ -52,157 +52,167 @@ class _ChatState extends State<Chat> {
 
     String? receiverName = widget.conversationInfo.receiverUsername;
     if (widget.conversationInfo.conversationId != '') {
-      return Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          leading: CustomBackButton(
-              backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
-          elevation: 0.5,
-          foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
-          shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+      return SafeArea(
+        child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
-          automaticallyImplyLeading: false,
-          title: GestureDetector(
-            onTap: () => Navigator.of(context)
-                .goToProfile(widget.conversationInfo.receiverUserId),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor:
-                      Theme.of(context).primaryTextTheme.bodyText1?.color,
-                  child: Text(
-                    receiverName![0],
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                ),
-                SizedBox(
-                  width: 20.0,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      receiverName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "Nunito",
-                        fontSize: 24,
-                        color:
-                            Theme.of(context).primaryTextTheme.bodyText1?.color,
-                      ),
+          appBar: AppBar(
+            leading: CustomBackButton(
+                backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
+            elevation: 0.5,
+            foregroundColor:
+                Theme.of(context).primaryTextTheme.bodyText1?.color,
+            shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+            backgroundColor: Theme.of(context).primaryColor,
+            automaticallyImplyLeading: false,
+            title: GestureDetector(
+              onTap: () => Navigator.of(context)
+                  .goToProfile(widget.conversationInfo.receiverUserId),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor:
+                        Theme.of(context).primaryTextTheme.bodyText1?.color,
+                    child: Text(
+                      receiverName![0],
+                      style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        receiverName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "Nunito",
+                          fontSize: 24,
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
+          body: Stack(
+            children: [
+              Column(
+                children: [
+                  ChatList(
+                    apiServiceMessage: apiServiceMessage,
+                    messagesList: messagesList,
+                  ),
+                  InputField(
+                      conversationInfo: widget.conversationInfo,
+                      apiServiceMessage: apiServiceMessage,
+                      createNewConversation: false,
+                      addToPending: (String text) {
+                        setState(() {
+                          print(
+                              "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
+                          print("before bebree nu $messagesList");
+                          messagesList.add(Message(text: text));
+                          print("after bebree nu $messagesList");
+                        });
+                      }),
+                ],
+              ),
+            ],
+          ),
         ),
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                ChatList(
-                  apiServiceMessage: apiServiceMessage,
-                  messagesList: messagesList,
-                ),
-                InputField(
+      );
+    } else {
+      return SafeArea(
+        child: Scaffold(
+          backgroundColor: Theme.of(context).primaryColor,
+          appBar: AppBar(
+            leading: CustomBackButton(
+                backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
+            elevation: 0.5,
+            foregroundColor:
+                Theme.of(context).primaryTextTheme.bodyText1?.color,
+            shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+            backgroundColor: Theme.of(context).primaryColor,
+            automaticallyImplyLeading: false,
+            title: GestureDetector(
+              onTap: () => Navigator.of(context)
+                  .goToProfile(widget.conversationInfo.receiverUserId),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor:
+                        Theme.of(context).primaryTextTheme.bodyText1?.color,
+                    child: Text(
+                      receiverName![0],
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        receiverName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "Nunito",
+                          fontSize: 24,
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          body: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(),
+                  Center(
+                    child: Text(
+                      "Send a message to match",
+                      style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText2
+                              ?.color),
+                    ),
+                  ),
+                  InputField(
                     conversationInfo: widget.conversationInfo,
                     apiServiceMessage: apiServiceMessage,
-                    createNewConversation: false,
+                    createNewConversation: true,
                     addToPending: (String text) {
                       setState(() {
                         print(
                             "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
                         print("before bebree nu $messagesList");
+
                         messagesList.add(Message(text: text));
                         print("after bebree nu $messagesList");
                       });
-                    }),
-              ],
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          leading: CustomBackButton(
-              backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
-          elevation: 0.5,
-          foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
-          shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
-          backgroundColor: Theme.of(context).primaryColor,
-          automaticallyImplyLeading: false,
-          title: GestureDetector(
-            onTap: () => Navigator.of(context)
-                .goToProfile(widget.conversationInfo.receiverUserId),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor:
-                      Theme.of(context).primaryTextTheme.bodyText1?.color,
-                  child: Text(
-                    receiverName![0],
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                    },
                   ),
-                ),
-                SizedBox(
-                  width: 20.0,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      receiverName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "Nunito",
-                        fontSize: 24,
-                        color:
-                            Theme.of(context).primaryTextTheme.bodyText1?.color,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
-        ),
-        body: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(),
-                Center(
-                  child: Text(
-                    "Send a message to match",
-                    style: TextStyle(
-                        color: Theme.of(context)
-                            .primaryTextTheme
-                            .bodyText2
-                            ?.color),
-                  ),
-                ),
-                InputField(
-                  conversationInfo: widget.conversationInfo,
-                  apiServiceMessage: apiServiceMessage,
-                  createNewConversation: true,
-                  addToPending: (String text) {
-                    setState(() {
-                      print(
-                          "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
-                      print("before bebree nu $messagesList");
-
-                      messagesList.add(Message(text: text));
-                      print("after bebree nu $messagesList");
-                    });
-                  },
-                ),
-              ],
-            ),
-          ],
         ),
       );
     }

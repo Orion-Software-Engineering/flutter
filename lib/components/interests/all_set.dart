@@ -29,7 +29,7 @@ class _AllSetState extends State<AllSet> {
         children: [
           Text(
             textAlign: TextAlign.center,
-            "You're all set Happy Matchin'!",
+            "You're all set, Happy Matchin'!",
             style: TextStyle(
                 fontSize: 40,
                 fontFamily: 'Nunito',
