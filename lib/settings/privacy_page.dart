@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
 
 bool private = false;
 
@@ -57,6 +58,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                 private = value;
                 allowLocation = value;
                 setLocationPermission();
+                askLocationPermission();
               });
             },
             title: const Text(
@@ -83,5 +85,19 @@ class _PrivacyPageState extends State<PrivacyPage> {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.setBool("allowLocation", allowLocation!);
+  }
+
+  Future<Position> askLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        allowLocation = false;
+        return Future.error("Location permission denied");
+      }
+    }
+    allowLocation = true;
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
   }
 }
