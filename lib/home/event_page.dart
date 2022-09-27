@@ -31,7 +31,7 @@ class EventsPageState extends State<EventsPage> {
           toolbarHeight: 0.0,
           automaticallyImplyLeading: false,
           bottom: const TabBar(tabs: [
-            Tab(icon: Icon(Icons.newspaper)),
+            Tab(icon: Icon(Icons.trending_up)),
             Tab(
               icon: Icon(Icons.bookmark_added),
             )
@@ -98,7 +98,7 @@ class EventsPageState extends State<EventsPage> {
                         padding: EdgeInsets.fromLTRB(50.0, 40.0, 50.0, 20.0),
                         child: Text(
                           "Event organizers are probably cooking something fun. Check "
-                              "again later!",
+                          "again later!",
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.grey),
                         ),
@@ -130,7 +130,15 @@ class EventsPageState extends State<EventsPage> {
                 );
               },
             ),
-            //------------------------------------------------------------------------
+            //--------------------------------------------------------SavedEventsContent-----------------------------------------------------------
+            /*Container(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                children: <Widget>[
+                  Text('My Saved Events'),
+                ],
+              ),
+            )*/
             FutureBuilder<List<Event>>(
               future: _futureEvents,
               builder: (context, snapshot) {
@@ -189,8 +197,7 @@ class EventsPageState extends State<EventsPage> {
                       Container(
                         padding: EdgeInsets.fromLTRB(50.0, 40.0, 50.0, 20.0),
                         child: Text(
-                          "Event organizers are probably cooking something fun. Check "
-                              "again later!",
+                          "No events saved",
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.grey),
                         ),

@@ -123,7 +123,7 @@ class _ProfileState extends State<Profile> {
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: (!_keyboardIsVisible()) ? 16 : 11,
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.w600,fontFamily: 'Nunito'),
                               ),
                             ),
                           ),
@@ -135,6 +135,7 @@ class _ProfileState extends State<Profile> {
                 Expanded(flex: 3, child: Container())
               ],
             ),
+            //------------------------------Info card------------------------------
             Positioned(
               top: MediaQuery.of(context).size.height * paddingTop!,
               right: 0,
@@ -145,7 +146,7 @@ class _ProfileState extends State<Profile> {
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.shade500,
+                        color: Colors.grey.shade300,
                         spreadRadius: 2,
                         blurRadius: 10,
                       )

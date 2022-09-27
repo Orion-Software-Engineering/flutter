@@ -87,12 +87,11 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                   future: isEventSaved(event)),
             ],
           ),
-          
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                //-----------------------Event Name and Category--------------------------
+                //-------------------------------Event Name and Category--------------------------------
                 Container(
                   padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
                   //color: Colors.black,
@@ -100,39 +99,41 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
+                        margin: EdgeInsets.only(bottom: 5.0),
                         padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                         //color: Colors.black,
                         child: Text(
                           event.name,
-                          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Nunito'),
                         ),
                       ),
                       Container(
-                          height: 35.0,
-                          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-                          //color: Colors.black,
-                          child: ListView.builder(
-                              itemCount: event.interests.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 2.0, bottom: 4.0),
-                                  margin: EdgeInsets.only(left: 2.0, right: 2.0),
-                                  height: 40.0,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: InterestColors[event.interests[index]],
-                                  ),
-                                  child: Text(
-                                    event.interests[index],
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                );
-                              })),
+                        height: 35.0,
+                        padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                        //color: Colors.black,
+                        child: ListView.builder(
+                            itemCount: event.interests.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 2.0, bottom: 4.0),
+                                margin: EdgeInsets.only(left: 2.0, right: 2.0),
+                                height: 40.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: InterestColors[event.interests[index]],
+                                ),
+                                child: Text(
+                                  event.interests[index],
+                                  style: TextStyle(color: Colors.white, fontFamily: 'Nunito'),
+                                ),
+                              );
+                            }),
+                      ),
                     ],
                   ),
                 ),
-                //-----------------------Event Time and Venue---------------------------
+                //-----------------------------------------Event Time/Venue/Ticketing/Age restriction-------------------------------------
                 Container(
                   padding: EdgeInsets.all(10.0),
                   child: Column(
@@ -143,6 +144,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           children: <Widget>[
                             //Clock Icon
                             Container(
+                              margin:EdgeInsets.only(bottom: 2.0),
                               padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
                               child: Icon(
                                 Icons.access_time_sharp,
@@ -151,10 +153,10 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             ),
                             //TimeTextfield
                             Container(
-                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 8.0),
+                              padding: EdgeInsets.fromLTRB(10.0, 8.0, 10.0, 8.0),
                               child: Text(
                                 '${event.date} --- ${event.time}',
-                                style: TextStyle(fontSize: 14.0),
+                                style: TextStyle(fontSize: 16.0, fontFamily: 'Nunito', fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],
@@ -180,10 +182,10 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             ),
                             //VenueTextField
                             Container(
-                              padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 8.0),
+                              padding: EdgeInsets.fromLTRB(5.0, 8.0, 10.0, 8.0),
                               child: Text(
                                 event.venue,
-                                style: TextStyle(fontSize: 14.0),
+                                style: TextStyle(fontSize: 16.0, fontFamily: 'Nunito'),
                               ),
                             ),
                           ],
@@ -193,8 +195,8 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         children: <Widget>[
                           //Ticket icon
                           Container(
-                            width: 16.0,
-                            height: 18.0,
+                            width: 18.0,
+                            height: 20.0,
                             margin: EdgeInsets.fromLTRB(14.0, 10.0, 5.0, 20.0),
                             //padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                             decoration: BoxDecoration(
@@ -207,41 +209,43 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           ),
                           //VenueTextField
                           Container(
-                            padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 20.0),
+                            padding: EdgeInsets.fromLTRB(9.0, 5.0, 10.0, 20.0),
                             child: Text(
                               event.ticketPrice,
-                              style: TextStyle(fontSize: 14.0),
+                              style: TextStyle(fontSize: 16.0, fontFamily: 'Nunito'),
                             ),
                           ),
                         ],
                       ),
                       Container(
                         //Age restriction message.
+                        //color: Colors.grey[100]!.withOpacity(0.6),
                         child: Row(
                           children: <Widget>[
                             //Warning icon
                             Container(
                               width: 16,
                               height: 18,
-                              margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
+                              margin: EdgeInsets.fromLTRB(15.0, 10.0, 5.0, 30.0),
                               decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
-                                image: AssetImage('assets/icons/warning.png'),
-                              )),
+                                image: DecorationImage(
+                                  colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
+                                  image: AssetImage('assets/icons/warning.png'),
+                                ),
+                              ),
                             ),
                             //Warning TextField
                             Container(
-                              padding: EdgeInsets.fromLTRB(10, 10.0, 10.0, 40.0),
+                              padding: EdgeInsets.fromLTRB(10, 20.0, 10.0, 40.0),
                               child: Text(
                                 'This event has an 18+ age restriction.',
-                                style: TextStyle(fontSize: 10.0),
+                                style: TextStyle(fontSize: 13.0, fontFamily: 'Nunito', color: Colors.red),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      //-------------------------Line separator---------------------------------
+                      //---------------------------Line separator------------------------------
                       Container(
                         width: 310.0,
                         height: 1.0,
@@ -252,12 +256,12 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                     ],
                   ),
                 ),
-                //------------------------Description------------------------------------------
+                //----------------------------------Description--------------------------------
                 Container(
                   padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
                   child: Text(
                     "Description",
-                    style: TextStyle(fontSize: 20.0),
+                    style: TextStyle(fontSize: 20.0, fontFamily: 'Nunito'),
                   ),
                 ),
                 //Description Content
@@ -265,7 +269,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                   padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20),
                   child: Text(
                     event.description,
-                    style: TextStyle(fontSize: 12.0),
+                    style: TextStyle(fontSize: 15.0, fontFamily: 'Nunito'),
                   ),
                 ),
                 //-------------------------------Organizers------------------------------------
@@ -277,17 +281,18 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                         child: Text(
                           'Organizers',
-                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                          style: TextStyle(fontSize: 12.0, color: Colors.grey, fontFamily: 'Nunito'),
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
-                        child: Text('${event.organizers}'),
+                        child: Text(event.organizers,
+                        style: TextStyle(fontSize: 16.0, fontFamily: 'Nunito'),),
                       ),
                     ],
                   ),
                 ),
-                //------------------------------------MCs----------------------------------------
+                //---------------------------------MCs----------------------------------------
                 Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,17 +301,18 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                         child: Text(
                           'MCs',
-                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                          style: TextStyle(fontSize: 12.0, color: Colors.grey, fontFamily: 'Nunito'),
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
-                        child: Text('${event.mcs}'),
+                        child: Text(event.mcs,
+                        style: TextStyle(fontSize: 16.0, fontFamily: 'Nunito'),),
                       ),
                     ],
                   ),
                 ),
-                //-------------------------------------Guests--------------------------------------
+                //----------------------------------------Guests-------------------------------------------
                 Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,12 +321,14 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                         child: Text(
                           'Guests',
-                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                          style: TextStyle(fontSize: 12.0, color: Colors.grey, fontFamily: 'Nunito'
+                              ''),
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
-                        child: Text(event.guests),
+                        child: Text(event.guests,
+                        style: TextStyle(fontSize: 16.0, fontFamily: 'Nunito'),),
                       ),
                     ],
                   ),

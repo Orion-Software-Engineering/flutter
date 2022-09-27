@@ -32,7 +32,7 @@ class _BioFieldState extends State<BioField> {
           style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-              fontWeight: FontWeight.w400),
+              fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +44,7 @@ class _BioFieldState extends State<BioField> {
                 style: TextStyle(
                     fontSize: 20,
                     color: Theme.of(context).primaryTextTheme.bodyText1?.color,
-                    fontWeight: FontWeight.w400),
+                    fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
               ),
             ),
             GestureDetector(
@@ -67,7 +67,7 @@ class _BioFieldState extends State<BioField> {
           style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-              fontWeight: FontWeight.w400),
+              fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
         ),
         Center(
           child: Row(
@@ -155,7 +155,7 @@ class _BioFieldState extends State<BioField> {
                       fontSize: 14,
                       color:
                           Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
                 ),
                 Text(
                   widget.bioText,
@@ -163,7 +163,7 @@ class _BioFieldState extends State<BioField> {
                       fontSize: 20,
                       color:
                           Theme.of(context).primaryTextTheme.bodyText1?.color,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
                 ),
               ],
       ),
