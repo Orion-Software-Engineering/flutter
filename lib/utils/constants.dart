@@ -31,8 +31,18 @@ const List<Color> matchingCardColors = [
   Color(0xFF007AFF),
   Color(0xFF241837),
   Color(0xFFFF5A00),
-  Color(0xFFFFD500),
+  Color(0xFF836D03),
   Color(0xFF007E24),
+];
+
+const List<Color> avatarColors = [
+  Colors.teal,
+  Color(0xFFB49600),
+  Color(0xFF0054FF),
+  Color(0xFFFF5A00),
+  Color(0xFFFFB300),
+  Color(0xFF00BD00),
+  Color(0xFFC70000)
 ];
 
 TextStyle loginSignUpButtonTextStyle = TextStyle(
