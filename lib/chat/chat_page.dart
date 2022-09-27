@@ -227,6 +227,7 @@ class _ChatState extends State<Chat> {
       setState(() {
         messagesList.removeWhere((message) => message.messageId == null);
         messagesList = apiServiceMessage.listOfMessages;
+        messagesJustSent = 0;
       });
     }
 

@@ -20,21 +20,23 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     return Flexible(
         child: ListView.builder(
-            physics: PageScrollPhysics(),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.all(0),
             itemCount: widget.messagesList.length,
-            reverse: false,
+            reverse: true,
             itemBuilder: (BuildContext context, int index) {
+              int itemCount = widget.messagesList.length;
+              int reversedIndex = itemCount - 1 - index;
               return GestureDetector(
                 onLongPress: () {
                   showOptionsWhenMessageLongPressed(index);
                 },
                 child: ChatItem(
-                  time: widget.messagesList[index].createdAt,
+                  time: widget.messagesList[reversedIndex].createdAt,
                   messageIsFromMe:
-                      widget.messagesList[index].messageIsFromMe ?? true,
-                  text: widget.messagesList[index].text!,
+                      widget.messagesList[reversedIndex].messageIsFromMe ??
+                          true,
+                  text: widget.messagesList[reversedIndex].text!,
                 ),
               );
             }
