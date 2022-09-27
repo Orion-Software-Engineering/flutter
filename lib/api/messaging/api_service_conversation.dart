@@ -7,10 +7,7 @@ import '../../utils/api_call_paths.dart';
 class APIServiceConversation {
   String? userId;
   String? myUsername;
-  List<String> listOfConversationIds = [];
-  Map<String, List<Map<String, String>>> conversationIdsAndTheirUsers = {};
   List<ConversationInfo> listOfConversationInfo = [];
-  // late ConversationInfo conversationInfoFromMatchScreen;
   String? newlyCreatedConversationId;
 
   Future getConversationsOfUser() async {
@@ -32,69 +29,24 @@ class APIServiceConversation {
 
     List conversationsList = json.decode(response.body);
     print(conversationsList);
-    for (var i in conversationsList) {
-      listOfConversationIds.add(i["id"]);
-    }
-  }
+    for (Map i in conversationsList) {
+      ConversationInfo conversationInfo =
+          ConversationInfo(conversationId: i["id"]);
+      conversationInfo.lastMessage = i["lastMessage"]["text"];
+      conversationInfo.lastMessageIsMine =
+          (i["lastMessage"]["sender"] == myUsername);
+      List users = i["users"];
 
-  Future getConversationInfo() async {
-    print("list of conversation users = $listOfConversationIds");
-    print(" in getUsersOfAllConversations");
-    if (listOfConversationIds.isNotEmpty) {
-      // print('convoList not empty');
-      for (String convoId in listOfConversationIds) {
-        ConversationInfo conversationInfo =
-            ConversationInfo(conversationId: convoId);
-        Uri getUsersUrl = Uri(
-            scheme: scheme,
-            host: host,
-            path: getUsersOfAllConversationsPath + convoId);
-
-        Uri getLastMessageUrl =
-            Uri(scheme: scheme, host: host, path: getLastMessagePath + convoId);
-
-        final getUsersResponse = await http.get(getUsersUrl);
-
-        List listOfUsers = json.decode(getUsersResponse.body);
-
-        for (Map i in listOfUsers) {
-          Map<String, String> userIdAndUsername = {
-            "userId": i["id"],
-            "username": i["username"]
-          };
-          if (userIdAndUsername["username"] != myUsername) {
-            conversationInfo.receiverUsername = userIdAndUsername["username"]!;
-            print("username ${conversationInfo.receiverUsername}");
-            conversationInfo.receiverUserId = userIdAndUsername["userId"]!;
-            print("id ${conversationInfo.receiverUserId}");
-          } else {
-            conversationInfo.senderUsername = userIdAndUsername["username"]!;
-            print("sender username ${conversationInfo.senderUsername}");
-            conversationInfo.senderUserId = userIdAndUsername["userId"]!;
-            print("sender id ${conversationInfo.senderUserId}");
-          }
-          conversationInfo.conversationUsers.add(userIdAndUsername);
-
-          final lastMessageResponse =
-              await http.get(getLastMessageUrl, headers: headers);
-          print("last message body = ${lastMessageResponse.body}");
-          if (lastMessageResponse.body != "No message found") {
-            var lastMessageResponseDecoded =
-                json.decode(lastMessageResponse.body);
-
-            conversationInfo.lastMessage =
-                lastMessageResponseDecoded["text"] ?? "";
-            if (lastMessageResponseDecoded["userId"] == userId) {
-              conversationInfo.lastMessageIsMine = true;
-            } else {
-              conversationInfo.lastMessageIsMine = false;
-            }
-          } else {
-            conversationInfo.lastMessage = '';
-          }
+      for (Map user in users) {
+        if (user["id"] == userId) {
+          conversationInfo.senderUserId = user["id"];
+          conversationInfo.senderUsername = user["username"];
+        } else {
+          conversationInfo.receiverUserId = user["id"];
+          conversationInfo.receiverUsername = user["username"];
         }
-        listOfConversationInfo.add(conversationInfo);
       }
+      listOfConversationInfo.add(conversationInfo);
     }
   }
 
@@ -122,10 +74,6 @@ class APIServiceConversation {
     String? conversationId = createConversationResponseDecoded["id"];
     print("conversationId = $conversationId");
     newlyCreatedConversationId = conversationId;
-    // conversationInfoFromMatchScreen =
-    //     ConversationInfo(conversationId: conversationId);
-    // // conversationInfoFromMatchScreen.receiverUserId = userIdOfMatch;
-    // conversationInfoFromMatchScreen.receiverUsername = usernameOfMatch;
 
     addUserToConversation(userIdOfMatch, conversationId!);
   }

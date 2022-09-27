@@ -34,10 +34,7 @@ class _ChatRoomState extends State<ChatRoom> {
   void initState() {
     super.initState();
     APIServiceConversation apiServiceConversation = APIServiceConversation();
-    apiServiceConversation
-        .getConversationsOfUser()
-        .then((value) => apiServiceConversation.getConversationInfo())
-        .then(
+    apiServiceConversation.getConversationsOfUser().then(
       (value) {
         if (!mounted) {
           return;
