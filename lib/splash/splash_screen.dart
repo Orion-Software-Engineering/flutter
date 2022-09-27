@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/login_signup_interests/api_service_login.dart';
 import '../models/login_signup_interests/login_model.dart';
 
-bool? allowLocation;
+bool? allowLocation = false;
 
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
@@ -29,7 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
     widget.obtainedUsername = sharedPreferences.getString("username");
     widget.obtainedPassword = sharedPreferences.getString("password");
     widget.obtainedUserId = sharedPreferences.getString("userId");
+    sharedPreferences.setBool("allowLocation", allowLocation!);
     allowLocation = sharedPreferences.getBool("allowLocation");
+    print("splash $allowLocation");
     //todo it seems the corresponding sharedPreferences.setBool for the call below is never made.
     // todo that has to be fixed before the line below is uncommented else the app would be stuck on splash screen
   }

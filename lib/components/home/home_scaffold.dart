@@ -11,7 +11,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matchmaking_demo/api/api_service_events.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/api/api_service_profile.dart';
-import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
 import 'package:matchmaking_demo/models/profile/profile_model.dart';
@@ -52,6 +51,9 @@ class _HomeScaffoldState extends State<HomeScaffold> {
       print(postModel);
       LocationAPIService apiService = LocationAPIService();
       apiService.location(postModel).then((value) => null);
+      allowLocation = true;
+      saveLocationPermission(allowLocation!);
+      print("home3 $allowLocation");
     });
   }
 
@@ -72,16 +74,34 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     });
   }
 
+  Future saveLocationPermission(bool value) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    print("home $allowLocation");
+    sharedPreferences.setBool("allowLocation", value);
+  }
+
   Future<Position> askLocationPermission() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        allowLocation = false;
+        print("home2 $allowLocation");
+        setState(() {
+          allowLocation = false;
+          saveLocationPermission(allowLocation!);
+          print("home2 $allowLocation");
+        });
+        print("home2 $allowLocation");
         return Future.error("Location permission denied");
       }
     }
-    allowLocation = true;
+    setState(() {
+      allowLocation = false;
+      saveLocationPermission(allowLocation!);
+      print("home2 $allowLocation");
+    });
+    print("here");
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
   }
