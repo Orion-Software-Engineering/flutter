@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 IconData? systemIcon;
-bool displayThemeSettings = false;
+bool displayThemeSettings = true;
 DeleteAccountRequestModel requestModel = DeleteAccountRequestModel();
 
 class SettingsPage extends StatefulWidget {
@@ -246,10 +246,48 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               print('logout');
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Login()));
-              deleteLoginCredentials();
-              OneSignal.shared.removeExternalUserId();
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        elevation: 80,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        title: Text(
+                          'Logout',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color),
+                        ),
+                        content: Text(
+                          "Are you sure you want to logout?",
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Login()));
+                              deleteLoginCredentials();
+                              OneSignal.shared.removeExternalUserId();
+                            },
+                            child: Text("OK"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Cancel"),
+                          ),
+                        ],
+                      ));
             },
             leading: Icon(
               Icons.logout_outlined,
@@ -273,7 +311,7 @@ class _SettingsPageState extends State<SettingsPage> {
               showDialog(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
-                        elevation: 50,
+                        elevation: 80,
                         backgroundColor: Theme.of(context).primaryColor,
                         title: Text(
                           'Delete Account',

@@ -15,7 +15,7 @@ class CustomBackButton extends StatelessWidget {
           onTap:
               (navigateTo == null) ? () => Navigator.pop(context) : navigateTo,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
             child: Icon(
               Icons.arrow_back_ios,
               size: 30,
