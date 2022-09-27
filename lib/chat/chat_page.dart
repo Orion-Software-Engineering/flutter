@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:matchmaking_demo/api/messaging/api_service_message.dart';
 import 'package:matchmaking_demo/chat/chat_list.dart';
 import 'package:matchmaking_demo/chat/input_field.dart';
@@ -53,80 +54,87 @@ class _ChatState extends State<Chat> {
 
     String? receiverName = widget.conversationInfo.receiverUsername;
     if (widget.conversationInfo.conversationId != '') {
-      return SafeArea(
-        child: Scaffold(
-          backgroundColor: Theme.of(context).primaryColor,
-          appBar: AppBar(
-            leading: CustomBackButton(
-                backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
-            elevation: 0.5,
-            foregroundColor:
-                Theme.of(context).primaryTextTheme.bodyText1?.color,
-            shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+      return Container(
+        color: Theme.of(context).primaryColor,
+        child: SafeArea(
+          left: false,
+          right: false,
+          bottom: false,
+          child: Scaffold(
             backgroundColor: Theme.of(context).primaryColor,
-            automaticallyImplyLeading: false,
-            title: GestureDetector(
-              onTap: () => Navigator.of(context)
-                  .goToProfile(widget.conversationInfo.receiverUserId),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor:
-                        Theme.of(context).primaryTextTheme.bodyText1?.color,
-                    child: Text(
-                      receiverName![0],
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        receiverName,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "Nunito",
-                          fontSize: 24,
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText1
-                              ?.color,
-                        ),
+            appBar: AppBar(
+              leading: CustomBackButton(
+                  backColor:
+                      Theme.of(context).primaryTextTheme.bodyText1?.color),
+              elevation: 0.5,
+              foregroundColor:
+                  Theme.of(context).primaryTextTheme.bodyText1?.color,
+              shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
+              backgroundColor: Theme.of(context).primaryColor,
+              automaticallyImplyLeading: false,
+              title: GestureDetector(
+                onTap: () => Navigator.of(context)
+                    .goToProfile(widget.conversationInfo.receiverUserId),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color,
+                      child: Text(
+                        receiverName![0],
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          receiverName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "Nunito",
+                            fontSize: 24,
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText1
+                                ?.color,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          body: Stack(
-            children: [
-              Column(
-                children: [
-                  ChatList(
-                    apiServiceMessage: apiServiceMessage,
-                    messagesList: messagesList,
-                  ),
-                  InputField(
-                      conversationInfo: widget.conversationInfo,
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    ChatList(
                       apiServiceMessage: apiServiceMessage,
-                      createNewConversation: false,
-                      addToPending: (String text) {
-                        setState(() {
-                          print(
-                              "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
-                          print("before bebree nu $messagesList");
-                          messagesList.add(Message(text: text));
-                          messagesJustSent++;
-                          print("after bebree nu $messagesList");
-                        });
-                      }),
-                ],
-              ),
-            ],
+                      messagesList: messagesList,
+                    ),
+                    InputField(
+                        conversationInfo: widget.conversationInfo,
+                        apiServiceMessage: apiServiceMessage,
+                        createNewConversation: false,
+                        addToPending: (String text) {
+                          setState(() {
+                            print(
+                                "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
+                            print("before bebree nu $messagesList");
+                            messagesList.add(Message(text: text));
+                            messagesJustSent++;
+                            print("after bebree nu $messagesList");
+                          });
+                        }),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       );
