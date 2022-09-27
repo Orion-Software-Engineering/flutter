@@ -87,7 +87,6 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                   future: isEventSaved(event)),
             ],
           ),
-          
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +103,8 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         //color: Colors.black,
                         child: Text(
                           event.name,
-                          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
@@ -116,12 +116,18 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 2.0, bottom: 4.0),
-                                  margin: EdgeInsets.only(left: 2.0, right: 2.0),
+                                  padding: EdgeInsets.only(
+                                      left: 10.0,
+                                      right: 10.0,
+                                      top: 2.0,
+                                      bottom: 4.0),
+                                  margin:
+                                      EdgeInsets.only(left: 2.0, right: 2.0),
                                   height: 40.0,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    color: InterestColors[event.interests[index]],
+                                    color:
+                                        interestColors[event.interests[index]],
                                   ),
                                   child: Text(
                                     event.interests[index],
@@ -151,7 +157,8 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             ),
                             //TimeTextfield
                             Container(
-                              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 8.0),
+                              padding:
+                                  EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 8.0),
                               child: Text(
                                 '${event.date} --- ${event.time}',
                                 style: TextStyle(fontSize: 14.0),
@@ -168,12 +175,15 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             Container(
                               width: 16.0,
                               height: 22.0,
-                              margin: EdgeInsets.fromLTRB(14.0, 10.0, 10.0, 10.0),
-                              padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
+                              margin:
+                                  EdgeInsets.fromLTRB(14.0, 10.0, 10.0, 10.0),
+                              padding:
+                                  EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
                               decoration: BoxDecoration(
                                 //color: Colors.black,
                                 image: DecorationImage(
-                                  image: AssetImage('assets/icons/location-mark.png'),
+                                  image: AssetImage(
+                                      'assets/icons/location-mark.png'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -200,7 +210,8 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             decoration: BoxDecoration(
                               //color: Colors.black,
                               image: DecorationImage(
-                                image: AssetImage('assets/icons/ticket-outline.png'),
+                                image: AssetImage(
+                                    'assets/icons/ticket-outline.png'),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -223,16 +234,19 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             Container(
                               width: 16,
                               height: 18,
-                              margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
+                              margin:
+                                  EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                colorFilter: ColorFilter.mode(Colors.red, BlendMode.modulate),
+                                colorFilter: ColorFilter.mode(
+                                    Colors.red, BlendMode.modulate),
                                 image: AssetImage('assets/icons/warning.png'),
                               )),
                             ),
                             //Warning TextField
                             Container(
-                              padding: EdgeInsets.fromLTRB(10, 10.0, 10.0, 40.0),
+                              padding:
+                                  EdgeInsets.fromLTRB(10, 10.0, 10.0, 40.0),
                               child: Text(
                                 'This event has an 18+ age restriction.',
                                 style: TextStyle(fontSize: 10.0),

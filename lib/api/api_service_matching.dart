@@ -20,9 +20,6 @@ class MatchingApiService {
     try {
       final response = await http.get(url, headers: headers);
 
-      print(response.statusCode);
-      print(response.body);
-
       if (response.statusCode == 200) {
         isLoading = false;
         List responseMatches = json.decode(response.body);
@@ -41,7 +38,6 @@ class MatchingApiService {
   }
 
   Future<void> getLocationBasedMatches() async {
-    print("in loc based matching");
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
 
@@ -54,7 +50,6 @@ class MatchingApiService {
       final response = await http.get(url, headers: headers);
 
       List responseMatches = json.decode(response.body);
-      print(responseMatches);
       for (List m in responseMatches) {
         MatchModel match = MatchModel(
             userId: m[0], userName: m[1], bio: m[2], proximity: m[3]);

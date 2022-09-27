@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../models/login_signup_interests/login_model.dart';
 import '../utils/constants.dart';
-import 'package:matchmaking_demo/splash/splash_screen.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -110,7 +109,7 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 30.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).cardColor,
+                            backgroundColor: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),

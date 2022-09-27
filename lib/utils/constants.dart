@@ -9,7 +9,7 @@ TextStyle signUpLoginTextFieldTextStyle =
 //apis
 
 //Mapping Interests & Colors
-final Map<String, Color> InterestColors = {
+final Map<String, Color> interestColors = {
   'art': Colors.deepPurple[900]!,
   'business': Colors.black,
   'cars': Colors.grey[800]!,

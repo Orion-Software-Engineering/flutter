@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_profile.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/models/profile/profile_model.dart';
-import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../components/profile/interests/active_interests_list.dart';
 import '../components/profile/bio_field.dart';
 import '../components/profile/interests/interest_field.dart';
 import '../components/profile/profile_fields.dart';
@@ -81,11 +79,17 @@ class _ProfileState extends State<Profile> {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Center(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      opacity: 0.2,
+                      image: AssetImage("assets/images/matching/doodle.png"),
+                      fit: BoxFit.cover,
+                    )),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(color: Color(0x00338742)),
                         Container(
                           height: (!_keyboardIsVisible()) ? 100 : 60,
                           width: (!_keyboardIsVisible()) ? 100 : 60,

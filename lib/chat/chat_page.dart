@@ -23,6 +23,7 @@ class _ChatState extends State<Chat> {
   MessageAPIService apiServiceMessage = MessageAPIService();
   List<Message> messagesList = [];
   Timer? timer;
+  int messagesJustSent = 0;
 
   @override
   void initState() {
@@ -119,6 +120,7 @@ class _ChatState extends State<Chat> {
                               "object\nobject\nobject\nobject\nobject\nobject\nobject\nobject\n");
                           print("before bebree nu $messagesList");
                           messagesList.add(Message(text: text));
+                          messagesJustSent++;
                           print("after bebree nu $messagesList");
                         });
                       }),
@@ -219,10 +221,15 @@ class _ChatState extends State<Chat> {
   }
 
   void updateMessageList() async {
-    setState(() {
-      messagesList.removeWhere((message) => message.messageId == null);
-      messagesList = apiServiceMessage.listOfMessages;
-    });
+    if (messagesJustSent > apiServiceMessage.messagesToAppend.length) {
+      print("Won't update");
+    } else {
+      setState(() {
+        messagesList.removeWhere((message) => message.messageId == null);
+        messagesList = apiServiceMessage.listOfMessages;
+      });
+    }
+
     print("here $messagesList");
   }
 }

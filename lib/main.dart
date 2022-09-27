@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
-  static final String oneSignalAppId = '0bfcc099-9621-4dba-a906-7aa5cefae056';
+  static const String oneSignalAppId = '0bfcc099-9621-4dba-a906-7aa5cefae056';
 
   Future<void> initPlatformState() async {
     OneSignal.shared.setAppId(oneSignalAppId);
@@ -65,7 +65,8 @@ class _MyAppState extends State<MyApp> {
           themeMode: themeChangeProvider.darkTheme,
           theme: MyThemes.themeData(false, context),
           darkTheme: MyThemes.themeData(true, context),
-          initialRoute: AppRouter.splash,
+          // initialRoute: AppRouter.splash,
+          home: Profile(userId: "fd4e6b78-f8f2-4367-8a94-ce10f0d76543"),
         );
       }),
     );

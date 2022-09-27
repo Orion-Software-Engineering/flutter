@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_if_null_operators
 
-import 'package:flutter/material.dart';
-
 class InterestResponseModel {
   String? token;
   String? error;

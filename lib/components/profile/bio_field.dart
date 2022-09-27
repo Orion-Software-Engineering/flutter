@@ -38,6 +38,7 @@ class _BioFieldState extends State<BioField> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
+              flex: 10,
               child: Text(
                 widget.bioText,
                 maxLines: 3,
@@ -47,15 +48,18 @@ class _BioFieldState extends State<BioField> {
                     fontWeight: FontWeight.w400),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  index = 1;
-                });
-              },
-              child: Icon(
-                Icons.edit,
-                color: Colors.grey,
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    index = 1;
+                  });
+                },
+                child: Icon(
+                  Icons.edit,
+                  color: Colors.grey,
+                ),
               ),
             )
           ],
@@ -73,69 +77,79 @@ class _BioFieldState extends State<BioField> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
-                  style: TextStyle(
-                      fontFamily: 'Nunito',
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText1?.color),
-                  controller: newBioText,
-                  expands: true,
-                  maxLines: null,
+              Expanded(
+                flex: 10,
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: TextField(
+                    style: TextStyle(
+                        fontFamily: 'Nunito',
+                        color: Theme.of(context)
+                            .primaryTextTheme
+                            .bodyText1
+                            ?.color),
+                    controller: newBioText,
+                    expands: true,
+                    maxLines: null,
+                  ),
                 ),
               ),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      disableScreen();
-                      widget.apiServiceProfile
-                          .updateBio(newBioText.text)
-                          .then((value) {
-                        newBioText.clear();
-                        print(
-                            "gogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\n");
-                        index = 0;
-                        widget.refresh();
-                        print(
-                            "gigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii");
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(4)),
-                        child: Icon(
-                          Icons.check,
-                          // size: 1,
-                          color: Colors.white,
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        disableScreen();
+                        widget.apiServiceProfile
+                            .updateBio(newBioText.text)
+                            .then((value) {
+                          newBioText.clear();
+                          print(
+                              "gogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\n");
+                          index = 0;
+                          widget.refresh();
+                          print(
+                              "gigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii");
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(4)),
+                          child: Icon(
+                            Icons.check,
+                            // size: 1,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        index = 0;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(4)),
-                      child: Icon(
-                        Icons.close,
-                        // size: 1,
-                        color:
-                            Theme.of(context).primaryTextTheme.bodyText2?.color,
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          index = 0;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Icon(
+                          Icons.close,
+                          // size: 1,
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText2
+                              ?.color,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           ),

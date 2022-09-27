@@ -9,15 +9,12 @@ class ProfileApiService {
   ProfileResponseModel profileResponseModel = ProfileResponseModel();
 
   Future<void> getProfile(String userId) async {
-    print(
-        "APISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\nAPISERVICEUSERID\n${userId}");
     Uri url = Uri(scheme: scheme, host: host, path: profilePath + userId);
     try {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
         var profileResponse = json.decode(response.body);
-        print(json.decode(response.body));
         profileResponseModel.id = profileResponse["id"];
         profileResponseModel.email = profileResponse["email"];
         profileResponseModel.username = profileResponse["username"];
@@ -45,12 +42,9 @@ class ProfileApiService {
     Uri url = Uri(scheme: scheme, host: host, path: updateBioPath);
 
     try {
-      final response = await http.post(url,
+      http.post(url,
           headers: headers,
           body: jsonEncode(UpdateBioRequestModel(userId: userId!, bio: text)));
-
-      print("update bio status code ${response.statusCode}");
-      print("update bio body ${response.body}");
     } catch (e) {
       rethrow;
     }
@@ -62,12 +56,9 @@ class ProfileApiService {
 
     Uri url = Uri(scheme: scheme, host: host, path: addInterestsPath + userId!);
 
-    final response = await http.put(url,
+    http.put(url,
         headers: headers,
         body: jsonEncode(InterestCallModel(interests: interestsToAdd)));
-
-    print("Addintersts response code ${response.statusCode}");
-    print("Addintersts response code ${response.body}");
   }
 
   Future<void> deleteInterests(List<String> interestsToDelete) async {
@@ -77,11 +68,8 @@ class ProfileApiService {
     Uri url =
         Uri(scheme: scheme, host: host, path: removeInterestsPath + userId!);
 
-    final response = await http.delete(url,
+    http.delete(url,
         headers: headers,
         body: jsonEncode(InterestCallModel(interests: interestsToDelete)));
-
-    print("delete intersts response code ${response.statusCode}");
-    print("delete intersts response code ${response.body}");
   }
 }
