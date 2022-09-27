@@ -7,6 +7,8 @@ import '../../utils/api_call_paths.dart';
 class MessageAPIService {
   List<Message> listOfMessages = [];
   List<Message> listOfNewMessages = [];
+  List<Message> messagesToAppend = [];
+
   late String? myUserId;
 
   void getUserId() async {
@@ -15,6 +17,8 @@ class MessageAPIService {
   }
 
   Future getMessagesOfConversation(String conversationId) async {
+    messagesToAppend = [];
+
     getUserId();
 
     Uri url = Uri(
@@ -42,6 +46,9 @@ class MessageAPIService {
       }
       listOfNewMessages.add(message);
     }
+    messagesToAppend.addAll(listOfNewMessages.where((newMessage) =>
+        listOfMessages
+            .every((message) => (newMessage.messageId != message.messageId))));
     listOfMessages.addAll(listOfNewMessages.where((newMessage) => listOfMessages
         .every((message) => (newMessage.messageId != message.messageId))));
   }

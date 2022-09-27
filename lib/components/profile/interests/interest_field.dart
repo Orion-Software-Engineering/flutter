@@ -69,7 +69,7 @@ class _InterestFieldState extends State<InterestField> {
                     color: Colors.grey,
                     fontWeight: FontWeight.w400),
               ),
-              ActiveInterestsList(interestList: widget.localInterestList ?? []),
+              ActiveInterestsList(interestList: widget.localInterestList),
             ],
           ),
         ),
@@ -181,7 +181,7 @@ class _InterestFieldState extends State<InterestField> {
                     color: Colors.grey,
                     fontWeight: FontWeight.w400),
               ),
-              ActiveInterestsList(interestList: widget.localInterestList ?? []),
+              ActiveInterestsList(interestList: widget.localInterestList),
             ],
           ),
         )

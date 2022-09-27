@@ -169,6 +169,7 @@ class _DeleteState extends State<Delete> {
                             child: Text(
                               'DELETE ACCOUNT',
                               style: TextStyle(
+                                fontFamily: "Nunitot",
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,

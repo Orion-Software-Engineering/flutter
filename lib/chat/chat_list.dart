@@ -20,6 +20,7 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     return Flexible(
         child: ListView.builder(
+            physics: PageScrollPhysics(),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.all(0),
             itemCount: widget.messagesList.length,

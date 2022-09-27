@@ -40,7 +40,5 @@ class LoginAPIService {
         await SharedPreferences.getInstance();
     sharedPreferences.setString("userId", userId);
     sharedPreferences.setString("username", username);
-    print("dtfe\ndtfe\ndtfe\ndtfe\ndtfe\ndtfe\ndtfe\ndtfe\ndtfe\n");
-    print("here; ${sharedPreferences.getString("userId")}");
   }
 }

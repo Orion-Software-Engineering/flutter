@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 import 'dart:core';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +164,6 @@ class _SignUpState extends State<SignUp> {
                       ),
 
                       DobField(validationFunction: (value) {
-                        print("text form field value $value");
                         requestModel.dob = value!;
                         return null;
                       }),
@@ -230,7 +228,7 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(height: 20.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).cardColor,
+                            backgroundColor: Theme.of(context).cardColor,
                             // padding: EdgeInsets.fromLTRB(190.0, 10.0, 190.0, 10.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -252,7 +250,8 @@ class _SignUpState extends State<SignUp> {
                                     print(
                                         "one signal result${results.toString()}");
                                   }).catchError((error) {
-                                    print("udgyhdb ${error.toString()}");
+                                    print(
+                                        "one signal error ${error.toString()}");
                                   });
                                   Navigator.of(context).goToInterests1();
                                 } else {
