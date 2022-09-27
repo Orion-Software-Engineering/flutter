@@ -65,8 +65,7 @@ class _MyAppState extends State<MyApp> {
           themeMode: themeChangeProvider.darkTheme,
           theme: MyThemes.themeData(false, context),
           darkTheme: MyThemes.themeData(true, context),
-          // initialRoute: AppRouter.splash,
-          home: Profile(userId: "fd4e6b78-f8f2-4367-8a94-ce10f0d76543"),
+          initialRoute: AppRouter.splash,
         );
       }),
     );
