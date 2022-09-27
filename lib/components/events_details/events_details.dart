@@ -139,7 +139,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                     height: 40.0,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20.0),
-                                      color: InterestColors[
+                                      color: interestColors[
                                           event.interests[index]],
                                     ),
                                     child: Text(
