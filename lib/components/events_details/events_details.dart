@@ -175,12 +175,12 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                               //TimeTextfield
                               Container(
                                 color: Theme.of(context).primaryColor,
-                                padding:
-                                    EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 8.0),
+                                margin: EdgeInsets.only(top: 5),
+                                padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 8.0),
                                 child: Text(
                                   '${event.date} --- ${event.time}',
                                   style: TextStyle(fontFamily: 'Nunito',
-                                      fontSize: 14.0,
+                                      fontSize: 16.0,
                                       color: Theme.of(context)
                                           .primaryTextTheme
                                           .bodyText1
@@ -220,7 +220,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                 child: Text(
                                   event.venue,
                                   style: TextStyle(fontFamily: 'Nunito',
-                                      fontSize: 14.0,
+                                      fontSize: 16.0,
                                       color: Theme.of(context)
                                           .primaryTextTheme
                                           .bodyText1
@@ -234,8 +234,8 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           children: <Widget>[
                             //Ticket icon
                             Container(
-                              width: 16.0,
-                              height: 18.0,
+                              width: 20.0,
+                              height: 20.0,
                               margin:
                                   EdgeInsets.fromLTRB(14.0, 10.0, 5.0, 20.0),
                               //padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
@@ -251,11 +251,11 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             ),
                             Container(
                               color: Theme.of(context).primaryColor,
-                              padding: EdgeInsets.fromLTRB(10, 0.0, 10.0, 20.0),
+                              padding: EdgeInsets.fromLTRB(6.0, 0.0, 10.0, 20.0),
                               child: Text(
                                 event.ticketPrice,
                                 style: TextStyle(fontFamily: 'Nunito',
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     color: Theme.of(context)
                                         .primaryTextTheme
                                         .bodyText1
@@ -274,7 +274,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                 width: 16,
                                 height: 18,
                                 margin:
-                                    EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
+                                    EdgeInsets.fromLTRB(14.0, 0.0, 10.0, 30.0),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     image: DecorationImage(
@@ -287,11 +287,11 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                               //Warning TextField
                               Container(
                                 padding:
-                                    EdgeInsets.fromLTRB(10, 10.0, 10.0, 40.0),
+                                    EdgeInsets.fromLTRB(8, 10.0, 10.0, 40.0),
                                 child: Text(
                                   'This event has an 18+ age restriction.',
                                   style: TextStyle(fontFamily: 'Nunito',
-                                      fontSize: 10.0,
+                                      fontSize: 13.0,
                                       color: Theme.of(context)
                                           .primaryTextTheme
                                           .bodyText1
