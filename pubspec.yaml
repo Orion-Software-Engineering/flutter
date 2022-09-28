@@ -82,6 +82,7 @@ flutter:
     - assets/icons/icons8-chat-room-50.png
     - assets/images/Events/Event1.png
     - assets/images/matching/doodle.png
+    - assets/images/matching/doodle1.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -104,6 +105,9 @@ flutter:
     - family: CustomIcon
       fonts:
         - asset: assets/fonts/CustomIcon.ttf
+        - asset: assets/icons/location-mark.png
+        - asset: assets/icons/ticket-outline.png
+        - asset: assets/icons/warning.png
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
