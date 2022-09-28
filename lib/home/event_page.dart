@@ -27,6 +27,7 @@ class EventsPageState extends State<EventsPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           toolbarHeight: 0.0,
           automaticallyImplyLeading: false,
@@ -46,7 +47,8 @@ class EventsPageState extends State<EventsPage> {
                   if (snapshot.data!.isNotEmpty) {
                     return GridView.builder(
                       itemCount: snapshot.data!.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
@@ -66,10 +68,14 @@ class EventsPageState extends State<EventsPage> {
                             height: 190.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(snapshot.data![index].coverImage),
+                                  image: NetworkImage(
+                                      snapshot.data![index].coverImage),
                                   fit: BoxFit.fill,
                                 ),
-                                color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText2
+                                    ?.color,
                                 border: Border.all(color: signUpLoginTextColor),
                                 borderRadius: BorderRadius.circular(8)),
                           ),
@@ -90,7 +96,9 @@ class EventsPageState extends State<EventsPage> {
                               'assets/images/Events/noresults.png',
                             ),
                             fit: BoxFit.fill,
-                            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5), BlendMode.modulate),
+                            colorFilter: ColorFilter.mode(
+                                Colors.white.withOpacity(0.5),
+                                BlendMode.modulate),
                           ),
                         ),
                       ),
@@ -100,7 +108,10 @@ class EventsPageState extends State<EventsPage> {
                           "Event organizers are probably cooking something fun. Check "
                           "again later!",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.grey),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w100,
+                              fontSize: 20.0,
+                              color: Colors.grey),
                         ),
                       ),
                     ],
@@ -113,7 +124,8 @@ class EventsPageState extends State<EventsPage> {
                   highlightColor: Colors.grey[300]!,
                   child: GridView.builder(
                     itemCount: 12,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         padding: EdgeInsets.all(20.0),
@@ -122,7 +134,8 @@ class EventsPageState extends State<EventsPage> {
                         height: 190.0,
                         decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.4),
-                            border: Border.all(color: Colors.grey.withOpacity(0.1)),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.1)),
                             borderRadius: BorderRadius.circular(8)),
                       );
                     },
@@ -179,7 +192,8 @@ class EventsPageState extends State<EventsPage> {
                   if (snapshot.data!.isNotEmpty) {
                     return GridView.builder(
                       itemCount: snapshot.data!.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
@@ -199,10 +213,14 @@ class EventsPageState extends State<EventsPage> {
                             height: 190.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(snapshot.data![index].coverImage),
+                                  image: NetworkImage(
+                                      snapshot.data![index].coverImage),
                                   fit: BoxFit.fill,
                                 ),
-                                color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText2
+                                    ?.color,
                                 border: Border.all(color: signUpLoginTextColor),
                                 borderRadius: BorderRadius.circular(8)),
                           ),
@@ -223,7 +241,9 @@ class EventsPageState extends State<EventsPage> {
                               'assets/images/Events/noresults.png',
                             ),
                             fit: BoxFit.fill,
-                            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5), BlendMode.modulate),
+                            colorFilter: ColorFilter.mode(
+                                Colors.white.withOpacity(0.5),
+                                BlendMode.modulate),
                           ),
                         ),
                       ),
@@ -232,7 +252,10 @@ class EventsPageState extends State<EventsPage> {
                         child: Text(
                           "No events saved",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.grey),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w100,
+                              fontSize: 20.0,
+                              color: Colors.grey),
                         ),
                       ),
                     ],
@@ -245,7 +268,8 @@ class EventsPageState extends State<EventsPage> {
                   highlightColor: Colors.grey[300]!,
                   child: GridView.builder(
                     itemCount: 12,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         padding: EdgeInsets.all(20.0),
@@ -254,7 +278,8 @@ class EventsPageState extends State<EventsPage> {
                         height: 190.0,
                         decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.4),
-                            border: Border.all(color: Colors.grey.withOpacity(0.1)),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.1)),
                             borderRadius: BorderRadius.circular(8)),
                       );
                     },
