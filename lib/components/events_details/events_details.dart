@@ -184,7 +184,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                   '${event.date} --- ${event.time}',
                                   style: TextStyle(
                                       fontFamily: 'Nunito',
-                                      fontSize: 14.0,
+                                      fontSize: 16.0,
                                       color: Theme.of(context)
                                           .primaryTextTheme
                                           .bodyText1
@@ -206,9 +206,10 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                 margin:
                                     EdgeInsets.fromLTRB(0.0, 0.0, 30.0, 10.0),
                                 padding:
-                                    EdgeInsets.fromLTRB(10.0, 5.0, 25.0, 10.0),
+                                    EdgeInsets.fromLTRB(8.0, 5.0, 25.0, 10.0),
                                 child: Icon(
                                   Icons.location_on_outlined,
+                                  size: 28,
                                   color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
@@ -221,7 +222,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                   event.venue,
                                   style: TextStyle(
                                       fontFamily: 'Nunito',
-                                      fontSize: 14.0,
+                                      fontSize: 16.0,
                                       color: Theme.of(context)
                                           .primaryTextTheme
                                           .bodyText1
@@ -240,7 +241,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                               margin:
                                   EdgeInsets.fromLTRB(12.0, 6.0, 25.0, 20.0),
                               //padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-                              child: Icon(FontAwesomeIcons.ticket),
+                              child: Icon(FontAwesomeIcons.ticket, size: 20,),
                             ),
                             Container(
                               color: Theme.of(context).primaryColor,
@@ -249,7 +250,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                 event.ticketPrice,
                                 style: TextStyle(
                                     fontFamily: 'Nunito',
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     color: Theme.of(context)
                                         .primaryTextTheme
                                         .bodyText1
@@ -268,7 +269,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                 width: 16,
                                 height: 18,
                                 margin:
-                                    EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
+                                    EdgeInsets.fromLTRB(13.0, 0.0, 10.0, 30.0),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     image: DecorationImage(
@@ -286,7 +287,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                   'This event has an 18+ age restriction.',
                                   style: TextStyle(
                                       fontFamily: 'Nunito',
-                                      fontSize: 10.0,
+                                      fontSize: 13.0,
                                       color: Theme.of(context)
                                           .primaryTextTheme
                                           .bodyText1
@@ -333,7 +334,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                       event.description,
                       style: TextStyle(
                           fontFamily: 'Nunito',
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           color: Theme.of(context)
                               .primaryTextTheme
                               .bodyText1
@@ -352,7 +353,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             'Organizers',
                             style: TextStyle(
                                 fontFamily: 'Nunito',
-                                fontSize: 12.0,
+                                fontSize: 14.0,
                                 color: Theme.of(context)
                                     .primaryTextTheme
                                     .bodyText2
@@ -363,8 +364,9 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           color: Theme.of(context).primaryColor,
                           padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
                           child: Text(
-                            '${event.organizers}',
+                            event.organizers,
                             style: TextStyle(
+                              fontSize: 16.0,
                                 fontFamily: 'Nunito',
                                 color: Theme.of(context)
                                     .primaryTextTheme
@@ -386,7 +388,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           child: Text(
                             'MCs',
                             style: TextStyle(
-                                fontSize: 12.0,
+                                fontSize: 14.0,
                                 color: Colors.grey,
                                 fontFamily: 'Nunito'),
                           ),
@@ -395,8 +397,9 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           color: Theme.of(context).primaryColor,
                           padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
                           child: Text(
-                            '${event.mcs}',
+                            event.mcs,
                             style: TextStyle(
+                              fontSize: 16.0,
                                 fontFamily: 'Nunito',
                                 color: Theme.of(context)
                                     .primaryTextTheme
@@ -418,7 +421,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           child: Text(
                             'Guests',
                             style: TextStyle(
-                                fontSize: 12.0,
+                                fontSize: 14.0,
                                 color: Colors.grey,
                                 fontFamily: 'Nunito'),
                           ),
@@ -429,6 +432,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           child: Text(
                             event.guests,
                             style: TextStyle(
+                              fontSize: 16.0,
                                 fontFamily: 'Nunito',
                                 color: Theme.of(context)
                                     .primaryTextTheme

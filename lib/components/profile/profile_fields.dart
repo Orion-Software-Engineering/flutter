@@ -8,7 +8,9 @@ class ProfileFields extends StatelessWidget {
       this.genderValue});
   String? title;
   String? value;
-  String text = "";
+  String
+
+  text = "";
   bool isGender;
   bool? genderValue;
 
@@ -30,13 +32,14 @@ class ProfileFields extends StatelessWidget {
       text = (value == null) ? "..." : value!;
     }
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title!,
             style: TextStyle(
+              fontFamily: 'Nunito',
                 fontSize: 14,
                 color: Theme.of(context).primaryTextTheme.bodyText2?.color,
                 fontWeight: FontWeight.w400),
@@ -44,6 +47,7 @@ class ProfileFields extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
+              fontFamily: 'Nunito',
                 fontSize: (title == 'Bio') ? 20 : 26,
                 color: Theme.of(context).primaryTextTheme.bodyText1?.color,
                 fontWeight:

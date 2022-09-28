@@ -33,7 +33,7 @@ class _BioFieldState extends State<BioField> {
           Text(
             "Bio",
             style: TextStyle(
-                fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+                fontFamily: 'Nunito', fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
           ),
           GestureDetector(
             onTap: () {
@@ -69,7 +69,6 @@ class _BioFieldState extends State<BioField> {
         Text(
           "Bio",
           style: TextStyle(
-
               fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
 
         ),
