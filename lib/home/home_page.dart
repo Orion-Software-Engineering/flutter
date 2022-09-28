@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
       matchingApiService.getLocationBasedMatches().then((value) {
         setState(() {
           matches = matchingApiService.matchList;
+          print(matches);
         });
       });
     }
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return matchingApiService.isLoading
+    return matches.isEmpty
         ? ListView.builder(
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) {
@@ -59,7 +60,11 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).goToChatPage(ConversationInfo.withoutConversationId(matches[index].userId, matches[index].userName, userId));
+                  Navigator.of(context).goToChatPage(
+                      ConversationInfo.withoutConversationId(
+                          matches[index].userId,
+                          matches[index].userName,
+                          userId));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -96,21 +101,32 @@ class _HomePageState extends State<HomePage> {
                                       child: Text(
                                         matches[index].userName!,
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 32, fontFamily: 'Nunito'),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 32,
+                                            fontFamily: 'Nunito'),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                      child: Proximity(level: matches[index].proximity),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Proximity(
+                                          level: matches[index].proximity),
                                     ),
                                   ],
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    matches[index].bio ?? "bio NA", //120 characters
+                                    matches[index].bio ??
+                                        "bio NA", //120 characters
                                     textAlign: TextAlign.left,
-                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16, fontFamily: 'Nunito'),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16,
+                                        fontFamily: 'Nunito'),
                                   ),
                                 ),
                               ],
@@ -127,7 +143,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future getUserData() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     userId = sharedPreferences.getString("userId");
     setState(() {
       print("in tht setState");
@@ -182,7 +199,10 @@ class Proximity extends StatelessWidget {
               Text(
                 howClose,
                 textAlign: TextAlign.left,
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14),
               ),
             ],
           );

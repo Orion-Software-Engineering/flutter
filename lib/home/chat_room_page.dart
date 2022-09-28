@@ -78,8 +78,6 @@ class _ChatRoomState extends State<ChatRoom> {
             ? ListView.builder(
                 itemCount: listOfConversations.length,
                 itemBuilder: (BuildContext context, int index) {
-                  print(
-                      "last message${listOfConversations[0].lastMessageIsMine}");
                   String lastMessageSender;
                   if (listOfConversations[index].lastMessageIsMine) {
                     lastMessageSender = "me";

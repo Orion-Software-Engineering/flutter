@@ -50,11 +50,14 @@ class MatchingApiService {
       final response = await http.get(url, headers: headers);
 
       List responseMatches = json.decode(response.body);
+      print(responseMatches);
+      print(matchList.length);
       for (List m in responseMatches) {
         MatchModel match = MatchModel(
             userId: m[0], userName: m[1], bio: m[2], proximity: m[3]);
         matchList.add(match);
       }
+      print(matchList.length);
     } catch (e) {
       rethrow;
     }
