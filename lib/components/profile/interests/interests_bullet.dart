@@ -10,7 +10,7 @@ class InterestsBullet extends StatelessWidget {
     switch (interest) {
       case 'art':
         {
-          color = Colors.green;
+          color = Color(0xff0ed200);
         }
         break;
       case 'business':
@@ -26,7 +26,7 @@ class InterestsBullet extends StatelessWidget {
         break;
       case 'comedy':
         {
-          color = Colors.yellow;
+          color = Color(0xffd2b900);
         }
         break;
       case 'entertainment':
@@ -46,7 +46,7 @@ class InterestsBullet extends StatelessWidget {
         break;
       case 'gaming':
         {
-          color = Color(0xff007fff);
+          color = Color(0xff009dff);
         }
         break;
       case 'beauty':
@@ -74,12 +74,12 @@ class InterestsBullet extends StatelessWidget {
         break;
       case 'sports':
         {
-          color = Color(0xffb7ff00);
+          color = Color(0xff013a1a);
         }
         break;
       case 'health':
         {
-          color = Color(0xff00ffff);
+          color = Color(0xff4000ff);
           interest = 'Health & Fitness';
         }
         break;
@@ -92,21 +92,19 @@ class InterestsBullet extends StatelessWidget {
         color = Color(0x00ffffff);
         break;
     }
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          height: 10,
-          width: 10,
-          decoration: BoxDecoration(
-              color: color, borderRadius: BorderRadius.circular(8)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 1.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: color, borderRadius: BorderRadius.circular(14)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 6),
+          child: Text(
+            interest[0].toUpperCase() + interest.substring(1),
+            style: TextStyle(color: Colors.white),
+          ),
         ),
-        Text(
-          interest[0].toUpperCase() + interest.substring(1),
-          style: TextStyle(
-              color: Theme.of(context).primaryTextTheme.bodyText1?.color),
-        )
-      ],
+      ),
     );
   }
 }

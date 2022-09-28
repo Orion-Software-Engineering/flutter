@@ -9,12 +9,13 @@ class BioField extends StatefulWidget {
   VoidCallback refresh;
   bool isEditable;
 
-  BioField(
-      {super.key,
-      required this.apiServiceProfile,
-      required this.bioText,
-      required this.refresh,
-      required this.isEditable});
+  BioField({
+    super.key,
+    required this.apiServiceProfile,
+    required this.bioText,
+    required this.refresh,
+    required this.isEditable,
+  });
 
   @override
   State<BioField> createState() => _BioFieldState();
@@ -27,13 +28,26 @@ class _BioFieldState extends State<BioField> {
   Widget build(BuildContext context) {
     List<List<Widget>> bioFieldsVersions = [
       [
-        Text(
-          "Bio",
-          style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-              fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
-        ),
+
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            "Bio",
+            style: TextStyle(
+                fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                index = 1;
+              });
+            },
+            child: Icon(
+              Icons.edit,
+              color: Colors.grey,
+            ),
+          )
+        ]),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -48,20 +62,6 @@ class _BioFieldState extends State<BioField> {
                     fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    index = 1;
-                  });
-                },
-                child: Icon(
-                  Icons.edit,
-                  color: Colors.grey,
-                ),
-              ),
-            )
           ],
         ),
       ],
@@ -69,12 +69,13 @@ class _BioFieldState extends State<BioField> {
         Text(
           "Bio",
           style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-              fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
+
+              fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+
         ),
         Center(
           child: Row(
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
@@ -106,12 +107,8 @@ class _BioFieldState extends State<BioField> {
                             .updateBio(newBioText.text)
                             .then((value) {
                           newBioText.clear();
-                          print(
-                              "gogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\n");
                           index = 0;
                           widget.refresh();
-                          print(
-                              "gigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii");
                         });
                       },
                       child: Padding(
@@ -141,10 +138,7 @@ class _BioFieldState extends State<BioField> {
                         child: Icon(
                           Icons.close,
                           // size: 1,
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText2
-                              ?.color,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -165,19 +159,22 @@ class _BioFieldState extends State<BioField> {
             : [
                 Text(
                   "Bio",
+                  textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontSize: 14,
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
+
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700),
                 ),
                 Text(
                   widget.bioText,
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                       color:
                           Theme.of(context).primaryTextTheme.bodyText1?.color,
-                      fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
+
+                      fontWeight: FontWeight.w700),
+
                 ),
               ],
       ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_profile.dart';
 import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
@@ -16,15 +18,21 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  List<Color> bioCardColours = [
+    Color(0xfffbdf00),
+    Color(0xffc60000),
+    Color(0xff007aff)
+  ];
+  Color? bioCardColor;
   String? myUserId;
   ProfileResponseModel profileResponse = ProfileResponseModel();
   ProfileApiService apiServiceProfile = ProfileApiService();
-  double? paddingTop;
+  double? paddingTop = 0.17;
   bool? canEditBio;
-
   @override
   void initState() {
     super.initState();
+    bioCardColor = bioCardColours[Random().nextInt(3)];
     checkIfEditable().then((value) {
       if (!canEditBio!) {
         getProfileCall();
@@ -67,163 +75,224 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    if (_keyboardIsVisible()) {
-      paddingTop = 0.2;
-    } else {
-      paddingTop = 0.35;
-    }
     if (canEditBio ?? false) {
       return SafeArea(
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
           body: Stack(
             children: [
-              Column(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        opacity: 0.2,
-                        image: AssetImage("assets/images/matching/doodle.png"),
-                        fit: BoxFit.cover,
-                      )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: (!_keyboardIsVisible()) ? 100 : 60,
-                            width: (!_keyboardIsVisible()) ? 100 : 60,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodyText1
-                                  ?.color,
-                              borderRadius: BorderRadius.circular(200),
-                            ),
-                            child: Center(
-                                child: Text(
-                              (profileResponse.username != null)
-                                  ? profileResponse.username![0]
-                                  : "",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "Nunito"),
-                            )),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: (!_keyboardIsVisible()) ? 100 : 80,
-                              height: (!_keyboardIsVisible()) ? 30 : 20,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF00FF00),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'verified',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize:
-                                          (!_keyboardIsVisible()) ? 16 : 11,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(flex: 3, child: Container())
-                ],
+              Opacity(
+                opacity: 0.3,
+                child: Image.asset(
+                  "assets/images/matching/doodle.png",
+                  height: MediaQuery.of(context).size.height,
+                  repeat: ImageRepeat.repeatY,
+                ),
               ),
               Positioned(
-                top: MediaQuery.of(context).size.height * paddingTop!,
-                right: 0,
+                top: MediaQuery.of(context).size.height * 0.18,
                 bottom: 0,
+                right: 0,
                 left: 0,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.8,
                   decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade500,
-                          spreadRadius: 2,
-                          blurRadius: 10,
-                        )
-                      ],
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25))),
+                    color: Theme.of(context).primaryColor,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0xd04f4f4f),
+                        blurRadius: 3,
+                        spreadRadius: 1,
+                        offset: Offset(0, 1), // shadow direction: bottom right
+                      ),
+                    ],
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(25),
+                        topLeft: Radius.circular(25)),
+                  ),
                   child: CustomScrollView(
                     slivers: [
                       SliverFillRemaining(
                         hasScrollBody: false,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BioField(
-                              isEditable: canEditBio ?? false,
-                              bioText: (profileResponse.bio == null)
-                                  ? ""
-                                  : profileResponse.bio!,
-                              apiServiceProfile: apiServiceProfile,
-                              refresh: () {
-                                getProfileCall();
-                                Navigator.pop(context);
-                              },
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                  title: 'Username',
-                                  value: profileResponse.username,
-                                  isGender: false),
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                  title: 'Email',
-                                  value: profileResponse.email,
-                                  isGender: false),
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                  title: 'Date of Birth',
-                                  value: profileResponse.dateOfBirth,
-                                  isGender: false),
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                title: 'Gender',
-                                isGender: true,
-                                genderValue: profileResponse.gender,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color(0xd0a2a2a2),
+                                      blurRadius: 3,
+                                      spreadRadius: 3,
+                                      offset: Offset(0,
+                                          1), // shadow direction: bottom right
+                                    ),
+                                  ],
+                                  color: bioCardColor,
+                                  borderRadius: BorderRadius.circular(25),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/profile/bio_card_background.png"),
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.04,
+                                    ),
+                                    Center(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            profileResponse.username!,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 24,
+                                                fontFamily: "Nunito",
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                          Text(
+                                            profileResponse.email!,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.01,
+                                    ),
+                                    Divider(
+                                      color: Colors.black,
+                                      indent: 10,
+                                      endIndent: 10,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                    ),
+                                    BioField(
+                                      apiServiceProfile: apiServiceProfile,
+                                      bioText: (profileResponse.bio == null)
+                                          ? ""
+                                          : profileResponse.bio!,
+                                      refresh: () {
+                                        getProfileCall();
+                                        Navigator.pop(context);
+                                      },
+                                      isEditable: canEditBio ?? false,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.004,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            InterestField(
-                              localInterestList:
-                                  profileResponse.interests ?? [],
-                              isEditable: canEditBio ?? false,
-                              profileApiService: apiServiceProfile,
-                              refresh: () {
-                                getProfileCall();
-                              },
-                            ),
-                          ],
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
+                              ),
+                              Divider(
+                                color: Colors.black,
+                                indent: 10,
+                                endIndent: 10,
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ProfileFields(
+                                      title: "Date of Birth",
+                                      value: profileResponse.dateOfBirth,
+                                      isGender: false),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                                    child: ProfileFields(
+                                      title: "Gender",
+                                      isGender: true,
+                                      genderValue: profileResponse.gender,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
+                              InterestField(
+                                localInterestList:
+                                    profileResponse.interests ?? [],
+                                isEditable: canEditBio ?? false,
+                                profileApiService: apiServiceProfile,
+                                refresh: () {
+                                  getProfileCall();
+                                },
+                              ),
+                              // Divider(
+                              //   color: Colors.black,
+                              //   indent: 10,
+                              //   endIndent: 10,
+                              // ),
+                            ],
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
               ),
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.12,
+                left: MediaQuery.of(context).size.width * 0.373,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.11,
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0xb88f8f8f),
+                        blurRadius: 3,
+                        spreadRadius: 2,
+                        offset: Offset(0, 2), // shadow direction: bottom right
+                      )
+                    ],
+                    color: Color(0xFFFF5A00),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      profileResponse.username![0] ?? "",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Nunito"),
+                    ),
+                  ),
+                ),
+              ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 40, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: CustomBackButton(
                     backColor:
                         Theme.of(context).primaryTextTheme.bodyText1?.color),
@@ -238,146 +307,217 @@ class _ProfileState extends State<Profile> {
           backgroundColor: Theme.of(context).primaryColor,
           body: Stack(
             children: [
-              Column(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        opacity: 0.2,
-                        image: AssetImage("assets/images/matching/doodle.png"),
-                        fit: BoxFit.cover,
-                      )),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: (!_keyboardIsVisible()) ? 100 : 60,
-                            width: (!_keyboardIsVisible()) ? 100 : 60,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodyText1
-                                  ?.color,
-                              borderRadius: BorderRadius.circular(200),
-                            ),
-                            child: Center(
-                                child: Text(
-                              (profileResponse.username != null)
-                                  ? profileResponse.username![0]
-                                  : "",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "Nunito"),
-                            )),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: (!_keyboardIsVisible()) ? 100 : 80,
-                              height: (!_keyboardIsVisible()) ? 30 : 20,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF00FF00),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'verified',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize:
-                                          (!_keyboardIsVisible()) ? 16 : 11,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(flex: 3, child: Container())
-                ],
+              Opacity(
+                opacity: 0.3,
+                child: Image.asset(
+                  "assets/images/matching/doodle.png",
+                  height: MediaQuery.of(context).size.height,
+                  repeat: ImageRepeat.repeatY,
+                ),
               ),
               Positioned(
-                top: MediaQuery.of(context).size.height * paddingTop!,
-                right: 0,
+                top: MediaQuery.of(context).size.height * 0.18,
                 bottom: 0,
+                right: 0,
                 left: 0,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.8,
                   decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade500,
-                          spreadRadius: 2,
-                          blurRadius: 10,
-                        )
-                      ],
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25))),
+                    color: Theme.of(context).primaryColor,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0xd04f4f4f),
+                        blurRadius: 3,
+                        spreadRadius: 1,
+                        offset: Offset(0, 1), // shadow direction: bottom right
+                      ),
+                    ],
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(25),
+                        topLeft: Radius.circular(25)),
+                  ),
                   child: CustomScrollView(
                     slivers: [
                       SliverFillRemaining(
                         hasScrollBody: false,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BioField(
-                              isEditable: canEditBio ?? false,
-                              bioText: (profileResponse.bio == null)
-                                  ? ""
-                                  : profileResponse.bio!,
-                              apiServiceProfile: apiServiceProfile,
-                              refresh: () {
-                                getProfileCall();
-                                Navigator.pop(context);
-                              },
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                  title: 'Username',
-                                  value: profileResponse.username,
-                                  isGender: false),
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                  title: 'Date of Birth',
-                                  value: profileResponse.dateOfBirth,
-                                  isGender: false),
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                title: 'Gender',
-                                isGender: true,
-                                genderValue: profileResponse.gender,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color(0xd0a2a2a2),
+                                      blurRadius: 3,
+                                      spreadRadius: 3,
+                                      offset: Offset(0,
+                                          1), // shadow direction: bottom right
+                                    ),
+                                  ],
+                                  color: bioCardColor, //todo colour
+                                  borderRadius: BorderRadius.circular(25),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/profile/bio_card_background.png"),
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.04,
+                                    ),
+                                    Center(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            profileResponse.username ?? "",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 24,
+                                                fontFamily: "Nunito",
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.01,
+                                    ),
+                                    Divider(
+                                      color: Colors.black,
+                                      indent: 10,
+                                      endIndent: 10,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                    ),
+                                    BioField(
+                                      apiServiceProfile: apiServiceProfile,
+                                      bioText: (profileResponse.bio == null)
+                                          ? ""
+                                          : profileResponse.bio!,
+                                      refresh: () {
+                                        getProfileCall();
+                                        Navigator.pop(context);
+                                      },
+                                      isEditable: canEditBio ?? false,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.004,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            InterestField(
-                              localInterestList:
-                                  profileResponse.interests ?? [],
-                              isEditable: canEditBio ?? false,
-                              profileApiService: apiServiceProfile,
-                              refresh: () {
-                                getProfileCall();
-                              },
-                            ),
-                          ],
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
+                              ),
+                              Divider(
+                                color: Colors.black,
+                                indent: 10,
+                                endIndent: 10,
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ProfileFields(
+                                      title: "Date of Birth",
+                                      value: profileResponse.dateOfBirth,
+                                      isGender: false),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                                    child: ProfileFields(
+                                      title: "Gender",
+                                      isGender: true,
+                                      genderValue: profileResponse.gender,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                              ),
+
+                              InterestField(
+                                localInterestList:
+                                    profileResponse.interests ?? [],
+                                isEditable: canEditBio ?? false,
+                                profileApiService: apiServiceProfile,
+                                refresh: () {
+                                  getProfileCall();
+                                },
+                              ),
+                              // Divider(
+                              //   color: Colors.black,
+                              //   indent: 10,
+                              //   endIndent: 10,
+                              // ),
+                            ],
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
               ),
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.12,
+                left: MediaQuery.of(context).size.width * 0.373,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.11,
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0xb88f8f8f),
+                        blurRadius: 3,
+                        spreadRadius: 2,
+                        offset: Offset(0, 2), // shadow direction: bottom right
+                      )
+                    ],
+                    color: Color(0xFFFF5A00),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      (profileResponse.username == null)
+                          ? ""
+                          : profileResponse.username![0],
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Nunito"),
+                    ),
+                  ),
+                ),
+              ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 40, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: CustomBackButton(
                     backColor:
                         Theme.of(context).primaryTextTheme.bodyText1?.color),

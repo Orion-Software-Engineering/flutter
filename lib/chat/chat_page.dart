@@ -57,9 +57,6 @@ class _ChatState extends State<Chat> {
       return Container(
         color: Theme.of(context).primaryColor,
         child: SafeArea(
-          left: false,
-          right: false,
-          bottom: false,
           child: Scaffold(
             backgroundColor: Theme.of(context).primaryColor,
             appBar: AppBar(
