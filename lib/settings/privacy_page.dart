@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_location.dart';
+import 'package:matchmaking_demo/models/location_model.dart';
 import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:matchmaking_demo/components/home/home_scaffold.dart';
 
-bool private = false;
+bool private = allowLocation!;
 
 class PrivacyPage extends StatefulWidget {
   const PrivacyPage({Key? key}) : super(key: key);
@@ -14,6 +17,8 @@ class PrivacyPage extends StatefulWidget {
 }
 
 class _PrivacyPageState extends State<PrivacyPage> {
+  String? userId;
+  Position? userPosition;
   Future<void> _launchUrl(String url, String path) async {
     final Uri uri = Uri(scheme: "https", host: url, path: path);
     if (!await launchUrl(
@@ -48,17 +53,18 @@ class _PrivacyPageState extends State<PrivacyPage> {
           SwitchListTile(
             activeTrackColor: Colors.black,
             inactiveThumbColor: Colors.black,
-            //todo fix activeThumbColor
             inactiveTrackColor: Colors.grey,
             tileColor: Colors.grey[400],
             value: private,
             onChanged: (bool value) {
               setState(() {
-                print(value);
                 private = value;
+                print(value);
                 allowLocation = value;
-                setLocationPermission();
-                askLocationPermission();
+                print(allowLocation);
+                if (allowLocation!) {
+                  askLocationPermission();
+                }
               });
             },
             title: const Text(
@@ -81,10 +87,16 @@ class _PrivacyPageState extends State<PrivacyPage> {
     );
   }
 
-  Future setLocationPermission() async {
+  // Future setLocationPermission() async {
+  //   final SharedPreferences sharedPreferences =
+  //       await SharedPreferences.getInstance();
+  //   sharedPreferences.setBool("allowLocation", allowLocation!);
+  // }
+  Future saveLocationPermission(bool value) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    sharedPreferences.setBool("allowLocation", allowLocation!);
+    print("home $allowLocation");
+    sharedPreferences.setBool("allowLocation", value);
   }
 
   Future<Position> askLocationPermission() async {
@@ -92,12 +104,45 @@ class _PrivacyPageState extends State<PrivacyPage> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        allowLocation = false;
+        print("home2 $allowLocation");
+        setState(() {
+          allowLocation = false;
+          saveLocationPermission(allowLocation!);
+          print("home2 $allowLocation");
+        });
+        print("home2 $allowLocation");
         return Future.error("Location permission denied");
       }
     }
-    allowLocation = true;
+    setState(() {
+      allowLocation = false;
+      saveLocationPermission(allowLocation!);
+      print("home2 $allowLocation");
+    });
+    print("here");
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
+  }
+
+  void getCurrentPosition() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    late LocationPostModel postModel;
+    userId = sharedPreferences.getString("userId");
+    Position position = await askLocationPermission();
+    setState(() {
+      userPosition = position;
+      postModel = LocationPostModel();
+      postModel.userID = userId!;
+      postModel.latitude = userPosition!.latitude.toStringAsFixed(6).toString();
+      postModel.longitude =
+          userPosition!.longitude.toStringAsFixed(6).toString();
+      print(postModel);
+      LocationAPIService apiService = LocationAPIService();
+      apiService.location(postModel).then((value) => null);
+      allowLocation = true;
+      saveLocationPermission(allowLocation!);
+      print("home3 $allowLocation");
+    });
   }
 }

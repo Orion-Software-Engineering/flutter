@@ -20,7 +20,7 @@ class SignupRequestModel {
   String password = '';
   String dob = '';
   String gender = '';
-  String player_id = '';
+  String playerId = '';
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {

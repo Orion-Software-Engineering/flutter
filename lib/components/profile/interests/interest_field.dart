@@ -69,7 +69,7 @@ class _InterestFieldState extends State<InterestField> {
                     color: Colors.grey,
                     fontWeight: FontWeight.w400),
               ),
-              ActiveInterestsList(interestList: widget.localInterestList ?? []),
+              ActiveInterestsList(interestList: widget.localInterestList),
             ],
           ),
         ),
@@ -88,8 +88,8 @@ class _InterestFieldState extends State<InterestField> {
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
                               color: Theme.of(context).primaryColor,
-                              height: MediaQuery.of(context).size.height * 0.38,
-                              width: MediaQuery.of(context).size.width * 0.8,
+                              height: 400,
+                              width: 400,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -181,7 +181,7 @@ class _InterestFieldState extends State<InterestField> {
                     color: Colors.grey,
                     fontWeight: FontWeight.w400),
               ),
-              ActiveInterestsList(interestList: widget.localInterestList ?? []),
+              ActiveInterestsList(interestList: widget.localInterestList),
             ],
           ),
         )

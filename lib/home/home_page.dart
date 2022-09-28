@@ -132,7 +132,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       print("in tht setState");
       isLocationAllowed = sharedPreferences.getBool("allowLocation") ?? false;
-      print(isLocationAllowed);
     });
   }
 

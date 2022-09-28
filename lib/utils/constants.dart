@@ -9,7 +9,7 @@ TextStyle signUpLoginTextFieldTextStyle =
 //apis
 
 //Mapping Interests & Colors
-final Map<String, Color> InterestColors = {
+final Map<String, Color> interestColors = {
   'art': Colors.deepPurple[900]!,
   'business': Colors.black,
   'cars': Colors.grey[800]!,
@@ -31,8 +31,18 @@ const List<Color> matchingCardColors = [
   Color(0xFF007AFF),
   Color(0xFF241837),
   Color(0xFFFF5A00),
-  Color(0xFFFFD500),
+  Color(0xFF836D03),
   Color(0xFF007E24),
+];
+
+const List<Color> avatarColors = [
+  Colors.teal,
+  Color(0xFFB49600),
+  Color(0xFF0054FF),
+  Color(0xFFFF5A00),
+  Color(0xFFFFB300),
+  Color(0xFF00BD00),
+  Color(0xFFC70000)
 ];
 
 TextStyle loginSignUpButtonTextStyle = TextStyle(
@@ -140,6 +150,7 @@ TextStyle interestsPageNextBackStyle = TextStyle(
 class MyThemes {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+      shadowColor: isDarkTheme ? Colors.grey.shade700 : Colors.grey.shade500,
       dividerColor: isDarkTheme ? Colors.grey[800]! : Colors.grey[400]!,
       primaryColorDark: isDarkTheme ? Colors.grey[700]! : Colors.grey[300]!,
       indicatorColor: isDarkTheme ? Colors.white : Colors.black,

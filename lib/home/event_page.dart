@@ -137,6 +137,39 @@ class EventsPageState extends State<EventsPage> {
                 children: <Widget>[
                   Text('My Saved Events'),
                 ],
+              }, //itemBuilder
+            );
+          }
+          // -----------------------------------------------No events to show screen------------------------------------------------------
+          return Column(
+            children: <Widget>[
+              Container(
+                width: 120,
+                height: 90,
+                margin: EdgeInsets.fromLTRB(50, 180, 50, 0.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/images/Events/noresults.png',
+                    ),
+                    fit: BoxFit.fill,
+                    colorFilter: ColorFilter.mode(
+                        Colors.white.withOpacity(0.5), BlendMode.modulate),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(50.0, 40.0, 50.0, 20.0),
+                child: Text(
+                  "Event organizers are probably cooking something fun. Check "
+                  "again later!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20.0,
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color),
+                ),
               ),
             )*/
             FutureBuilder<List<Event>>(

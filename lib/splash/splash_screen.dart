@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/login_signup_interests/api_service_login.dart';
 import '../models/login_signup_interests/login_model.dart';
 
-bool? allowLocation;
+bool? allowLocation = false;
 
 // ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
@@ -29,7 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
     widget.obtainedUsername = sharedPreferences.getString("username");
     widget.obtainedPassword = sharedPreferences.getString("password");
     widget.obtainedUserId = sharedPreferences.getString("userId");
+    sharedPreferences.setBool("allowLocation", allowLocation!);
     allowLocation = sharedPreferences.getBool("allowLocation");
+    print("splash $allowLocation");
     //todo it seems the corresponding sharedPreferences.setBool for the call below is never made.
     // todo that has to be fixed before the line below is uncommented else the app would be stuck on splash screen
   }
@@ -54,13 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void routeToApp() {
     bool checkIfLoginSuccessful = false;
 
-    print("nnsnnsnns");
-    print("username ${widget.obtainedUsername}");
-    print("password ${widget.obtainedPassword}");
-
     if (widget.obtainedUsername != null && widget.obtainedPassword != null) {
-      print(
-          "user: ${widget.obtainedUsername} \n pass: ${widget.obtainedPassword}");
       widget.requestModel = LoginRequestModel();
       widget.requestModel!.username = widget.obtainedUsername!;
       widget.requestModel!.password = widget.obtainedPassword!;
@@ -70,18 +66,14 @@ class _SplashScreenState extends State<SplashScreen> {
         if (value.statusCode == 200) {
           checkIfLoginSuccessful = true;
           Navigator.of(context).enterAppThroughHomeScreen();
-          print("username ${widget.obtainedUsername}");
-          print("password ${widget.obtainedPassword}");
         }
       }).then((value) {
         if (!checkIfLoginSuccessful) {
           Navigator.of(context).enterAppThroughLoginScreen();
-          print("splash login unsuccessful");
         }
       });
     } else {
       Navigator.of(context).enterAppThroughLoginScreen();
-      print("noting saved");
     }
   }
 }

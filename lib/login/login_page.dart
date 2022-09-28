@@ -6,12 +6,12 @@ import 'package:matchmaking_demo/api/login_signup_interests/api_service_login.da
 import 'package:matchmaking_demo/components/login_signup/login_signup_scaffold.dart';
 import 'package:matchmaking_demo/components/login_signup/title_and_subtext.dart';
 import 'package:matchmaking_demo/models/progress_popup.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/login_signup/custom_password_field.dart';
 import '../models/login_signup_interests/login_model.dart';
 import '../utils/constants.dart';
-import 'package:matchmaking_demo/splash/splash_screen.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -238,6 +238,7 @@ class _LoginState extends State<Login> {
     sharedPreferences.setString("username", requestModel.username);
     sharedPreferences.setString("password", requestModel.password);
     sharedPreferences.setBool("allowLocation", false);
+    print("login $allowLocation");
     print("saved");
     print(sharedPreferences.get("username"));
     print(sharedPreferences.get("password"));

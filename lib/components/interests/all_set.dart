@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/components/interests/interests_scaffold.dart';
+import 'package:matchmaking_demo/signup/sign_up_page.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 
 class AllSet extends StatefulWidget {
@@ -41,7 +42,7 @@ class _AllSetState extends State<AllSet> {
           ),
           Text(
             textAlign: TextAlign.center,
-            "Please check your email to verify your account",
+            "An email has been sent to $userEmail .\nCheck your mail to verify your account",
             style: TextStyle(
                 fontSize: 16,
                 fontFamily: 'Nunito',
