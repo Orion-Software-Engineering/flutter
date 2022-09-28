@@ -269,7 +269,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                 width: 16,
                                 height: 18,
                                 margin:
-                                    EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 30.0),
+                                    EdgeInsets.fromLTRB(13.0, 0.0, 10.0, 30.0),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     image: DecorationImage(
@@ -364,7 +364,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           color: Theme.of(context).primaryColor,
                           padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
                           child: Text(
-                            '${event.organizers}',
+                            event.organizers,
                             style: TextStyle(
                               fontSize: 16.0,
                                 fontFamily: 'Nunito',
@@ -397,7 +397,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           color: Theme.of(context).primaryColor,
                           padding: EdgeInsets.fromLTRB(20.0, 0.00, 20.0, 20.0),
                           child: Text(
-                            '${event.mcs}',
+                            event.mcs,
                             style: TextStyle(
                               fontSize: 16.0,
                                 fontFamily: 'Nunito',

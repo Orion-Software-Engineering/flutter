@@ -8,7 +8,9 @@ class ProfileFields extends StatelessWidget {
       this.genderValue});
   String? title;
   String? value;
-  String text = "";
+  String
+
+  text = "";
   bool isGender;
   bool? genderValue;
 

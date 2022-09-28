@@ -69,7 +69,6 @@ class _BioFieldState extends State<BioField> {
         Text(
           "Bio",
           style: TextStyle(
-
               fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
 
         ),
