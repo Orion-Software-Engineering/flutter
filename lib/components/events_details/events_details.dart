@@ -122,6 +122,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         Container(
                             color: Theme.of(context).primaryColor,
                             height: 35.0,
+                            margin: EdgeInsets.only(top: 5.0),
                             padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                             //color: Colors.black,
                             child: ListView.builder(

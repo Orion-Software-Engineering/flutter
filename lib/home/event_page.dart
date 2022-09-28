@@ -232,7 +232,7 @@ class EventsPageState extends State<EventsPage> {
                         child: Text(
                           "No events saved",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.grey),
+                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Theme.of(context).primaryTextTheme.bodyText1?.color),
                         ),
                       ),
                     ],
