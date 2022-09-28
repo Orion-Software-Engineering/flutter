@@ -8,15 +8,14 @@ class BioField extends StatefulWidget {
   String bioText = '';
   VoidCallback refresh;
   bool isEditable;
-  String username;
 
-  BioField(
-      {super.key,
-      required this.apiServiceProfile,
-      required this.bioText,
-      required this.refresh,
-      required this.isEditable,
-      required this.username});
+  BioField({
+    super.key,
+    required this.apiServiceProfile,
+    required this.bioText,
+    required this.refresh,
+    required this.isEditable,
+  });
 
   @override
   State<BioField> createState() => _BioFieldState();
@@ -29,15 +28,25 @@ class _BioFieldState extends State<BioField> {
   Widget build(BuildContext context) {
     List<List<Widget>> bioFieldsVersions = [
       [
-        Text(
-          "Bio",
-          style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-              fontWeight: FontWeight.w400),
-        ),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            "Bio",
+            style: TextStyle(
+                fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                index = 1;
+              });
+            },
+            child: Icon(
+              Icons.edit,
+              color: Colors.grey,
+            ),
+          )
+        ]),
         Row(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
@@ -51,20 +60,6 @@ class _BioFieldState extends State<BioField> {
                     fontWeight: FontWeight.w400),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    index = 1;
-                  });
-                },
-                child: Icon(
-                  Icons.edit,
-                  color: Colors.grey,
-                ),
-              ),
-            )
           ],
         ),
       ],
@@ -72,13 +67,11 @@ class _BioFieldState extends State<BioField> {
         Text(
           "Bio",
           style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-              fontWeight: FontWeight.w400),
+              fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
         ),
         Center(
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
@@ -110,12 +103,8 @@ class _BioFieldState extends State<BioField> {
                             .updateBio(newBioText.text)
                             .then((value) {
                           newBioText.clear();
-                          print(
-                              "gogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\ngogogo\n");
                           index = 0;
                           widget.refresh();
-                          print(
-                              "gigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii\ngigigii");
                         });
                       },
                       child: Padding(
@@ -145,10 +134,7 @@ class _BioFieldState extends State<BioField> {
                         child: Icon(
                           Icons.close,
                           // size: 1,
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText2
-                              ?.color,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -162,45 +148,27 @@ class _BioFieldState extends State<BioField> {
     ];
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Color(0xFFFFE000), borderRadius: BorderRadius.circular(25)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Column(
-              children: [Text(widget.username)],
-            ),
-            Divider(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: (widget.isEditable)
-                  ? bioFieldsVersions[index]
-                  : [
-                      Text(
-                        "Bio",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        widget.bioText,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context)
-                                .primaryTextTheme
-                                .bodyText1
-                                ?.color,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ],
-            ),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: (widget.isEditable)
+            ? bioFieldsVersions[index]
+            : [
+                Text(
+                  "Bio",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  widget.bioText,
+                  style: TextStyle(
+                      fontSize: 16,
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color,
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
       ),
     );
   }
