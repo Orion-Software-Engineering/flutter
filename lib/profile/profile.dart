@@ -534,7 +534,9 @@ class _ProfileState extends State<Profile> {
     setState(() {
       profileResponse = apiServiceProfile.profileResponseModel;
     });
-    sharedPreferences.setStringList("interests", profileResponse.interests!);
-    sharedPreferences.setString("bio", profileResponse.bio!);
+    if (canEditBio!) {
+      sharedPreferences.setStringList("interests", profileResponse.interests!);
+      sharedPreferences.setString("bio", profileResponse.bio!);
+    }
   }
 }
