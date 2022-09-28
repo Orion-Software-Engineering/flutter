@@ -36,3 +36,10 @@ Future<bool> isEventSaved(Event event) async {
   }
   return false;
 }
+
+Future<List<String>> getSavedEvents() async {
+  final SharedPreferences pref = await SharedPreferences.getInstance();
+  List<String>? savedEvents = pref.getStringList('saved_events');
+  if (savedEvents == null) return <String>[];
+  return savedEvents;
+}

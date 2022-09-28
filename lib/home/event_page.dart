@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_events.dart';
 import 'package:matchmaking_demo/components/events_details/events_details.dart';
+import 'package:matchmaking_demo/utils/save_event.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import '../utils/constants.dart';
+import '../utils/get_event_data.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
@@ -18,11 +20,13 @@ class EventsPage extends StatefulWidget {
 
 class EventsPageState extends State<EventsPage> {
   late Future<List<Event>> _futureEvents;
+  late Future<List<String>> _savedEvents;
   int eventCount = 4;
 
   @override
   Widget build(BuildContext context) {
     _futureEvents = getEvents();
+    _savedEvents = getSavedEvents();
 
     return DefaultTabController(
       length: 2,
@@ -47,8 +51,7 @@ class EventsPageState extends State<EventsPage> {
                   if (snapshot.data!.isNotEmpty) {
                     return GridView.builder(
                       itemCount: snapshot.data!.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
@@ -68,14 +71,10 @@ class EventsPageState extends State<EventsPage> {
                             height: 190.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                      snapshot.data![index].coverImage),
+                                  image: NetworkImage(snapshot.data![index].coverImage),
                                   fit: BoxFit.fill,
                                 ),
-                                color: Theme.of(context)
-                                    .primaryTextTheme
-                                    .bodyText2
-                                    ?.color,
+                                color: Theme.of(context).primaryTextTheme.bodyText2?.color,
                                 border: Border.all(color: signUpLoginTextColor),
                                 borderRadius: BorderRadius.circular(8)),
                           ),
@@ -96,9 +95,7 @@ class EventsPageState extends State<EventsPage> {
                               'assets/images/Events/noresults.png',
                             ),
                             fit: BoxFit.fill,
-                            colorFilter: ColorFilter.mode(
-                                Colors.white.withOpacity(0.5),
-                                BlendMode.modulate),
+                            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5), BlendMode.modulate),
                           ),
                         ),
                       ),
@@ -108,10 +105,7 @@ class EventsPageState extends State<EventsPage> {
                           "Event organizers are probably cooking something fun. Check "
                           "again later!",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w100,
-                              fontSize: 20.0,
-                              color: Colors.grey),
+                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.grey),
                         ),
                       ),
                     ],
@@ -124,8 +118,7 @@ class EventsPageState extends State<EventsPage> {
                   highlightColor: Colors.grey[300]!,
                   child: GridView.builder(
                     itemCount: 12,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         padding: EdgeInsets.all(20.0),
@@ -134,8 +127,7 @@ class EventsPageState extends State<EventsPage> {
                         height: 190.0,
                         decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.4),
-                            border:
-                                Border.all(color: Colors.grey.withOpacity(0.1)),
+                            border: Border.all(color: Colors.grey.withOpacity(0.1)),
                             borderRadius: BorderRadius.circular(8)),
                       );
                     },
@@ -185,46 +177,65 @@ class EventsPageState extends State<EventsPage> {
                 ),
               ),
             )*/
-            FutureBuilder<List<Event>>(
-              future: _futureEvents,
+            FutureBuilder<List<String>>(
+              future: _savedEvents,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data!.isNotEmpty) {
                     return GridView.builder(
                       itemCount: snapshot.data!.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                       itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EventsDetailsPage(
-                                  event: snapshot.data![index],
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(20.0),
-                            margin: EdgeInsets.all(20.0),
-                            width: 150.0,
-                            height: 190.0,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      snapshot.data![index].coverImage),
-                                  fit: BoxFit.fill,
-                                ),
-                                color: Theme.of(context)
-                                    .primaryTextTheme
-                                    .bodyText2
-                                    ?.color,
-                                border: Border.all(color: signUpLoginTextColor),
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        );
+                        return FutureBuilder(
+                            future: getEventData(snapshot.data![index]),
+                            builder: (context, snapshot) {
+                              if (snapshot.data != null) {
+                                Event event = snapshot.data as Event;
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EventsDetailsPage(
+                                          event: event,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(20.0),
+                                    margin: EdgeInsets.all(20.0),
+                                    width: 150.0,
+                                    height: 190.0,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(event.coverImage),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                                        border: Border.all(color: signUpLoginTextColor),
+                                        borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                );
+                              } else {
+                                // TODO: implement proper loader
+                                return Shimmer.fromColors(
+                                  baseColor: Colors.grey[400]!,
+                                  direction: ShimmerDirection.ltr,
+                                  highlightColor: Colors.grey[300]!,
+                                  child: Container(
+                                    padding: EdgeInsets.all(20.0),
+                                    margin: EdgeInsets.all(20.0),
+                                    width: 150.0,
+                                    height: 190.0,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.4),
+                                        border: Border.all(color: Colors.grey.withOpacity(0.1)),
+                                        borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                );
+                              }
+                            });
                       }, //itemBuilder
                     );
                   }
@@ -241,9 +252,7 @@ class EventsPageState extends State<EventsPage> {
                               'assets/images/Events/noresults.png',
                             ),
                             fit: BoxFit.fill,
-                            colorFilter: ColorFilter.mode(
-                                Colors.white.withOpacity(0.5),
-                                BlendMode.modulate),
+                            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5), BlendMode.modulate),
                           ),
                         ),
                       ),
@@ -252,10 +261,8 @@ class EventsPageState extends State<EventsPage> {
                         child: Text(
                           "No events saved",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w100,
-                              fontSize: 20.0,
-                              color: Colors.grey),
+                          // TODO: theming here
+                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.orange.shade800),
                         ),
                       ),
                     ],
@@ -268,8 +275,7 @@ class EventsPageState extends State<EventsPage> {
                   highlightColor: Colors.grey[300]!,
                   child: GridView.builder(
                     itemCount: 12,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         padding: EdgeInsets.all(20.0),
@@ -278,8 +284,7 @@ class EventsPageState extends State<EventsPage> {
                         height: 190.0,
                         decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.4),
-                            border:
-                                Border.all(color: Colors.grey.withOpacity(0.1)),
+                            border: Border.all(color: Colors.grey.withOpacity(0.1)),
                             borderRadius: BorderRadius.circular(8)),
                       );
                     },
