@@ -191,6 +191,7 @@ class _InterestFieldState extends State<InterestField> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: (widget.isEditable!) ? versions[0] : versions[1],
       ),
     );

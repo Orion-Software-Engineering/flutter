@@ -8,13 +8,15 @@ class BioField extends StatefulWidget {
   String bioText = '';
   VoidCallback refresh;
   bool isEditable;
+  String username;
 
   BioField(
       {super.key,
       required this.apiServiceProfile,
       required this.bioText,
       required this.refresh,
-      required this.isEditable});
+      required this.isEditable,
+      required this.username});
 
   @override
   State<BioField> createState() => _BioFieldState();
@@ -35,6 +37,7 @@ class _BioFieldState extends State<BioField> {
               fontWeight: FontWeight.w400),
         ),
         Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
@@ -75,6 +78,7 @@ class _BioFieldState extends State<BioField> {
         ),
         Center(
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
@@ -158,28 +162,45 @@ class _BioFieldState extends State<BioField> {
     ];
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: (widget.isEditable)
-            ? bioFieldsVersions[index]
-            : [
-                Text(
-                  "Bio",
-                  style: TextStyle(
-                      fontSize: 14,
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText2?.color,
-                      fontWeight: FontWeight.w400),
-                ),
-                Text(
-                  widget.bioText,
-                  style: TextStyle(
-                      fontSize: 20,
-                      color:
-                          Theme.of(context).primaryTextTheme.bodyText1?.color,
-                      fontWeight: FontWeight.w400),
-                ),
-              ],
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color(0xFFFFE000), borderRadius: BorderRadius.circular(25)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [Text(widget.username)],
+            ),
+            Divider(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: (widget.isEditable)
+                  ? bioFieldsVersions[index]
+                  : [
+                      Text(
+                        "Bio",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        widget.bioText,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText1
+                                ?.color,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ],
+            ),
+          ],
+        ),
       ),
     );
   }
