@@ -262,7 +262,7 @@ class EventsPageState extends State<EventsPage> {
                           "No events saved",
                           textAlign: TextAlign.center,
                           // TODO: theming here
-                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Colors.orange.shade800),
+                          style: TextStyle(fontWeight: FontWeight.w100, fontSize: 20.0, color: Theme.of(context).primaryTextTheme.bodyText2?.color,),
                         ),
                       ),
                     ],
