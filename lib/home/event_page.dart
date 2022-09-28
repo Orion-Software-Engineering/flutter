@@ -24,43 +24,132 @@ class EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     _futureEvents = getEvents();
 
-    return FutureBuilder<List<Event>>(
-      future: _futureEvents,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.isNotEmpty) {
-            return GridView.builder(
-              itemCount: snapshot.data!.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EventsDetailsPage(
-                          event: snapshot.data![index],
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
+        appBar: AppBar(
+          toolbarHeight: 0.0,
+          automaticallyImplyLeading: false,
+          bottom: const TabBar(tabs: [
+            Tab(icon: Icon(Icons.trending_up)),
+            Tab(
+              icon: Icon(Icons.bookmark_added),
+            )
+          ]),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            FutureBuilder<List<Event>>(
+              future: _futureEvents,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data!.isNotEmpty) {
+                    return GridView.builder(
+                      itemCount: snapshot.data!.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EventsDetailsPage(
+                                  event: snapshot.data![index],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(20.0),
+                            margin: EdgeInsets.all(20.0),
+                            width: 150.0,
+                            height: 190.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      snapshot.data![index].coverImage),
+                                  fit: BoxFit.fill,
+                                ),
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText2
+                                    ?.color,
+                                border: Border.all(color: signUpLoginTextColor),
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
+                        );
+                      }, //itemBuilder
+                    );
+                  }
+                  // -----------------------------------------------No events to show screen------------------------------------------------------
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        height: 90,
+                        margin: EdgeInsets.fromLTRB(50, 180, 50, 0.0),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/Events/noresults.png',
+                            ),
+                            fit: BoxFit.fill,
+                            colorFilter: ColorFilter.mode(
+                                Colors.white.withOpacity(0.5),
+                                BlendMode.modulate),
+                          ),
                         ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    margin: EdgeInsets.all(20.0),
-                    width: 150.0,
-                    height: 190.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(snapshot.data![index].coverImage),
-                          fit: BoxFit.fill,
+                      Container(
+                        padding: EdgeInsets.fromLTRB(50.0, 40.0, 50.0, 20.0),
+                        child: Text(
+                          "Event organizers are probably cooking something fun. Check "
+                          "again later!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w100,
+                              fontSize: 20.0,
+                              color: Colors.grey),
                         ),
-                        color:
-                            Theme.of(context).primaryTextTheme.bodyText2?.color,
-                        border: Border.all(color: signUpLoginTextColor),
-                        borderRadius: BorderRadius.circular(8)),
+                      ),
+                    ],
+                  );
+                }
+                //Shimmer during fetching
+                return Shimmer.fromColors(
+                  baseColor: Colors.grey[400]!,
+                  direction: ShimmerDirection.ltr,
+                  highlightColor: Colors.grey[300]!,
+                  child: GridView.builder(
+                    itemCount: 12,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: EdgeInsets.all(20.0),
+                        margin: EdgeInsets.all(20.0),
+                        width: 150.0,
+                        height: 190.0,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.4),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.1)),
+                            borderRadius: BorderRadius.circular(8)),
+                      );
+                    },
                   ),
                 );
+              },
+            ),
+            //--------------------------------------------------------SavedEventsContent-----------------------------------------------------------
+            /*Container(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                children: <Widget>[
+                  Text('My Saved Events'),
+                ],
               }, //itemBuilder
             );
           }
@@ -95,32 +184,112 @@ class EventsPageState extends State<EventsPage> {
                           Theme.of(context).primaryTextTheme.bodyText1?.color),
                 ),
               ),
-            ],
-          );
-        }
-        //Shimmer during fetching
-        return Shimmer.fromColors(
-            baseColor: Colors.grey[400]!,
-            direction: ShimmerDirection.ltr,
-            highlightColor: Colors.grey[300]!,
-            child: GridView.builder(
-              itemCount: 12,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.all(20.0),
-                  width: 150.0,
-                  height: 190.0,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.4),
-                      border: Border.all(color: Colors.grey.withOpacity(0.1)),
-                      borderRadius: BorderRadius.circular(8)),
+            )*/
+            FutureBuilder<List<Event>>(
+              future: _futureEvents,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data!.isNotEmpty) {
+                    return GridView.builder(
+                      itemCount: snapshot.data!.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EventsDetailsPage(
+                                  event: snapshot.data![index],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(20.0),
+                            margin: EdgeInsets.all(20.0),
+                            width: 150.0,
+                            height: 190.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      snapshot.data![index].coverImage),
+                                  fit: BoxFit.fill,
+                                ),
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText2
+                                    ?.color,
+                                border: Border.all(color: signUpLoginTextColor),
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
+                        );
+                      }, //itemBuilder
+                    );
+                  }
+                  // -----------------------------------------------No events to show screen------------------------------------------------------
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        height: 90,
+                        margin: EdgeInsets.fromLTRB(50, 180, 50, 0.0),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/Events/noresults.png',
+                            ),
+                            fit: BoxFit.fill,
+                            colorFilter: ColorFilter.mode(
+                                Colors.white.withOpacity(0.5),
+                                BlendMode.modulate),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(50.0, 40.0, 50.0, 20.0),
+                        child: Text(
+                          "No events saved",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w100,
+                              fontSize: 20.0,
+                              color: Colors.grey),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                //Shimmer during fetching
+                return Shimmer.fromColors(
+                  baseColor: Colors.grey[400]!,
+                  direction: ShimmerDirection.ltr,
+                  highlightColor: Colors.grey[300]!,
+                  child: GridView.builder(
+                    itemCount: 12,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 150.0 / 190.0),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: EdgeInsets.all(20.0),
+                        margin: EdgeInsets.all(20.0),
+                        width: 150.0,
+                        height: 190.0,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.4),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.1)),
+                            borderRadius: BorderRadius.circular(8)),
+                      );
+                    },
+                  ),
                 );
               },
-            ));
-      },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

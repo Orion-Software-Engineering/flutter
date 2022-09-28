@@ -28,6 +28,7 @@ class _BioFieldState extends State<BioField> {
   Widget build(BuildContext context) {
     List<List<Widget>> bioFieldsVersions = [
       [
+
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             "Bio",
@@ -46,6 +47,7 @@ class _BioFieldState extends State<BioField> {
             ),
           )
         ]),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -57,7 +59,7 @@ class _BioFieldState extends State<BioField> {
                 style: TextStyle(
                     fontSize: 20,
                     color: Theme.of(context).primaryTextTheme.bodyText1?.color,
-                    fontWeight: FontWeight.w400),
+                    fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
               ),
             ),
           ],
@@ -67,7 +69,9 @@ class _BioFieldState extends State<BioField> {
         Text(
           "Bio",
           style: TextStyle(
+
               fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+
         ),
         Center(
           child: Row(
@@ -157,6 +161,7 @@ class _BioFieldState extends State<BioField> {
                   "Bio",
                   textAlign: TextAlign.start,
                   style: TextStyle(
+
                       fontSize: 16,
                       color: Colors.black,
                       fontWeight: FontWeight.w700),
@@ -167,7 +172,9 @@ class _BioFieldState extends State<BioField> {
                       fontSize: 16,
                       color:
                           Theme.of(context).primaryTextTheme.bodyText1?.color,
+
                       fontWeight: FontWeight.w700),
+
                 ),
               ],
       ),
