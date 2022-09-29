@@ -2,7 +2,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 ///-------------------Detect Maps on device and launch--------------------
 void launchMaps(String location) async {
-  if (location.split(' ').isEmpty) location = "6.6817115 -1.5752673";
+  if (location.split(' ').length <= 1) location = "6.6817115 -1.5752673";
   print(location);
   String lat = location.split(' ')[0];
   String long = location.split(' ')[1];
