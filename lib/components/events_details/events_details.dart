@@ -6,6 +6,7 @@ import 'package:matchmaking_demo/utils/like_event.dart';
 import 'package:matchmaking_demo/utils/variables.dart';
 import 'package:matchmaking_demo/models/events_model.dart';
 import '../../utils/save_event.dart';
+import '../../utils/location.dart';
 
 class EventsDetailsPage extends StatefulWidget {
   const EventsDetailsPage({Key? key, required this.event}) : super(key: key);
@@ -207,6 +208,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                             ],
                           ),
                         ),
+                        //---------------------------------View Location On Map--------------------------------
                         Row(
                           children: <Widget>[
                             //Ticket icon
@@ -260,6 +262,21 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                     ),
                                   ]
                                 : <Widget>[],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 20.0),
+                          child: Center(
+                            child: MaterialButton(
+                              color: Colors.orange,
+                              onPressed: () {
+                                launchMaps(event.location);
+                              },
+                              child: Text(
+                                'view on map',
+                                style: TextStyle(fontSize: 15.0, color: Colors.white),
+                              ),
+                            ),
                           ),
                         ),
                         //-------------------------Line separator---------------------------------
