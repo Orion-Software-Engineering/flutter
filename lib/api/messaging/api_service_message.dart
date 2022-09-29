@@ -62,6 +62,7 @@ class MessageAPIService {
   }
 
   Future sendMessage(MessageToBeSent messageToBeSent, String userId) async {
+    getUserId();
     Uri url = Uri(scheme: scheme, host: host, path: sendMessagePath);
 
     messageToBeSent.userId = userId;
@@ -84,6 +85,7 @@ class MessageAPIService {
   }
 
   Future deleteMessage(MessageToBeDeleted messageToBeDeleted) async {
+    getUserId();
     Uri url = Uri(scheme: scheme, host: host, path: deleteMessagePath);
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

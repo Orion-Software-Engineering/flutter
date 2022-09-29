@@ -103,8 +103,9 @@ class _ChatRoomState extends State<ChatRoom> {
                       child: ListTile(
                         leading: AvatarPlaceholder(
                           avatarColor: avatarColors[index % 8],
-                          firstCharacter:
-                              listOfConversations[index].receiverUsername![0],
+                          firstCharacter: (listOfConversations == null)
+                              ? ""
+                              : listOfConversations[index].receiverUsername![0],
                           characterColor: Theme.of(context)
                               .primaryTextTheme
                               .bodyText1

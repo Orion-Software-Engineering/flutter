@@ -5,9 +5,8 @@ import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:matchmaking_demo/components/home/home_scaffold.dart';
 
-bool private = allowLocation!;
+// bool private = allowLocation!;
 
 class PrivacyPage extends StatefulWidget {
   const PrivacyPage({Key? key}) : super(key: key);
@@ -19,6 +18,7 @@ class PrivacyPage extends StatefulWidget {
 class _PrivacyPageState extends State<PrivacyPage> {
   String? userId;
   Position? userPosition;
+  bool? private = allowLocation;
   Future<void> _launchUrl(String url, String path) async {
     final Uri uri = Uri(scheme: "https", host: url, path: path);
     if (!await launchUrl(
@@ -55,17 +55,27 @@ class _PrivacyPageState extends State<PrivacyPage> {
             inactiveThumbColor: Colors.black,
             inactiveTrackColor: Colors.grey,
             tileColor: Colors.grey[400],
-            value: private,
+            value: private!,
             onChanged: (bool value) {
-              setState(() {
-                private = value;
-                print(value);
-                allowLocation = value;
-                print(allowLocation);
-                if (allowLocation!) {
-                  askLocationPermission();
+              print(value);
+              if (value) {
+                getCurrentPosition();
+                if (!allowLocation!) {
+                  setState(() {
+                    private = false;
+                  });
+                } else {
+                  setState(() {
+                    private = true;
+                  });
                 }
-              });
+              } else {
+                setState(() {
+                  private = false;
+                  allowLocation = false;
+                });
+                saveLocationPermission(allowLocation!);
+              }
             },
             title: const Text(
               'Enable location based matching',

@@ -22,10 +22,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   MatchingApiService matchingApiService = MatchingApiService();
-
+  bool thereAreMatches = true;
   List matches = [];
   String? userId;
-  bool isLocationAllowed = false;
+  bool isLocationAllowed = allowLocation!;
   Position? userPosition;
 
   void getCurrentPosition() async {
@@ -33,7 +33,13 @@ class _HomePageState extends State<HomePage> {
         await SharedPreferences.getInstance();
     userId = sharedPreferences.getString("userId");
     Position position = await askLocationPermission();
+    if (!mounted) {
+      return;
+    }
     setState(() {
+      allowLocation = true;
+      isLocationAllowed = true;
+      saveLocationPermission(allowLocation!);
       userPosition = position;
       postModel = LocationPostModel();
       postModel.userID = userId!;
@@ -43,9 +49,6 @@ class _HomePageState extends State<HomePage> {
       print(postModel);
       LocationAPIService apiService = LocationAPIService();
       apiService.location(postModel).then((value) => null);
-      allowLocation = true;
-      isLocationAllowed = true;
-      saveLocationPermission(allowLocation!);
       print("home3 $allowLocation");
     });
   }
@@ -67,7 +70,7 @@ class _HomePageState extends State<HomePage> {
           allowLocation = false;
           isLocationAllowed = false;
           saveLocationPermission(allowLocation!);
-          print("home2 $allowLocation");
+          print("ss home2 $allowLocation");
         });
         print("home2 $allowLocation");
         return Future.error("Location permission denied");
@@ -100,6 +103,9 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           matches = matchingApiService.matchList;
         });
+        if (matches.isEmpty) {
+          thereAreMatches = false;
+        }
       });
     } else {
       print("in the else");
@@ -108,103 +114,118 @@ class _HomePageState extends State<HomePage> {
           matches = matchingApiService.matchList;
           print(matches);
         });
+        if (matches.isEmpty) {
+          thereAreMatches = false;
+        }
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return matches.isEmpty
-        ? ListView.builder(
+    if (matches.isEmpty) {
+      if (thereAreMatches) {
+        return ListView.builder(
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) {
               return buildShimmer();
-            })
-        : ListView.builder(
-            itemCount: matches.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).goToChatPage(
-                      ConversationInfo.withoutConversationId(
-                          matches[index].userId,
-                          matches[index].userName,
-                          userId));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Container(
-                      height: 160,
-                      width: 380,
-                      decoration: BoxDecoration(
-                        color: matchingCardColors[index % 5],
-                        borderRadius: BorderRadius.circular(15),
+            });
+      } else {
+        return Center(
+          child: Text(
+            "There are no matches in the system.",
+            style: TextStyle(
+                color: Theme.of(context).primaryTextTheme.bodyText2?.color),
+          ),
+        );
+      }
+    } else {
+      return ListView.builder(
+        itemCount: matches.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onLongPress: () {
+              Navigator.of(context).goToProfile(matches[index].userId);
+            },
+            onTap: () {
+              Navigator.of(context).goToChatPage(
+                  ConversationInfo.withoutConversationId(
+                      matches[index].userId, matches[index].userName, userId));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Container(
+                  height: 160,
+                  width: 380,
+                  decoration: BoxDecoration(
+                    color: matchingCardColors[index % 5],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Stack(
+                    children: [
+                      Opacity(
+                        opacity: 0.3,
+                        child: Image.asset(
+                          'assets/images/matching/doodle1.png',
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      child: Stack(
-                        children: [
-                          Opacity(
-                            opacity: 0.3,
-                            child: Image.asset(
-                              'assets/images/matching/doodle1.png',
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        matches[index].userName!,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 32,
-                                            fontFamily: 'Nunito'),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Proximity(
-                                          level: matches[index].proximity),
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    matches[index].bio ??
-                                        "bio NA", //120 characters
+                                    matches[index].userName!,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
-                                        fontSize: 16,
+                                        fontSize: 32,
                                         fontFamily: 'Nunito'),
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Proximity(
+                                      level: matches[index].proximity),
+                                ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                matches[index].bio ?? "bio NA", //120 characters
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                    fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           );
+        },
+      );
+    }
   }
 
   Future getUserData() async {

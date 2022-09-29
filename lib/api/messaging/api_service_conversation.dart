@@ -35,27 +35,29 @@ class APIServiceConversation {
     print("response body = ${json.decode(response.body)}");
     print("userId = $userId");
 
-    List conversationsList = json.decode(response.body);
-    print(conversationsList);
-    for (Map i in conversationsList) {
-      ConversationInfo conversationInfo =
-          ConversationInfo(conversationId: i["id"]);
-      conversationInfo.lastMessage = i["lastMessage"]["text"];
-      conversationInfo.lastMessageIsMine =
-          (i["lastMessage"]["sender"] == myUsername);
-      List users = i["users"];
+    if (response.statusCode == 200) {
+      List conversationsList = json.decode(response.body);
+      print(conversationsList);
+      for (Map i in conversationsList) {
+        ConversationInfo conversationInfo =
+            ConversationInfo(conversationId: i["id"]);
+        conversationInfo.lastMessage = i["lastMessage"]["text"];
+        conversationInfo.lastMessageIsMine =
+            (i["lastMessage"]["sender"] == myUsername);
+        List users = i["users"];
 
-      for (Map user in users) {
-        if (user["id"] == userId) {
-          conversationInfo.senderUserId = user["id"];
-          conversationInfo.senderUsername = user["username"];
-        } else {
-          conversationInfo.receiverUserId = user["id"];
-          conversationInfo.receiverUsername = user["username"];
+        for (Map user in users) {
+          if (user["id"] == userId) {
+            conversationInfo.senderUserId = user["id"];
+            conversationInfo.senderUsername = user["username"];
+          } else {
+            conversationInfo.receiverUserId = user["id"];
+            conversationInfo.receiverUsername = user["username"];
+          }
         }
+        listOfConversationInfo.add(conversationInfo);
       }
-      listOfConversationInfo.add(conversationInfo);
-    }
+    } else if (response.statusCode == 400) {}
   }
 
   Future<void> createConversation(
