@@ -21,7 +21,15 @@ class APIServiceConversation {
     Uri url =
         Uri(scheme: scheme, host: host, path: getConversationsPath + userId!);
 
-    final response = await http.get(url);
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
+
+    final response = await http.get(url, headers: headers);
     print("get conversations of user");
     print(response.statusCode);
     print("response body = ${json.decode(response.body)}");
@@ -52,14 +60,19 @@ class APIServiceConversation {
 
   Future<void> createConversation(
       String userIdOfMatch, String usernameOfMatch) async {
-    if (userId == null) {
-      final SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      userId = sharedPreferences.getString("userId");
-    }
+    String accessToken;
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    userId ??= sharedPreferences.getString("userId");
+    accessToken = sharedPreferences.getString("accessToken")!;
 
     Uri url = Uri(scheme: scheme, host: host, path: createConversationPath);
 
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
     final createConversationResponse = await http.put(url,
         headers: headers,
         body: jsonEncode(CreateConversationInfo(userId: userId)));
@@ -82,6 +95,15 @@ class APIServiceConversation {
       String userId, String conversationId) async {
     Uri urlAddUser =
         Uri(scheme: scheme, host: host, path: addUserToConversationPath);
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
 
     final addUserToConversationResponse = await http.put(urlAddUser,
         headers: headers,

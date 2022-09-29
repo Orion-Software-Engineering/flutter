@@ -175,6 +175,7 @@ class _ProfileState extends State<Profile> {
                                               0.01,
                                     ),
                                     Divider(
+                                      thickness: 0.22,
                                       color: Colors.black,
                                       indent: 10,
                                       endIndent: 10,
@@ -208,9 +209,10 @@ class _ProfileState extends State<Profile> {
                                     MediaQuery.of(context).size.height * 0.02,
                               ),
                               Divider(
+                                thickness: 0.22,
                                 color: Colors.black,
-                                indent: 10,
-                                endIndent: 10,
+                                indent: 20,
+                                endIndent: 20,
                               ),
                               SizedBox(
                                 height:
@@ -397,6 +399,7 @@ class _ProfileState extends State<Profile> {
                                               0.01,
                                     ),
                                     Divider(
+                                      thickness: 0.22,
                                       color: Colors.black,
                                       indent: 10,
                                       endIndent: 10,
@@ -430,6 +433,7 @@ class _ProfileState extends State<Profile> {
                                     MediaQuery.of(context).size.height * 0.02,
                               ),
                               Divider(
+                                thickness: 0.22,
                                 color: Colors.black,
                                 indent: 10,
                                 endIndent: 10,

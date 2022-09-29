@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   void getMatches(MatchingApiService matchingApiService) {
     if (!isLocationAllowed) {
+      print("in the if");
       matchingApiService.getInterestBasedMatches().then((value) {
         setState(() {
           matches = matchingApiService.matchList;

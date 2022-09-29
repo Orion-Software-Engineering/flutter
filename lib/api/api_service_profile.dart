@@ -10,8 +10,18 @@ class ProfileApiService {
 
   Future<void> getProfile(String userId) async {
     Uri url = Uri(scheme: scheme, host: host, path: profilePath + userId);
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
+
     try {
-      final response = await http.get(url);
+      final response = await http.get(url, headers: headers);
 
       if (response.statusCode == 200) {
         var profileResponse = json.decode(response.body);
@@ -41,6 +51,13 @@ class ProfileApiService {
     String? userId = sharedPreferences.getString("userId");
     Uri url = Uri(scheme: scheme, host: host, path: updateBioPath);
 
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
     try {
       http.post(url,
           headers: headers,
@@ -56,6 +73,14 @@ class ProfileApiService {
 
     Uri url = Uri(scheme: scheme, host: host, path: addInterestsPath + userId!);
 
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
+
     http.put(url,
         headers: headers,
         body: jsonEncode(InterestCallModel(interests: interestsToAdd)));
@@ -67,6 +92,14 @@ class ProfileApiService {
 
     Uri url =
         Uri(scheme: scheme, host: host, path: removeInterestsPath + userId!);
+
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
 
     http.delete(url,
         headers: headers,
