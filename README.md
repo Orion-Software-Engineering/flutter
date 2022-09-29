@@ -127,17 +127,16 @@ You'd want to set the initialRoute in main.dart to do that.
   
 
 ## Components and special classes implemented;
-  1. Chat tile class
-  2. Custom password field
-  3. Progress popup
-  5. LoginAPIService class and Login models
-  6. SignUpAPIService class and Sign up models
-  7. InterestAPIService class and Interest models
-  8. LocationAPIService class and Location models
-  9. ForgotPasswordAPIService class Password models
-  10. MessageAPIService class and Message models
-  11. ProfileAPIService class and Profile models
-  12. APIServiceConversation class and Conversation models
+  1. Custom password field
+  2. Progress popup
+  3. LoginAPIService class and Login models
+  4. SignUpAPIService class and Sign up models
+  5. InterestAPIService class and Interest models
+  6. LocationAPIService class and Location models
+  7. ForgotPasswordAPIService class Password models
+  8. MessageAPIService class and Message models
+  9. ProfileAPIService class and Profile models
+  10. APIServiceConversation class and Conversation models
 
 ### Custom Password Field
     -The custom password field extends the stateful widget and has the following required parameteres: hint text and validation function.
@@ -157,6 +156,7 @@ You'd want to set the initialRoute in main.dart to do that.
     -The widget has a boolean value. When set to true by a usage of the widget then the ModalBarrier and CircularProgressIndicator pops up on the screen.
      
 ### LoginAPIService class and Login models
+
     -There are two login model classes; LoginResponseModel and LoginRequestModel.
     -The LoginResponseModel returns an object of type LoginResponseModel which contains the response body as a token.
     -The LoginRequestModel has 2 string fields,username and password.
@@ -169,6 +169,7 @@ You'd want to set the initialRoute in main.dart to do that.
     -The user's Id is saved after login using the class's saveUserIdAfterLogin method which saves the user's Id to SharedPreferences.
     
  ### SignUpAPIService class and Sign up models
+ 
     -There are two sign up model classes; SignupResponseModel and SignupRequestModel.
     -The SignupResponseModel returns an object of type SignupResponseModel which contains the response body as a token
     -The SignupRequestModel has 4 string fields;username,email,password and dob.
@@ -180,6 +181,7 @@ You'd want to set the initialRoute in main.dart to do that.
     -Any other response throws an exception.
     
 ### InterestAPIService class and Interest models
+
     -There are two interest model classes; InterestResponseModel and InterestResponseModel.
     -The InterestResponseModel returns an object of type InterestResponseModel which contains the response body as a token.
     -It creates and returns a json map of the field.
@@ -189,6 +191,7 @@ You'd want to set the initialRoute in main.dart to do that.
    
 
 ### LocationAPIService class and Location models
+
     -There are two location model classes; LocationResponseModel and LocationPostModel.
     -The LocationResponseModel returns an object of type LocationResponseModel which contains the response body as a token.
     -The LocationPostModel has 3 string fields,userID,latitude and longitude.
@@ -198,6 +201,7 @@ You'd want to set the initialRoute in main.dart to do that.
     -Any other response throws an exception.
     
 ### ForgotPasswordAPIService class Password models
+
     -There are two forgot password model classes; ForgotPasswordResponseModel and ForgotPasswordRequestModel.
     -The ForgotPasswordResponseModel returns an object of type ForgotPasswordResponseModel which contains the response body as a token.
     -The ForgotPasswordRequestModel has a single string field,email.
@@ -205,6 +209,36 @@ You'd want to set the initialRoute in main.dart to do that.
     -The ForgotPasswordAPIService class is an asynchronous class which send a post request body of type ForgotPasswordRequestModel and returns a response of type ForgotPasswordResponseModel if there was no error in making the request. The response body has the following status codes and associated meanings.
       -200: shows that post request was successful
     -Any other response throws an exception.
+    
+### MessageAPIService class and Message models
+
+    -There are three Message models.  
+    -The 'Message' class has four string fields messageId,userId,text and createdAt.It also has a boolean field messageIsFromMe.
+    -The 'MessageToBeSent' class has three strings,messageText,userId and conversationId.
+    -The 'MessageToBeDeleted' class has a single string field,messageId.
+    -The MessageAPIService class is an asynchronous class which sends a get request. It can get messages of a conversation using its Future getMessagesOfConversation(String conversationId) function, send a message using Future sendMessage(MessageToBeSent messageToBeSent, String userId) function and delete messages using Future deleteMessage(MessageToBeDeleted messageToBeDeleted).
+      -200: shows that get request was successful
+    -Any other response throws an exception.
+
+### ProfileAPIService class and Profile models
+
+    -There are two Profile models.  
+    -The 'ProfileResponseModel' class has six string fields id, email, isEmailVerified, username, dateOfBirth and bio.It also has a boolean field gender. It has a list string field called interests.
+    -The 'UpdateBioRequestModel' class has two strings,userId and bio. It aslo returns a json map of strings.
+    -The ProfileApiService class is an asynchronous class which sends a get request. It can get profile of a user using its Future<void> getProfile(String userId) function, update the user bio using Future<void> updateBio(String text) function,add interests using Future<void> addInterests(List<String> interestsToAdd) and delete interests using Future<void> deleteInterests(List<String> interestsToDelete).
+      -200: shows that get request was successful
+    -Any other response throws an exception.
+    
+### APIServiceConversation class and Conversation models
+
+    -There are three Conversation models.  
+    -The 'ConversationInfo' class has six string fields conversationId, receiverUsername, receiverUserId, senderUserId, senderUsername and lastMessage.It also has a boolean field lastMessageIsMine. It has a list string field called conversationUsers.
+    -The 'CreateConversationInfo' class has a single string, userId. It aslo returns a json map of strings to dynamic.
+    -The 'AddUserToConversationRequest' class has a single string, userId. It aslo returns a json map of strings.
+    -The APIServiceConversation class is an asynchronous class which sends a get request. It can get conversation of a user using its Future getConversationsOfUser(), create a conversation using Future<void> createConversation(
+      String userIdOfMatch, String usernameOfMatch),add a user to a conversation using Future<void> addUserToConversation(
+      String userId, String conversationId).
+      -200: shows that get request was successful
+    -Any other response throws an exception.
 😉
 
-### EventsPage
