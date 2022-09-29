@@ -5,10 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 //------------------------------Liking and Unliking -----------------------------------
-Map<String, String> headers = {
-  'Content-type': 'application/json',
-  'Accept': 'application/json',
-};
 
 var likeUrl = Uri(
   scheme: scheme,
@@ -23,18 +19,30 @@ var unlikeUrl = Uri(
 );
 
 Future<void> likeEvent(Event event) async {
-  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
   String? userId = sharedPreferences.getString("userId");
+  String? accessToken = sharedPreferences.getString("accessToken")!;
+
+  Map<String, String> headers = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'x-access-token': accessToken
+  };
   // get existing string list
   List<String>? likedEvents = sharedPreferences.getStringList('liked_events');
   List<String> eventsToLike = <String>[];
   // if (userId == null) return;
 
-  Map<String, String> requestBody = {'userId': '7c952bb9-01b0-4214-b850-b1dc0d040d9e', 'eventId': event.id};
+  Map<String, String> requestBody = {
+    'userId': '7c952bb9-01b0-4214-b850-b1dc0d040d9e',
+    'eventId': event.id
+  };
   if (likedEvents == null || likedEvents.isEmpty) {
     // like the event
     print('liking event');
-    final response = await http.post(likeUrl, headers: headers, body: jsonEncode(requestBody));
+    final response = await http.post(likeUrl,
+        headers: headers, body: jsonEncode(requestBody));
     eventsToLike.add(event.id);
     sharedPreferences.setStringList('liked_events', eventsToLike);
     if (response.statusCode == 201) {
@@ -48,7 +56,8 @@ Future<void> likeEvent(Event event) async {
     eventsToLike = likedEvents;
     // unlike the event
     print('unliking event');
-    final response = await http.post(unlikeUrl, headers: headers, body: jsonEncode(requestBody));
+    final response = await http.post(unlikeUrl,
+        headers: headers, body: jsonEncode(requestBody));
     eventsToLike.remove(event.id);
     sharedPreferences.setStringList('liked_events', eventsToLike);
     if (response.statusCode == 200) {
