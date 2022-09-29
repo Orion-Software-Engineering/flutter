@@ -65,7 +65,7 @@ class _DeleteState extends State<Delete> {
           child: Column(
             children: [
               CustomBackButton(
-                backColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
+                backColor: Colors.white,
               ),
               Expanded(
                 flex: 2,

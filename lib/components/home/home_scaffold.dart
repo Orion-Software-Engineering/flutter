@@ -14,11 +14,9 @@ import 'package:matchmaking_demo/api/api_service_profile.dart';
 import 'package:matchmaking_demo/home/event_page.dart';
 import 'package:matchmaking_demo/home/settings_page.dart';
 import 'package:matchmaking_demo/models/profile/profile_model.dart';
-import 'package:matchmaking_demo/splash/splash_screen.dart';
 import '../../home/chat_room_page.dart';
 import '../../home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:matchmaking_demo/models/location_model.dart';
 
 // ignore: must_be_immutable
@@ -34,28 +32,6 @@ class HomeScaffold extends StatefulWidget {
 class _HomeScaffoldState extends State<HomeScaffold> {
   int _currentIndex = 0;
   String? userId;
-  Position? userPosition;
-
-  void getCurrentPosition() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    userId = sharedPreferences.getString("userId");
-    Position position = await askLocationPermission();
-    setState(() {
-      userPosition = position;
-      postModel = LocationPostModel();
-      postModel.userID = userId!;
-      postModel.latitude = userPosition!.latitude.toStringAsFixed(6).toString();
-      postModel.longitude =
-          userPosition!.longitude.toStringAsFixed(6).toString();
-      print(postModel);
-      LocationAPIService apiService = LocationAPIService();
-      apiService.location(postModel).then((value) => null);
-      allowLocation = true;
-      saveLocationPermission(allowLocation!);
-      print("home3 $allowLocation");
-    });
-  }
 
   void getAndSaveProfile() async {
     final SharedPreferences sharedPreferences =
@@ -74,38 +50,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
     });
   }
 
-  Future saveLocationPermission(bool value) async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    print("home $allowLocation");
-    sharedPreferences.setBool("allowLocation", value);
-  }
-
-  Future<Position> askLocationPermission() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        print("home2 $allowLocation");
-        setState(() {
-          allowLocation = false;
-          saveLocationPermission(allowLocation!);
-          print("home2 $allowLocation");
-        });
-        print("home2 $allowLocation");
-        return Future.error("Location permission denied");
-      }
-    }
-    setState(() {
-      allowLocation = false;
-      saveLocationPermission(allowLocation!);
-      print("home2 $allowLocation");
-    });
-    print("here");
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
-  }
-
   void goHome() {
     setState(() {
       _currentIndex = 0;
@@ -117,7 +61,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
   @override
   void initState() {
     super.initState();
-    getCurrentPosition();
     getAndSaveProfile();
   }
 
@@ -143,10 +86,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               fontSize: 32,
               fontWeight: FontWeight.w700),
         ),
-        FaIcon(
-          FontAwesomeIcons.solidBell,
-          color: Color(0xFFFFBA00),
-        )
       ],
       [
         Text(
@@ -157,10 +96,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               fontSize: 32,
               fontWeight: FontWeight.w700),
         ),
-        FaIcon(
-          FontAwesomeIcons.solidBell,
-          color: Color(0xFFFFBA00),
-        )
       ],
       [
         Text(
@@ -171,10 +106,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               fontSize: 32,
               fontWeight: FontWeight.w700),
         ),
-        FaIcon(
-          FontAwesomeIcons.solidBell,
-          color: Color(0xFFFFBA00),
-        )
       ]
     ];
     final tabs = <Widget>[

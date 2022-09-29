@@ -19,11 +19,12 @@ class LoginAPIService {
       final response = await http.post(url, body: requestModel.toJson());
       print(response.statusCode);
       if (response.statusCode == 200) {
+        print("login body ${response.body}");
         String userId = json.decode(response.body)["id"];
         String username = json.decode(response.body)["username"];
-        saveUserDetailsAfterLogin(userId, username);
+        String accessToken = json.decode(response.body)["accessToken"];
+        saveUserDetailsAfterLogin(userId, username, accessToken);
 
-        print('hi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\n$userId');
         OneSignal.shared.setExternalUserId(userId).then((results) {
           print("one signal result${results.toString()}");
         }).catchError((error) {
@@ -43,10 +44,12 @@ class LoginAPIService {
     }
   }
 
-  void saveUserDetailsAfterLogin(String userId, String username) async {
+  void saveUserDetailsAfterLogin(
+      String userId, String username, String accessToken) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.setString("userId", userId);
     sharedPreferences.setString("username", username);
+    sharedPreferences.setString("accessToken", accessToken);
   }
 }

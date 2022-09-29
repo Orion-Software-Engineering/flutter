@@ -76,228 +76,236 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     if (canEditBio ?? false) {
-      return SafeArea(
-        child: Scaffold(
-          backgroundColor: Theme.of(context).primaryColor,
-          body: Stack(
-            children: [
-              Opacity(
-                opacity: 0.3,
-                child: Image.asset(
-                  "assets/images/matching/doodle.png",
-                  height: MediaQuery.of(context).size.height,
-                  repeat: ImageRepeat.repeatY,
-                ),
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.18,
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0xd04f4f4f),
-                        blurRadius: 3,
-                        spreadRadius: 1,
-                        offset: Offset(0, 1), // shadow direction: bottom right
-                      ),
-                    ],
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(25),
-                        topLeft: Radius.circular(25)),
+      return Container(
+        color: Theme.of(context).primaryColor,
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Theme.of(context).primaryColor,
+            body: Stack(
+              children: [
+                Opacity(
+                  opacity: 0.3,
+                  child: Image.asset(
+                    "assets/images/matching/doodle.png",
+                    height: MediaQuery.of(context).size.height,
+                    repeat: ImageRepeat.repeatY,
                   ),
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverFillRemaining(
-                        hasScrollBody: false,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0xd0a2a2a2),
-                                      blurRadius: 3,
-                                      spreadRadius: 3,
-                                      offset: Offset(0,
-                                          1), // shadow direction: bottom right
+                ),
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.18,
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0xd04f4f4f),
+                          blurRadius: 3,
+                          spreadRadius: 1,
+                          offset:
+                              Offset(0, 1), // shadow direction: bottom right
+                        ),
+                      ],
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(25),
+                          topLeft: Radius.circular(25)),
+                    ),
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Color(0xd0a2a2a2),
+                                        blurRadius: 3,
+                                        spreadRadius: 3,
+                                        offset: Offset(0,
+                                            1), // shadow direction: bottom right
+                                      ),
+                                    ],
+                                    color: bioCardColor,
+                                    borderRadius: BorderRadius.circular(25),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/profile/bio_card_background.png"),
                                     ),
-                                  ],
-                                  color: bioCardColor,
-                                  borderRadius: BorderRadius.circular(25),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/profile/bio_card_background.png"),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                      ),
+                                      Center(
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              profileResponse.username!,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 24,
+                                                  fontFamily: "Nunito",
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                            Text(
+                                              profileResponse.email!,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.01,
+                                      ),
+                                      Divider(
+                                        thickness: 0.22,
+                                        color: Colors.black,
+                                        indent: 10,
+                                        endIndent: 10,
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                      ),
+                                      BioField(
+                                        apiServiceProfile: apiServiceProfile,
+                                        bioText: (profileResponse.bio == null)
+                                            ? ""
+                                            : profileResponse.bio!,
+                                        refresh: () {
+                                          getProfileCall();
+                                          Navigator.pop(context);
+                                        },
+                                        isEditable: canEditBio ?? false,
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.004,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                child: Column(
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                ),
+                                Divider(
+                                  thickness: 0.22,
+                                  color: Colors.black,
+                                  indent: 20,
+                                  endIndent: 20,
+                                ),
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                ),
+                                Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.04,
-                                    ),
-                                    Center(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            profileResponse.username!,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 24,
-                                                fontFamily: "Nunito",
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                          Text(
-                                            profileResponse.email!,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
-                                          )
-                                        ],
+                                    ProfileFields(
+                                        title: "Date of Birth",
+                                        value: profileResponse.dateOfBirth,
+                                        isGender: false),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 0, 30, 0),
+                                      child: ProfileFields(
+                                        title: "Gender",
+                                        isGender: true,
+                                        genderValue: profileResponse.gender,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.01,
-                                    ),
-                                    Divider(
-                                      color: Colors.black,
-                                      indent: 10,
-                                      endIndent: 10,
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    BioField(
-                                      apiServiceProfile: apiServiceProfile,
-                                      bioText: (profileResponse.bio == null)
-                                          ? ""
-                                          : profileResponse.bio!,
-                                      refresh: () {
-                                        getProfileCall();
-                                        Navigator.pop(context);
-                                      },
-                                      isEditable: canEditBio ?? false,
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.004,
-                                    ),
+                                    )
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.02,
-                              ),
-                              Divider(
-                                color: Colors.black,
-                                indent: 10,
-                                endIndent: 10,
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.02,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ProfileFields(
-                                      title: "Date of Birth",
-                                      value: profileResponse.dateOfBirth,
-                                      isGender: false),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 30, 0),
-                                    child: ProfileFields(
-                                      title: "Gender",
-                                      isGender: true,
-                                      genderValue: profileResponse.gender,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.01,
-                              ),
-                              InterestField(
-                                localInterestList:
-                                    profileResponse.interests ?? [],
-                                isEditable: canEditBio ?? false,
-                                profileApiService: apiServiceProfile,
-                                refresh: () {
-                                  getProfileCall();
-                                },
-                              ),
-                              // Divider(
-                              //   color: Colors.black,
-                              //   indent: 10,
-                              //   endIndent: 10,
-                              // ),
-                            ],
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.01,
+                                ),
+                                InterestField(
+                                  localInterestList:
+                                      profileResponse.interests ?? [],
+                                  isEditable: canEditBio ?? false,
+                                  profileApiService: apiServiceProfile,
+                                  refresh: () {
+                                    getProfileCall();
+                                  },
+                                ),
+                                // Divider(
+                                //   color: Colors.black,
+                                //   indent: 10,
+                                //   endIndent: 10,
+                                // ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.12,
-                left: MediaQuery.of(context).size.width * 0.373,
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.25,
-                  height: MediaQuery.of(context).size.height * 0.11,
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0xb88f8f8f),
-                        blurRadius: 3,
-                        spreadRadius: 2,
-                        offset: Offset(0, 2), // shadow direction: bottom right
-                      )
-                    ],
-                    color: Color(0xFFFF5A00),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Center(
-                    child: Text(
-                      profileResponse.username![0] ?? "",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 45,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Nunito"),
+                        )
+                      ],
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: CustomBackButton(
-                    backColor:
-                        Theme.of(context).primaryTextTheme.bodyText1?.color),
-              ),
-            ],
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.12,
+                  left: MediaQuery.of(context).size.width * 0.373,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    height: MediaQuery.of(context).size.height * 0.11,
+                    decoration: BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0xb88f8f8f),
+                          blurRadius: 3,
+                          spreadRadius: 2,
+                          offset:
+                              Offset(0, 2), // shadow direction: bottom right
+                        )
+                      ],
+                      color: Color(0xFFFF5A00),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Center(
+                      child: Text(
+                        profileResponse.username![0] ?? "",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 45,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Nunito"),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: CustomBackButton(
+                      backColor:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -397,6 +405,7 @@ class _ProfileState extends State<Profile> {
                                               0.01,
                                     ),
                                     Divider(
+                                      thickness: 0.22,
                                       color: Colors.black,
                                       indent: 10,
                                       endIndent: 10,
@@ -430,6 +439,7 @@ class _ProfileState extends State<Profile> {
                                     MediaQuery.of(context).size.height * 0.02,
                               ),
                               Divider(
+                                thickness: 0.22,
                                 color: Colors.black,
                                 indent: 10,
                                 endIndent: 10,

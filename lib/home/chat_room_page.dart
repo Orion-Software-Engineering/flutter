@@ -78,8 +78,6 @@ class _ChatRoomState extends State<ChatRoom> {
             ? ListView.builder(
                 itemCount: listOfConversations.length,
                 itemBuilder: (BuildContext context, int index) {
-                  print(
-                      "last message${listOfConversations[0].lastMessageIsMine}");
                   String lastMessageSender;
                   if (listOfConversations[index].lastMessageIsMine) {
                     lastMessageSender = "me";
@@ -105,8 +103,9 @@ class _ChatRoomState extends State<ChatRoom> {
                       child: ListTile(
                         leading: AvatarPlaceholder(
                           avatarColor: avatarColors[index % 8],
-                          firstCharacter:
-                              listOfConversations[index].receiverUsername![0],
+                          firstCharacter: (listOfConversations == null)
+                              ? ""
+                              : listOfConversations[index].receiverUsername![0],
                           characterColor: Theme.of(context)
                               .primaryTextTheme
                               .bodyText1

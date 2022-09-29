@@ -32,7 +32,11 @@ class _BioFieldState extends State<BioField> {
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             "Bio",
-            style: TextStyle(fontFamily: 'Nunito', fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+            style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 14,
+                color: Colors.black,
+                fontWeight: FontWeight.w700),
           ),
           GestureDetector(
             onTap: () {
@@ -56,6 +60,7 @@ class _BioFieldState extends State<BioField> {
                 maxLines: 3,
                 style: TextStyle(
                     fontSize: 20, color: Theme.of(context).primaryTextTheme.bodyText1?.color, fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
+                    
               ),
             ),
           ],
@@ -64,7 +69,8 @@ class _BioFieldState extends State<BioField> {
       [
         Text(
           "Bio",
-          style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+          style: TextStyle(
+              fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
         ),
         Center(
           child: Row(
@@ -142,11 +148,18 @@ class _BioFieldState extends State<BioField> {
                 Text(
                   "Bio",
                   textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700),
                 ),
                 Text(
                   widget.bioText,
-                  style: TextStyle(fontSize: 16, color: Theme.of(context).primaryTextTheme.bodyText1?.color, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                      fontSize: 16,
+                      color:
+                          Theme.of(context).primaryTextTheme.bodyText1?.color,
+                      fontWeight: FontWeight.w700),
                 ),
               ],
       ),

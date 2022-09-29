@@ -11,7 +11,7 @@ You'd want to set the initialRoute in main.dart to do that.
   2. Sign Up Pages
   3. Forgot Password Page 
   4. Home Page
-  5. Messaging Pages
+  5. Chat Page
   6. Chat Room Page
   7. Events Page
   8. Settings Pages
@@ -89,6 +89,39 @@ You'd want to set the initialRoute in main.dart to do that.
 
     -The SUBMIT button is of Elevated button type and validates the input field as well as make and api post request that
       allows a reset password link to be sent to the provided email. It calls the ForgotPasswordAPIService.
+      
+### Home Page
+  <p float="left">
+   <img src="https://user-images.githubusercontent.com/80262558/192906949-902eec77-7cd1-4b30-a7aa-2eaee5b629b9.jpg" width="216" height="480">
+<img src="https://user-images.githubusercontent.com/80262558/192906956-6e4f8c67-ceaf-451f-9a02-f9e01f4f8307.jpg" width="216" height="480">
+</p>
+
+    -Home page has asks the user for location permission and if permission is granted, passes the information to an api using LocationAPIService class and Location models. 
+    
+    -Based on the permissions allowed the user is presented with matches based on common interests of based on location in order of increasing proximity.
+
+    -A match is created by starting a conversation with the matched user. A matched user is taking out of the matches list.
+    
+
+### Chat Page
+  <p float="left">
+   <img src="https://user-images.githubusercontent.com/80262558/192909631-4fd81439-d92d-410a-a6ad-bf0f1df7665b.jpg" width="216" height="480">
+<img src="https://user-images.githubusercontent.com/80262558/192909643-dfb26db7-67d4-4042-a79f-bd5923456fb2.jpg" width="216" height="480">
+</p>
+
+    -The Chat page loads and displays the conversations a user has with another user by making use of the MessageAPIService. 
+    
+### Chat Room Page
+  <p float="left">
+   <img src="https://user-images.githubusercontent.com/80262558/192906949-902eec77-7cd1-4b30-a7aa-2eaee5b629b9.jpg" width="216" height="480">
+<img src="https://user-images.githubusercontent.com/80262558/192906956-6e4f8c67-ceaf-451f-9a02-f9e01f4f8307.jpg" width="216" height="480">
+</p>
+
+    -The Chat Room Page loads and displays all conversations of a user by making use of APIServiceConversation class and Conversation models. 
+    
+    -An absence of any conversations implies no matches. The sending and receiving of a message is recorded as a match and the math is taken out of the matches list.
+
+      
  
 
   
@@ -104,7 +137,7 @@ You'd want to set the initialRoute in main.dart to do that.
   9. ForgotPasswordAPIService class Password models
   10. MessageAPIService class and Message models
   11. ProfileAPIService class and Profile models
-  12. ConversationAPIService class and Conversation models
+  12. APIServiceConversation class and Conversation models
 
 ### Custom Password Field
     -The custom password field extends the stateful widget and has the following required parameteres: hint text and validation function.

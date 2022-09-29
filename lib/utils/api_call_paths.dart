@@ -1,11 +1,6 @@
 // uri data
 const String scheme = "https";
-const String host = "orion-meet-testing.herokuapp.com";
-
-const Map<String, String> headers = {
-  'Content-type': 'application/json',
-  'Accept': 'application/json',
-};
+const String host = "orion-meet.herokuapp.com";
 
 // login and signup
 const String logInPath = "/api/auth/signin";
