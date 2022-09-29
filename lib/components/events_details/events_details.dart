@@ -170,7 +170,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                               //TimeTextfield
                               Container(
                                 color: Theme.of(context).primaryColor,
-                                padding: EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 8.0),
+                                padding: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 8.0),
                                 child: Text(
                                   '${event.date} --- ${event.time}',
                                   style: TextStyle(fontFamily: 'Nunito', fontSize: 18.0, color: Theme.of(context).primaryTextTheme.bodyText1?.color),
@@ -273,8 +273,8 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                                 launchMaps(event.location);
                               },
                               child: Text(
-                                'view on map',
-                                style: TextStyle(fontSize: 15.0, color: Colors.white),
+                                'view location on map',
+                                style: TextStyle(fontFamily: 'Nunito', fontSize: 15.0, color: Colors.white),
                               ),
                             ),
                           ),
