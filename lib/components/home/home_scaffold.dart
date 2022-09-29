@@ -86,10 +86,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               fontSize: 32,
               fontWeight: FontWeight.w700),
         ),
-        FaIcon(
-          FontAwesomeIcons.solidBell,
-          color: Color(0xFFFFBA00),
-        )
       ],
       [
         Text(
@@ -100,10 +96,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               fontSize: 32,
               fontWeight: FontWeight.w700),
         ),
-        FaIcon(
-          FontAwesomeIcons.solidBell,
-          color: Color(0xFFFFBA00),
-        )
       ],
       [
         Text(
@@ -114,10 +106,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
               fontSize: 32,
               fontWeight: FontWeight.w700),
         ),
-        FaIcon(
-          FontAwesomeIcons.solidBell,
-          color: Color(0xFFFFBA00),
-        )
       ]
     ];
     final tabs = <Widget>[

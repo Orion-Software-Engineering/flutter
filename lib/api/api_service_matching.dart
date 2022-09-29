@@ -68,9 +68,13 @@ class MatchingApiService {
       List responseMatches = json.decode(response.body);
       print(responseMatches);
       print(matchList.length);
-      for (List m in responseMatches) {
+      for (Map<String, dynamic> m in responseMatches) {
         MatchModel match = MatchModel(
-            userId: m[0], userName: m[1], bio: m[2], proximity: m[3]);
+            userId: m["userId"],
+            userName: m["username"],
+            bio: m["bio"],
+            proximity: m["proximity"],
+            commonInterests: m["commonInterests"]);
         matchList.add(match);
       }
       print(matchList.length);

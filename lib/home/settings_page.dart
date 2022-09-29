@@ -194,22 +194,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             tileColor: Theme.of(context).primaryColor,
             onTap: () {
-              print('insights');
-            },
-            leading:
-                Icon(Icons.insights, color: Theme.of(context).iconTheme.color),
-            title: Text('Insights',
-                style: TextStyle(
-                    color:
-                        Theme.of(context).primaryTextTheme.bodyText1?.color)),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: Theme.of(context).iconTheme.color,
-            ),
-          ),
-          ListTile(
-            tileColor: Theme.of(context).primaryColor,
-            onTap: () {
               _launchUrl('orionmeet.vercel.app', '/about');
             },
             leading: Icon(Icons.info, color: Theme.of(context).iconTheme.color),
