@@ -123,30 +123,41 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           ),
                         ),
                         Container(
-                            color: Theme.of(context).primaryColor,
-                            height: 35.0,
-                            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-                            //color: Colors.black,
-                            child: ListView.builder(
-                                itemCount: event.interests.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0, bottom: 2.0),
-                                    margin: EdgeInsets.only(left: 2.0, right: 2.0),
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      color: interestColors[event.interests[index]],
-                                    ),
-                                    child: Text(
-                                      event.interests[index],
-                                      style: TextStyle(color: Colors.white, fontFamily: 'Nunito'),
-                                    ),
-                                  );
-                                })),
+                          color: Theme.of(context).primaryColor,
+                          height: 35.0,
+                          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                          //color: Colors.black,
+                          child: ListView.builder(
+                            itemCount: event.interests.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 3.0, bottom: 3.0),
+                                margin: EdgeInsets.only(left: 2.0, right: 2.0),
+                                height: 40.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: interestColors[event.interests[index]],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    event.interests[index],
+                                    style: TextStyle(fontSize: 14.0, color: Colors.white, fontFamily: 'Nunito'),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
+                  ),
+                  Container(
+                    width:310.0 ,
+                    height:1.0 ,
+                    margin: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 10.0),
+                    padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 40.0) ,
+                    color: Theme.of(context).primaryTextTheme.bodyText1?.color!.withOpacity(0.3),
                   ),
                   //-----------------------Event Time and Venue---------------------------
                   Container(
@@ -170,7 +181,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                               //TimeTextfield
                               Container(
                                 color: Theme.of(context).primaryColor,
-                                padding: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 8.0),
+                                padding: EdgeInsets.fromLTRB(10.0, 8.0, 10.0, 8.0),
                                 child: Text(
                                   '${event.date} --- ${event.time}',
                                   style: TextStyle(fontFamily: 'Nunito', fontSize: 18.0, color: Theme.of(context).primaryTextTheme.bodyText1?.color),
@@ -285,7 +296,7 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                           height: 1.0,
                           margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
                           padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 40.0),
-                          color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+                          color: Theme.of(context).primaryTextTheme.bodyText1?.color!.withOpacity(0.3),
                         ),
                       ],
                     ),
