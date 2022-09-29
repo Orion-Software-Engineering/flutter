@@ -13,9 +13,9 @@ You'd want to set the initialRoute in main.dart to do that.
   4. Home Page
   5. Chat Page
   6. Chat Room Page
-  7. Events Page
+  7. Events Pages
   8. Settings Pages
-  9. Profile Pages
+  9. Profile Page
   
 ### Login Page
   <img src="https://user-images.githubusercontent.com/80262558/186311100-b2880f07-2a2c-4949-a808-ca157b29f910.jpg" width="216" height="480">
@@ -121,31 +121,57 @@ You'd want to set the initialRoute in main.dart to do that.
     
     -An absence of any conversations implies no matches. The sending and receiving of a message is recorded as a match and the math is taken out of the matches list.
 
-### Events List Page
- <p> 
+### Events Pages
+<p float="left">
+   <img src="https://user-images.githubusercontent.com/80262558/192985680-8ab8a9cf-e1d0-41e0-afe7-3b3a3f6c32d4.jpg" width="216" height="480">
+<img src="https://user-images.githubusercontent.com/80262558/192985804-1ebec70d-32f3-40e4-9660-a5796d1511fc.jpg" width="216" height="480">
+  <img src="https://user-images.githubusercontent.com/80262558/192985856-f1b24cd8-c477-4303-82ff-136b0851063b.jpg" width="216" height="480">
+<img src="https://user-images.githubusercontent.com/80262558/192986042-4257bc4b-9496-4ccd-b6ee-6e29c5e8325a.jpg" width="216" height="480">
 </p>
  
- -The Events List Page shows to a user the events happening around them. Events are categorized in sync with interests. A user is more likely to see events that match their active interests on this page.
+    -The Events List Page shows to a user the events happening around them. Events are categorized in sync with interests. A user is more likely to see events that match their active interests on this page.
 
-###Events Details Page
- <p>
-</p>
+    -The Events details page displays the details of events which includes the event name, date & time, venue, ticketing, age restrictions, description, organizers, MCs and special guests.
 
-  -The events details page displays the details of events which includes the event name, date & time, venue, ticketing, age restrictions, description, organizers, MCs and special guests.
-
-  -The "view location on map" will redirect a user to google maps/apple maps to give them directions to the venue of said events.
-
-### Saved Events Page
-<p> 
-</p>
-
-  -Events list keep updating and a user might not see an event they had interest in anymore. Events can be saved to mitigate this situation from a user's experience with the events feature.
+    -Events list keep updating and a user might not see an event they had interest in anymore. Events can be saved to mitigate this situation from a user's experience with the events feature.
   
-  -On click of the 'save' button an event is saved onto this page to be accessed anytime by the user until application cache is wiped.
+    -On click of the 'save' button an event is saved onto this page to be accessed anytime by the user until application cache is wiped.
 
 
-      
- 
+### Settings Pages
+  <p float="left">
+   <img src="https://user-images.githubusercontent.com/80262558/192990700-fdf58d83-3688-4058-b126-34841ad6262b.jpg" width="216" height="480">
+  <img src="https://user-images.githubusercontent.com/80262558/192990792-194dfca0-ff7f-43be-9a98-cc7028eadbea.jpg" width="216" height="480">
+  <img src="https://user-images.githubusercontent.com/80262558/192990901-df227273-12b8-472c-95fc-8155439f4212.jpg" width="216" height="480">
+  <img src="https://user-images.githubusercontent.com/80262558/192990996-2f7c7dd7-3159-4baf-aa91-a440ec7593bf.jpg" width="216" height="480">
+</p>
+
+    -The settings page allows a user to change preferences inside the app.
+    
+    -Account allows the user to include and edit bio and also exclude and include interests. Excluding all interests results in no matches.
+
+    -Privacy gives the user the ability to enable and disable location based matching and also view the Privacy Policy of Orion Meet.
+
+    -Theme allows the user to vary the app theme by choosing among the options, Light, Dark and System.  
+    
+    -About routes the user to the About page of Orion Meet.
+    
+    -Contact Support routes the user to the contact page of Orion Meet.
+    
+    -Logout allows the user to logout of the app but maintain the account
+    
+    -Delete Account allows the user to delete account and clear all preferences and credentials.
+    
+ ### Profile Page
+  <p float="left">
+   <img src="https://user-images.githubusercontent.com/80262558/192991432-2bcbd6cf-5964-48ea-8ca8-a8a0e9440db0.jpg" width="216" height="480">
+</p>
+
+    -The profile page allows the user to view his or her account details and a limited amount of the account details of other users .
+    
+    -A user may include and edit bio on the profile page and also edit interests.
+    
+    -A user cannot edit the profile of another user.
 
   
 
