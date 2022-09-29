@@ -39,3 +39,6 @@ const String getLocationBasedMatchesPath = "/api/test/match/location/";
 const String likeEventPath = "/api/event/like";
 const String getEventLikesPath = 'api/event/likes/';
 const String unlikeEventPath = 'api/event/unlike/';
+
+
+const String getEvent = 'api/event/';

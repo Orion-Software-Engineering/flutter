@@ -24,6 +24,7 @@ class BioField extends StatefulWidget {
 class _BioFieldState extends State<BioField> {
   int index = 0;
   TextEditingController newBioText = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     List<List<Widget>> bioFieldsVersions = [
@@ -58,10 +59,8 @@ class _BioFieldState extends State<BioField> {
                 widget.bioText,
                 maxLines: 3,
                 style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Nunito'),
+                    fontSize: 20, color: Theme.of(context).primaryTextTheme.bodyText1?.color, fontWeight: FontWeight.w400, fontFamily: 'Nunito'),
+                    
               ),
             ),
           ],
@@ -84,12 +83,7 @@ class _BioFieldState extends State<BioField> {
                   height: MediaQuery.of(context).size.height * 0.1,
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: TextField(
-                    style: TextStyle(
-                        fontFamily: 'Nunito',
-                        color: Theme.of(context)
-                            .primaryTextTheme
-                            .bodyText1
-                            ?.color),
+                    style: TextStyle(fontFamily: 'Nunito', color: Theme.of(context).primaryTextTheme.bodyText1?.color),
                     controller: newBioText,
                     expands: true,
                     maxLines: null,
@@ -103,9 +97,7 @@ class _BioFieldState extends State<BioField> {
                     GestureDetector(
                       onTap: () {
                         disableScreen();
-                        widget.apiServiceProfile
-                            .updateBio(newBioText.text)
-                            .then((value) {
+                        widget.apiServiceProfile.updateBio(newBioText.text).then((value) {
                           newBioText.clear();
                           index = 0;
                           widget.refresh();
@@ -114,9 +106,7 @@ class _BioFieldState extends State<BioField> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(4)),
+                          decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(4)),
                           child: Icon(
                             Icons.check,
                             // size: 1,
@@ -132,9 +122,7 @@ class _BioFieldState extends State<BioField> {
                         });
                       },
                       child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(4)),
+                        decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(4)),
                         child: Icon(
                           Icons.close,
                           // size: 1,

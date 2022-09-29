@@ -30,6 +30,7 @@ class Event {
   final String coverImage;
   final bool liked;
   final String ticketPrice;
+  final String location;
 
   const Event(
       {required this.id,
@@ -45,24 +46,25 @@ class Event {
       required this.interests,
       required this.coverImage,
       required this.liked,
-      required this.ticketPrice});
+      required this.ticketPrice,
+      required this.location});
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      id: json['id'] ?? "Unavailable",
-      name: json['name'] ?? "Unavailable",
-      date: json['date'] ?? "Unavailable",
-      time: json['time'] ?? "Unavailable",
-      venue: json['venue'] ?? "Unavailable",
-      organizers: json['organizers'] ?? "Unavailable",
-      mcs: json['mcs'] ?? "Unavailable",
-      guests: json['guests'] ?? "Unavailable",
-      ageRestriction: json['age_restriction'] ?? "Unavailable",
-      description: json['description'] ?? "Unavailable",
-      interests: json['interests'] ?? "Unavailable",
-      coverImage: json['cover_image'] ?? "Unavailable",
-      liked: json['liked'] ?? false,
-      ticketPrice: json['ticket_price'] ?? "Unavailable",
-    );
+        id: json['id'] ?? "Unavailable",
+        name: json['name'] ?? "Unavailable",
+        date: json['date'] ?? "Unavailable",
+        time: json['time'] ?? "Unavailable",
+        venue: json['venue'] ?? "Unavailable",
+        organizers: json['organizers'] ?? "Unavailable",
+        mcs: json['mcs'] ?? "Unavailable",
+        guests: json['guests'] ?? "Unavailable",
+        ageRestriction: json['age_restriction'] ?? "Unavailable",
+        description: json['description'] ?? "Unavailable",
+        interests: json['interests'] ?? "Unavailable",
+        coverImage: json['cover_image'] ?? "Unavailable",
+        liked: json['liked'] ?? false,
+        ticketPrice: json['ticket_price'] ?? "Unavailable",
+        location: json['location'] ?? "40.727337 -73.994301");
   }
 }
