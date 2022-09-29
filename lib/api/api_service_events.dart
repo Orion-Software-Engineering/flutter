@@ -6,14 +6,25 @@ import 'package:matchmaking_demo/utils/api_call_paths.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<List<Event>> getEvents() async {
-  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  String userId = sharedPreferences.getString("userId") != null ? sharedPreferences.getString("userId")! : "";
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  String userId = sharedPreferences.getString("userId") != null
+      ? sharedPreferences.getString("userId")!
+      : "";
   var url = Uri(
     scheme: scheme,
     host: host,
     path: eventsPath + userId,
   );
-  final response = await http.get(url);
+
+  String accessToken = sharedPreferences.getString("accessToken")!;
+
+  Map<String, String> headers = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'x-access-token': accessToken
+  };
+  final response = await http.get(url, headers: headers);
   List<Event> events = <Event>[];
 
   if (response.statusCode == 200) {

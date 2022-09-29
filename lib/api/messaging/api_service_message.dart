@@ -10,10 +10,12 @@ class MessageAPIService {
   List<Message> messagesToAppend = [];
 
   late String? myUserId;
+  late String accessToken;
 
   void getUserId() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     myUserId = sharedPreferences.getString("userId")!;
+    accessToken = sharedPreferences.getString("accessToken")!;
   }
 
   Future getMessagesOfConversation(String conversationId) async {
@@ -26,7 +28,13 @@ class MessageAPIService {
         host: host,
         path: getMessagesOfConversationPath + conversationId);
 
-    final response = await http.get(url);
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
+
+    final response = await http.get(url, headers: headers);
     print("get messages of conversation response");
     print(response.statusCode);
     print(response.body);
@@ -58,6 +66,15 @@ class MessageAPIService {
 
     messageToBeSent.userId = userId;
 
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
+
     print("json endcode requestmodel ${jsonEncode(messageToBeSent)}");
     final response = await http.put(url,
         headers: headers, body: jsonEncode(messageToBeSent));
@@ -69,9 +86,13 @@ class MessageAPIService {
   Future deleteMessage(MessageToBeDeleted messageToBeDeleted) async {
     Uri url = Uri(scheme: scheme, host: host, path: deleteMessagePath);
 
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
+      'x-access-token': accessToken
     };
 
     final response = await http.delete(url,

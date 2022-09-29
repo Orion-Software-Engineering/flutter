@@ -17,6 +17,13 @@ class MatchingApiService {
         host: host,
         path: getInterestBasedMatchesPath + userId!);
 
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
     try {
       final response = await http.get(url, headers: headers);
 
@@ -38,6 +45,7 @@ class MatchingApiService {
   }
 
   Future<void> getLocationBasedMatches() async {
+    print("in loc based");
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString("userId");
 
@@ -45,6 +53,14 @@ class MatchingApiService {
         scheme: scheme,
         host: host,
         path: getLocationBasedMatchesPath + userId!);
+
+    String accessToken = sharedPreferences.getString("accessToken")!;
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'x-access-token': accessToken
+    };
 
     try {
       final response = await http.get(url, headers: headers);
