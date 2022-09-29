@@ -121,6 +121,29 @@ You'd want to set the initialRoute in main.dart to do that.
     
     -An absence of any conversations implies no matches. The sending and receiving of a message is recorded as a match and the math is taken out of the matches list.
 
+### Events List Page
+ <p> 
+</p>
+ 
+ -The Events List Page shows to a user the events happening around them. Events are categorized in sync with interests. A user is more likely to see events that match their active interests on this page.
+
+###Events Details Page
+ <p>
+</p>
+
+  -The events details page displays the details of events which includes the event name, date & time, venue, ticketing, age restrictions, description, organizers, MCs and special guests.
+
+  -The "view location on map" will redirect a user to google maps/apple maps to give them directions to the venue of said events.
+
+### Saved Events Page
+<p> 
+</p>
+
+  -Events list keep updating and a user might not see an event they had interest in anymore. Events can be saved to mitigate this situation from a user's experience with the events feature.
+  
+  -On click of the 'save' button an event is saved onto this page to be accessed anytime by the user until application cache is wiped.
+
+
       
  
 
