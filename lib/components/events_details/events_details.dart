@@ -166,17 +166,18 @@ class EventsDetailsPageState extends State<EventsDetailsPage> {
                         ],
                       ),
                     ),
-                    Container(
+                    Center(
+                      child: Container(
                       width: 310.0,
                       height: 1.0,
-                      margin: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 10.0),
-                      padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 40.0),
+                      margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                      padding: EdgeInsets.all(20.0),
                       color: Theme.of(context)
                           .primaryTextTheme
                           .bodyText1
                           ?.color!
                           .withOpacity(0.3),
-                    ),
+                    ),),
                     //-----------------------Event Time and Venue---------------------------
                     Container(
                       padding: EdgeInsets.all(10.0),
