@@ -2,12 +2,16 @@
 * HomePage is a "recyclerview" with a lost of possible matches(*/
 
 import 'package:flutter/material.dart';
+import 'package:matchmaking_demo/api/api_service_location.dart';
 import 'package:matchmaking_demo/api/api_service_matching.dart';
 import 'package:matchmaking_demo/components/home/shimmer_dart.dart';
+import 'package:matchmaking_demo/models/location_model.dart';
+import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:matchmaking_demo/utils/app_routes.dart';
 import 'package:matchmaking_demo/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/messaging/conversation_model.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,10 +26,70 @@ class _HomePageState extends State<HomePage> {
   List matches = [];
   String? userId;
   bool isLocationAllowed = false;
+  Position? userPosition;
+
+  void getCurrentPosition() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    userId = sharedPreferences.getString("userId");
+    Position position = await askLocationPermission();
+    setState(() {
+      userPosition = position;
+      postModel = LocationPostModel();
+      postModel.userID = userId!;
+      postModel.latitude = userPosition!.latitude.toStringAsFixed(6).toString();
+      postModel.longitude =
+          userPosition!.longitude.toStringAsFixed(6).toString();
+      print(postModel);
+      LocationAPIService apiService = LocationAPIService();
+      apiService.location(postModel).then((value) => null);
+      allowLocation = true;
+      isLocationAllowed = true;
+      saveLocationPermission(allowLocation!);
+      print("home3 $allowLocation");
+    });
+  }
+
+  Future saveLocationPermission(bool value) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    print("home $allowLocation");
+    sharedPreferences.setBool("allowLocation", value);
+  }
+
+  Future<Position> askLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print("home2 $allowLocation");
+        setState(() {
+          allowLocation = false;
+          isLocationAllowed = false;
+          saveLocationPermission(allowLocation!);
+          print("home2 $allowLocation");
+        });
+        print("home2 $allowLocation");
+        return Future.error("Location permission denied");
+      }
+    }
+    setState(() {
+      allowLocation = false;
+      isLocationAllowed = false;
+      saveLocationPermission(allowLocation!);
+      print("home2 $allowLocation");
+    });
+    print("here");
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+  }
+
+  late LocationPostModel postModel;
 
   @override
   void initState() {
     super.initState();
+    getCurrentPosition();
     getUserData().then((value) => getMatches(matchingApiService));
   }
 
