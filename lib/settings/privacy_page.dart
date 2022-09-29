@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matchmaking_demo/api/api_service_location.dart';
+import 'package:matchmaking_demo/components/login_signup/custom_back_button.dart';
 import 'package:matchmaking_demo/models/location_model.dart';
 import 'package:matchmaking_demo/splash/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +35,8 @@ class _PrivacyPageState extends State<PrivacyPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
+        leading: CustomBackButton(
+            backColor: Theme.of(context).primaryTextTheme.bodyText1?.color),
         foregroundColor: Theme.of(context).primaryTextTheme.bodyText1?.color,
         shadowColor: Theme.of(context).primaryTextTheme.bodyText2?.color,
         backgroundColor: Theme.of(context).primaryColor,
